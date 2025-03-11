@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    /*Green */
+    --color-bayfi-green-50: #F9FCEB;
+    --color-bayfi-green-100: #EBF4C2 ;
+    --color-bayfi-green-200: #E1EFA4;
+    --color-bayfi-green-300: #D3E87B;
+    --color-bayfi-green-400: #CBE461;
+    --color-bayfi-green-500: #BEDD3A;
+    --color-bayfi-green-600: #ADC935;
+    --color-bayfi-green-700: #879D29;
+    --color-bayfi-green-800: #697A20;
+    --color-bayfi-green-900: #505D18;
+
+
+    /*Black theme */
+    --color-bayfi-black-50: #E8E8E8;
+    --color-bayfi-black-100: #B8B8B8;
+    --color-bayfi-black-200: #969696;
+    --color-bayfi-black-300: #666666;
+    --color-bayfi-black-400: #494949;
+    --color-bayfi-black-500: #1B1B1B;
+    --color-bayfi-black-600: #191919;
+    --color-bayfi-black-700: #131313;
+    --color-bayfi-black-800: #0F0F0F;
+    --color-bayfi-black-900: #0B0B0B;
+    /*Grey Color */
+
+    --color-bayfi-grey-50: #FEFEFE;
+    --color-bayfi-grey-100: #FBFBFB;
+    --color-bayfi-grey-200: #F9F9F9;
+    --color-bayfi-grey-300: #F6F6F6;
+    --color-bayfi-grey-400: #F5F5F5;
+    --color-bayfi-grey-500: #F2F2F2;
+    --color-bayfi-grey-600:#DCDCDC;
+    --color-bayfi-grey-700: #ACACAC;
+    --color-bayfi-grey-800:#858585;
+    --color-bayfi-grey-900: #0B0B0B;
+    /*Text Color */
+
+    --color-text-color-50: #EDEEEF;
+    --color-text-color-100: #C7CACF;
+    --color-text-color-200: #ACB1B7;
+    --color-text-color-300: #868D96;
+    --color-text-color-400: #6F7782;
+    --color-text-color-500: #4B5563;
+    --color-text-color-600:#444D5A;
+    --color-text-color-700: #353C46;
+    --color-text-color-800:#292F36;
+    --color-text-color-900: #20242A;
+
+
+
+    /*--font-sans: var(--font-geist-sans);*/
+    /*--font-mono: var(--font-geist-mono);*/
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --background: #0a0a0a;*/
+/*    --foreground: #ededed;*/
+/*  }*/
+/*}*/
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+/*body {*/
+/*  background: var(--background);*/
+/*  color: var(--foreground);*/
+/*  font-family: Arial, Helvetica, sans-serif;*/
+/*}*/
