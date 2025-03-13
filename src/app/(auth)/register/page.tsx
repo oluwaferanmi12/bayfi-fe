@@ -1,4 +1,6 @@
+import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
+import arrowIcon from "@/assets/svg/arrow-bidirection.svg";
 
 const Register = () => {
   return (
@@ -9,6 +11,31 @@ const Register = () => {
       <Text value="Dont have an account ?" type="text-plain-18" />
       <Text value="Forgot Password" type="text-plain-16" />
       <Text value="Sign up" type="text-plain-dark-18" />
+      <Button type="bgGreen" text="Login" loading={false} fullWidth />
+      <Button icon={arrowIcon} type="bgGreen" text="Login" loading={false} />
+      <Button type="bgGreen" text="Login" loading={true} disabled />
+      <Button type="bgBlack" text="Login" loading={false} />
+      <Button type="bgBlack" text="Login" loading={false} fullWidth />
+      <Button type="bgBlack" text="Login" loading={true} disabled />
+      <Button icon={arrowIcon} type="bgWhite" text="Login" loading={false} />
+      <div className="bg-bayfi-black-500 py-3">
+        <Button icon={arrowIcon} type="bgWhite" text="Login" loading={false} />
+        <Button
+          icon={arrowIcon}
+          type="bgWhite"
+          text="Login"
+          loading={true}
+          disabled
+        />
+        <Button
+          type="bgWhite"
+          icon={arrowIcon}
+          text="Login"
+          loading={false}
+          fullWidth
+          iconPosition="left"
+        />
+      </div>
     </div>
   );
 };
