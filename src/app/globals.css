@@ -1,104 +1,101 @@
 @import "tailwindcss";
 
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 @font-face {
-    font-family: 'grotesk-light';
-    src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Light.ttf");
+  font-family: "grotesk-light";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Light.ttf");
 }
 
 @font-face {
-    font-family: 'grotesk-bold';
-    src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Bold.ttf");
+  font-family: "grotesk-bold";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Bold.ttf");
 }
 
 @font-face {
-    font-family: 'grotesk-regular';
-    src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Regular.ttf");
+  font-family: "grotesk-regular";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Regular.ttf");
 }
 
 @font-face {
-    font-family: 'grotesk-medium';
-    src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Medium.ttf");
-}
-
-
-@font-face {
-    font-family: 'grotesk-semi-bold';
-    src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-SemiBold.ttf");
+  font-family: "grotesk-medium";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Medium.ttf");
 }
 
 @font-face {
-    font-family: 'grotesk-extra-bold';
-    src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-ExtraBold.ttf");
+  font-family: "grotesk-semi-bold";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-SemiBold.ttf");
 }
 
+@font-face {
+  font-family: "grotesk-extra-bold";
+  src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-ExtraBold.ttf");
+}
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    /*Green */
-    --color-bayfi-green-50: #F9FCEB;
-    --color-bayfi-green-100: #EBF4C2 ;
-    --color-bayfi-green-200: #E1EFA4;
-    --color-bayfi-green-300: #D3E87B;
-    --color-bayfi-green-400: #CBE461;
-    --color-bayfi-green-500: #BEDD3A;
-    --color-bayfi-green-600: #ADC935;
-    --color-bayfi-green-700: #879D29;
-    --color-bayfi-green-800: #697A20;
-    --color-bayfi-green-900: #505D18;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /*Green */
+  --color-bayfi-green-50: #f9fceb;
+  --color-bayfi-green-100: #ebf4c2;
+  --color-bayfi-green-200: #e1efa4;
+  --color-bayfi-green-300: #d3e87b;
+  --color-bayfi-green-400: #cbe461;
+  --color-bayfi-green-500: #bedd3a;
+  --color-bayfi-green-600: #adc935;
+  --color-bayfi-green-700: #879d29;
+  --color-bayfi-green-800: #697a20;
+  --color-bayfi-green-900: #505d18;
 
+  /*Black theme */
+  --color-bayfi-black-50: #e8e8e8;
+  --color-bayfi-black-100: #b8b8b8;
+  --color-bayfi-black-200: #969696;
+  --color-bayfi-black-300: #666666;
+  --color-bayfi-black-400: #494949;
+  --color-bayfi-black-500: #1b1b1b;
+  --color-bayfi-black-600: #191919;
+  --color-bayfi-black-700: #131313;
+  --color-bayfi-black-800: #0f0f0f;
+  --color-bayfi-black-900: #0b0b0b;
+  /*Grey Color */
 
-    /*Black theme */
-    --color-bayfi-black-50: #E8E8E8;
-    --color-bayfi-black-100: #B8B8B8;
-    --color-bayfi-black-200: #969696;
-    --color-bayfi-black-300: #666666;
-    --color-bayfi-black-400: #494949;
-    --color-bayfi-black-500: #1B1B1B;
-    --color-bayfi-black-600: #191919;
-    --color-bayfi-black-700: #131313;
-    --color-bayfi-black-800: #0F0F0F;
-    --color-bayfi-black-900: #0B0B0B;
-    /*Grey Color */
+  --color-bayfi-grey-50: #fefefe;
+  --color-bayfi-grey-100: #fbfbfb;
+  --color-bayfi-grey-200: #f9f9f9;
+  --color-bayfi-grey-300: #f6f6f6;
+  --color-bayfi-grey-400: #f5f5f5;
+  --color-bayfi-grey-500: #f2f2f2;
+  --color-bayfi-grey-600: #dcdcdc;
+  --color-bayfi-grey-700: #acacac;
+  --color-bayfi-grey-800: #858585;
+  --color-bayfi-grey-900: #0b0b0b;
+  /*Text Color */
 
-    --color-bayfi-grey-50: #FEFEFE;
-    --color-bayfi-grey-100: #FBFBFB;
-    --color-bayfi-grey-200: #F9F9F9;
-    --color-bayfi-grey-300: #F6F6F6;
-    --color-bayfi-grey-400: #F5F5F5;
-    --color-bayfi-grey-500: #F2F2F2;
-    --color-bayfi-grey-600:#DCDCDC;
-    --color-bayfi-grey-700: #ACACAC;
-    --color-bayfi-grey-800:#858585;
-    --color-bayfi-grey-900: #0B0B0B;
-    /*Text Color */
+  --color-text-color-50: #edeeef;
+  --color-text-color-100: #c7cacf;
+  --color-text-color-200: #acb1b7;
+  --color-text-color-300: #868d96;
+  --color-text-color-400: #6f7782;
+  --color-text-color-500: #4b5563;
+  --color-text-color-600: #444d5a;
+  --color-text-color-700: #353c46;
+  --color-text-color-800: #292f36;
+  --color-text-color-900: #20242a;
 
-    --color-text-color-50: #EDEEEF;
-    --color-text-color-100: #C7CACF;
-    --color-text-color-200: #ACB1B7;
-    --color-text-color-300: #868D96;
-    --color-text-color-400: #6F7782;
-    --color-text-color-500: #4B5563;
-    --color-text-color-600:#444D5A;
-    --color-text-color-700: #353C46;
-    --color-text-color-800:#292F36;
-    --color-text-color-900: #20242A;
+  /* Fonts  */
+  --font-grotesk-light: "grotesk-light";
+  --font-grotesk-bold: "grotesk-bold";
+  --font-grotesk-regular: "grotesk-regular";
+  --font-grotesk-medium: "grotesk-medium";
+  --font-grotesk-semi-bold: "grotesk-semi-bold";
+  --font-grotesk-extra-bold: "grotesk-extra-bold";
 
-    /* Fonts  */
-    --font-grotesk-light: 'grotesk-light';
-    --font-grotesk-bold: 'grotesk-bold';
-    --font-grotesk-regular: 'grotesk-regular';
-    --font-grotesk-medium: 'grotesk-medium';
-    --font-grotesk-semi-bold: 'grotesk-semi-bold';
-    --font-grotesk-extra-bold: 'grotesk-extra-bold';
-
-    /*--font-sans: var(--font-geist-sans);*/
-    /*--font-mono: var(--font-geist-mono);*/
+  /*--font-sans: var(--font-geist-sans);*/
+  /*--font-mono: var(--font-geist-mono);*/
 }
 
 /*@media (prefers-color-scheme: dark) {*/
@@ -113,3 +110,33 @@
 /*  color: var(--foreground);*/
 /*  font-family: Arial, Helvetica, sans-serif;*/
 /*}*/
+
+.authDarkBackground {
+  background-image: url("../assets/svg/authBlackBackground.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.flex-center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-neutral {
+  display: flex;
+  align-items: center;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
