@@ -140,3 +140,11 @@
   justify-content: space-around;
   align-items: center;
 }
+
+
+.onBoardingBackground {
+    background-image: url("../assets/svg/onboardingBg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
