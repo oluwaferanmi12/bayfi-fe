@@ -44,7 +44,7 @@ export const GInput = ({
         <input
           type={type === "password" ? (showPassword ? "text" : type) : type}
           placeholder={placeholder}
-          className="bg-bayfi-grey-400 font-grotesk-medium placeholder:font-grotesk-regular text-base rounded-lg p-3 px-9 min-w-full min-w-full outline-none border border-bayfi-grey-600"
+          className="bg-bayfi-grey-400 font-grotesk-medium placeholder:font-grotesk-regular text-base rounded-lg p-3 px-9 min-w-full  outline-none border border-bayfi-grey-600"
         />
       </div>
     </div>

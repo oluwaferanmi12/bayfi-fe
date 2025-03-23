@@ -6,6 +6,11 @@ import { Text } from "@/components/texts/text";
 import mailIcon from "@/assets/svg/input-message-icon.svg";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
+import mobileIcon from "@/assets/svg/mobileIcon.svg";
+import locationIcon from "@/assets/svg/locationIcon.svg";
+import globalIcon from "@/assets/svg/globalIcon.svg";
+import securityCardIcon from "@/assets/svg/securityCard.svg";
+import { UploadInput } from "@/components/inputs/upload-input";
 
 const Onboarding = () => {
   return (
@@ -30,10 +35,35 @@ const Onboarding = () => {
               </div>
             </div>
             <div className="my-4">
-              <GInput label="Email" icon={mailIcon} placeholder="Enter Email" />
-              <GInput label="Email" icon={mailIcon} placeholder="Enter Email" />
-              <GInput label="Email" icon={mailIcon} placeholder="Enter Email" />
-              <GInput label="Email" icon={mailIcon} placeholder="Enter Email" />
+              <GInput
+                label="Phone number"
+                icon={mobileIcon}
+                placeholder="Your phone number"
+              />
+              <div className="flex gap-2 items-center ">
+                <div className="w-full">
+                  <GInput
+                    label="Address"
+                    icon={locationIcon}
+                    placeholder="Street address"
+                  />
+                </div>
+
+                <div className="w-full">
+                  <GInput
+                    label="State"
+                    icon={globalIcon}
+                    placeholder="Select state"
+                  />
+                </div>
+              </div>
+
+              <GInput
+                label="Select ID Type"
+                icon={securityCardIcon}
+                placeholder="National ID"
+              />
+              <UploadInput title={"Click here to upload document"} label="" />
             </div>
             <div className="mt-4">
               <Button
