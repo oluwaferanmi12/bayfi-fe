@@ -1,12 +1,13 @@
-import { Col, Row } from "antd";
+import likeIcon from "@/assets/svg/likeIcon.svg"
+import { Row, Col } from "antd";
 import { Text } from "@/components/texts/text";
-import { Button } from "@/components/buttons";
 import Image from "next/image";
 import logo from "@/assets/svg/logo.svg";
-import mailIcon from "@/assets/svg/input-message-icon.svg";
-import { GInput } from "@/components/inputs/GInput";
+import { Button } from "@/components/buttons";
+import { OTPInput } from "@/components/inputs/otp-input";
 
-const ForgotPassword = () => {
+
+const Otp = () => {
   return (
     <Row className="h-full">
       <Col xs={14}>
@@ -16,26 +17,28 @@ const ForgotPassword = () => {
               <Image src={logo} alt="" />
             </div>
             <div className="bg-white  border border-bayfi-green-50 rounded-lg p-8 ">
-              <div className="flex  flex-col ">
-                <Text value="Forgot password?" type="header-32" />
+              <div className="flex items-center  flex-col ">
+                <div>
+                  <Image src={likeIcon} alt="" />
+                </div>
+                <Text
+                  value="Account registered successfully"
+                  type="header-32"
+                />
                 <div className="mt-2">
                   <Text
                     type="header-subtext"
-                    value="We've all been here before; Let's reset it."
+                    value="Please confirm provide the OTP in your mailbox"
                   />
                 </div>
               </div>
-              <div className="mt-6">
-                <GInput
-                  label="Email"
-                  placeholder="Your email address"
-                  icon={mailIcon}
-                />
+              <div className="mt-6 ">
+                <OTPInput />
               </div>
               <div className="mt-4">
                 <Button
                   type="bgGreen"
-                  text="Send reset link"
+                  text="Confirm OTP"
                   fullWidth
                   loading={false}
                 />
@@ -51,4 +54,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default Otp;
