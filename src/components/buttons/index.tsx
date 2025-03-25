@@ -12,9 +12,11 @@ export const Button = ({
   disabled,
   iconLeft,
   lessRounded,
+  action,
 }: ButtonInterface) => {
   return (
     <button
+      onClick={action}
       style={{ opacity: disabled || loading ? 0.2 : 1 }}
       className={`flex  cursor-pointer font-grotesk-semi-bold pt-2 my-1 pb-3 px-12 items-center ${lessRounded ? "rounded-2xl" : "rounded-full"} justify-center ${fullWidth && "w-full"} ${type === "bgGreen" ? "bg-[#BEDD3A]" : type === "bgBlack" ? "bg-bayfi-black-500 text-white" : "bg-white text-bayfi-black-500"}`}
       disabled={loading || disabled}

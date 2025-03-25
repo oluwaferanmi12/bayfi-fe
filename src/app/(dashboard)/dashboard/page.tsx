@@ -1,3 +1,4 @@
+"use client";
 import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { Col, Row } from "antd";
 import bgImage from "@/assets/svg/walletCardImage.svg";
@@ -18,10 +19,81 @@ import chartPlaceholder from "@/assets/svg/chartPlaceholder.svg";
 import sendSquare from "@/assets/svg/sendSquareIcon.svg";
 import recieveSquare from "@/assets/svg/recieveSquare.svg";
 import calendarIcon from "@/assets/svg/calendarIcon.svg";
+import { useState } from "react";
+import { SideDrawer } from "@/components/side-drawers/side-drawer";
+import bitCoinGroup from "@/assets/svg/bitCoinGroup.svg";
+import nairaGreyIcon from "@/assets/svg/naira-grey.svg";
+import sellCryptoIcon from "@/assets/svg/sellCryptoIcon.svg";
 
 const Dashboard = () => {
+  const [depositModal, setDepositModal] = useState(false);
+  const [showCryptoModal, setShowCryptoModal] = useState(false);
   return (
     <>
+      <SideDrawer
+        onClose={() => {
+          setShowCryptoModal(false);
+        }}
+        open={showCryptoModal}
+        title="Trade Crypto"
+      >
+        <div className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
+          <div>
+            <Text value="Buy Crypto" type="text-plain-dark-18" />
+            <div className="w-[80%]">
+              <Text
+                value="Swift and reliable trading of any cryptocurrencies"
+                type="text-small-light"
+              />
+            </div>
+          </div>
+          <Image src={bitCoinGroup} alt="" />
+        </div>
+        <div className="bg-bayfi-black-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
+          <div>
+            <Text value="Sell crypto" type="text-plain-green-18" />
+            <div className="w-[80%]">
+              <Text
+                value="Deposit naira via bank transfer or with your card"
+                type="text-small-white"
+              />
+            </div>
+          </div>
+          <Image src={sellCryptoIcon} alt="" />
+        </div>
+      </SideDrawer>
+      <SideDrawer
+        onClose={() => {
+          setDepositModal(false);
+        }}
+        open={depositModal}
+        title="Deposit"
+      >
+        <div className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
+          <div>
+            <Text value="Crypto" type="text-plain-dark-18" />
+            <div className="w-[80%]">
+              <Text
+                value="Swift and reliable trading of any cryptocurrencies"
+                type="text-small-light"
+              />
+            </div>
+          </div>
+          <Image src={bitCoinGroup} alt="" />
+        </div>
+        <div className="bg-bayfi-grey-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
+          <div>
+            <Text value="Naira" type="text-plain-dark-18" />
+            <div className="w-[80%]">
+              <Text
+                value="Deposit naira via bank transfer or with your card"
+                type="text-small-light"
+              />
+            </div>
+          </div>
+          <Image src={nairaGreyIcon} alt="" />
+        </div>
+      </SideDrawer>
       <GPageWrapper>
         <Row gutter={12}>
           <Col xs={16}>
@@ -52,6 +124,9 @@ const Dashboard = () => {
                     icon={bidirectionIcon}
                     type="bgGreen"
                     lessRounded
+                    action={() => {
+                      setShowCryptoModal(true);
+                    }}
                   />
                   <Button
                     loading={false}
@@ -59,6 +134,9 @@ const Dashboard = () => {
                     icon={arrowSlantDown}
                     type="bgGreen"
                     lessRounded
+                    action={() => {
+                      setDepositModal(true);
+                    }}
                   />
                   <Button
                     loading={false}
