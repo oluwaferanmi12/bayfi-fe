@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <div className="h-full min-h-screen w-full pt-24 bg-bayfi-grey-300">
-      <div className="fixed top-0 w-full bg-white border border-[#EAECF0] py-4">
+      <div className="fixed top-0 w-full z-50 bg-white border border-[#EAECF0] py-4">
         <Row justify={"center"} align={"middle"}>
           <Col xs={22}>
             <div className="flex justify-between items-center">
