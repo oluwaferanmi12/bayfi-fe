@@ -11,6 +11,11 @@ import googleIcon from "@/assets/svg/googleIcon.svg";
 import facebookIcon from "@/assets/svg/facebookIcon.svg";
 import appleIcon from "@/assets/svg/appleIcon.svg";
 import Link from "next/link";
+import appleBlackCard from "@/assets/svg/authAppleCard.svg";
+import appleGiftCardBlack from "@/assets/svg/appleGiftCardBlack.svg";
+import authDstvSub from '@/assets/svg/authDstvSub.svg'
+import authBitcoin from "@/assets/svg/authBitcoin.svg";
+import authEthereum from "@/assets/svg/authEthereum.svg";
 
 const Login = () => {
   return (
@@ -92,7 +97,23 @@ const Login = () => {
         </Row>
       </Col>
       <Col xs={10}>
-        <div className="bg-bayfi-black-500 h-full min-h-full w-full authDarkBackground"></div>
+        <div className="bg-bayfi-black-500 h-full min-h-full w-full authDarkBackground">
+          <div>
+            <Image src={appleBlackCard} alt="apple-black-card" />
+          </div>
+          <div className="flex justify-end">
+            <Image src={appleGiftCardBlack} alt="" />
+          </div>
+          <div>
+            <Image src={authDstvSub} alt="apple-black-card" />
+          </div>
+          <div className="flex justify-end">
+            <Image src={authBitcoin} alt="" />
+          </div>
+          <div className="">
+            <Image src={authEthereum} alt="" />
+          </div>
+        </div>
       </Col>
     </Row>
   );
