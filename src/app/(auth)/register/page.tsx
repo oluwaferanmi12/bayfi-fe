@@ -18,9 +18,9 @@ import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 const Register = () => {
   return (
     <Row className="h-full">
-      <Col xs={14}>
+      <Col xs={16}>
         <Row className="h-full" justify={"center"} align={"middle"}>
-          <Col xs={14}>
+          <Col xs={12}>
             <div className="mb-6">
               <Image src={logo} alt="" />
             </div>
@@ -114,7 +114,7 @@ const Register = () => {
           </Col>
         </Row>
       </Col>
-      <Col xs={10}>
+      <Col xs={8}>
         <AnimatedAuthSide />
       </Col>
     </Row>

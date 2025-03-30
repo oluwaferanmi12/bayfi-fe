@@ -1,18 +1,20 @@
-import likeIcon from "@/assets/svg/likeIcon.svg"
+"use client";
+
+import likeIcon from "@/assets/svg/likeIcon.svg";
 import { Row, Col } from "antd";
 import { Text } from "@/components/texts/text";
 import Image from "next/image";
 import logo from "@/assets/svg/logo.svg";
 import { Button } from "@/components/buttons";
 import { OTPInput } from "@/components/inputs/otp-input";
-
+import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 
 const Otp = () => {
   return (
     <Row className="h-full">
-      <Col xs={14}>
+      <Col xs={16}>
         <Row className="h-full" justify={"center"} align={"middle"}>
-          <Col xs={14}>
+          <Col xs={12}>
             <div className="mb-6">
               <Image src={logo} alt="" />
             </div>
@@ -47,8 +49,8 @@ const Otp = () => {
           </Col>
         </Row>
       </Col>
-      <Col xs={10}>
-        <div className="bg-bayfi-black-500 h-full min-h-full w-full authDarkBackground"></div>
+      <Col xs={8}>
+        <AnimatedAuthSide />
       </Col>
     </Row>
   );
