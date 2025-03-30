@@ -1,6 +1,6 @@
 export interface TextInterface {
     value: string;
-    type: "header-32" | 'body-medium' | 'header-white-32' | "input-text" | 'header-subtext' | 'text-plain-18' | "text-plain-16" | "text-plain-dark-18" | "text-plain-dark-16" | "nav-text" | "text-green-bold" | "number-big" | 'header-text-20' | 'main-text-bold' | "main-text-regular" | "text-small-light" | 'text-plain-green-18' | "text-small-white"
+    type: "header-32" | 'body-medium' | 'header-white-32' | "input-text" | 'header-subtext' | 'text-plain-18' | "text-plain-16" | "text-plain-dark-18" | "text-plain-dark-16" | "nav-text" | "text-green-bold" | "number-big" | 'header-text-20' | 'main-text-bold' | "main-text-regular" | "text-small-light" | 'text-plain-green-18' | "text-small-white" | "header-dark-light-32"
 }
 
 export type ButtonType = "bgGreen" | "bgBlack" | "bgWhite";

@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
 import arrowIcon from "@/assets/svg/arrow-bidirection.svg";
@@ -12,6 +13,7 @@ import facebookIcon from "@/assets/svg/facebookIcon.svg";
 import appleIcon from "@/assets/svg/appleIcon.svg";
 import Link from "next/link";
 import userIconButton from "@/assets/svg/input-profile-icon.svg";
+import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 
 const Register = () => {
   return (
@@ -113,7 +115,7 @@ const Register = () => {
         </Row>
       </Col>
       <Col xs={10}>
-        <div className="bg-bayfi-black-500 h-full min-h-full w-full authDarkBackground"></div>
+        <AnimatedAuthSide />
       </Col>
     </Row>
   );

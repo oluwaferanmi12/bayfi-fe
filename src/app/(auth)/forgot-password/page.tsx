@@ -1,3 +1,4 @@
+"use client"
 import { Col, Row } from "antd";
 import { Text } from "@/components/texts/text";
 import { Button } from "@/components/buttons";
@@ -5,6 +6,7 @@ import Image from "next/image";
 import logo from "@/assets/svg/logo.svg";
 import mailIcon from "@/assets/svg/input-message-icon.svg";
 import { GInput } from "@/components/inputs/GInput";
+import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 
 const ForgotPassword = () => {
   return (
@@ -45,7 +47,8 @@ const ForgotPassword = () => {
         </Row>
       </Col>
       <Col xs={10}>
-        <div className="bg-bayfi-black-500 h-full min-h-full w-full authDarkBackground"></div>
+        <AnimatedAuthSide />
+
       </Col>
     </Row>
   );
