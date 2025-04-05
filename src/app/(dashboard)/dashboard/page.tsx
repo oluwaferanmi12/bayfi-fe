@@ -24,12 +24,96 @@ import { SideDrawer } from "@/components/side-drawers/side-drawer";
 import bitCoinGroup from "@/assets/svg/bitCoinGroup.svg";
 import nairaGreyIcon from "@/assets/svg/naira-grey.svg";
 import sellCryptoIcon from "@/assets/svg/sellCryptoIcon.svg";
+import { UserProfile } from "@/components/UIs/user-name-profile";
+import { DarkBalanceWrapper } from "@/components/wrappers/dark-balance-wrapper";
+import { GInput } from "@/components/inputs/GInput";
+import padLockIcon from "@/assets/svg/padLockIcon.svg";
+import { OTPInput } from "@/components/inputs/otp-input";
+import { GReceipt } from "@/components/UIs/general-reciept";
 
 const Dashboard = () => {
   const [depositModal, setDepositModal] = useState(false);
   const [showCryptoModal, setShowCryptoModal] = useState(false);
+  const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
+  const [showReciept, setShowReciept] = useState(false);
   return (
     <>
+      <SideDrawer
+        title="Withdraw"
+        open={showWithdrawModal}
+        onClose={() => {
+          setShowWithdrawModal(false);
+        }}
+      >
+        {!showWithdrawOtp ? (
+          <div>
+            <div className="mt-2 mb-4">
+              <Text type="header-text-20" value="Recent beneficiaries" />
+            </div>
+            <div className="flex items-center justify-between">
+              <UserProfile />
+              <UserProfile />
+              <UserProfile />
+              <UserProfile />
+              <UserProfile />
+            </div>
+            <div className="my-4">
+              <DarkBalanceWrapper />
+            </div>
+            <div>
+              <GInput
+                label="How much would you like to withdraw?"
+                placeholder="0.00"
+              />
+              <GInput label="Select bank" placeholder="0.00" />
+              <GInput
+                label="Recipient Account"
+                placeholder="Enter 10 digits account number"
+              />
+              <Button
+                loading={false}
+                fullWidth
+                text="Continue"
+                type="bgGreen"
+                action={() => {
+                  setShowWithdrawOtp(true);
+                }}
+              />
+            </div>
+          </div>
+        ) : showReciept ? (
+          <GReceipt />
+        ) : (
+          <div className="flex items-center justify-center flex-col">
+            <Text type="header-text-20" value="You are about to send" />
+            <Text type="text-green-24" value="NGN 200,000.00" />
+            <div>
+              <Text type="main-text-regular" value="to " />
+              <Text type="main-text-bold" value=" Akinlade Olaitan A" />
+              <Text type="text-green-24" value=" OPAY" />
+            </div>
+            <div className="my-6">
+              <Image src={padLockIcon} alt="" />
+            </div>
+            <div className="mb-4">
+              <Text type="input-text" value="Enter your pin to confirm" />
+            </div>
+            <OTPInput />
+            <div className="my-4 w-full">
+              <Button
+                action={() => {
+                  setShowReciept(true);
+                }}
+                fullWidth
+                loading={false}
+                type="bgGreen"
+                text="Withdraw money"
+              />
+            </div>
+          </div>
+        )}
+      </SideDrawer>
       <SideDrawer
         onClose={() => {
           setShowCryptoModal(false);
@@ -143,6 +227,9 @@ const Dashboard = () => {
                     text="Withdraw"
                     icon={arrowSlantUp}
                     type="bgGreen"
+                    action={() => {
+                      setShowWithdrawModal(true);
+                    }}
                     lessRounded
                   />
                 </div>
@@ -164,10 +251,12 @@ const Dashboard = () => {
                 <Image src={dollarSquare} alt="" />
                 <div>
                   <Text type="main-text-bold" value="Trade Analytics" />
-                  <Text
-                    type="body-medium"
-                    value="Keep track of new and previous trades"
-                  />
+                  <div>
+                    <Text
+                      type="body-medium"
+                      value="Keep track of new and previous trades"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="p-4 py-8">
@@ -217,7 +306,9 @@ const TransactionWrapper = () => {
         <Image src={sendSquare} alt="" />
         <div>
           <Text type="text-plain-dark-18" value="NGN 200,000.00" />
-          <Text type="text-plain-16" value="Funds Withdrawal" />
+          <div>
+            <Text type="text-plain-16" value="Funds Withdrawal" />
+          </div>
         </div>
       </div>
       <div className="flex items-center gap-2">
