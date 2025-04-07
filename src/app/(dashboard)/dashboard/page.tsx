@@ -30,6 +30,12 @@ import { GInput } from "@/components/inputs/GInput";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
 import { OTPInput } from "@/components/inputs/otp-input";
 import { GReceipt } from "@/components/UIs/general-reciept";
+import { SideDrawerBreadCrumb } from "@/components/breadcrumb/side-drawer-bread-crumb";
+import { SearchInput } from "@/components/inputs/search-input";
+import { CoinWrapper } from "@/components/wrappers/coin-wrapper";
+import { CoinNetworkWrappr } from "@/components/wrappers/network-wrapper";
+import { CopyButton } from "@/components/buttons/copy-button";
+import qrCodeIcon from "@/assets/svg/qr-code.svg";
 
 const Dashboard = () => {
   const [depositModal, setDepositModal] = useState(false);
@@ -37,6 +43,10 @@ const Dashboard = () => {
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
   const [showReciept, setShowReciept] = useState(false);
+  const [showCryptoDeposit, setShowCryptoDeposit] = useState(false);
+  const [showCryptoDepositDetails, setShowCryptoDepositDetails] =
+    useState(false);
+  const [showDepositQR, setShowDepositQR] = useState(false);
   return (
     <>
       <SideDrawer
@@ -153,30 +163,107 @@ const Dashboard = () => {
         open={depositModal}
         title="Deposit"
       >
-        <div className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
+        <SideDrawerBreadCrumb
+          breadCrumbArray={[
+            { text: "home", active: false, action: () => {} },
+            { text: "Select coin", active: false, action: () => {} },
+            { text: "Network", active: true, action: () => {} },
+          ]}
+        />
+        {showCryptoDeposit ? (
           <div>
-            <Text value="Crypto" type="text-plain-dark-18" />
-            <div className="w-[80%]">
-              <Text
-                value="Swift and reliable trading of any cryptocurrencies"
-                type="text-small-light"
-              />
+            <div className="my-3">
+              <SearchInput />
+              <div className="mt-4">
+                <CoinWrapper
+                  action={() => {
+                    setShowCryptoDepositDetails(true);
+                    setShowCryptoDeposit(false);
+                  }}
+                />
+                <CoinWrapper />
+                <CoinWrapper />
+              </div>
             </div>
           </div>
-          <Image src={bitCoinGroup} alt="" />
-        </div>
-        <div className="bg-bayfi-grey-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
-          <div>
-            <Text value="Naira" type="text-plain-dark-18" />
-            <div className="w-[80%]">
-              <Text
-                value="Deposit naira via bank transfer or with your card"
-                type="text-small-light"
-              />
+        ) : showCryptoDepositDetails ? (
+          <>
+            <CoinWrapper />
+            <div>
+              <p className="text-text-color-600 text-base font-grotesk-medium">
+                Select your preferred network
+              </p>
+              <div className="mt-4">
+                <CoinNetworkWrappr
+                  action={() => {
+                    setShowCryptoDepositDetails(false);
+                    setShowCryptoDeposit(false);
+                    setShowDepositQR(true);
+                  }}
+                />
+                <CoinNetworkWrappr />
+                <CoinNetworkWrappr />
+              </div>
             </div>
+          </>
+        ) : showDepositQR ? (
+          <div>
+            <CoinWrapper />
+            <div className="mt-3 bg-bayfi-grey-300 rounded-lg p-4">
+              <p className="text-black text-lg font-grotesk-bold">bep-20</p>
+              <p className="text-bayfi-black-800 text-sm font-grotesk-regular">
+                0xa8400a2782eed05d10721ff9282b37084a7416df
+              </p>
+              <div className="my-2">
+                <CopyButton />
+              </div>
+              <div className="flex justify-center my-2 items-center">
+                <Image src={qrCodeIcon} alt="" />
+              </div>
+              <div className="bg-white px-4 py-2 rounded-lg my-4">
+                <p className="text-bayfi-black-900 text-base font-grotesk-regular">
+                  Confirm the wallet you are sending to to avoid issues
+                </p>
+              </div>
+            </div>
+            <p className="text-[#FF3B30] font-grotesk-medium mt-2">
+              Ensure you are sending BTC to the correct wallet address.
+              Transactions are irreversible
+            </p>
           </div>
-          <Image src={nairaGreyIcon} alt="" />
-        </div>
+        ) : (
+          <>
+            <div
+              onClick={() => {
+                setShowCryptoDeposit(true);
+              }}
+              className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
+            >
+              <div>
+                <Text value="Crypto" type="text-plain-dark-18" />
+                <div className="w-[80%]">
+                  <Text
+                    value="Swift and reliable trading of any cryptocurrencies"
+                    type="text-small-light"
+                  />
+                </div>
+              </div>
+              <Image src={bitCoinGroup} alt="" />
+            </div>
+            <div className="bg-bayfi-grey-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
+              <div>
+                <Text value="Naira" type="text-plain-dark-18" />
+                <div className="w-[80%]">
+                  <Text
+                    value="Deposit naira via bank transfer or with your card"
+                    type="text-small-light"
+                  />
+                </div>
+              </div>
+              <Image src={nairaGreyIcon} alt="" />
+            </div>
+          </>
+        )}
       </SideDrawer>
       <GPageWrapper>
         <Row gutter={12}>
