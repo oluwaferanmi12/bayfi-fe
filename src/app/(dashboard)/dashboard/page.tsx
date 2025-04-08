@@ -36,6 +36,9 @@ import { CoinWrapper } from "@/components/wrappers/coin-wrapper";
 import { CoinNetworkWrappr } from "@/components/wrappers/network-wrapper";
 import { CopyButton } from "@/components/buttons/copy-button";
 import qrCodeIcon from "@/assets/svg/qr-code.svg";
+import buyCryptoIcon from "@/assets/svg/buyCrypto.svg";
+import dollarCircle from "@/assets/svg/dollar-circle.svg";
+import bitcoinInputIcon from "@/assets/svg/bitcoing-(btc).svg";
 
 const Dashboard = () => {
   const [depositModal, setDepositModal] = useState(false);
@@ -47,6 +50,8 @@ const Dashboard = () => {
   const [showCryptoDepositDetails, setShowCryptoDepositDetails] =
     useState(false);
   const [showDepositQR, setShowDepositQR] = useState(false);
+  const [showBuyCrypto, setShowBuyCrypto] = useState(false);
+  const [showSelectWallet, setShowSelectWallet] = useState(false);
   return (
     <>
       <SideDrawer
@@ -131,30 +136,87 @@ const Dashboard = () => {
         open={showCryptoModal}
         title="Trade Crypto"
       >
-        <div className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
-          <div>
-            <Text value="Buy Crypto" type="text-plain-dark-18" />
-            <div className="w-[80%]">
-              <Text
-                value="Swift and reliable trading of any cryptocurrencies"
-                type="text-small-light"
-              />
+        <SideDrawerBreadCrumb
+          breadCrumbArray={[
+            { text: "home", active: false, action: () => {} },
+            { text: "Select coin", active: false, action: () => {} },
+            { text: "Network", active: true, action: () => {} },
+          ]}
+        />
+        {showBuyCrypto ? (
+          <>
+            <div className="my-3">
+              <SearchInput />
+              <div className="mt-4">
+                <CoinWrapper
+                  action={() => {
+                    setShowBuyCrypto(false);
+                    setShowSelectWallet(true);
+                  }}
+                />
+                <CoinWrapper />
+                <CoinWrapper />
+              </div>
             </div>
-          </div>
-          <Image src={bitCoinGroup} alt="" />
-        </div>
-        <div className="bg-bayfi-black-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
-          <div>
-            <Text value="Sell crypto" type="text-plain-green-18" />
-            <div className="w-[80%]">
-              <Text
-                value="Deposit naira via bank transfer or with your card"
-                type="text-small-white"
-              />
+          </>
+        ) : showSelectWallet ? (
+          <div className="my-3">
+            <GInput
+              label="Select wallet type"
+              placeholder="bep-20"
+              icon={buyCryptoIcon}
+            />
+            <GInput
+              label="How much do you want to purchase in dollars?"
+              placeholder="Enter amount"
+              icon={dollarCircle}
+            />
+            <div className="mb-3">
+              <Text type="text-small-red" value="Minimum amoutn $50" />
             </div>
+            <GInput
+              label="Enter wallet address"
+              placeholder="Enter amount"
+              icon={bitcoinInputIcon}
+            />
+            <div className="mb-3">
+              <Text type="text-small-red" value="Hint text" />
+            </div>
+            <Button fullWidth text="Proceed" loading={false} type="bgGreen" />
           </div>
-          <Image src={sellCryptoIcon} alt="" />
-        </div>
+        ) : (
+          <>
+            <div
+              onClick={() => {
+                setShowBuyCrypto(true);
+              }}
+              className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
+            >
+              <div>
+                <Text value="Buy Crypto" type="text-plain-dark-18" />
+                <div className="w-[80%]">
+                  <Text
+                    value="Swift and reliable trading of any cryptocurrencies"
+                    type="text-small-light"
+                  />
+                </div>
+              </div>
+              <Image src={bitCoinGroup} alt="" />
+            </div>
+            <div className="bg-bayfi-black-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between">
+              <div>
+                <Text value="Sell crypto" type="text-plain-green-18" />
+                <div className="w-[80%]">
+                  <Text
+                    value="Deposit naira via bank transfer or with your card"
+                    type="text-small-white"
+                  />
+                </div>
+              </div>
+              <Image src={sellCryptoIcon} alt="" />
+            </div>
+          </>
+        )}
       </SideDrawer>
       <SideDrawer
         onClose={() => {
