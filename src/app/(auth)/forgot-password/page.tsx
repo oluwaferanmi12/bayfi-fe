@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Col, Row } from "antd";
 import { Text } from "@/components/texts/text";
 import { Button } from "@/components/buttons";
@@ -11,9 +11,9 @@ import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 const ForgotPassword = () => {
   return (
     <Row className="h-full">
-      <Col xs={16}>
+      <Col lg={16} xs={24}>
         <Row className="h-full" justify={"center"} align={"middle"}>
-          <Col xs={12}>
+          <Col lg={12} xs={22}>
             <div className="mb-6">
               <Image src={logo} alt="" />
             </div>
@@ -46,9 +46,8 @@ const ForgotPassword = () => {
           </Col>
         </Row>
       </Col>
-      <Col xs={8}>
+      <Col className="hideContainer" xs={8}>
         <AnimatedAuthSide />
-
       </Col>
     </Row>
   );

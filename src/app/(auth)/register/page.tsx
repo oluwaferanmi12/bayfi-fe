@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
 import arrowIcon from "@/assets/svg/arrow-bidirection.svg";
@@ -18,9 +18,9 @@ import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 const Register = () => {
   return (
     <Row className="h-full">
-      <Col xs={16}>
+      <Col lg={16} xs={24}>
         <Row className="h-full" justify={"center"} align={"middle"}>
-          <Col xs={12}>
+          <Col lg={12} xs={22}>
             <div className="mb-6">
               <Image src={logo} alt="" />
             </div>
@@ -66,7 +66,7 @@ const Register = () => {
               </div>
 
               <div className="mt-6">
-                <div className="flex gap-2 w-full ">
+                <div className="flex flex-col xl:flex-row gap-2 w-full ">
                   <div className="w-full">
                     <GInput
                       label="First Name"
@@ -114,7 +114,7 @@ const Register = () => {
           </Col>
         </Row>
       </Col>
-      <Col xs={8}>
+      <Col className="hideContainer" xs={8}>
         <AnimatedAuthSide />
       </Col>
     </Row>
