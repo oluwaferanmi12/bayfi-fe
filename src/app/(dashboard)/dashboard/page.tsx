@@ -457,7 +457,7 @@ const DashboardServiceWrapper = ({
   );
 };
 
-const TransactionWrapper = () => {
+export const TransactionWrapper = () => {
   return (
     <div className="border-bayfi-grey-500 flex py-2 justify-between">
       <div className="flex items-center gap-2">

@@ -1,0 +1,41 @@
+import bettingIcon from "@/assets/svg/bettingMobileIcon.svg";
+import airtimeIcon from "@/assets/svg/airtimeMobileIcon.svg";
+import giftCardIcon from "@/assets/svg/giftCardMobileIcon.svg";
+import otherIcon from "@/assets/svg/othersMobileIcon.svg";
+import Image from "next/image";
+
+export const MobileDashboardService = () => {
+  return (
+    <>
+      <div className="my-3">
+        <p className="text-bayfi-black-900 text-base font-grotesk-semi-bold">
+          Other services
+        </p>
+        <div className="my-4 flex items-center justify-between">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Image src={giftCardIcon} alt="" />
+            <p className="text-bayfi-black-500 font-semibold text-sm">
+              Gift card
+            </p>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Image src={airtimeIcon} alt="" />
+            <p className="text-bayfi-black-500 font-semibold text-sm">
+              Airtime
+            </p>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Image src={bettingIcon} alt="" />
+            <p className="text-bayfi-black-500 font-semibold text-sm">
+              Betting
+            </p>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Image src={otherIcon} alt="" />
+            <p className="text-bayfi-black-500 font-semibold text-sm">Others</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
