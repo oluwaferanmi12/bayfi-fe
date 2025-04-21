@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <div className="h-full min-h-screen w-full pt-24 bg-bayfi-grey-300">
+      <div className="h-full min-h-screen w-full lg:pt-24 bg-bayfi-grey-300">
         <div className="fixed hidden lg:block  top-0 w-full z-50 bg-white border border-[#EAECF0] py-4">
           <Row justify={"center"} align={"middle"}>
             <Col xs={22}>
@@ -80,7 +80,7 @@ export default function RootLayout({
             text="More"
           />
         </div>
-        {children}
+      {children}
       </div>
     </>
   );
