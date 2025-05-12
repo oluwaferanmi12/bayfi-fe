@@ -24,9 +24,12 @@ export const GInput = ({
     <div className={`${noMarginBottom ? "mb-0" : "mb-4"}`}>
       <Text type="input-text" value={label} />
       <div className="mt-1 relative">
-        <span className="absolute top-4 left-2">
-          {icon && <Image src={icon} alt="" />}
-        </span>
+        {icon && (
+          <span className="absolute lg:top-4  top-3 left-2">
+            {icon && <Image src={icon} alt="" />}
+          </span>
+        )}
+
         {type === "password" && (
           <button
             onClick={() => {
@@ -46,7 +49,7 @@ export const GInput = ({
         <input
           type={type === "password" ? (showPassword ? "text" : type) : type}
           placeholder={placeholder}
-          className={`bg-bayfi-grey-400 font-grotesk-medium placeholder:font-grotesk-regular text-base rounded-lg p-2 lg:p-3 ${icon && "px-9"}  min-w-full  outline-none border border-bayfi-grey-600`}
+          className={`bg-bayfi-grey-400 font-grotesk-medium placeholder:font-grotesk-regular text-base rounded-lg p-2 lg:py-3 ${icon && " px-9"}  min-w-full  outline-none border border-bayfi-grey-600`}
         />
       </div>
     </div>

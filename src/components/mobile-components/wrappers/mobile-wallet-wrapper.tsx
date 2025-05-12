@@ -9,11 +9,13 @@ import bitCoinGroup from "@/assets/svg/bitCoinGroup.svg";
 import { BottomDrawer } from "@/components/bottom-drawers/bottom-drawer";
 import nairaGreyIcon from "@/assets/svg/naira-grey.svg";
 import sellCryptoIcon from "@/assets/svg/sellCryptoIcon.svg";
+import { useRouter } from "next/navigation";
 
 export const MobileWalletWrapper = () => {
   const [showTradeModal, setShowTradeModal] = useState(false);
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const router = useRouter();
   return (
     <>
       <BottomDrawer
@@ -30,7 +32,11 @@ export const MobileWalletWrapper = () => {
             }}
             className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
           >
-            <div>
+            <div
+              onClick={() => {
+                router.push("deposit-crypto");
+              }}
+            >
               <Text value="Crypto" type="text-plain-dark-18" />
               <div className="w-[80%]">
                 <Text
@@ -69,7 +75,7 @@ export const MobileWalletWrapper = () => {
             }}
             className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
           >
-            <div>
+            <div onClick={() => router.push("buy-crypto")}>
               <Text value="Buy Crypto" type="text-plain-dark-18" />
               <div className="w-[80%]">
                 <Text
@@ -128,7 +134,7 @@ export const MobileWalletWrapper = () => {
           </div>
           <div
             onClick={() => {
-              setShowWithdrawModal(true);
+              router.push("withdrawal")
             }}
             className="flex flex-col items-center justify-center gap-2"
           >

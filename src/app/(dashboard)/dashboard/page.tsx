@@ -172,6 +172,7 @@ const Dashboard = () => {
                 label="How much do you want to purchase in dollars?"
                 placeholder="Enter amount"
                 icon={dollarCircle}
+                noMarginBottom
               />
               <div className="mb-3">
                 <Text type="text-small-red" value="Minimum amoutn $50" />
@@ -180,6 +181,7 @@ const Dashboard = () => {
                 label="Enter wallet address"
                 placeholder="Enter amount"
                 icon={bitcoinInputIcon}
+                noMarginBottom
               />
               <div className="mb-3">
                 <Text type="text-small-red" value="Hint text" />
@@ -433,7 +435,6 @@ const Dashboard = () => {
       </div>
 
       <DashboardMobile />
-
     </>
   );
 };
