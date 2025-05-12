@@ -331,107 +331,102 @@ const Dashboard = () => {
             </>
           )}
         </SideDrawer>
-        <GPageWrapper>
-          <Row gutter={12}>
-            <Col xs={16}>
-              <div className="bg-white relative py-12 text-center items-center  rounded-xl p-4 ">
-                <span className="absolute left-0 top-0">
-                  <Image src={bgImage} alt="" />
-                </span>
-                <span className="absolute right-0 top-0">
-                  <Image src={bgImage} alt="" />
-                </span>
-                <div>
-                  <div className="flex justify-center">
-                    <div className="bg-bayfi-green-100 rounded-full px-4 py-1 flex items-center gap-2">
-                      <span>
-                        <Image src={eyeIcon} alt="" />
-                      </span>
-                      <Text type="text-plain-dark-16" value="Wallet balance" />
-                    </div>
-                  </div>
-
-                  <div className="py-6">
-                    <Text type="number-big" value="NGN 200,000.00" />
-                  </div>
-                  <div className="flex items-center gap-2 justify-center">
-                    <Button
-                      loading={false}
-                      text="Trade crypto"
-                      icon={bidirectionIcon}
-                      type="bgGreen"
-                      lessRounded
-                      action={() => {
-                        setShowCryptoModal(true);
-                      }}
-                    />
-                    <Button
-                      loading={false}
-                      text="Deposit"
-                      icon={arrowSlantDown}
-                      type="bgGreen"
-                      lessRounded
-                      action={() => {
-                        setDepositModal(true);
-                      }}
-                    />
-                    <Button
-                      loading={false}
-                      text="Withdraw"
-                      icon={arrowSlantUp}
-                      type="bgGreen"
-                      action={() => {
-                        setShowWithdrawModal(true);
-                      }}
-                      lessRounded
-                    />
+        <Row gutter={12}>
+          <Col xs={16}>
+            <div className="bg-white relative py-12 text-center items-center  rounded-xl p-4 ">
+              <span className="absolute left-0 top-0">
+                <Image src={bgImage} alt="" />
+              </span>
+              <span className="absolute right-0 top-0">
+                <Image src={bgImage} alt="" />
+              </span>
+              <div>
+                <div className="flex justify-center">
+                  <div className="bg-bayfi-green-100 rounded-full px-4 py-1 flex items-center gap-2">
+                    <span>
+                      <Image src={eyeIcon} alt="" />
+                    </span>
+                    <Text type="text-plain-dark-16" value="Wallet balance" />
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-6">
-                <Text type="header-text-20" value="Other services" />
-                <div className="mt-4 flex gap-6">
-                  <DashboardServiceWrapper icon={bulkCard} text="Gift card" />
-                  <DashboardServiceWrapper icon={bulkCall} text="Buy airtime" />
-                  <DashboardServiceWrapper icon={bulkGlobal} text="Betting" />
-                  <DashboardServiceWrapper
-                    icon={wifiSquare}
-                    text="Mobile data"
+                <div className="py-6">
+                  <Text type="number-big" value="NGN 200,000.00" />
+                </div>
+                <div className="flex items-center gap-2 justify-center">
+                  <Button
+                    loading={false}
+                    text="Trade crypto"
+                    icon={bidirectionIcon}
+                    type="bgGreen"
+                    lessRounded
+                    action={() => {
+                      setShowCryptoModal(true);
+                    }}
                   />
-                  <DashboardServiceWrapper icon={cableIcon} text="Cable TV" />
+                  <Button
+                    loading={false}
+                    text="Deposit"
+                    icon={arrowSlantDown}
+                    type="bgGreen"
+                    lessRounded
+                    action={() => {
+                      setDepositModal(true);
+                    }}
+                  />
+                  <Button
+                    loading={false}
+                    text="Withdraw"
+                    icon={arrowSlantUp}
+                    type="bgGreen"
+                    action={() => {
+                      setShowWithdrawModal(true);
+                    }}
+                    lessRounded
+                  />
                 </div>
               </div>
-              <div className="mt-8 bg-white rounded-2xl">
-                <div className="p-4 flex items-center gap-3 border-b border-bayfi-grey-500">
-                  <Image src={dollarSquare} alt="" />
+            </div>
+
+            <div className="mt-6">
+              <Text type="header-text-20" value="Other services" />
+              <div className="mt-4 flex gap-6">
+                <DashboardServiceWrapper icon={bulkCard} text="Gift card" />
+                <DashboardServiceWrapper icon={bulkCall} text="Buy airtime" />
+                <DashboardServiceWrapper icon={bulkGlobal} text="Betting" />
+                <DashboardServiceWrapper icon={wifiSquare} text="Mobile data" />
+                <DashboardServiceWrapper icon={cableIcon} text="Cable TV" />
+              </div>
+            </div>
+            <div className="mt-8 bg-white rounded-2xl">
+              <div className="p-4 flex items-center gap-3 border-b border-bayfi-grey-500">
+                <Image src={dollarSquare} alt="" />
+                <div>
+                  <Text type="main-text-bold" value="Trade Analytics" />
                   <div>
-                    <Text type="main-text-bold" value="Trade Analytics" />
-                    <div>
-                      <Text
-                        type="body-medium"
-                        value="Keep track of new and previous trades"
-                      />
-                    </div>
+                    <Text
+                      type="body-medium"
+                      value="Keep track of new and previous trades"
+                    />
                   </div>
                 </div>
-                <div className="p-4 py-8">
-                  <Image className="w-full" src={chartPlaceholder} alt="" />
-                </div>
               </div>
-            </Col>
-            <Col xs={8}>
-              <div className="bg-white min-h-[80vh] rounded-lg p-4">
-                <Text type="main-text-regular" value="Transaction history" />
-                <div className="mt-3 border border-[#EAECF0] rounded-lg bg-[#FDFEFF] p-4">
-                  <TransactionWrapper />
-                  <TransactionWrapper />
-                  <TransactionWrapper />
-                </div>
+              <div className="p-4 py-8">
+                <Image className="w-full" src={chartPlaceholder} alt="" />
               </div>
-            </Col>
-          </Row>
-        </GPageWrapper>
+            </div>
+          </Col>
+          <Col xs={8}>
+            <div className="bg-white min-h-[80vh] rounded-lg p-4">
+              <Text type="main-text-regular" value="Transaction history" />
+              <div className="mt-3 border border-[#EAECF0] rounded-lg bg-[#FDFEFF] p-4">
+                <TransactionWrapper />
+                <TransactionWrapper />
+                <TransactionWrapper />
+              </div>
+            </div>
+          </Col>
+        </Row>
       </div>
 
       <DashboardMobile />

@@ -16,6 +16,7 @@ import bitcoinConvertWhite from "@/assets/svg/bitcoin-convert-white.svg";
 import documentNormal2 from "@/assets/svg/document-normal-2.svg";
 import menu2 from "@/assets/svg/menu-2.svg";
 import mobileHomeActive from "@/assets/svg/home-2.svg";
+import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -80,7 +81,7 @@ export default function RootLayout({
             text="More"
           />
         </div>
-      {children}
+        <GPageWrapper>{children}</GPageWrapper>
       </div>
     </>
   );

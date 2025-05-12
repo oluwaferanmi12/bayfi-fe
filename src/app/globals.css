@@ -175,3 +175,19 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.serviceCardBg {
+  background-image: url("../assets/svg/gift-card-bg.svg");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+}
+
+.downloadApp {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("../assets/images/download-app.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
