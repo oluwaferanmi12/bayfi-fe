@@ -31,20 +31,20 @@ export default function RootLayout({
               <div className="flex justify-between items-center">
                 <Image src={logo} alt="" />
                 <div className="flex items-center gap-8">
-                  <Link href={"/"}>
+                  <Link href={"/dashboard"}>
                     <span className="flex items-center gap-2 px-4 py-2 bg-black rounded-lg">
                       <Image src={homeIcon} alt="" />
                       <Text value="Dashboard" type="text-green-bold" />
                     </span>
                   </Link>
-                  <Link href={"/"}>
+                  <Link href={"/services"}>
                     <Text type="nav-text" value="Services" />
                   </Link>
                   <Link href={"/"}>
                     <Text type="nav-text" value="Transactions" />
                   </Link>
                   <Link href={"/"}>
-                    <Text type="nav-text" value="More" />
+                    <Text type="nav-text" value="Support" />
                   </Link>
                 </div>
                 <div className="flex items-center gap-4">
