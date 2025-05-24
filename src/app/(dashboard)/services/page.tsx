@@ -180,7 +180,7 @@ const Services = () => {
               />
             </div>
           ) : showGiftcardChat ? (
-            <div>
+            <div className="relative ">
               <SideDrawerBreadCrumb
                 breadCrumbArray={[
                   { text: "home", active: false, action: () => {} },

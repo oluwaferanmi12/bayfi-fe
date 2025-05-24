@@ -22,6 +22,7 @@ export const SideDrawer = ({
       closeIcon={false}
       onClose={onClose}
       open={open}
+      className="relative"
     >
       <div className={"flex gap-2 items-center  border-b border-bayfi-grey-500 py-2 justify-between"}>
         <Text value={title} type="main-text-regular" />

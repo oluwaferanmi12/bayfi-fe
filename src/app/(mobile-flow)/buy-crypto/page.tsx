@@ -1,6 +1,7 @@
 import { SearchInput } from "@/components/inputs/search-input";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
 import { CoinWrapper } from "@/components/wrappers/coin-wrapper";
+import Link from "next/link";
 import React from "react";
 
 const BuyCrytpoMobile = () => {
@@ -11,7 +12,9 @@ const BuyCrytpoMobile = () => {
         <SearchInput />
       </div>
       <div>
-        <CoinWrapper withWhiteBg />
+        <Link href={"/select-preferred-network"}>
+          <CoinWrapper withWhiteBg />
+        </Link>
         <CoinWrapper withWhiteBg />
         <CoinWrapper withWhiteBg />
         <CoinWrapper withWhiteBg />

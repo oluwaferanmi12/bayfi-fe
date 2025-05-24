@@ -15,8 +15,9 @@ import { CopyButton } from "@/components/buttons/copy-button";
 import qrCodeIcon from "@/assets/svg/qr-code.svg";
 
 const BuyCryptoForm = () => {
-  const [showWalletType, setShowWalletType] = useState(false);
-  const [showWalletDetails , setShowWalletDetails] = useState(true)
+  const [showWalletType, setShowWalletType] = useState(true);
+  const [showWalletDetails , setShowWalletDetails] = useState(true);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
   return (
     <>
       <BottomDrawer
@@ -37,7 +38,7 @@ const BuyCryptoForm = () => {
       <BottomDrawer
         open={showWalletDetails}
         height="medium"
-        title="Wallet type"
+        title="Wallet Details"
         onClose={() => {
           setShowWalletDetails(false);
         }}
@@ -74,6 +75,7 @@ const BuyCryptoForm = () => {
           label="Select wallet type"
           placeholder="bep-20"
           icon={buyCryptoIcon}
+          
         />
         <GInput
           label="How much do you want to purchase in dollars?"
