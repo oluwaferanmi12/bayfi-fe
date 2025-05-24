@@ -4,4 +4,5 @@ export interface ServiceContentInterface {
     subText: string,
     sideIcon: string,
     bgColor: string,
+    clickAction: () => void
 }

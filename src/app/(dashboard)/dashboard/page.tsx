@@ -428,7 +428,6 @@ const Dashboard = () => {
           </Col>
         </Row>
       </div>
-
       <DashboardMobile />
     </>
   );
