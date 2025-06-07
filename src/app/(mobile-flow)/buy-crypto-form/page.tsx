@@ -16,10 +16,51 @@ import qrCodeIcon from "@/assets/svg/qr-code.svg";
 
 const BuyCryptoForm = () => {
   const [showWalletType, setShowWalletType] = useState(true);
-  const [showWalletDetails , setShowWalletDetails] = useState(true);
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+  const [showWalletDetails, setShowWalletDetails] = useState(true);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   return (
     <>
+      <BottomDrawer
+        onClose={() => {
+          setShowConfirmationModal(false);
+        }}
+        open={showConfirmationModal}
+        title="Confirm Purchase"
+      >
+        <div className="bg-bayfi-black-700 py-4 rounded-3xl flex justify-center items-center flex-col">
+          <p className="text-white font-grotesk-medium text-base">
+            You will be charged
+          </p>
+          <p className="mt-2 text-bayfi-black-50 font-grotesk-semi-bold text-2xl">
+            NGN 555,000.00
+          </p>
+        </div>
+        <div className="mt-2 border mb-2 border-[#DCDCDC] bg-bayfi-grey-400 p-4 rounded-xl">
+          <div className="flex items-center justify-between pb-3  border-b border-bayfi-black-50">
+            <p className="font-grotesk-medium text-sm">BTC Value in dollars</p>
+            <p className="font-grotesk-medium">$5,000</p>
+          </div>
+          <div className="flex items-center justify-between pb-3  border-b border-bayfi-black-50">
+            <p className="font-grotesk-medium text-sm">Gas fee</p>
+            <p className="font-grotesk-medium">$0.005</p>
+          </div>
+          <div className="flex items-center justify-between pb-3  border-b border-bayfi-black-50">
+            <p className="font-grotesk-medium text-sm">Exchange Rate</p>
+            <p className="font-grotesk-medium">NGN 1500</p>
+          </div>
+          <div className="flex items-center justify-between pb-3   border-bayfi-black-50">
+            <p className="font-grotesk-medium text-sm">Bayfi Transaction Fee</p>
+            <p className="font-grotesk-medium">NGN 2000</p>
+          </div>
+        </div>
+        <Button
+          loading={false}
+          type="bgGreen"
+          text="Proceed to purchase"
+          fullWidth
+          action={() => {}}
+        />
+      </BottomDrawer>
       <BottomDrawer
         open={showWalletType}
         height="medium"
@@ -75,7 +116,6 @@ const BuyCryptoForm = () => {
           label="Select wallet type"
           placeholder="bep-20"
           icon={buyCryptoIcon}
-          
         />
         <GInput
           label="How much do you want to purchase in dollars?"
@@ -95,7 +135,15 @@ const BuyCryptoForm = () => {
         <div className="mb-3">
           <Text type="text-small-red" value="Hint text" />
         </div>
-        <Button fullWidth text="Proceed" loading={false} type="bgGreen" />
+        <Button
+          action={() => {
+            setShowConfirmationModal(true);
+          }}
+          fullWidth
+          text="Proceed"
+          loading={false}
+          type="bgGreen"
+        />
       </div>
     </>
   );
@@ -108,9 +156,7 @@ const MobileWalletType = () => {
     <>
       <div className="bg-bayfi-grey-300 p-2 mb-2 flex gap-2 items-center  rounded-lg ">
         <Image src={walletTypeIcon} alt="" />
-        <p className="font-grotesk-semi-bold">
-            TRC 20
-        </p>
+        <p className="font-grotesk-semi-bold">TRC 20</p>
       </div>
     </>
   );

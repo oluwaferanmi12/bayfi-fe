@@ -35,6 +35,14 @@
   src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-ExtraBold.ttf");
 }
 
+.fixed-background {
+  background-image: url("../assets/svg/white-mobile-header.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+  
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

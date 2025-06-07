@@ -3,6 +3,7 @@ import airtimeIcon from "@/assets/svg/airtimeMobileIcon.svg";
 import giftCardIcon from "@/assets/svg/giftCardMobileIcon.svg";
 import otherIcon from "@/assets/svg/othersMobileIcon.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const MobileDashboardService = () => {
   return (
@@ -30,10 +31,14 @@ export const MobileDashboardService = () => {
               Betting
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center gap-2">
-            <Image src={otherIcon} alt="" />
-            <p className="text-bayfi-black-500 font-semibold text-sm">Others</p>
-          </div>
+          <Link href={"/other-services"}>
+            <div className="flex flex-col items-center justify-center gap-2">
+              <Image src={otherIcon} alt="" />
+              <p className="text-bayfi-black-500 font-semibold text-sm">
+                Others
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
     </>
