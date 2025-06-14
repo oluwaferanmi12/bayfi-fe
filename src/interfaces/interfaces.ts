@@ -4,7 +4,7 @@ export interface TextInterface {
     blockType ?: boolean;
 }
 
-export type ButtonType = "bgGreen" | "bgBlack" | "bgWhite";
+export type ButtonType = "bgGreen" | "bgBlack" | "bgWhite" | 'bgGrey';
 
 export interface ButtonInterface {
     text: string;
@@ -17,4 +17,5 @@ export interface ButtonInterface {
     iconLeft?: string;
     lessRounded?: boolean;
     action ?: () => void
+    smallerType ?: boolean
 }

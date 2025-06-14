@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FixedMobileHeader } from "@/components/mobile-components/headers/fixed-mobile-header";
 import { OtherServiceWrapper } from "@/components/mobile-components/wrappers/other-service-wrapper";
@@ -8,10 +8,12 @@ import airtimeIcon from "@/assets/svg/black-airtime-icon.svg";
 import mobileIcon from "@/assets/svg/mobile-icon-black.svg";
 import cableBlackIcon from "@/assets/svg/cable-tv-icon-black.svg";
 import { DashboardMobile } from "@/components/mobile-screens/dashboard-mobile";
+import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
 
 const OtherServices = () => {
   return (
     <>
+      <MobileNav />
       <FixedMobileHeader
         header={"Other Services"}
         subText="Pay bill, Buy airtime and others"
