@@ -5,8 +5,8 @@ export const TableInput = ({ placeholder }: { placeholder: string }) => {
   return (
     <>
       <div className="relative">
-        <span className="absolute top-2 left-2">
-          <Image src={tableNormal} alt="" />
+        <span className="absolute top-3 left-2">
+          <Image className="w-4 h-4" src={tableNormal} alt="" />
         </span>
         <input
           placeholder={placeholder}

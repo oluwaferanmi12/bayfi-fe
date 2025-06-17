@@ -5,6 +5,7 @@ import exportIcon from "@/assets/svg/export-icon.svg";
 import { SearchInput } from "@/components/inputs/search-input";
 import { TableInput } from "@/components/inputs/table-input";
 import { TablePagination } from "@/components/pagination/table-pagination";
+import { TransactionTable } from "@/components/tables/transaction-table";
 
 function Transaction() {
   return (
@@ -39,6 +40,7 @@ function Transaction() {
         <TableInput placeholder="Search" />
         <TablePagination />
       </div>
+        <TransactionTable />
     </div>
   );
 }

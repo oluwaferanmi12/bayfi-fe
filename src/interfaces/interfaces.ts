@@ -19,3 +19,11 @@ export interface ButtonInterface {
     action ?: () => void
     smallerType ?: boolean
 }
+
+export interface TransactionInterface {
+    date: string;
+    amount: number;
+    balance: number;
+    channel: string;
+    status: 'Completed' | "In progress" | "Failed" 
+}
