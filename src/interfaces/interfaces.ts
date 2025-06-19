@@ -4,7 +4,7 @@ export interface TextInterface {
     blockType ?: boolean;
 }
 
-export type ButtonType = "bgGreen" | "bgBlack" | "bgWhite" | 'bgGrey';
+export type ButtonType = "bgGreen" | "bgBlack" | "bgWhite" | 'bgGrey' | 'bgPlain'
 
 export interface ButtonInterface {
     text: string;

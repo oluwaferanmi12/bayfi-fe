@@ -13,13 +13,13 @@ export const Button = ({
   iconLeft,
   lessRounded,
   action,
-  smallerType
+  smallerType,
 }: ButtonInterface) => {
   return (
     <button
       onClick={action}
       style={{ opacity: disabled || loading ? 0.2 : 1 }}
-      className={`flex  cursor-pointer font-grotesk-semi-bold  my-1   ${smallerType ? "px-4 py-2" : "px-12 pb-3 pt-2"}  items-center ${lessRounded ? "rounded-xl" : "rounded-full"} justify-center ${fullWidth && "w-full"} ${type === "bgGreen" ? "bg-[#BEDD3A]" : type === "bgBlack" ? "bg-bayfi-black-500 text-white" : type === "bgGrey" ? "border border-[#D0D5DD] text-[#344054]" : "bg-white text-bayfi-black-500"}`}
+      className={`flex  cursor-pointer font-grotesk-semi-bold  my-1   ${smallerType ? "px-4 py-2" : "px-12 pb-3 pt-2"}  items-center ${lessRounded ? "rounded-xl" : "rounded-full"} justify-center ${fullWidth && "w-full"} ${type === "bgGreen" ? "bg-[#BEDD3A]" : type === "bgBlack" ? "bg-bayfi-black-500 text-white" : type === "bgGrey" ? "border border-[#D0D5DD] text-[#344054]" : type === "bgPlain" ? "bg-transparent text-[#344054]" : "bg-white text-bayfi-black-500"}`}
       disabled={loading || disabled}
     >
       {!loading ? (

@@ -1,0 +1,5 @@
+export const SupportTable = () => {
+    return <>
+    
+    </>
+}

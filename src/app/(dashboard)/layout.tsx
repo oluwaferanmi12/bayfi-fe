@@ -41,10 +41,10 @@ export default function RootLayout({
                   <Link href={"/services"}>
                     <Text type="nav-text" value="Services" />
                   </Link>
-                  <Link href={"/"}>
+                  <Link href={"/transaction"}>
                     <Text type="nav-text" value="Transactions" />
                   </Link>
-                  <Link href={"/"}>
+                  <Link href={"/support"}>
                     <Text type="nav-text" value="Support" />
                   </Link>
                 </div>
@@ -62,5 +62,3 @@ export default function RootLayout({
     </>
   );
 }
-
-
