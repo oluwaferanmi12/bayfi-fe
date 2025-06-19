@@ -21,7 +21,7 @@ export const GInput = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
-    <div className={`${noMarginBottom ? "mb-0" : "mb-4"}`}>
+    <div className={`${noMarginBottom ? "mb-0" : "mb-4"} w-full`}>
       <Text type="input-text" value={label} />
       <div className="mt-1 relative">
         {icon && (

@@ -6,3 +6,5 @@ export interface ServiceContentInterface {
     bgColor: string,
     clickAction: () => void
 }
+
+export type ProfileType = "leaderboard" | 'setting' | 'security' 
