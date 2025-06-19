@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Text } from "@/components/texts/text";
 import { Button } from "@/components/buttons";
 import addCircle from "@/assets/svg/add-circle.svg";
@@ -8,10 +10,35 @@ import { Col, Row } from "antd";
 import { ChatContainer } from "@/components/chat/chat-container";
 import { TransactionTable } from "@/components/tables/transaction-table";
 import { SupportTable } from "@/components/tables/support-table";
+import { SideDrawer } from "@/components/side-drawers/side-drawer";
+import { GInput } from "@/components/inputs/GInput";
 
 function Support() {
+  const [showCreateModal, setShowCreateModal] = useState(false);
   return (
     <>
+      <SideDrawer
+        open={showCreateModal}
+        title="Create new ticket"
+        onClose={() => {
+          setShowCreateModal(false);
+        }}
+      >
+        <div className="mt-4">
+          <GInput label="Ticket channel" placeholder="Select a channel" />
+          <GInput
+            label="How urgent is this issue"
+            placeholder="Select a priority (High, Low , Medium)"
+          />
+          <GInput label="Message" placeholder="Describe issue" />
+          <Button
+            loading={false}
+            text="Send a message"
+            type="bgGreen"
+            fullWidth
+          />
+        </div>
+      </SideDrawer>
       <Row gutter={12}>
         <Col xs={18}>
           <div className="bg-white rounded-lg p-4">
@@ -24,6 +51,9 @@ function Support() {
               </div>
               <div className="flex items-center gap-2">
                 <Button
+                  action={() => {
+                    setShowCreateModal(true);
+                  }}
                   loading={false}
                   smallerType
                   lessRounded
