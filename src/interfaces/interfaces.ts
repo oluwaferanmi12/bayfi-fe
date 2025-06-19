@@ -1,7 +1,7 @@
 export interface TextInterface {
     value: string;
     type: "header-32" | 'body-medium' | 'header-white-32' | "input-text" | 'header-subtext' | 'text-plain-18' | "text-plain-16" | "text-plain-dark-18" | "text-plain-dark-16" | "nav-text" | "text-green-bold" | "number-big" | 'header-text-20' | 'main-text-bold' | "main-text-regular" | "text-small-light" | 'text-plain-green-18' | "text-small-white" | "header-dark-light-32" | "number-small-white" | "text-green-24" | 'header-text-white-20' | 'header-text-white-bold-20' | 'text-small-green' | 'text-small-red';
-    blockType ?: boolean;
+    blockType?: boolean;
 }
 
 export type ButtonType = "bgGreen" | "bgBlack" | "bgWhite" | 'bgGrey' | 'bgPlain'
@@ -16,8 +16,8 @@ export interface ButtonInterface {
     disabled?: boolean;
     iconLeft?: string;
     lessRounded?: boolean;
-    action ?: () => void
-    smallerType ?: boolean
+    action?: () => void
+    smallerType?: boolean
 }
 
 export interface TransactionInterface {
@@ -25,5 +25,14 @@ export interface TransactionInterface {
     amount: number;
     balance: number;
     channel: string;
-    status: 'Completed' | "In progress" | "Failed" 
+    status: 'Completed' | "In progress" | "Failed"
+}
+
+export interface SupportInterface {
+    date: string;
+    ticketName: string;
+    channel: "crypto" | "wallet";
+    priority: "low" | "high" | 'medium';
+    ticketId: string;
+    status: "open" | 'closed' | 'resolved'
 }

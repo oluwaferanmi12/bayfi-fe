@@ -12,9 +12,9 @@ export const TableStatus = ({
 }) => {
   return (
     <div
-      className={`${type === "Success" ? "border border-[#ABEFC6] bg-[#ECFDF3] text-[#067647]" : type === "Pending" ? "border border-[#B2DDFF] bg-[#EFF8FF] text-[#175CD3]" : "border border-[#FECDCA] bg-[#FEF3F2] text-[#B42318]"} rounded-full font-grotesk-medium px-4 py-1 flex items-center gap-2`}
+      className={`${type === "Success" ? "border border-[#ABEFC6] bg-[#ECFDF3] text-[#067647]" : type === "Pending" ? "border border-[#B2DDFF] bg-[#EFF8FF] text-[#175CD3]" : "border border-[#FECDCA] bg-[#FEF3F2] text-[#B42318]"} rounded-full font-grotesk-medium px-4 py-1 flex items-center gap-1`}
     >
-      <span>
+      <div style={{ marginTop: "2px" }}>
         <Image
           src={
             type === "Success"
@@ -25,8 +25,8 @@ export const TableStatus = ({
           }
           alt=""
         />
-      </span>
-      <p>{text}</p>
+      </div>
+      <p className="flex items-center">{text}</p>
     </div>
   );
 };
