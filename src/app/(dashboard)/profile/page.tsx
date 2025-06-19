@@ -74,6 +74,56 @@ function ProfileSetting() {
                         </div>
                       </div>
                     )}
+                    {activeProfile === "security" && (
+                      <>
+                        <div className="py-3 border-b border-[#EAECF0] w-full">
+                          <div className="flex items-center w-full justify-between">
+                            <p className="text-[#101828] text-xl font-grotesk-medium">
+                              Password settings
+                            </p>
+                            <Button
+                              loading={false}
+                              type="bgGreen"
+                              text="Change password"
+                              lessRounded
+                            />
+                          </div>
+                          <div className="mt-4 w-full">
+                            <GInput
+                              label="Old Password"
+                              placeholder="Insert old password"
+                            />
+                            <GInput
+                              label="New Password"
+                              placeholder="Insert old password"
+                            />
+                          </div>
+                        </div>
+                        <div className="py-3 border-b border-[#EAECF0] w-full">
+                          <div className="flex items-center w-full justify-between">
+                            <p className="text-[#101828] text-xl font-grotesk-medium">
+                              Pin Setting
+                            </p>
+                            <Button
+                              loading={false}
+                              type="bgGreen"
+                              text="Change Pin"
+                              lessRounded
+                            />
+                          </div>
+                          <div className="mt-4 w-full">
+                            <GInput
+                              label="Old Pin"
+                              placeholder="Enter old pin"
+                            />
+                            <GInput
+                              label="New Pin"
+                              placeholder="Enter new pin"
+                            />
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </Col>
               </Row>

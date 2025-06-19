@@ -38,9 +38,21 @@ export const ProfileNav = ({
           </p>
         </div>
         <div className="mt-4">
-          <ProfileNavContainer icon={profileSetting} text="Profile Setting" />
+          <ProfileNavContainer
+            clickAction={() => {
+              setActiveProfile("setting");
+            }}
+            icon={profileSetting}
+            text="Profile Setting"
+          />
           <ProfileNavContainer icon={leaderboardIcon} text="Leaderboard" />
-          <ProfileNavContainer icon={securityIcon} text="Security settings" />
+          <ProfileNavContainer
+            clickAction={() => {
+              setActiveProfile("security");
+            }}
+            icon={securityIcon}
+            text="Security settings"
+          />
           <ProfileNavContainer icon={helpIcon} text="Help & Support" />
           <ProfileNavContainer
             icon={aboutIcon}
