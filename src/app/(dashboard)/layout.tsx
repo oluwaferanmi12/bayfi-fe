@@ -18,11 +18,13 @@ import menu2 from "@/assets/svg/menu-2.svg";
 import mobileHomeActive from "@/assets/svg/home-2.svg";
 import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
+import { useRouter } from "next/navigation";
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
   return (
     <>
       <div className="h-full min-h-screen w-full lg:pt-24 bg-bayfi-grey-300">
@@ -50,7 +52,13 @@ export default function RootLayout({
                 </div>
                 <div className="flex items-center gap-4">
                   <Image src={bellIcon} alt="" />
-                  <Image src={profilePlaceholder} alt="" />
+                  <Image
+                    onClick={() => {
+                      router.push("/profile");
+                    }}
+                    src={profilePlaceholder}
+                    alt=""
+                  />
                 </div>
               </div>
             </Col>

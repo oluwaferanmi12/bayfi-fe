@@ -12,8 +12,9 @@ export const OtherServiceWrapper = ({
 }) => {
   return (
     <div
+      onClick={action}
       style={{ border: "0.5px solid #EBF1FF" }}
-      className="border bg-white mb-3 rounded-lg p-4 flex items-center justify-between"
+      className="border cursor-pointer bg-white mb-3 rounded-lg p-4 flex items-center justify-between"
     >
       <div className="flex items-center gap-2">
         <span>
