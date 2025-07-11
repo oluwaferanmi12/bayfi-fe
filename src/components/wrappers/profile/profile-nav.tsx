@@ -82,7 +82,9 @@ const ProfileNavContainer = ({
   return (
     <div
       onClick={() => {
-        clickAction && clickAction();
+        if (clickAction) {
+          clickAction();
+        }
       }}
       className="flex items-center  justify-between cursor-pointer py-3"
       style={{ borderBottom: "1px solid #EBF1FF" }}

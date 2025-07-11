@@ -374,7 +374,7 @@ const Services = () => {
           <Row gutter={12}>
             {services.map((item, index) => {
               return (
-                <Col xs={8}>
+                <Col key={index} xs={8}>
                   {" "}
                   <DesktopServiceCard key={index} item={item} />{" "}
                 </Col>

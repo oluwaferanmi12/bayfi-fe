@@ -63,12 +63,13 @@ export const SupportTable = () => {
       <div className="mt-4">
         <table className="w-full">
           <thead>
-            {table.getHeaderGroups().map((headerGroup) => {
+            {table.getHeaderGroups().map((headerGroup, index) => {
               return (
-                <tr className="  min-w-full w-full">
+                <tr key={index} className="  min-w-full w-full">
                   {headerGroup.headers.map((header, index, rootData) => {
                     return (
                       <th
+                      
                         className={`bg-[#F7F7F7]  p-4 ${
                           index === 0 && "rounded-tl-2xl"
                         } ${index === rootData.length - 1 && "rounded-tr-2xl"}`}
