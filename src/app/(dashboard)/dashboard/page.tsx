@@ -16,9 +16,7 @@ import wifiSquare from "@/assets/svg/wifi-square.svg";
 import cableIcon from "@/assets/svg/bulkMonitor.svg";
 import dollarSquare from "@/assets/svg/dollarSquare.svg";
 import chartPlaceholder from "@/assets/svg/chartPlaceholder.svg";
-import sendSquare from "@/assets/svg/sendSquareIcon.svg";
-import recieveSquare from "@/assets/svg/recieveSquare.svg";
-import calendarIcon from "@/assets/svg/calendarIcon.svg";
+
 import { useState } from "react";
 import { SideDrawer } from "@/components/side-drawers/side-drawer";
 import bitCoinGroup from "@/assets/svg/bitCoinGroup.svg";
@@ -40,8 +38,9 @@ import buyCryptoIcon from "@/assets/svg/buyCrypto.svg";
 import dollarCircle from "@/assets/svg/dollar-circle.svg";
 import bitcoinInputIcon from "@/assets/svg/bitcoing-(btc).svg";
 import { DashboardMobile } from "@/components/mobile-screens/dashboard-mobile";
+import { TransactionWrapper } from "@/components/transaction/transaction-wrapper";
 
-const Dashboard = () => {
+function Dashboard() {
   const [depositModal, setDepositModal] = useState(false);
   const [showCryptoModal, setShowCryptoModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -431,7 +430,7 @@ const Dashboard = () => {
       <DashboardMobile />
     </>
   );
-};
+}
 
 export default Dashboard;
 
@@ -452,22 +451,3 @@ const DashboardServiceWrapper = ({
   );
 };
 
-export const TransactionWrapper = () => {
-  return (
-    <div className="border-bayfi-grey-500 flex py-2 justify-between">
-      <div className="flex items-center gap-2">
-        <Image src={sendSquare} alt="" />
-        <div>
-          <Text type="text-plain-dark-18" value="NGN 200,000.00" />
-          <div>
-            <Text type="text-plain-16" value="Funds Withdrawal" />
-          </div>
-        </div>
-      </div>
-      <div className="flex items-center gap-2">
-        <Image src={calendarIcon} alt="" />
-        <Text type={"text-plain-16"} value="Feb-20-2025" />
-      </div>
-    </div>
-  );
-};

@@ -1,4 +1,5 @@
-import { TransactionWrapper } from "@/app/(dashboard)/dashboard/page";
+import { TransactionWrapper } from "@/components/transaction/transaction-wrapper";
+
 
 export const MobileTransactionWrapper = () => {
   return (
