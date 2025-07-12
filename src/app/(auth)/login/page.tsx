@@ -13,8 +13,10 @@ import facebookIcon from "@/assets/svg/facebookIcon.svg";
 import appleIcon from "@/assets/svg/appleIcon.svg";
 import Link from "next/link";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -53,7 +55,15 @@ const Login = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <Button type="bgGreen" text="Login" fullWidth loading={false} />
+                <Button
+                  action={() => {
+                    router.push("/dashboard");
+                  }}
+                  type="bgGreen"
+                  text="Login"
+                  fullWidth
+                  loading={false}
+                />
               </div>
               <div className="w-[70%] flex-between mx-auto my-4">
                 <span className="w-full">
@@ -79,7 +89,7 @@ const Login = () => {
                 </span>
               </div>
               <div className="flex-between my-4">
-                <Image className="cursor-pointer" src={googleIcon} alt="" />
+                <Image  className="cursor-pointer border" src={googleIcon} alt="" />
                 <Image className="cursor-pointer" src={facebookIcon} alt="" />
                 <Image className="cursor-pointer" src={appleIcon} alt="" />
               </div>

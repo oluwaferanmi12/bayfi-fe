@@ -14,8 +14,10 @@ import appleIcon from "@/assets/svg/appleIcon.svg";
 import Link from "next/link";
 import userIconButton from "@/assets/svg/input-profile-icon.svg";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
+  const router = useRouter();
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -97,6 +99,9 @@ const Register = () => {
               </div>
               <div className="mt-4">
                 <Button
+                  action={() => {
+                    router.push("/onboarding");
+                  }}
                   type="bgGreen"
                   text="Register"
                   fullWidth

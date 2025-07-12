@@ -6,7 +6,7 @@ export default function RootLayout({
   return (
     <div
       style={{ height: "100dvh", maxHeight: "100dvh", minHeight: "100dvh" }}
-      className={"bg-bayfi-grey-300"}
+      className={"bg-bayfi-grey-300 overflow-y-scroll"}
     >
       {children}
     </div>

@@ -7,8 +7,10 @@ import logo from "@/assets/svg/logo.svg";
 import mailIcon from "@/assets/svg/input-message-icon.svg";
 import { GInput } from "@/components/inputs/GInput";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
+import { useRouter } from "next/navigation";
 
 const ForgotPassword = () => {
+  const router = useRouter();
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -36,6 +38,9 @@ const ForgotPassword = () => {
               </div>
               <div className="mt-4">
                 <Button
+                  action={() => {
+                    router.push("/otp");
+                  }}
                   type="bgGreen"
                   text="Send reset link"
                   fullWidth

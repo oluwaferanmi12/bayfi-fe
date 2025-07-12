@@ -8,8 +8,10 @@ import logo from "@/assets/svg/logo.svg";
 import { Button } from "@/components/buttons";
 import { OTPInput } from "@/components/inputs/otp-input";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
+import { useRouter } from "next/navigation";
 
 const Otp = () => {
+  const router = useRouter();
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -43,6 +45,9 @@ const Otp = () => {
                   text="Confirm OTP"
                   fullWidth
                   loading={false}
+                  action={() => {
+                    router.push("/dashboard");
+                  }}
                 />
               </div>
             </div>
