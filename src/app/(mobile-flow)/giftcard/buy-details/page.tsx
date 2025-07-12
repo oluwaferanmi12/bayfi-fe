@@ -25,13 +25,13 @@ function BuyCardDetails() {
       </div>
       <div className="bg-white p-4 rounded-lg">
         <div className="mt-4 flex items-center gap-2">
-          <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
+          <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center font-grotesk-medium">
             $ 2000
           </span>
-          <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
+          <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center font-grotesk-medium">
             $ 2000
           </span>
-          <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
+          <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 text-sm px-4 rounded-lg text-center font-grotesk-medium">
             $ 2000
           </span>
         </div>
