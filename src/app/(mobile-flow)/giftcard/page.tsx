@@ -24,6 +24,9 @@ function GiftCard() {
         title="Select country"
         height="full"
       >
+        <div className="mb-2">
+          <SearchInput bgGrey />
+        </div>
         <CountryWrapper
           action={() => {
             router.push("/giftcard/buy-details");
@@ -47,7 +50,7 @@ function GiftCard() {
         />
       </BottomDrawer>
       <PageTitle title="Giftcards" />
-      <SearchInput />
+      <SearchInput bgWhite />
       <FlashSalesCard />
       <div className="mt-2">
         <GiftCardWrapper
