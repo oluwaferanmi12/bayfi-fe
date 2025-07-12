@@ -23,7 +23,7 @@ const OtherServices = () => {
       <div className="mt-20">
         <OtherServiceWrapper
           action={() => {
-            router.push("/buy-giftcard");
+            router.push("/giftcard");
           }}
           icon={otherGiftCardIcon}
           text="Buy Gift Card"
