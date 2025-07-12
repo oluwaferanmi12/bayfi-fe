@@ -6,12 +6,12 @@ export const SupportChatContainer = () => {
       <div className="bg-[#EBF4C2] mb-4  border border-[#BEDD3A] rounded-lg p-2 px-4">
         <div className="flex justify-end">
           <div className="flex items-center gap-2">
-            <p className="font-grotesk-medium">Bayfi support</p>
+            <p className="font-grotesk-medium text-sm">Bayfi support</p>
             <Image src={bayfiIcon} alt="" />
           </div>
         </div>
         <div>
-          <p className="text-[#292929] font-grotesk-medium">
+          <p className="text-[#292929] text-sm font-grotesk-medium">
             Hi Yemi, Good evening <br />
             The rate for the card is 2000 <br />
             Kindly send the picture if you will like to proceed

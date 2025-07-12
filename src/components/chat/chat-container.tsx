@@ -17,7 +17,7 @@ export const ChatContainer = ({
     >
       {chatType === "support" && <SupportHeaderType />}
       <UserChatHeader bgWhite={bgWhite} />
-      <p className="font-grotesk-semi-bold text-base">
+      <p className="font-grotesk-semi-bold text-sm lg:text-base">
         Admin will respond in 5:00 mins
       </p>
       <div className="mt-4">

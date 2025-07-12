@@ -4,8 +4,8 @@ import Image from "next/image";
 
 export const ChatInput = ({ bgWhite }: { bgWhite?: boolean }) => {
   return (
-    <div className="absolute bottom-0 w-full">
-      <div className="relative ">
+    <div className="fixed lg:absolute left-0 py-4 bottom-0 w-full">
+      <div className="relative  ">
         <span className="absolute right-4 top-2">
           <Image src={sendIcon} alt="" />
         </span>

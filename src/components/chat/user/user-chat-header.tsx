@@ -9,23 +9,23 @@ export const UserChatHeader = ({ bgWhite }: { bgWhite ?: boolean }) => {
       </p>
       <div className="flex items-center gap-2 mt-2">
         <div className="bg-[#F6F6F6] rounded-lg border flex items-center border-[#DCDCDC]">
-          <p className="text-text-color-500 font-grotesk-medium flex items-center px-3 py-1">
+          <p className="text-text-color-500 text-sm font-grotesk-medium flex items-center px-3 py-1">
             Itunes card
           </p>
         </div>
         <div className="bg-[#F6F6F6] rounded-lg border flex items-center border-[#DCDCDC]">
-          <p className="text-text-color-500 font-grotesk-medium flex items-center px-3 py-1">
+          <p className="text-text-color-500 text-sm font-grotesk-medium flex items-center px-3 py-1">
             Canada
           </p>
         </div>
         <div className="bg-[#F6F6F6] rounded-lg border flex items-center border-[#DCDCDC]">
-          <p className="text-text-color-500 font-grotesk-medium flex items-center px-3 py-1">
+          <p className="text-text-color-500 text-sm font-grotesk-medium flex items-center px-3 py-1">
             $2000
           </p>
         </div>
       </div>
       <div className="mt-2">
-        <p className="text-[#878787] font-grotesk-regular">
+        <p className="text-[#878787] text-xs font-grotesk-regular">
           Mar 23rd, 2024 12:45:23 AM
         </p>
       </div>
