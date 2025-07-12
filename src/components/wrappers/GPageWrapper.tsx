@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 export const GPageWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <Row justify="center">
-      <Col xs={22}>{children}</Col>
+      <Col lg={22} xs={24}>{children}</Col>
     </Row>
   );
 };

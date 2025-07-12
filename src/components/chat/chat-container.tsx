@@ -24,7 +24,7 @@ export const ChatContainer = ({
         <SupportChatContainer />
         <UserResponseContainer bgWhite={bgWhite} />
         <SupportChatContainer />
-        <ChatInput />
+        <ChatInput bgWhite />
       </div>
     </div>
   );

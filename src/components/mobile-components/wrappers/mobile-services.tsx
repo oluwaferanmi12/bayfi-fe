@@ -9,32 +9,32 @@ export const MobileDashboardService = () => {
   return (
     <>
       <div className="my-3">
-        <p className="text-bayfi-black-900 text-base font-grotesk-semi-bold">
+        <p className="text-bayfi-black-900 text-lg font-grotesk-semi-bold">
           Other services
         </p>
         <div className="my-4 flex items-center justify-between">
           <div className="flex flex-col items-center justify-center gap-2">
             <Image src={giftCardIcon} alt="" />
-            <p className="text-bayfi-black-500 font-semibold text-sm">
+            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
               Gift card
             </p>
           </div>
           <div className="flex flex-col items-center justify-center gap-2">
             <Image src={airtimeIcon} alt="" />
-            <p className="text-bayfi-black-500 font-semibold text-sm">
+            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
               Airtime
             </p>
           </div>
           <div className="flex flex-col items-center justify-center gap-2">
             <Image src={bettingIcon} alt="" />
-            <p className="text-bayfi-black-500 font-semibold text-sm">
+            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
               Betting
             </p>
           </div>
           <Link href={"/other-services"}>
             <div className="flex flex-col items-center justify-center gap-2">
               <Image src={otherIcon} alt="" />
-              <p className="text-bayfi-black-500 font-semibold text-sm">
+              <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
                 Others
               </p>
             </div>

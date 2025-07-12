@@ -119,7 +119,9 @@ export const MobileWalletWrapper = () => {
             className="flex flex-col cursor-pointer items-center justify-center gap-2"
           >
             <Image src={tradeIcon} alt="" />
-            <p className="text-bayfi-black-500 font-semibold text-sm">Trade</p>
+            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
+              Trade
+            </p>
           </div>
           <div
             onClick={() => {
@@ -128,18 +130,18 @@ export const MobileWalletWrapper = () => {
             className="flex cursor-pointer flex-col items-center justify-center gap-2"
           >
             <Image src={depositIcon} alt="" />
-            <p className="text-bayfi-black-500 font-semibold text-sm">
+            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
               Deposit
             </p>
           </div>
           <div
             onClick={() => {
-              router.push("withdrawal")
+              router.push("withdrawal");
             }}
             className="flex flex-col items-center justify-center gap-2"
           >
             <Image src={withdrawIcon} alt="" />
-            <p className="text-bayfi-black-500 font-semibold text-sm">
+            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
               Withdraw
             </p>
           </div>
