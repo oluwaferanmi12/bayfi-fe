@@ -200,3 +200,10 @@
   background-size: cover;
   background-position: center;
 }
+
+
+.ant-switch-checked {
+  background-color: black !important;
+}
+
+/* Optional: change the handle color too */

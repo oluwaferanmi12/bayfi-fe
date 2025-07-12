@@ -11,6 +11,7 @@ import arrowRightTop from "@/assets/svg/arrow-right-top.svg";
 import { Dispatch, SetStateAction } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
 import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
+import { useRouter } from "next/navigation";
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -21,6 +22,7 @@ export const ProfileNav = ({
   activeProfile: ProfileType;
   noBg?: boolean;
 }) => {
+  const router = useRouter();
   return (
     <>
       <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
@@ -43,6 +45,9 @@ export const ProfileNav = ({
         <div className="mt-4">
           <ProfileNavContainer
             clickAction={() => {
+              if (noBg) {
+                router.push("/profile-setting");
+              }
               setActiveProfile("setting");
             }}
             icon={profileSetting}
@@ -56,6 +61,9 @@ export const ProfileNav = ({
           />
           <ProfileNavContainer
             clickAction={() => {
+              if (noBg) {
+                router.push("/security-setting");
+              }
               setActiveProfile("security");
             }}
             icon={securityIcon}
@@ -85,7 +93,7 @@ export const ProfileNav = ({
   );
 };
 
-const ProfileNavContainer = ({
+export const ProfileNavContainer = ({
   icon,
   text,
   extraIcon,
@@ -118,11 +126,13 @@ const ProfileNavContainer = ({
           {text}
         </p>
       </div>
-      {((extraIcon || whiteBg) && !logoutType)  && (extraIcon ? (
-        <Image src={extraIcon} alt="" />
-      ) : (
-        <Image src={arrowRightGreen} alt="" />
-      ))}
+      {(extraIcon || whiteBg) &&
+        !logoutType &&
+        (extraIcon ? (
+          <Image src={extraIcon} alt="" />
+        ) : (
+          <Image src={arrowRightGreen} alt="" />
+        ))}
     </div>
   );
 };
