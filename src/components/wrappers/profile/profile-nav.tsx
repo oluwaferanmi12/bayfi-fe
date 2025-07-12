@@ -10,17 +10,20 @@ import logoutIcon from "@/assets/svg/profile-logout-icon.svg";
 import arrowRightTop from "@/assets/svg/arrow-right-top.svg";
 import { Dispatch, SetStateAction } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
+import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
 
 export const ProfileNav = ({
   setActiveProfile,
   activeProfile,
+  noBg,
 }: {
   setActiveProfile: Dispatch<SetStateAction<ProfileType>>;
   activeProfile: ProfileType;
+  noBg?: boolean;
 }) => {
   return (
     <>
-      <div className="bg-bayfi-grey-100 p-4 rounded-lg">
+      <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
         <div className="flex items-center justify-center ">
           <Image
             className="border border-[#CBE461] rounded-full"
@@ -30,10 +33,10 @@ export const ProfileNav = ({
         </div>
         <IncompleteKycBadge />
         <div className="flex items-center flex-col  justify-center">
-          <p className="text-bayfi-black-900 font-grotesk-medium text-2xl">
+          <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl">
             Olaitan Akinlade
           </p>
-          <p className="text-text-color-600 font-grotesk-medium text-base">
+          <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base">
             Kiitan234
           </p>
         </div>
@@ -44,22 +47,38 @@ export const ProfileNav = ({
             }}
             icon={profileSetting}
             text="Profile Setting"
+            whiteBg={noBg}
           />
-          <ProfileNavContainer icon={leaderboardIcon} text="Leaderboard" />
+          <ProfileNavContainer
+            whiteBg={noBg}
+            icon={leaderboardIcon}
+            text="Leaderboard"
+          />
           <ProfileNavContainer
             clickAction={() => {
               setActiveProfile("security");
             }}
             icon={securityIcon}
             text="Security settings"
+            whiteBg={noBg}
           />
-          <ProfileNavContainer icon={helpIcon} text="Help & Support" />
+          <ProfileNavContainer
+            whiteBg={noBg}
+            icon={helpIcon}
+            text="Help & Support"
+          />
           <ProfileNavContainer
             icon={aboutIcon}
             text="About Bayfi"
             extraIcon={arrowRightTop}
+            whiteBg={noBg}
           />
-          <ProfileNavContainer icon={logoutIcon} text="Logout" logoutType />
+          <ProfileNavContainer
+            whiteBg={noBg}
+            icon={logoutIcon}
+            text="Logout"
+            logoutType
+          />
         </div>
       </div>
     </>
@@ -72,12 +91,14 @@ const ProfileNavContainer = ({
   extraIcon,
   logoutType,
   clickAction,
+  whiteBg,
 }: {
   icon: string;
   text: string;
   extraIcon?: string;
   logoutType?: boolean;
   clickAction?: () => void;
+  whiteBg?: boolean;
 }) => {
   return (
     <div
@@ -86,18 +107,22 @@ const ProfileNavContainer = ({
           clickAction();
         }
       }}
-      className="flex items-center  justify-between cursor-pointer py-3"
+      className={`flex ${whiteBg && "bg-white rounded-lg px-4 mb-2"} items-center  justify-between cursor-pointer py-3`}
       style={{ borderBottom: "1px solid #EBF1FF" }}
     >
       <div className="flex items-center gap-3 ">
         <Image src={icon} alt="" />
         <p
-          className={`${logoutType && "text-[#FB0C0C]"} text-base font-grotesk-medium`}
+          className={`${logoutType && "text-[#FB0C0C]"} text-sm lg:text-base font-grotesk-medium`}
         >
           {text}
         </p>
       </div>
-      {extraIcon && <Image src={extraIcon} alt="" />}
+      {((extraIcon || whiteBg) && !logoutType)  && (extraIcon ? (
+        <Image src={extraIcon} alt="" />
+      ) : (
+        <Image src={arrowRightGreen} alt="" />
+      ))}
     </div>
   );
 };

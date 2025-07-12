@@ -46,7 +46,7 @@ export const MobileNav = () => {
           iconActive={menu2}
           text="More"
           action={() => {
-            router.push("/profile");
+            router.push("/more");
           }}
         />
       </div>

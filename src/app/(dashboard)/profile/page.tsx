@@ -22,7 +22,7 @@ function ProfileSetting() {
           </p>
         </div>
       </div>
-      <div className="p-4 ">
+      <div className="p-4">
         <Row>
           <Col xs={6}>
             <ProfileNav
