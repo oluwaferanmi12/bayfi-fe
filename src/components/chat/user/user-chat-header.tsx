@@ -1,6 +1,8 @@
-export const UserChatHeader = () => {
+export const UserChatHeader = ({ bgWhite }: { bgWhite ?: boolean }) => {
   return (
-    <div className="border border-[#EAECF0] my-3 p-4 rounded-lg">
+    <div
+      className={`border ${bgWhite && "bg-white rounded-lg"} border-[#EAECF0] my-3 p-4 rounded-lg`}
+    >
       <p className="text-[#868C98] text-sm font-grotesk-medium">You</p>
       <p className="text-[#292929] font-grotesk-medium text-sm">
         I want to trade my gift card
@@ -23,7 +25,9 @@ export const UserChatHeader = () => {
         </div>
       </div>
       <div className="mt-2">
-        <p className="text-[#878787] font-grotesk-regular">Mar 23rd, 2024 12:45:23 AM</p>
+        <p className="text-[#878787] font-grotesk-regular">
+          Mar 23rd, 2024 12:45:23 AM
+        </p>
       </div>
     </div>
   );

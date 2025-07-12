@@ -9,9 +9,11 @@ import giftCardPlaceHolder from "@/assets/svg/amazon-placeholder.svg";
 import { BottomDrawer } from "@/components/bottom-drawers/bottom-drawer";
 import { CountryWrapper } from "@/components/wrappers/country-wrapper";
 import usIcon from "@/assets/svg/us-icon.svg";
+import { useRouter } from "next/navigation";
 
 function GiftCard() {
   const [showCountryDrawer, setShowCountryDrawer] = useState(false);
+  const router = useRouter();
   return (
     <>
       <BottomDrawer
@@ -22,9 +24,27 @@ function GiftCard() {
         title="Select country"
         height="full"
       >
-        <CountryWrapper flag={usIcon} countryName="USA" />
-        <CountryWrapper flag={usIcon} countryName="USA" />
-        <CountryWrapper flag={usIcon} countryName="USA" />
+        <CountryWrapper
+          action={() => {
+            router.push("/giftcard/buy-details");
+          }}
+          flag={usIcon}
+          countryName="USA"
+        />
+        <CountryWrapper
+          action={() => {
+            router.push("/giftcard/buy-details");
+          }}
+          flag={usIcon}
+          countryName="USA"
+        />
+        <CountryWrapper
+          action={() => {
+            router.push("/giftcard/buy-details");
+          }}
+          flag={usIcon}
+          countryName="USA"
+        />
       </BottomDrawer>
       <PageTitle title="Giftcards" />
       <SearchInput />
