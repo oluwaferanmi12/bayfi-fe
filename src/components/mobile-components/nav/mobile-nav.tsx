@@ -35,6 +35,9 @@ export const MobileNav = () => {
           }}
         />
         <MobileNavWrapper
+          action={() => {
+            router.push("/m-transaction");
+          }}
           icon={documentNormal}
           active={false}
           iconActive={documentNormal2}
