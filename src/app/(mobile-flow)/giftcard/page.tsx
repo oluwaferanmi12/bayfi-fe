@@ -51,6 +51,7 @@ function GiftCard() {
       <FlashSalesCard />
       <div className="mt-2">
         <GiftCardWrapper
+          whiteBg
           action={() => {
             setShowCountryDrawer(true);
           }}
@@ -58,6 +59,7 @@ function GiftCard() {
           image={giftCardPlaceHolder}
         />
         <GiftCardWrapper
+          whiteBg
           action={() => {
             setShowCountryDrawer(true);
           }}
@@ -65,6 +67,7 @@ function GiftCard() {
           image={giftCardPlaceHolder}
         />
         <GiftCardWrapper
+          whiteBg
           action={() => {
             setShowCountryDrawer(true);
           }}
@@ -72,6 +75,7 @@ function GiftCard() {
           image={giftCardPlaceHolder}
         />
         <GiftCardWrapper
+          whiteBg
           action={() => {
             setShowCountryDrawer(true);
           }}
