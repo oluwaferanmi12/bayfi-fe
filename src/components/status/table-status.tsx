@@ -26,7 +26,7 @@ export const TableStatus = ({
           alt=""
         />
       </div>
-      <p className="flex items-center">{text}</p>
+      <div className="flex items-center">{text}</div>
     </div>
   );
 };
