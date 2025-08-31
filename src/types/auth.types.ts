@@ -18,3 +18,21 @@ export interface LoginResponse {
   requireLogout: boolean;
   require2Fa: boolean;
 }
+
+export interface RegisterInterface {
+  firstname: string;
+  lastname: string;
+  email: string;
+  username: string;
+  phoneNumber: string;
+  password: string;
+}
+export interface RegisterResponseInterface {
+  status: true;
+  statusCode: number;
+  message: string;
+  details: null;
+  data: string;
+  metadata: null;
+  timeStamp: string;
+}

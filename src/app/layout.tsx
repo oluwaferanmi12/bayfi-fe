@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-
+import QueryProvider from "@/react-query/query-provider";
+import { Toaster } from "sonner";
 
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export default function RootLayout({
       <body
         className={`font-grotesk-regular`}
       >
-        <AntdRegistry>{children}</AntdRegistry>
+        <AntdRegistry>
+          <QueryProvider>{children}</QueryProvider>
+          <Toaster richColors position="top-right" />
+        </AntdRegistry>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
 import arrowIcon from "@/assets/svg/arrow-bidirection.svg";
@@ -15,9 +16,31 @@ import Link from "next/link";
 import userIconButton from "@/assets/svg/input-profile-icon.svg";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import mobileIcon from "@/assets/svg/mobileIcon.svg";
+import { useRegister } from "@/hooks/query/useAuth";
+import { toast } from "sonner";
+
 
 const Register = () => {
   const router = useRouter();
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const registerMutate = useRegister((data) =>{
+    toast.success("Successfully Registered")
+    router.push("/onboarding")
+  } )
+
+
+
+
+
+
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -74,6 +97,7 @@ const Register = () => {
                       label="First Name"
                       placeholder="Enter your first name"
                       icon={userIconButton}
+                      setInput={setFirstname}
                     />
                   </div>
 
@@ -82,25 +106,48 @@ const Register = () => {
                       label="Last Name"
                       placeholder="Enter your last name"
                       icon={userIconButton}
+                      setInput={setLastname}
                     />
                   </div>
                 </div>
+                <div className="flex flex-col xl:flex-row gap-2 w-full ">
+                  <div className="w-full">
+                    <GInput
+                      label="Username"
+                      placeholder="Your username"
+                      icon={userIconButton}
+                      setInput={setUsername}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <GInput
+                      label="Phone number"
+                      icon={mobileIcon}
+                      placeholder="Your phone number"
+                      setInput={setPhoneNumber}
+                    />
+                  </div>
+                </div>
+
                 <GInput
                   label="Email"
                   placeholder="Your email address"
                   icon={mailIcon}
+                  setInput={setEmail}
                 />
+
                 <GInput
                   label="Password"
                   placeholder="Enter password"
                   icon={inputPasswordIcon}
                   type={"password"}
+                  setInput={setPassword}
                 />
               </div>
               <div className="mt-4">
                 <Button
                   action={() => {
-                    router.push("/onboarding");
+                    registerMutate.mutate({firstname, lastname, email, phoneNumber, username, password})
                   }}
                   type="bgGreen"
                   text="Register"

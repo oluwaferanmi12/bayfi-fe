@@ -8,9 +8,9 @@ export const SupportHeaderType = () => {
       <div className="flex justify-between">
         <div>
           <p className="mb-1 text-xl font-grotesk-medium">Bcryp020</p>
-          <p>
+          <div>
             <TableStatus text="Open" type="Pending" />
-          </p>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <Image src={bitcoinIcon} alt="" />

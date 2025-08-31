@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export const OTPInput = () => {
-  const [arrayInput, setArrayInput] = useState(["", "", "", ""]);
+  const [arrayInput, setArrayInput] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const backSpaceRef = useRef<boolean>(false);
 

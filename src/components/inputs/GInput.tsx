@@ -12,12 +12,16 @@ export const GInput = ({
   type = "text",
   icon,
   noMarginBottom,
+  setInput,
+  inputVal,
 }: {
   label: string;
   placeholder: string;
   type?: "password" | "text" | "number";
   icon?: string;
   noMarginBottom?: boolean;
+  setInput?: (val: string) => void;
+  inputVal?: string;
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -47,6 +51,12 @@ export const GInput = ({
         )}
 
         <input
+          value={inputVal}
+          onChange={(e) => {
+            if (setInput) {
+              setInput(e.target.value);
+            }
+          }}
           type={type === "password" ? (showPassword ? "text" : type) : type}
           placeholder={placeholder}
           className={`bg-bayfi-grey-400 font-grotesk-medium placeholder:font-grotesk-regular text-base rounded-lg p-2 lg:py-3 ${icon && " px-9"}  min-w-full  outline-none border border-bayfi-grey-600`}
