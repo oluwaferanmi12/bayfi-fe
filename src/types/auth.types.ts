@@ -36,3 +36,29 @@ export interface RegisterResponseInterface {
   metadata: null;
   timeStamp: string;
 }
+
+export interface OtpVerificationInterface {
+  otp: string;
+  otpMedium: string;
+}
+
+export interface OtpVerificationResponseInterface {
+  accessToken: string;
+  refreshToken: string;
+  userDetailsResponse: UserDetailResponse;
+  requireLogout: boolean;
+  require2Fa: boolean
+}
+export interface ResendOtpVerificationInterface {
+  email: string;
+}
+
+export interface ResendOtpVerificationResponseInterface {
+  status: true;
+  statusCode: number;
+  message: string;
+  details: null;
+  data: string;
+  metadata: null;
+  timeStamp: string;
+}

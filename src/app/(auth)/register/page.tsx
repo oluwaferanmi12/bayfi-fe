@@ -31,10 +31,22 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const registerMutate = useRegister((data) =>{
+
+  const payloadObj = {
+    firstname,
+    lastname,
+    email,
+    phoneNumber,
+    username,
+    password
+  }
+
+  const registerMutate = useRegister((data) => {
     toast.success("Successfully Registered")
-    router.push("/onboarding")
-  } )
+    localStorage.setItem("userEmail", email)
+    router.push("/otp")
+  });
+
 
 
 
@@ -147,12 +159,12 @@ const Register = () => {
               <div className="mt-4">
                 <Button
                   action={() => {
-                    registerMutate.mutate({firstname, lastname, email, phoneNumber, username, password})
+                    registerMutate.mutate(payloadObj)
                   }}
                   type="bgGreen"
                   text="Register"
                   fullWidth
-                  loading={false}
+                  loading={registerMutate.isPending}
                 />
               </div>
 
