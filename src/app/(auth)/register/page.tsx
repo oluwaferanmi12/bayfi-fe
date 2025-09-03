@@ -42,7 +42,7 @@ const Register = () => {
   }
 
   const registerMutate = useRegister((data) => {
-    toast.success("Successfully Registered")
+    toast.success("Successfuly Registered")
     localStorage.setItem("userEmail", email)
     router.push("/otp")
   });

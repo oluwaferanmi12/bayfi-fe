@@ -20,8 +20,8 @@ const Otp = () => {
   const router = useRouter();
 
   const verifyOtpMutate = useOtp((data) => {
-    toast.success("Verification Successfull")
-    router.push("/dashboard")
+    toast.success("Verification Successful")
+    router.push("/login")
   })
 
   const resendOtpMutate = useResendOtp((data) => {
@@ -42,7 +42,7 @@ const Otp = () => {
                   <Image src={likeIcon} alt="" />
                 </div>
                 <Text
-                  value="Account registered successfully"
+                  value="Account registered Successfuly"
                   type="header-32"
                 />
                 <div className="mt-2">

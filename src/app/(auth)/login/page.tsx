@@ -14,9 +14,25 @@ import appleIcon from "@/assets/svg/appleIcon.svg";
 import Link from "next/link";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useLogin } from "@/hooks/query";
+import { toast } from "sonner";
+import Cookies from "js-cookie";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
+
+  const loginMutate = useLogin( (data) => {
+    Cookies.set("loginDetails", JSON.stringify(data))
+    toast.success("Login Successful");
+    router.push("/dashboard");
+  })
+
+
+
+
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -41,12 +57,14 @@ const Login = () => {
                   label="Email"
                   placeholder="Your email address"
                   icon={mailIcon}
+                  setInput={setEmail}
                 />
                 <GInput
                   label="Password"
                   placeholder="Enter password"
                   icon={inputPasswordIcon}
                   type={"password"}
+                  setInput={setPassword}
                 />
                 <div className="flex justify-end cursor-pointer w-full">
                   <Link href="/forgot-password">
@@ -57,12 +75,12 @@ const Login = () => {
               <div className="mt-4">
                 <Button
                   action={() => {
-                    router.push("/dashboard");
+                    loginMutate.mutate({email, password})
                   }}
                   type="bgGreen"
                   text="Login"
                   fullWidth
-                  loading={false}
+                  loading={loginMutate.isPending}
                 />
               </div>
               <div className="w-[70%] flex-between mx-auto my-4">

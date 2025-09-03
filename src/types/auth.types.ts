@@ -1,4 +1,7 @@
-export interface PostLoginInterface {}
+export interface PostLoginInterface {
+  email: string;
+  password: string;
+}
 
 export interface UserDetailResponse {
   id: string;
