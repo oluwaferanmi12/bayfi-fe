@@ -16,7 +16,8 @@ import usIcon from "@/assets/svg/us-icon.svg";
 import { FullCardDetails } from "@/components/wrappers/full-card-details";
 import { GInput } from "@/components/inputs/GInput";
 import { SideDrawerBreadCrumbProps } from "@/interfaces/interfaces-ui";
-import { CardInterface } from "@/types";
+import { CardInterface, CountryResponseInterface } from "@/types";
+import { text } from "stream/consumers";
 
 export const GiftCardDrawer = ({
   handleClose,
@@ -31,31 +32,45 @@ export const GiftCardDrawer = ({
   const { data: cards, isPending } = useGetCards({ page: 1, pageSize: 100 });
   const [showGiftcardChat, setGiftCardChat] = useState(false);
   const [sellGiftCard, setSellGiftCard] = useState(0);
+  const [countrySelected, setCountrySelected] =
+    useState<CountryResponseInterface>();
   const [breadCrumData, setBreadCrumbData] = useState<
     SideDrawerBreadCrumbProps[]
-  >([]);
+  >([
+    {
+      text: "home",
+      action: () => {
+        setShowGiftCardList(false);
+        setShowGiftCardAmount(false);
+        setShowCountry(false)
+        handlRemoveFromBreadCrumb("home");
+      },
+      active: false,
+    },
+  ]);
   const [selectedCard, setSelectedCard] = useState<CardInterface>();
 
-  useEffect(() => {
-    if (sellGiftCard === 1) {
-      setBreadCrumbData((prev) => [
-        {
-          text: "home",
-          action: () => {
-            setShowGiftCardList(false);
-          },
-          active: false,
-        },
-        {
-          text: "Sell Giftcard",
-          action: () => {
-            setShowGiftCardList(true);
-          },
-          active: true,
-        },
-      ]);
-    }
-  }, [sellGiftCard]);
+  const handeUpdateBreadCrumb = (data: SideDrawerBreadCrumbProps) => {
+    setBreadCrumbData((prev) => {
+      const newData = prev.map((data_) => ({ ...data_, active: false }));
+      newData.push(data);
+      return newData;
+    });
+  };
+
+  const handlRemoveFromBreadCrumb = (id: string) => {
+    setBreadCrumbData((prev) => {
+      const activeIndex = prev.findIndex((item) => item.text === id);
+      if (activeIndex === -1) return prev;
+
+      const trimmed = prev.slice(0, activeIndex + 1);
+      const updated = trimmed.map((item, idx, arr) => ({
+        ...item,
+        active: idx === arr.length - 1,
+      }));
+      return updated;
+    });
+  };
 
   return (
     <SideDrawer
@@ -66,9 +81,9 @@ export const GiftCardDrawer = ({
       title="Sell Giftcard"
     >
       <div>
+        <SideDrawerBreadCrumb breadCrumbArray={breadCrumData} />
         {showGiftCardList ? (
           <>
-            <SideDrawerBreadCrumb breadCrumbArray={breadCrumData} />
             <div className="my-2">
               <SearchInput />
             </div>
@@ -84,6 +99,23 @@ export const GiftCardDrawer = ({
                     setShowGiftCardList(false);
                     setShowCountry(true);
                     setSelectedCard(item);
+                    setBreadCrumbData((prev) => {
+                      const newData = prev.map((item) => ({
+                        ...item,
+                        active: false,
+                      }));
+                      return [
+                        ...newData,
+                        {
+                          text: "Countries",
+                          action: () => {
+                            setShowCountry(true);
+                            handlRemoveFromBreadCrumb("Countries");
+                          },
+                          active: true,
+                        },
+                      ];
+                    });
                   }}
                 >
                   <GiftCardWrapper
@@ -109,7 +141,16 @@ export const GiftCardDrawer = ({
                   onClick={() => {
                     setShowGiftCardAmount(true);
                     setShowCountry(false);
+                    setCountrySelected(item);
+                    handeUpdateBreadCrumb({
+                      text: "Details",
+                      action: () => {
+                        handlRemoveFromBreadCrumb("Details");
+                      },
+                      active: true,
+                    });
                   }}
+                  className="cursor-pointer"
                 >
                   <CountryWrapper
                     flag={item.logo_url}
@@ -121,13 +162,12 @@ export const GiftCardDrawer = ({
           </>
         ) : showGiftCardAmount ? (
           <div>
-            <SideDrawerBreadCrumb breadCrumbArray={breadCrumData} />
             <div className="my-3">
               <FullCardDetails
-                flag={usIcon}
-                cardName="Amazon"
-                country="USA"
-                cardIcon={giftCardPlaceHolder}
+                flag={countrySelected?.logo_url ?? ""}
+                cardName={selectedCard?.cardName ?? ""}
+                country={countrySelected?.name ?? ""}
+                cardIcon={selectedCard?.avatarUrl ?? ""}
               />
             </div>
             <div className="mt-4 flex items-center gap-2">
@@ -157,13 +197,6 @@ export const GiftCardDrawer = ({
           </div>
         ) : showGiftcardChat ? (
           <div className="relative ">
-            <SideDrawerBreadCrumb
-              breadCrumbArray={[
-                { text: "home", active: false, action: () => {} },
-                { text: "Select coin", active: false, action: () => {} },
-                { text: "Network", active: true, action: () => {} },
-              ]}
-            />
             <ChatContainer />
           </div>
         ) : (
@@ -188,7 +221,17 @@ export const GiftCardDrawer = ({
             <div
               onClick={() => {
                 setShowGiftCardList(true);
-                setSellGiftCard(1);
+                setBreadCrumbData((prev) => [
+                  ...prev,
+                  {
+                    text: "Sell Giftcard",
+                    action: () => {
+                      setShowGiftCardList(true);
+                      handlRemoveFromBreadCrumb("Sell Giftcard");
+                    },
+                    active: true,
+                  },
+                ]);
               }}
               className="bg-bayfi-black-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
             >
