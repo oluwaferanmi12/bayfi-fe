@@ -2,14 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export const OTPInput = () => {
-  const [arrayInput, setArrayInput] = useState(["", "", "", ""]);
+export const OTPInput = ({ value, onChange }: { value: string; onChange: (val: string) => void }) => {
+  const [arrayInput, setArrayInput] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const backSpaceRef = useRef<boolean>(false);
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
+
+  useEffect(() => {
+    // Sync arrayInput with value from parent
+    if (value && value.length === arrayInput.length) {
+      setArrayInput(value.split(""));
+    }
+  }, [value, arrayInput.length]);
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -29,26 +36,22 @@ export const OTPInput = () => {
   ) => {
     const arrayLength = arrayInput.length;
     const nextIndex = inputIndex + 1;
-    // handle the update for the input that is passed into the active input
-   
 
     if (backSpaceRef.current) {
       backSpaceRef.current = false;
-      // Now, what should happen here is to update the index, then return so that the other parts don't get updated
       if (arrayInput[inputIndex]) {
         const spreadArray = [...arrayInput];
         spreadArray[inputIndex] = "";
-        console.log(spreadArray, "The spread array value")
         setArrayInput([...spreadArray]);
+        onChange(spreadArray.join(""));
       }
     } else {
       const newArrayInput = [...arrayInput];
       newArrayInput[inputIndex] = e.target.value.slice(-1);
       setArrayInput([...newArrayInput]);
+      onChange(newArrayInput.join(""));
       if (nextIndex <= arrayLength - 1) {
         inputRefs.current[inputIndex + 1]?.focus();
-      } else if (nextIndex > arrayLength - 1) {
-        // Then Do not move to the next input field
       }
     }
   };
@@ -63,6 +66,7 @@ export const OTPInput = () => {
         .concat(Array(arrayInput.length).fill(""))
         .slice(0, arrayInput.length);
       setArrayInput(newArrayInput);
+      onChange(newArrayInput.join(""));
       const nextEmptyIndex = newArrayInput.findIndex((val) => val === "");
       if (nextEmptyIndex !== -1) {
         inputRefs.current[nextEmptyIndex]?.focus();

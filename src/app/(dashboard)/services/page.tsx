@@ -28,6 +28,7 @@ import { CountryWrapper } from "@/components/wrappers/country-wrapper";
 import usIcon from "@/assets/svg/us-icon.svg";
 import { FullCardDetails } from "@/components/wrappers/full-card-details";
 import { ChatContainer } from "@/components/chat/chat-container";
+import { useGetCards } from "@/hooks/query";
 
 const Services = () => {
   const [showAirtimeModal, setShowAirtimeModal] = useState(false);
@@ -39,6 +40,11 @@ const Services = () => {
   const [showCountry, setShowCountry] = useState(false);
   const [showGiftCardAmount, setShowGiftCardAmount] = useState(false);
   const [showGiftcardChat, setGiftCardChat] = useState(false);
+  const cards = useGetCards({ page: 1, pageSize: 100 });
+
+
+  console.log(cards.data)
+
   const services = [
     {
       bgImage: giftCardBg,
@@ -105,9 +111,9 @@ const Services = () => {
             <>
               <SideDrawerBreadCrumb
                 breadCrumbArray={[
-                  { text: "home", active: false, action: () => {} },
-                  { text: "Select coin", active: false, action: () => {} },
-                  { text: "Network", active: true, action: () => {} },
+                  { text: "home", active: false, action: () => { } },
+                  { text: "Select coin", active: false, action: () => { } },
+                  { text: "Network", active: true, action: () => { } },
                 ]}
               />
               <div className="my-2">
@@ -120,7 +126,19 @@ const Services = () => {
                   setShowCountry(true);
                 }}
               >
-                <GiftCardWrapper text="Amazon" image={giftCardPlaceHolder} />
+                {Array.isArray(cards.data) && cards.data.length > 0 ? (
+                  cards.data.map((item) => (
+                    <GiftCardWrapper
+                      key={item.id}
+                      text={item.cardName}
+                      image={item.avatarUrl}
+                    />
+                  ))
+                ) : (
+                  <span>No data available</span>
+                )}
+                
+                
               </div>
             </>
           ) : showCountry ? (
@@ -141,9 +159,9 @@ const Services = () => {
             <div>
               <SideDrawerBreadCrumb
                 breadCrumbArray={[
-                  { text: "home", active: false, action: () => {} },
-                  { text: "Select coin", active: false, action: () => {} },
-                  { text: "Network", active: true, action: () => {} },
+                  { text: "home", active: false, action: () => { } },
+                  { text: "Select coin", active: false, action: () => { } },
+                  { text: "Network", active: true, action: () => { } },
                 ]}
               />
               <div className="my-3">
@@ -183,9 +201,9 @@ const Services = () => {
             <div className="relative ">
               <SideDrawerBreadCrumb
                 breadCrumbArray={[
-                  { text: "home", active: false, action: () => {} },
-                  { text: "Select coin", active: false, action: () => {} },
-                  { text: "Network", active: true, action: () => {} },
+                  { text: "home", active: false, action: () => { } },
+                  { text: "Select coin", active: false, action: () => { } },
+                  { text: "Network", active: true, action: () => { } },
                 ]}
               />
               <ChatContainer />

@@ -18,7 +18,7 @@ export const GiftCardWrapper = ({
     >
       <p className="text-sm text-text-color-900 font-grotesk-medium">{text}</p>
       <div>
-        <Image src={image} alt="" />
+        <Image src={image} className="object-contain" width={48} height={48} alt="" />
       </div>
     </div>
   );

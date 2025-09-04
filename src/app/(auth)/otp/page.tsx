@@ -9,9 +9,25 @@ import { Button } from "@/components/buttons";
 import { OTPInput } from "@/components/inputs/otp-input";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
+import { useOtp, useResendOtp } from "@/hooks/query";
+import { toast } from "sonner";
+import { useState } from "react";
 
 const Otp = () => {
+  const [otp, setOtp] = useState('');
+  const otpMedium = localStorage.getItem("userEmail") ?? ""
+  const email = localStorage.getItem("userEmail") ?? ""
   const router = useRouter();
+
+  const verifyOtpMutate = useOtp((data) => {
+    toast.success("Verification Successful")
+    router.push("/login")
+  })
+
+  const resendOtpMutate = useResendOtp((data) => {
+    toast.success("An Otp has been sent to your registered email")
+  })
+
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -26,7 +42,7 @@ const Otp = () => {
                   <Image src={likeIcon} alt="" />
                 </div>
                 <Text
-                  value="Account registered successfully"
+                  value="Account registered Successfuly"
                   type="header-32"
                 />
                 <div className="mt-2">
@@ -37,18 +53,29 @@ const Otp = () => {
                 </div>
               </div>
               <div className="mt-6 ">
-                <OTPInput />
+                <OTPInput value={otp} onChange={setOtp} />
               </div>
               <div className="mt-4">
                 <Button
                   type="bgGreen"
                   text="Confirm OTP"
                   fullWidth
-                  loading={false}
+                  loading={verifyOtpMutate.isPending}
                   action={() => {
-                    router.push("/dashboard");
+                    verifyOtpMutate.mutate({otp, otpMedium})
+                    
                   }}
                 />
+              </div>
+              <div className="flex justify-center">
+                <Button 
+                type="bgPlain" 
+                text="Resend code" 
+                loading={resendOtpMutate.isPending}
+                action = { () => {
+                  resendOtpMutate.mutate({email})
+                } }
+                 />
               </div>
             </div>
           </Col>
