@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/buttons";
 import { OTPInput } from "@/components/inputs/otp-input";
@@ -13,7 +13,7 @@ function ChangePin() {
         <p className="py-3 flex justify-center font-grotesk-medium">
           Create new transaction pin
         </p>
-        <OTPInput />
+        <OTPInput onChange={() => {}} value="" />
         <div className="my-3">
           <Button
             action={() => {}}
