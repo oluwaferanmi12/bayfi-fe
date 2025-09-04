@@ -39,7 +39,7 @@ export interface ManageCardInterface {
 }
 
 export interface InitiateCardTxn {
-  chatId: number;
+  chatId: number | null;
   message: string;
   imageUrl: string;
   countryName: string;

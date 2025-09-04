@@ -60,7 +60,8 @@ export const manageCard = async (payload: ManageCardInterface) => {
 
 export const initiateGiftCardTxn = async (payload: InitiateCardTxn) => {
   const { data } = await axiosInstance.post(
-    `/api/v1/giftcards/initiate/chat/transaction`
+    `/giftcards/initiate/chat/transaction`,
+    payload
   );
   return data.data;
 };

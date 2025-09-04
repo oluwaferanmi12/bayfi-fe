@@ -32,7 +32,11 @@ export const GiftCardDrawer = ({
   const { data: cards, isPending } = useGetCards({ page: 1, pageSize: 100 });
   const [showGiftcardChat, setGiftCardChat] = useState(false);
   const [sellGiftCard, setSellGiftCard] = useState(0);
-  const initiateTxn = useInitiateCardTxn();
+  const initiateTxn = useInitiateCardTxn((data) => {
+    console.log(data, "DAtataaaa");
+    setGiftCardChat(true);
+  });
+  const [giftCardAmount, setGiftCardAmount] = useState(0);
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface>();
   const [breadCrumData, setBreadCrumbData] = useState<
@@ -184,14 +188,29 @@ export const GiftCardDrawer = ({
               </span>
             </div>
             <div className="mt-4">
-              <GInput placeholder="0.00" label="Enter amount" />
+              <GInput
+                inputVal={String(giftCardAmount)}
+                placeholder="0.00"
+                label="Enter amount"
+                setInput={(e) => {
+                  setGiftCardAmount(+e);
+                }}
+              />
             </div>
             <Button
               action={() => {
-                setGiftCardChat(true);
-                setShowGiftCardAmount(false);
+                // setShowGiftCardAmount(false);
+                initiateTxn.mutate({
+                  amount: giftCardAmount,
+                  chatId: null,
+                  chatMessageInitiator: "USER",
+                  countryName: countrySelected?.name ?? "",
+                  giftCardName: selectedCard?.cardName ?? "",
+                  imageUrl: "",
+                  message: "I want to trade",
+                });
               }}
-              loading={false}
+              loading={initiateTxn.isPending}
               text="Get rate"
               type="bgGreen"
               fullWidth

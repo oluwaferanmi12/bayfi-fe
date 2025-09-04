@@ -79,10 +79,13 @@ export const useManageCard = (sc: (vaL: any) => void) => {
   });
 };
 
-export const useInitiateCardTxn = () => {
+export const useInitiateCardTxn = (sc: (val: any) => void) => {
   return useMutation({
     mutationFn: (payload: InitiateCardTxn) => {
       return initiateGiftCardTxn(payload);
+    },
+    onSuccess: (val) => {
+      sc(val);
     },
   });
 };
