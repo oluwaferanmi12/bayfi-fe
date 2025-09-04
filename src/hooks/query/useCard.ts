@@ -4,11 +4,13 @@ import {
   deleteCard,
   editCard,
   getCards,
+  initiateGiftCardTxn,
   manageCard,
 } from "@/services/card.service";
 import {
   CreateCardInterface,
   EditCardInterface,
+  InitiateCardTxn,
   ManageCardInterface,
 } from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -73,6 +75,14 @@ export const useManageCard = (sc: (vaL: any) => void) => {
     },
     onSuccess: (val) => {
       sc(val);
+    },
+  });
+};
+
+export const useInitiateCardTxn = () => {
+  return useMutation({
+    mutationFn: (payload: InitiateCardTxn) => {
+      return initiateGiftCardTxn(payload);
     },
   });
 };

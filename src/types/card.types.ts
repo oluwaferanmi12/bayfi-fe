@@ -37,3 +37,13 @@ export interface ManageCardInterface {
   id: string;
   status: boolean;
 }
+
+export interface InitiateCardTxn {
+  chatId: number;
+  message: string;
+  imageUrl: string;
+  countryName: string;
+  giftCardName: string;
+  amount: number;
+  chatMessageInitiator: "USER" | "ADMIN";
+}

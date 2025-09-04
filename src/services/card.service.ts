@@ -3,6 +3,7 @@ import {
   CardInterface,
   CreateCardInterface,
   EditCardInterface,
+  InitiateCardTxn,
   ManageCardInterface,
 } from "@/types";
 
@@ -53,6 +54,13 @@ export const editCard = async (payload: EditCardInterface) => {
 export const manageCard = async (payload: ManageCardInterface) => {
   const { data } = await axiosInstance.patch(
     `/admin/giftcards/${payload.id}/status?status=${payload.status}`
+  );
+  return data.data;
+};
+
+export const initiateGiftCardTxn = async (payload: InitiateCardTxn) => {
+  const { data } = await axiosInstance.post(
+    `/api/v1/giftcards/initiate/chat/transaction`
   );
   return data.data;
 };

@@ -3,7 +3,7 @@ import { SideDrawer } from "../side-drawer";
 import { GiftCardWrapper } from "@/components/wrappers/gift-card-wrapper";
 import { useEffect, useState } from "react";
 import { SearchInput } from "@/components/inputs/search-input";
-import { useGetCards } from "@/hooks/query";
+import { useGetCards, useInitiateCardTxn } from "@/hooks/query";
 import giftCardPlaceHolder from "@/assets/svg/amazon-placeholder.svg";
 import { ChatContainer } from "@/components/chat/chat-container";
 import { Button } from "@/components/buttons";
@@ -32,6 +32,7 @@ export const GiftCardDrawer = ({
   const { data: cards, isPending } = useGetCards({ page: 1, pageSize: 100 });
   const [showGiftcardChat, setGiftCardChat] = useState(false);
   const [sellGiftCard, setSellGiftCard] = useState(0);
+  const initiateTxn = useInitiateCardTxn();
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface>();
   const [breadCrumData, setBreadCrumbData] = useState<
@@ -42,8 +43,9 @@ export const GiftCardDrawer = ({
       action: () => {
         setShowGiftCardList(false);
         setShowGiftCardAmount(false);
-        setShowCountry(false)
+        setShowCountry(false);
         handlRemoveFromBreadCrumb("home");
+        setGiftCardChat(false);
       },
       active: false,
     },

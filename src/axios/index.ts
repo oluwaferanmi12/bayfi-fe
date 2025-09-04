@@ -24,7 +24,7 @@ axiosInstance.interceptors.request.use(
     const access = getAccessToken();
     if (access) {
       config.headers = config.headers ?? {};
-      (config.headers as any).Authorization = `Bearer ${access}`;
+      (config.headers ).Authorization = `Bearer ${access}`;
     }
     return config;
   },
@@ -110,7 +110,7 @@ axiosInstance.interceptors.response.use(
 
         // Set header and retry original
         originalRequest.headers = originalRequest.headers ?? {};
-        (originalRequest.headers as any).Authorization = `Bearer ${newToken}`;
+        (originalRequest.headers ).Authorization = `Bearer ${newToken}`;
 
         try {
           const resp = await axiosInstance(originalRequest);
