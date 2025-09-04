@@ -115,7 +115,7 @@ function Dashboard() {
               <div className="mb-4">
                 <Text type="input-text" value="Enter your pin to confirm" />
               </div>
-              <OTPInput />
+              <OTPInput onChange={() => {}} value="" />
               <div className="my-4 w-full">
                 <Button
                   action={() => {
@@ -450,4 +450,3 @@ const DashboardServiceWrapper = ({
     </>
   );
 };
-
