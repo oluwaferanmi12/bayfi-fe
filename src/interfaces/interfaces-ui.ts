@@ -8,3 +8,10 @@ export interface ServiceContentInterface {
 }
 
 export type ProfileType = "leaderboard" | 'setting' | 'security' 
+
+     
+export interface SideDrawerBreadCrumbProps {
+  text: string;
+  active: boolean;
+  action: () => void;
+}

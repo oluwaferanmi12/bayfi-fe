@@ -7,10 +7,10 @@ import {
   updateAccessToken,
 } from "@/utils";
 import { toast } from "sonner";
-// ^ You’ll need getRefreshToken(), setTokens({ access, refresh }), clearAuth()
+
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
-const REFRESH_URL = "/auth/admin/refresh"; // e.g. `${BASE_URL}/auth/refresh` if your API needs absolute
+const REFRESH_URL = "/auth/admin/refresh"; 
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -19,7 +19,6 @@ export const axiosInstance = axios.create({
 // Use a *separate* client for refresh to avoid interceptor recursion
 const refreshClient = axios.create({ baseURL: BASE_URL });
 
-// ===== Request interceptor: attach access token =====
 axiosInstance.interceptors.request.use(
   (config) => {
     const access = getAccessToken();
@@ -32,7 +31,6 @@ axiosInstance.interceptors.request.use(
   (err) => Promise.reject(err)
 );
 
-// ===== Refresh queue state =====
 let isRefreshing = false;
 let refreshPromise: Promise<string | null> | null = null;
 let requestQueue: Array<(token: string | null) => void> = [];
@@ -54,7 +52,6 @@ async function refreshAccessToken(): Promise<string | null> {
     refreshToken: refresh,
   });
   console.log("Refresh Token VAlue", data);
-  // Expecting { accessToken, refreshToken? } – adjust if different
   const newAccess = data?.data?.accessToken;
 
   if (!newAccess) return null;

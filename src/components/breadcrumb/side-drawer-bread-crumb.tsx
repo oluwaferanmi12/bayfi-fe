@@ -2,12 +2,8 @@ import homeIcon from "@/assets/svg/breadcrumb-base.svg";
 import Image from "next/image";
 import arrowRight from "@/assets/svg/chevron-right.svg";
 import { Text } from "@/components/texts/text";
+import { SideDrawerBreadCrumbProps } from "@/interfaces/interfaces-ui";
 
-interface SideDrawerBreadCrumbProps {
-  text: string;
-  active: boolean;
-  action: () => void;
-}
 
 export const SideDrawerBreadCrumb = ({
   breadCrumbArray,
