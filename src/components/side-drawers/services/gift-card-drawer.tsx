@@ -18,6 +18,7 @@ import { GInput } from "@/components/inputs/GInput";
 import { SideDrawerBreadCrumbProps } from "@/interfaces/interfaces-ui";
 import { CardInterface, CountryResponseInterface } from "@/types";
 import { text } from "stream/consumers";
+import { Spin } from "antd";
 
 export const GiftCardDrawer = ({
   handleClose,
@@ -98,7 +99,7 @@ export const GiftCardDrawer = ({
             </div>
 
             {isPending ? (
-              <p>loading...</p>
+            <Spin />
             ) : cards ? (
               cards.filter((item) => item.cardName.toLowerCase().includes(searchValue.toLowerCase())).map((item) => (
                 <div
