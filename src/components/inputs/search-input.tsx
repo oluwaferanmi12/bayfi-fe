@@ -17,6 +17,7 @@ export const SearchInput = ({
     if (onChange) {
       onChange(e.target.value);
     }
+    console.log("searching", value)
   };
 
   return (

@@ -8,19 +8,34 @@ import giftCardPlaceHolder from "@/assets/svg/amazon-placeholder.svg";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { CardInterface, CountryResponseInterface } from "@/types";
+
 
 function BuyCardDetails() {
+  const [selectedCard, setSelectedCard] = useState<CardInterface | null>(null);
+  const [countrySelected, setCountrySelected] = useState<CountryResponseInterface | null>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const card = localStorage.getItem("selectedCard");
+      const country = localStorage.getItem("selectedCountry");
+      setSelectedCard(card ? JSON.parse(card) : null);
+      setCountrySelected(country ? JSON.parse(country) : null);
+    }
+  }, []);
+
   return (
     <>
       <PageTitle title="Giftcard/Sell" />
       <div className="my-3">
         <FullCardDetails
           bgWhite
-          flag={usIcon}
-          cardName="Amazon"
-          country="USA"
-          cardIcon={giftCardPlaceHolder}
+          flag={countrySelected?.logo_url || ""}
+          cardName={selectedCard?.cardName || ""}
+          country={countrySelected?.name || ""}
+          cardIcon={selectedCard?.avatarUrl || ""}
         />
       </div>
       <div className="bg-white p-4 rounded-lg">
