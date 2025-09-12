@@ -50,7 +50,7 @@ export interface OtpVerificationResponseInterface {
   refreshToken: string;
   userDetailsResponse: UserDetailResponse;
   requireLogout: boolean;
-  require2Fa: boolean
+  require2Fa: boolean;
 }
 export interface ResendOtpVerificationInterface {
   email: string;
@@ -65,3 +65,5 @@ export interface ResendOtpVerificationResponseInterface {
   metadata: null;
   timeStamp: string;
 }
+
+export type Role = "ADMIN" | "USER";
