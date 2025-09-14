@@ -12,6 +12,9 @@ import { Dispatch, SetStateAction } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
 import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+// import { useLogout } from "@/hooks/query";
+
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -23,6 +26,16 @@ export const ProfileNav = ({
   noBg?: boolean;
 }) => {
   const router = useRouter();
+
+  // const logoutMutate = useLogout((data) => {
+  //   // Cookies.remove("loginDetails");
+  //   router.push("/login");
+  // });
+  const logoutFn = (() => {
+    Cookies.remove("loginDetails");
+    router.push("/login");
+  });
+  
   return (
     <>
       <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
@@ -86,6 +99,7 @@ export const ProfileNav = ({
             icon={logoutIcon}
             text="Logout"
             logoutType
+            clickAction={() => logoutFn()}
           />
         </div>
       </div>

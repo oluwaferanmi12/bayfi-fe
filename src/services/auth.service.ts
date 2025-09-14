@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/axios";
-import { LoginResponse, OtpVerificationInterface, OtpVerificationResponseInterface, PostLoginInterface, RegisterInterface, RegisterResponseInterface, ResendOtpVerificationInterface, ResendOtpVerificationResponseInterface } from "@/types";
+import { ForgotPasswordEmailInterface, GeneralResponseInterface, LoginResponse, OtpVerificationInterface, OtpVerificationResponseInterface, PostLoginInterface, RegisterInterface, RegisterResponseInterface, ResendOtpVerificationInterface, ResendOtpVerificationResponseInterface, ResetPasswordInterface } from "@/types";
 
 
 export const login = async (payload: PostLoginInterface): Promise<LoginResponse> => {
@@ -23,5 +23,26 @@ export const otpVerificationService = async(payload: OtpVerificationInterface): 
 // Resend OTP Verification
 export const resendOtpVerificationService = async(payload: ResendOtpVerificationInterface): Promise<ResendOtpVerificationResponseInterface> => {
  const { data } = await axiosInstance.post("/auth/generate/otp", payload)
+  return data.data
+}
+
+// Forgot password
+export const forgotPasswordEmailService = async (payload: ForgotPasswordEmailInterface): Promise<ResendOtpVerificationResponseInterface> => {
+  const { data } = await axiosInstance.post("/auth/password/otp", payload)
+  return data.data
+}
+
+export const forgotPasswordOtpVerificationService = async(payload: OtpVerificationInterface): Promise<GeneralResponseInterface> => {
+ const { data } = await axiosInstance.post("/auth/password/verify", payload)
+  return data.data
+}
+
+export const resetPasswordService = async(payload: ResetPasswordInterface) : Promise<ResendOtpVerificationResponseInterface> => {
+  const { data } = await axiosInstance.post("/auth/password/reset", payload)
+  return data.data
+}
+
+export const logoutService = async (): Promise<GeneralResponseInterface> => {
+  const { data } = await axiosInstance.post("/auth/logout")
   return data.data
 }

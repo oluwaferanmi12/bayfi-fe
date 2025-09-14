@@ -8,9 +8,21 @@ import mailIcon from "@/assets/svg/input-message-icon.svg";
 import { GInput } from "@/components/inputs/GInput";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForgotPasswordEmail } from "@/hooks/query";
+import { toast } from "sonner";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState('');
   const router = useRouter();
+
+  const forgotPasswordEmailMutate = useForgotPasswordEmail((data) => {
+    toast.success("An otp was sent to your email");
+    router.push("/forgot-password/verify-otp");
+
+  });
+
+
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -33,18 +45,19 @@ const ForgotPassword = () => {
                 <GInput
                   label="Email"
                   placeholder="Your email address"
+                  setInput={setEmail}
                   icon={mailIcon}
                 />
               </div>
               <div className="mt-4">
                 <Button
                   action={() => {
-                    router.push("/otp");
+                    forgotPasswordEmailMutate.mutate({email})
                   }}
                   type="bgGreen"
                   text="Send reset link"
                   fullWidth
-                  loading={false}
+                  loading={forgotPasswordEmailMutate.isPending}
                 />
               </div>
             </div>
