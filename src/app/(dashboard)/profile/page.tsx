@@ -9,9 +9,17 @@ import profilePlaceholder from "@/assets/svg/profile-default-avatar.svg";
 import Image from "next/image";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
+import { useFetchProfile } from "@/hooks/query/useProfile";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
+  const [profiledata, setProfileData] = useState()
+  
+  // const fetchProfileMutate = useFetchProfile((data) => {
+  //   setProfileData(data)
+  // })
+ 
+ 
   return (
     <div className="rounded-lg bg-white ">
       <div className="p-4 border-b border-[#EAECF0]">
@@ -52,19 +60,20 @@ function ProfileSetting() {
                           <GInput
                             label="Email address"
                             placeholder="enter your email"
+                            disabled
                           />
                           <GInput
                             label="Phone Number"
                             placeholder="enter your email"
                           />
-                          <GInput
+                          {/* <GInput
                             label="Date of Birth"
                             placeholder="DD-MM-YYYY"
                           />
                           <GInput
                             label="Address"
                             placeholder="Street Address"
-                          />
+                          /> */}
                           <Button
                             loading={false}
                             text="Save changes"
