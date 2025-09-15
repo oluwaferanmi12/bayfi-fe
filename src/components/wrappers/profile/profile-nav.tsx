@@ -55,7 +55,7 @@ export const ProfileNav = ({
             Kiitan234
           </p>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 pb-28 lg:pb-0">
           <ProfileNavContainer
             clickAction={() => {
               if (noBg) {

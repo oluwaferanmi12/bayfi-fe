@@ -57,7 +57,7 @@ export default function RootLayout({
           <Row justify={"center"} align={"middle"}>
             <Col xs={22}>
               <div className="flex justify-between items-center">
-                <Image src={logo} alt="" />
+                <Image onClick={() => router.push("/")} className="cursor-pointer" src={logo} alt="" />
                 <div className="flex items-center gap-8">
                   {navLinks.map((nav) => (
                     <Link key={nav.navTitle} href={nav.url}>
@@ -79,8 +79,9 @@ export default function RootLayout({
                   </Link> */}
                 </div>
                 <div className="flex items-center gap-4">
-                  <Image src={bellIcon} alt="" />
+                  <Image className="cursor-pointer" src={bellIcon} alt="" />
                   <Image
+                    className="cursor-pointer"
                     onClick={() => {
                       router.push("/profile");
                     }}

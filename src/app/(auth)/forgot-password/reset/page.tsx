@@ -62,7 +62,7 @@ const ResetPassword = () => {
                                     setInput={setEmail}
                                 />
 
-                                <div className="flex flex-col gap-1">
+                                <div className="flex flex-col gap-1 mb-1">
                                     <Text type="input-text" value="Enter Otp" />
                                     <OTPInput centered={false} value={otp} onChange={setOtp} />
                                 </div>
