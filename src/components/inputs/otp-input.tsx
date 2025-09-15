@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export const OTPInput = ({ value, onChange }: { value: string; onChange: (val: string) => void }) => {
+export const OTPInput = ({ value, onChange, centered= true }: { value: string; onChange: (val: string) => void; centered? : boolean }) => {
   const [arrayInput, setArrayInput] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const backSpaceRef = useRef<boolean>(false);
@@ -77,7 +77,7 @@ export const OTPInput = ({ value, onChange }: { value: string; onChange: (val: s
   };
 
   return (
-    <div className="flex justify-center gap-2">
+    <div className={`flex gap-2 ${centered ? "justify-center" : ""}`}>
       {arrayInput.map((item, index) => {
         return (
           <input
