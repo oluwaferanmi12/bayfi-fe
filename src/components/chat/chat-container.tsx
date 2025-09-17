@@ -3,8 +3,9 @@ import { SupportHeaderType } from "@/components/chat/support/support-header-type
 import { UserChatHeader } from "@/components/chat/user/user-chat-header";
 import { UserResponseContainer } from "@/components/chat/user/user-response-container";
 import { ChatInput } from "@/components/inputs/chat-input";
+import { useGetOneChat } from "@/hooks/query";
 import { useStompClient } from "@/hooks/stomp/useChatStomp";
-import { InitiateCardTxn } from "@/types";
+import { InitiateCardTxn, Message } from "@/types";
 import { getUserDetails } from "@/utils";
 import { useEffect, useState } from "react";
 
@@ -26,25 +27,22 @@ export const ChatContainer = ({
     unsubscribeAll,
   } = useStompClient();
   const [initMessage, setInitMessage] = useState<any>();
+  const [messages, setMesssages] = useState<Message[]>([]);
   const handleMessage = (m: any) => {
-    console.log(m, "message result")
     setInitMessage(m);
-    console.log(typeof m);
   };
 
+  const { data: chatResponses, isPending: messsageLoading } = useGetOneChat(
+    initMessage?.chatTransactionId
+  );
 
-
-  const handleAdminSubscription = (m:any) => {
-    console.log("Adming Sub", m)
-  }
-  const handleSendMessage = () => {
+  const handleSendMessage = (message: string) => {
     const payload = {
-      message: "How are you doing my guys ????",
+      message: message,
       chatMessageInitiator: "USER",
       imageUrl: "",
       chatId: initMessage.chatTransactionId,
     };
-    console.log(payload, "Request Payload");
     client?.publish({
       destination: "/app/chat.sendMessage",
       body: JSON.stringify(payload),
@@ -52,28 +50,51 @@ export const ChatContainer = ({
   };
   useEffect(() => {
     if (!isConnected || !client?.connected) return;
-    const userSub = subscribe(`/user/giftcard/messages`, handleMessage);
-    const adminSub = subscribe(`/topic/admin/chats`, handleAdminSubscription);
+    subscribe(`/user/giftcard/messages`, handleMessage);
     client?.publish({
       destination: "/app/chat.sendMessage",
       body: JSON.stringify({ ...initTxn }),
     });
   }, [isConnected, client, subscribe]);
+
+  useEffect(() => {
+    if (chatResponses?.messages.length) {
+      setMesssages(chatResponses.messages);
+    }
+  }, [chatResponses]);
   return (
     <div
-      className={`overflow-y-scroll ${chatType && "bg-white p-4 rounded-lg"} hide-scrollbar h-[85vh] relative`}
+      className={`overflow-y-scroll ${chatType && "bg-white p-4 rounded-lg"}  hide-scrollbar h-[85vh]  relative`}
     >
       {chatType === "support" && <SupportHeaderType />}
-      <UserChatHeader bgWhite={bgWhite} />
-      <p className="font-grotesk-semi-bold text-sm lg:text-base">
-        Admin will respond in 5:00 mins
-      </p>
-      <div className="mt-4">
-        <SupportChatContainer />
-        <UserResponseContainer bgWhite={bgWhite} />
-        <SupportChatContainer />
-        <ChatInput handleMessage={handleSendMessage} bgWhite />
-      </div>
+
+      {messsageLoading ? (
+        <p>Loading</p>
+      ) : (
+        messages.map((item) => {
+          return (
+            <>
+              {item.amount && item.countryName && item.giftCardName ? (
+                <UserChatHeader message={item} bgWhite={bgWhite} />
+              ) : (
+                <>
+                  <div className="mt-4">
+                    {item.messageInitiator === "USER" ? (
+                      <UserResponseContainer message={item} bgWhite={bgWhite} />
+                    ) : (
+                      <SupportChatContainer />
+                    )}
+                  </div>
+                  <ChatInput
+                    handleMessage={handleSendMessage}
+                    bgWhite={bgWhite}
+                  />
+                </>
+              )}
+            </>
+          );
+        })
+      )}
     </div>
   );
 };
