@@ -6,7 +6,7 @@ import { ChatInput } from "@/components/inputs/chat-input";
 import { useStompClient } from "@/hooks/stomp/useChatStomp";
 import { InitiateCardTxn } from "@/types";
 import { getUserDetails } from "@/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const ChatContainer = ({
   chatType,
@@ -25,21 +25,38 @@ export const ChatContainer = ({
     subscribe,
     unsubscribeAll,
   } = useStompClient();
+  const [initMessage, setInitMessage] = useState<any>();
   const handleMessage = (m: any) => {
-    console.log(m, "Message result");
+    console.log(m, "message result")
+    setInitMessage(m);
+    console.log(typeof m);
+  };
+
+
+
+  const handleAdminSubscription = (m:any) => {
+    console.log("Adming Sub", m)
+  }
+  const handleSendMessage = () => {
+    const payload = {
+      message: "How are you doing my guys ????",
+      chatMessageInitiator: "USER",
+      imageUrl: "",
+      chatId: initMessage.chatTransactionId,
+    };
+    console.log(payload, "Request Payload");
+    client?.publish({
+      destination: "/app/chat.sendMessage",
+      body: JSON.stringify(payload),
+    });
   };
   useEffect(() => {
     if (!isConnected || !client?.connected) return;
-    console.log("Right insiee heree");
-    console.log(getUserDetails().userDetailsResponse.id, "user details here");
-    const userSub = subscribe(
-      `/user/giftcard/messages`,
-      handleMessage
-    );
-    console.log(initTxn, "init txn");
+    const userSub = subscribe(`/user/giftcard/messages`, handleMessage);
+    const adminSub = subscribe(`/topic/admin/chats`, handleAdminSubscription);
     client?.publish({
       destination: "/app/chat.sendMessage",
-      body: JSON.stringify({...initTxn}),
+      body: JSON.stringify({ ...initTxn }),
     });
   }, [isConnected, client, subscribe]);
   return (
@@ -55,7 +72,7 @@ export const ChatContainer = ({
         <SupportChatContainer />
         <UserResponseContainer bgWhite={bgWhite} />
         <SupportChatContainer />
-        <ChatInput bgWhite />
+        <ChatInput handleMessage={handleSendMessage} bgWhite />
       </div>
     </div>
   );
