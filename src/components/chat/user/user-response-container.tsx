@@ -16,8 +16,15 @@ export const UserResponseContainer = ({
     >
       <p className="text-[#868C98] text-sm font-grotesk-medium">You</p>
       <div className="mt-2">
-        {message.message}
-        <Image src={giftCardIcon} alt="" />
+        {message.message ? (
+          <p className="text-[#292929] text-sm font-grotesk-medium">
+            {message.message}
+          </p>
+        ) : message.imageUrl ? (
+          <Image src={giftCardIcon} alt="" />
+        ) : (
+          ""
+        )}
       </div>
       <div className="mt-2">
         <p className="font-grotesk-regular text-xs">

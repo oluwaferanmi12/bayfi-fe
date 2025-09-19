@@ -28,8 +28,11 @@ export const ChatContainer = ({
   } = useStompClient();
   const [initMessage, setInitMessage] = useState<any>();
   const [messages, setMesssages] = useState<Message[]>([]);
-  const handleMessage = (m: any) => {
-    setInitMessage(m);
+  const handleMessage = (m: Message) => {
+    if (m.amount && m.countryName && m.giftCardName) {
+      setInitMessage(m);
+    }
+    setMesssages((prev) => [...prev, m]);
   };
 
   const { data: chatResponses, isPending: messsageLoading } = useGetOneChat(
@@ -71,29 +74,31 @@ export const ChatContainer = ({
       {messsageLoading ? (
         <p>Loading</p>
       ) : (
-        messages.map((item) => {
-          return (
-            <>
-              {item.amount && item.countryName && item.giftCardName ? (
-                <UserChatHeader message={item} bgWhite={bgWhite} />
-              ) : (
-                <>
-                  <div className="mt-4">
-                    {item.messageInitiator === "USER" ? (
-                      <UserResponseContainer message={item} bgWhite={bgWhite} />
-                    ) : (
-                      <SupportChatContainer />
-                    )}
-                  </div>
-                  <ChatInput
-                    handleMessage={handleSendMessage}
-                    bgWhite={bgWhite}
-                  />
-                </>
-              )}
-            </>
-          );
-        })
+        <>
+          {messages.map((item) => {
+            return (
+              <>
+                {item.amount && item.countryName && item.giftCardName ? (
+                  <UserChatHeader message={item} bgWhite={bgWhite} />
+                ) : (
+                  <>
+                    <div className="mt-4">
+                      {item.messageInitiator === "USER" ? (
+                        <UserResponseContainer
+                          message={item}
+                          bgWhite={bgWhite}
+                        />
+                      ) : (
+                        <SupportChatContainer message={item} />
+                      )}
+                    </div>
+                  </>
+                )}
+              </>
+            );
+          })}
+          <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
+        </>
       )}
     </div>
   );
