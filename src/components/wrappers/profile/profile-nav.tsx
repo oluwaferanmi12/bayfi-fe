@@ -13,6 +13,7 @@ import { ProfileType } from "@/interfaces/interfaces-ui";
 import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { useFetchProfile } from "@/hooks/query/useProfile";
 // import { useLogout } from "@/hooks/query";
 
 
@@ -26,6 +27,10 @@ export const ProfileNav = ({
   noBg?: boolean;
 }) => {
   const router = useRouter();
+
+  const profileData =  useFetchProfile();
+
+  console.log("Profile data", profileData?.data);
 
   // const logoutMutate = useLogout((data) => {
   //   // Cookies.remove("loginDetails");

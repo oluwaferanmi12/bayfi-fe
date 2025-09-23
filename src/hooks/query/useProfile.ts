@@ -1,14 +1,11 @@
 import { fetchUserProfileService } from "@/services/profile.service";
-import { useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
-export const useFetchProfile = (sc: (val:string) => void) => {
-    return useMutation({
-        mutationFn: () => {
-            return fetchUserProfileService()
+export const useFetchProfile = () => {
+    return useQuery({
+        queryFn: async () => {
+            return await fetchUserProfileService();
         },
-        onSuccess: (data) => {
-            sc(data)
-        }
-    })
-
+        queryKey: ["get-profile"],
+    });
 }
