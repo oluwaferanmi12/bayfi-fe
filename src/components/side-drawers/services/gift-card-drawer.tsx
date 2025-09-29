@@ -16,7 +16,11 @@ import usIcon from "@/assets/svg/us-icon.svg";
 import { FullCardDetails } from "@/components/wrappers/full-card-details";
 import { GInput } from "@/components/inputs/GInput";
 import { SideDrawerBreadCrumbProps } from "@/interfaces/interfaces-ui";
-import { CardInterface, CountryResponseInterface } from "@/types";
+import {
+  CardInterface,
+  CountryResponseInterface,
+  InitiateCardTxn,
+} from "@/types";
 import { text } from "stream/consumers";
 import { Spin } from "antd";
 
@@ -32,11 +36,12 @@ export const GiftCardDrawer = ({
   const [showGiftCardAmount, setShowGiftCardAmount] = useState(false);
   const { data: cards, isPending } = useGetCards({ page: 1, pageSize: 100 });
   const [showGiftcardChat, setGiftCardChat] = useState(false);
-  const [sellGiftCard, setSellGiftCard] = useState(0);
-  const initiateTxn = useInitiateCardTxn((data) => {
-    console.log(data, "DAtataaaa");
-    setGiftCardChat(true);
-  });
+  const [initiateCardTxn, setInitiateCardTxn] = useState<InitiateCardTxn>();
+  // const initiateTxn = useInitiateCardTxn((data) => {
+  //   setShowGiftCardAmount(false)
+  //   setGiftCardChat(true);
+  //   setGiftCardChat(true);
+  // });
   const [giftCardAmount, setGiftCardAmount] = useState(0);
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface>();
@@ -81,6 +86,13 @@ export const GiftCardDrawer = ({
       return updated;
     });
   };
+  useEffect(() => {
+    if (initiateCardTxn) {
+      setShowGiftCardAmount(false);
+      setGiftCardChat(true);
+      setGiftCardChat(true);
+    }
+  }, [initiateCardTxn]);
 
   return (
     <SideDrawer
@@ -204,7 +216,7 @@ export const GiftCardDrawer = ({
             <Button
               action={() => {
                 // setShowGiftCardAmount(false);
-                initiateTxn.mutate({
+                setInitiateCardTxn({
                   amount: giftCardAmount,
                   chatId: null,
                   chatMessageInitiator: "USER",
@@ -214,15 +226,15 @@ export const GiftCardDrawer = ({
                   message: "I want to trade",
                 });
               }}
-              loading={initiateTxn.isPending}
+              loading={false}
               text="Get rate"
               type="bgGreen"
               fullWidth
             />
           </div>
-        ) : showGiftcardChat ? (
+        ) : showGiftcardChat && initiateCardTxn ? (
           <div className="relative ">
-            <ChatContainer />
+            <ChatContainer bgWhite={false} initTxn={initiateCardTxn} />
           </div>
         ) : (
           <>

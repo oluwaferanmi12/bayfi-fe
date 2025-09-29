@@ -1,3 +1,5 @@
+import { Role } from "./auth.types";
+
 export interface TextInterface {
   value: string;
   type:
@@ -117,4 +119,10 @@ export interface GiftCardInterface {
   maximumAmount: number;
   minimumAmount: number;
   countries: string;
+}
+
+export interface StompInterface {
+  role: Role;
+  onMessage: (msg: any) => void;
+  userId: string;
 }

@@ -87,3 +87,5 @@ export interface GeneralResponseInterface {
   metadata: null;
   timeStamp: string;
 }
+
+export type Role = "ADMIN" | "USER";
