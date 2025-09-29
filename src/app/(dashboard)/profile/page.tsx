@@ -10,14 +10,31 @@ import Image from "next/image";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
 import { useFetchProfile } from "@/hooks/query/useProfile";
+import { ProfileDataInterface } from "@/types/profile.types";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
-  const [profiledata, setProfileData] = useState()
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: ""
+  });
   
-  // const fetchProfileMutate = useFetchProfile((data) => {
-  //   setProfileData(data)
-  // })
+  const profileDataFn = useFetchProfile();
+  const profileData: ProfileDataInterface = profileDataFn?.data;
+
+  // Update form data when profile data is loaded
+  React.useEffect(() => {
+    if (profileData) {
+      setFormData({
+        firstName: profileData.firstName || "",
+        lastName: profileData.lastName || "",
+        email: profileData.email || "",
+        phoneNumber: profileData.phoneNumber || ""
+      });
+    }
+  }, [profileData]);
  
  
   return (
@@ -54,17 +71,31 @@ function ProfileSetting() {
                         </span>
                         <div className="mt-4 w-full">
                           <div className="flex items-center gap-4 w-full">
-                            <GInput label="First name" placeholder="Olaitan" />
-                            <GInput label="Last name" placeholder="Akinlade" />
+                            <GInput 
+                              label="First name" 
+                              placeholder="Enter first name"
+                              inputVal={formData.firstName}
+                              setInput={(val) => setFormData(prev => ({ ...prev, firstName: val }))}
+                            />
+                            <GInput 
+                              label="Last name" 
+                              placeholder="Enter last name"
+                              inputVal={formData.lastName}
+                              setInput={(val) => setFormData(prev => ({ ...prev, lastName: val }))}
+                            />
                           </div>
                           <GInput
                             label="Email address"
-                            placeholder="enter your email"
+                            placeholder="Enter your email"
+                            inputVal={formData.email}
+                            setInput={(val) => setFormData(prev => ({ ...prev, email: val }))}
                             disabled
                           />
                           <GInput
                             label="Phone Number"
-                            placeholder="enter your email"
+                            placeholder="Enter your phone number"
+                            inputVal={formData.phoneNumber}
+                            setInput={(val) => setFormData(prev => ({ ...prev, phoneNumber: val }))}
                           />
                           {/* <GInput
                             label="Date of Birth"

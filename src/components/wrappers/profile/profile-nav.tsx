@@ -14,6 +14,7 @@ import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useFetchProfile } from "@/hooks/query/useProfile";
+import { ProfileDataInterface } from "@/types/profile.types";
 // import { useLogout } from "@/hooks/query";
 
 
@@ -28,9 +29,10 @@ export const ProfileNav = ({
 }) => {
   const router = useRouter();
 
-  const profileData =  useFetchProfile();
+  const profileDataFn =  useFetchProfile();
+  const profileData: ProfileDataInterface | undefined = profileDataFn?.data;
 
-  console.log("Profile data", profileData?.data);
+  console.log("Profile data", profileData);
 
   // const logoutMutate = useLogout((data) => {
   //   // Cookies.remove("loginDetails");
@@ -54,7 +56,7 @@ export const ProfileNav = ({
         <IncompleteKycBadge />
         <div className="flex items-center flex-col  justify-center">
           <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl">
-            Olaitan Akinlade
+            {profileData ? `${profileData.firstName} ${profileData.lastName}` : 'Loading...'}
           </p>
           <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base">
             Kiitan234
