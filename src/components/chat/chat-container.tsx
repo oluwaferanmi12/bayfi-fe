@@ -39,11 +39,11 @@ export const ChatContainer = ({
     initMessage?.chatTransactionId
   );
 
-  const handleSendMessage = (message: string) => {
+  const handleSendMessage = (message: string, imageUrl?: string) => {
     const payload = {
       message: message,
       chatMessageInitiator: "USER",
-      imageUrl: "",
+      imageUrl: imageUrl ?? "",
       chatId: initMessage.chatTransactionId,
     };
     client?.publish({
