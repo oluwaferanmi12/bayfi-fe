@@ -33,7 +33,7 @@ export const ChatInput = ({
     setMessage("");
     setImageUrl("");
     setImageDetails(null);
-    textareaRef.current?.focus(); // keep expanded
+    textareaRef.current?.blur() 
   };
 
   const getImageUrl = (file?: File) => {
@@ -48,7 +48,7 @@ export const ChatInput = ({
   };
 
   return (
-    <div className="fixed lg:absolute left-0 py-4 bottom-0 w-full">
+    <div className="fixed lg:absolute left-0 py-4 z-20 -bottom-8 w-full">
       <div className="absolute -top-1 bg-white">
         <p className="text-xs font-grotesk-medium">{imageDetails?.name}</p>
       </div>

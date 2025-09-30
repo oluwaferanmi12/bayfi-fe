@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/axios";
-import { MessagePayload } from "@/types";
+import { Message, MessagePayload } from "@/types";
 
 export const getChats = async (chatId: string) => {
   const { data } = await axiosInstance.get(
@@ -10,9 +10,10 @@ export const getChats = async (chatId: string) => {
 
 export const getOneChatMessages = async (
   chatId: string
-): Promise<MessagePayload> => {
+): Promise<Message[]> => {
   const { data } = await axiosInstance.get(
-    `/giftcards/fetch/chat/transaction/${chatId}?page=1&pageSize=100`
+    `/giftcards/chats/${chatId}/messages`
   );
-  return data.data;
+  console.log(data.data, "DAta value here");
+  return data.data.content;
 };

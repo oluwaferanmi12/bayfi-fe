@@ -7,9 +7,9 @@ export const getCountries = async () => {
 };
 
 export const saveImage = async (folderType: ImageFolderType, payload: any) => {
-  console.log(payload, "Payload value");
+
   const result = await axiosInstance.post(
-    `/uploads?folder=${folderType}`,
+    `/files?folder=${folderType}`,
     payload
   );
   return result.data;

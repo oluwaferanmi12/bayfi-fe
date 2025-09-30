@@ -218,7 +218,7 @@ export const GiftCardDrawer = ({
                   chatMessageInitiator: "USER",
                   countryName: countrySelected?.name ?? "",
                   giftCardName: selectedCard?.cardName ?? "",
-                  imageUrl: "",
+                  imageUrls: [],
                   message: "I want to trade",
                 });
               }}
