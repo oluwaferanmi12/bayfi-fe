@@ -3,7 +3,7 @@ export interface Message {
   chatMessageId: number;
   createdAt: string;
   message: string;
-  imageUrl: string;
+  imageUrls: string[];
   senderId: string;
   countryName: string;
   giftCardName: string;
@@ -23,4 +23,22 @@ export interface MessagePayload {
   isLocked: boolean;
   unreadForAdmin: number;
   messages: Message[];
+}
+
+export interface ChatTransaction {
+  id: number;
+  createdAt: string;
+  chatDuration: number;
+  chatExpiryDate: string;
+  isExpired: boolean;
+  isLocked: boolean;
+  temporaryLockTime: number;
+  isProcessed: boolean;
+  message: number;
+  imageUrl: string;
+  countryName: string;
+  giftCardName: string;
+  amount: number;
+  messageInitiator: MessageType;
+  messageInitiatorDescription: string;
 }

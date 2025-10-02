@@ -1,4 +1,4 @@
-import { getChats, getOneChatMessages } from "@/services";
+import { getChats, getOneChatMessages, userChats } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetChats = (chatId: string) => {
@@ -13,5 +13,12 @@ export const useGetOneChat = (chatId: string) => {
     queryFn: () => getOneChatMessages(chatId),
     queryKey: ["get-one-chat", chatId],
     enabled: !!chatId,
+  });
+};
+
+export const useGetActivChat = () => {
+  return useQuery({
+    queryFn: () => userChats(),
+    queryKey: ["user-chats"],
   });
 };

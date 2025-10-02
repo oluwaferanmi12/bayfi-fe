@@ -9,8 +9,7 @@ import { ChatInput } from "@/components/inputs/chat-input";
 import { useGetOneChat } from "@/hooks/query";
 import { useStompClient } from "@/hooks/stomp/useChatStomp";
 import { InitiateCardTxn, Message } from "@/types";
-import { getUserDetails } from "@/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const ChatContainer = ({
   chatType,
@@ -21,16 +20,13 @@ export const ChatContainer = ({
   bgWhite?: boolean;
   initTxn?: InitiateCardTxn;
 }) => {
-  const {
-    connect,
-    client,
-    disconnect,
-    isConnected,
-    subscribe,
-    unsubscribeAll,
-  } = useStompClient();
+  const { client, isConnected, subscribe } = useStompClient();
   const [initMessage, setInitMessage] = useState<any>();
   const [messages, setMesssages] = useState<Message[]>([]);
+  //refs
+  const scrollAreaRef = useRef<HTMLDivElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const firstPaint = useRef(true);
   const handleMessage = (m: Message) => {
     if (m.amount && m.countryName && m.giftCardName) {
       setInitMessage(m);
@@ -46,9 +42,10 @@ export const ChatContainer = ({
     const payload = {
       message: message,
       chatMessageInitiator: "USER",
-      imageUrl: imageUrl ?? "",
+      imageUrls: imageUrl ? [imageUrl] : [],
       chatId: initMessage.chatTransactionId,
     };
+    console.log(payload, "Payload value here");
     client?.publish({
       destination: "/app/chat.sendMessage",
       body: JSON.stringify(payload),
@@ -64,20 +61,28 @@ export const ChatContainer = ({
   }, [isConnected, client, subscribe]);
 
   useEffect(() => {
-    if (chatResponses?.messages.length) {
-      setMesssages(chatResponses.messages);
+    if (chatResponses?.length) {
+      setMesssages(chatResponses);
     }
   }, [chatResponses]);
+
+  useEffect(() => {
+    if (!bottomRef.current) return;
+    bottomRef.current.scrollIntoView({
+      behavior: firstPaint.current ? "auto" : "smooth",
+      block: "end",
+    });
+    firstPaint.current = false;
+  }, [messages.length]);
   return (
     <div
-      className={`overflow-y-scroll ${chatType && "bg-white p-4 rounded-lg"}  hide-scrollbar h-[85vh]  relative`}
+      className={`overflow-y-scroll ${chatType && "bg-white p-4 rounded-lg"}  hide-scrollbar h-[85vh]  `}
     >
       {chatType === "support" && <SupportHeaderType />}
-
       {messsageLoading ? (
         <p>Loading</p>
       ) : (
-        <>
+        <div>
           {messages.map((item) => {
             return (
               <>
@@ -97,12 +102,13 @@ export const ChatContainer = ({
                     </div>
                   </>
                 )}
+                <div ref={bottomRef} />
               </>
             );
           })}
-          <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
-        </>
+        </div>
       )}
+      <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
     </div>
   );
 };

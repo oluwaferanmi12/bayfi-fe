@@ -41,7 +41,7 @@ export interface ManageCardInterface {
 export interface InitiateCardTxn {
   chatId: number | null;
   message: string;
-  imageUrl: string;
+  imageUrls: string[] | null;
   countryName: string;
   giftCardName: string;
   amount: number;
