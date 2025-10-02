@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/axios";
-import { Message, MessagePayload } from "@/types";
+import { ChatTransaction, Message, MessagePayload } from "@/types";
 
 export const getChats = async (chatId: string) => {
   const { data } = await axiosInstance.get(
@@ -14,6 +14,10 @@ export const getOneChatMessages = async (
   const { data } = await axiosInstance.get(
     `/giftcards/chats/${chatId}/messages`
   );
-  console.log(data.data, "DAta value here");
   return data.data.content;
+};
+
+export const userChats = async (): Promise<ChatTransaction[]> => {
+  const { data } = await axiosInstance.get("/giftcards/chats");
+  return data.data.contents;
 };

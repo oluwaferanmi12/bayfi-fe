@@ -18,32 +18,33 @@ export const UserResponseContainer = ({
     <>
       <ImagePreviewWrapper show={showPreview} setShow={setShowPreview}>
         <div className="relative w-[500px] aspect-square">
-          <Image src={amazonCard} alt="" fill />
+          <Image src={message.imageUrls[0]} alt="" fill />
         </div>
       </ImagePreviewWrapper>
       <div
         className={`border ${bgWhite && "bg-white"} border-[#EAECF0] rounded-lg p-2 px-4 mb-4`}
       >
         <p className="text-[#868C98] text-sm font-grotesk-medium">You</p>
-        <div>
-          <div
-            onClick={() => {
-              setShowPreview(true);
-            }}
-            className="relative cursor-pointer my-2 w-[100px] h-[60px]"
-          >
-            <Image alt="" src={amazonCard} fill />
+        {message.imageUrls.length ? (
+          <div>
+            <div
+              onClick={() => {
+                setShowPreview(true);
+              }}
+              className="relative cursor-pointer my-2 w-[100px] h-[60px]"
+            >
+              <Image alt="" src={message.imageUrls[0]} fill />
+            </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
+
         <div className="mt-2">
-          {message.message ? (
+          {message.message && (
             <p className="text-[#292929] text-sm font-grotesk-medium">
               {message.message}
             </p>
-          ) : message.imageUrl ? (
-            <Image src={giftCardIcon} alt="" />
-          ) : (
-            ""
           )}
         </div>
         <div className="mt-2">

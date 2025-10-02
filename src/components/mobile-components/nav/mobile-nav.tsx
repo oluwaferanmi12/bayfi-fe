@@ -10,6 +10,7 @@ import menu2 from "@/assets/svg/menu-2.svg";
 import mobileHomeActive from "@/assets/svg/home-2.svg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import navChatIcon from "@/assets/svg/nav-chat-icon.svg";
 
 export const MobileNav = () => {
   const router = useRouter();
@@ -34,6 +35,7 @@ export const MobileNav = () => {
             router.push("/other-services");
           }}
         />
+
         <MobileNavWrapper
           action={() => {
             router.push("/m-transaction");
@@ -42,6 +44,15 @@ export const MobileNav = () => {
           active={false}
           iconActive={documentNormal2}
           text="Transactions"
+        />
+        <MobileNavWrapper
+          icon={navChatIcon}
+          active={false}
+          iconActive={navChatIcon}
+          text="Chat"
+          action={() => {
+            router.push("/m-chat");
+          }}
         />
         <MobileNavWrapper
           icon={more}

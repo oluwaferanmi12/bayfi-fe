@@ -28,7 +28,6 @@ export const ChatContainer = ({
     if (m.amount && m.countryName && m.giftCardName) {
       setInitMessage(m);
     }
-    console.log(m, "Message received");
     setMesssages((prev) => [...prev, m]);
   };
 
@@ -43,6 +42,7 @@ export const ChatContainer = ({
       imageUrls: imageUrl ? [imageUrl] : [],
       chatId: initMessage.chatTransactionId,
     };
+    console.log(payload, "Payload value here");
     client?.publish({
       destination: "/app/chat.sendMessage",
       body: JSON.stringify(payload),

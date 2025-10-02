@@ -27,13 +27,13 @@ export const ChatInput = ({
   const expanded = focused || message.trim().length > 0;
 
   const onSend = () => {
-    if (!message.trim()) return;
-    const toSend = message;
+    if (!message.trim() && !imageUrl) return;
+    const toSend = message ?? " ";
     handleMessage(toSend, imageUrl);
     setMessage("");
     setImageUrl("");
     setImageDetails(null);
-    textareaRef.current?.blur() 
+    textareaRef.current?.blur();
   };
 
   const getImageUrl = (file?: File) => {
