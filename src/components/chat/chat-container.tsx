@@ -1,3 +1,6 @@
+"use client";
+
+
 import { SupportChatContainer } from "@/components/chat/support/support-chat-container";
 import { SupportHeaderType } from "@/components/chat/support/support-header-type";
 import { UserChatHeader } from "@/components/chat/user/user-chat-header";
