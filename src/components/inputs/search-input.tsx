@@ -13,11 +13,21 @@ export const SearchInput = ({
   value?: string;
   onChange?: (val: string) => void;
 }) => {
+  const [internalValue, setInternalValue] = useState("");
+  
+  // Use controlled value if provided, otherwise use internal state
+  const inputValue = value !== undefined ? value : internalValue;
+  
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    
     if (onChange) {
-      onChange(e.target.value);
+      onChange(newValue);
+    } else {
+      // If no onChange prop, manage internal state
+      setInternalValue(newValue);
     }
-    console.log("searching", value)
+    console.log("searching", inputValue);
   };
 
   return (
@@ -27,7 +37,7 @@ export const SearchInput = ({
       </span>
       <input
         placeholder="Search"
-        value={value}
+        value={inputValue}
         onChange={handleSearchInput}
         className={`border lg:py-3 py-2 px-4 placeholder:font-grotesk-regular outline-none text-base font-grotesk-semi-bold pl-10 placeholder:text-[#CBCBCB] w-full border-[#EBF1FF] rounded-lg ${bgWhite ? "bg-white" : bgGrey ? "bg-[#F5F5F5]" : ""}`}
       />
