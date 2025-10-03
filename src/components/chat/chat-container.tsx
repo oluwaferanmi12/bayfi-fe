@@ -54,11 +54,18 @@ export const ChatContainer = ({
   useEffect(() => {
     if (!isConnected || !client?.connected) return;
     subscribe(`/user/giftcard/messages`, handleMessage);
-    client?.publish({
-      destination: "/app/chat.sendMessage",
-      body: JSON.stringify({ ...initTxn }),
-    });
-  }, [isConnected, client, subscribe]);
+    // only publish the initial txn if one was provided
+    if (initTxn) {
+      try {
+        client?.publish({
+          destination: "/app/chat.sendMessage",
+          body: JSON.stringify({ ...initTxn }),
+        });
+      } catch (err) {
+        console.warn("Failed to publish initial txn", err);
+      }
+    }
+  }, [isConnected, client, subscribe, initTxn]);
 
   useEffect(() => {
     if (chatResponses?.length) {
@@ -83,9 +90,9 @@ export const ChatContainer = ({
         <p>Loading</p>
       ) : (
         <div>
-          {messages.map((item) => {
+          {messages.map((item, index) => {
             return (
-              <>
+              <div key={item.chatMessageId || `message-${index}`}>
                 {item.amount && item.countryName && item.giftCardName ? (
                   <UserChatHeader message={item} bgWhite={bgWhite} />
                 ) : (
@@ -103,7 +110,7 @@ export const ChatContainer = ({
                   </>
                 )}
                 <div ref={bottomRef} />
-              </>
+              </div>
             );
           })}
         </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import placeholderImage from "@/assets/svg/placeholder.svg"
 
 export const GiftCardWrapper = ({
   text,
@@ -18,7 +19,7 @@ export const GiftCardWrapper = ({
     >
       <p className="text-base text-text-color-900 font-grotesk-medium">{text}</p>
       <div className="relative w-[50px] h-[30px]">
-        <Image className="object-cover" src={image} fill alt="" />
+        <Image className="object-cover" src={image ?? placeholderImage} fill alt="" />
       </div>
     </div>
   );

@@ -13,6 +13,9 @@ import { useRouter } from "next/navigation";
 import { useGetCards } from "@/hooks/query";
 import { Spin } from "antd";
 import { CardInterface, CountryResponseInterface } from "@/types";
+import placeholderImage from "@/assets/svg/placeholder.svg"
+
+
 
 function GiftCard() {
   const [showCountryDrawer, setShowCountryDrawer] = useState(false);
@@ -50,7 +53,7 @@ function GiftCard() {
                 router.push("/giftcard/buy-details");
                 setCountrySelected(item)
               }}
-              flag={item.logo_url}
+              flag={item.logo_url?? placeholderImage}
               countryName={item.name}
             />
           );
@@ -80,7 +83,7 @@ function GiftCard() {
                 setSelectedCard(item);
               }}
               text={item.cardName}
-              image={item.avatarUrl}
+              image={item?.avatarUrl}
             />
           ))
         ) : (

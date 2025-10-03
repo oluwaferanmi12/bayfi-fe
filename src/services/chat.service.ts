@@ -14,7 +14,7 @@ export const getOneChatMessages = async (
   const { data } = await axiosInstance.get(
     `/giftcards/chats/${chatId}/messages`
   );
-  return data.data.content;
+  return data.data?.content || data.data || [];
 };
 
 export const userChats = async (): Promise<ChatTransaction[]> => {
