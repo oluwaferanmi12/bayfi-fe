@@ -12,37 +12,69 @@ interface UseStompClientOptions {
   debug?: boolean;
 }
 
+type SubEntry = {
+  destination: string;
+  handler: SubscribeHandler;
+  sub?: StompSubscription | null;
+};
+
 export function useStompClient(opts: UseStompClientOptions = {}) {
   const {
-    url = process.env.NEXT_PUBLIC_CHAT_URL,
+    url = process.env.NEXT_PUBLIC_CHAT_URL!,
     autoConnect = true,
     debug = false,
   } = opts;
 
   const clientRef = useRef<Client | null>(null);
-  const [client, setClient] = useState<Client | null>(null);   // <-- reactive
+  const [client, setClient] = useState<Client | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 
-  const subsRef = useRef<Map<string, StompSubscription[]>>(new Map());
+  // Keep the desired subscriptions while the page is mounted
+  const subsRef = useRef<SubEntry[]>([]);
+
+  const resubscribeAll = useCallback((c: Client) => {
+    subsRef.current.forEach((entry, idx) => {
+      entry.sub?.unsubscribe();
+      const sub = c.subscribe(entry.destination, (message: IMessage) => {
+        let payload: any = message.body;
+        try { payload = JSON.parse(message.body); } catch {}
+        entry.handler(payload, message);
+      });
+      subsRef.current[idx] = { ...entry, sub };
+    });
+  }, []);
 
   const connect = useCallback(() => {
-    if (clientRef.current?.connected) return;
+    // if we already have an active+connected client, do nothing
+    if (clientRef.current?.active && clientRef.current?.connected) return;
+
+    // If there's a zombie client (active but stuck), reset it
+    if (clientRef.current?.active && !clientRef.current?.connected) {
+      try { clientRef.current?.deactivate(); } catch {}
+      clientRef.current = null;
+    }
 
     const c = new Client({
       brokerURL: url,
       reconnectDelay: 3000,
       heartbeatIncoming: 10000,
       heartbeatOutgoing: 10000,
-      connectHeaders: { Authorization: `Bearer ${getAccessToken()}` },
+      // ensure fresh token before every attempt (initial + retries)
+      beforeConnect: async () => {
+        c.connectHeaders = { Authorization: `Bearer ${getAccessToken()}` };
+        if (debug) console.log("[STOMP] beforeConnect (headers refreshed)");
+      },
       debug: debug ? (msg) => console.log("[STOMP]", msg) : () => {},
       onConnect: () => {
         setIsConnected(true);
-        setClient(c);                    // <-- make reactive after connect
+        setClient(c);
+        resubscribeAll(c);
+        toast.dismiss("stomp-retry");
         toast.success("Connected to chat");
       },
       onDisconnect: () => {
         setIsConnected(false);
-        setClient(null);                 // <-- clear on disconnect
+        setClient(null);
       },
       onStompError: (frame) => {
         console.error("Broker error:", frame.headers["message"], frame.body);
@@ -54,75 +86,82 @@ export function useStompClient(opts: UseStompClientOptions = {}) {
 
     c.activate();
     clientRef.current = c;
-  }, [url, debug]);
+  }, [url, debug, resubscribeAll]);
 
   const disconnect = useCallback(async () => {
-    subsRef.current.forEach((arr) => arr.forEach((s) => s.unsubscribe()));
-    subsRef.current.clear();
-
+    // Clean up subs and client on unmount/navigation
+    subsRef.current.forEach((e) => e.sub?.unsubscribe());
+    subsRef.current = [];
     setIsConnected(false);
     setClient(null);
     await clientRef.current?.deactivate?.();
     clientRef.current = null;
   }, []);
 
+  // Auto connect while this page is mounted; disconnect on unmount
   useEffect(() => {
     if (!autoConnect) return;
     connect();
-    return () => void disconnect();
+    return () => { void disconnect(); };
   }, [autoConnect, connect, disconnect]);
 
-  const subscribe = useCallback(
-  (destination: string, handler: SubscribeHandler) => {
-    const c = client; // <-- use stateful client, not clientRef.current
-    if (!c || !c.connected) {
-      console.warn(`Tried to subscribe to "${destination}" before ready.`);
-      return () => {};
-    }
-
-    const sub = c.subscribe(destination, (message: IMessage) => {
-      let payload: any = message.body;
-      try { payload = JSON.parse(message.body); } catch {}
-      handler(payload, message);
-    });
-
-    if (sub) {
-      const list = subsRef.current.get(destination) ?? [];
-      list.push(sub);
-      subsRef.current.set(destination, list);
-    }
-
-    return () => {
-      if (!sub) return;
-      try { sub.unsubscribe(); } finally {
-        const list = subsRef.current.get(destination);
-        if (list) {
-          subsRef.current.set(destination, list.filter(s => s.id !== sub.id));
-          if ((subsRef.current.get(destination)?.length ?? 0) === 0) {
-            subsRef.current.delete(destination);
-          }
-        }
-      }
+  // When user returns (focus/visible/online), ensure we’re connected.
+  // This handles background-tab throttling and sleep/wake cases.
+  useEffect(() => {
+    const ensure = () => {
+      const c = clientRef.current;
+      if (!c?.connected) connect();
     };
-  },
-  [client] // <-- depend on reactive client
-);
+    const onVisible = () => {
+      if (document.visibilityState === "visible") ensure();
+    };
+    window.addEventListener("focus", ensure);
+    window.addEventListener("online", ensure);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      window.removeEventListener("focus", ensure);
+      window.removeEventListener("online", ensure);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [connect]);
+
+  const subscribe = useCallback(
+    (destination: string, handler: SubscribeHandler) => {
+      const entry: SubEntry = { destination, handler, sub: null };
+      const c = clientRef.current;
+
+      if (c && c.connected) {
+        const sub = c.subscribe(destination, (message: IMessage) => {
+          let payload: any = message.body;
+          try { payload = JSON.parse(message.body); } catch {}
+          handler(payload, message);
+        });
+        entry.sub = sub ?? null;
+      }
+
+      subsRef.current.push(entry);
+
+      // Return unsubscribe for this single subscription
+      return () => {
+        entry.sub?.unsubscribe();
+        subsRef.current = subsRef.current.filter((e) => e !== entry);
+      };
+    },
+    []
+  );
 
   const unsubscribeAll = useCallback((destination: string) => {
-    const list = subsRef.current.get(destination);
-    if (!list) return;
-    list.forEach((s) => s.unsubscribe());
-    subsRef.current.delete(destination);
+    subsRef.current
+      .filter((e) => e.destination === destination)
+      .forEach((e) => e.sub?.unsubscribe());
+    subsRef.current = subsRef.current.filter((e) => e.destination !== destination);
   }, []);
 
   return {
-    // reactive state
     isConnected,
-    client,                  // <-- now reactive
-    // controls
+    client,
     connect,
     disconnect,
-    // subs
     subscribe,
     unsubscribeAll,
   };

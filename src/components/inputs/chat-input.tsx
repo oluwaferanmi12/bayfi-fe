@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { useSaveImage } from "@/hooks/query";
+import { ChatSelecteFiles } from "../bottom-drawers/chat/select-file-drawer";
 
 export const ChatInput = ({
   bgWhite,
@@ -14,6 +15,7 @@ export const ChatInput = ({
   handleMessage: (val: string, imageUrl?: string) => void;
 }) => {
   const [message, setMessage] = useState("");
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [focused, setFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -48,67 +50,79 @@ export const ChatInput = ({
   };
 
   return (
-    <div className="fixed  left-0 bottom-0 lg:px-0 px-2 py-4 z-20 lg:-bottom-8 w-full">
-      <div className="absolute -top-1 bg-white">
-        <p className="text-xs font-grotesk-medium">{imageDetails?.name}</p>
-      </div>
-      <div className="relative">
-        <button
-          disabled={uploadImageLoading}
-          type="button"
-          onMouseDown={(e) => e.preventDefault()}
-          onClick={onSend}
-          className={`absolute ${uploadImageLoading && "opacity-30"} right-4 z-10 cursor-pointer transition-all ${
-            expanded ? "top-3 translate-y-0" : "top-1/2 -translate-y-1/2"
-          }`}
-          aria-label="Send message"
-        >
-          <Image src={sendIcon} alt="" />
-        </button>
+    <>
+      <ChatSelecteFiles
+        open={openDrawer}
+        handleClose={() => {
+          setOpenDrawer(false);
+        }}
+      />
+      <div className="fixed  left-0 bottom-0 lg:px-0 px-2 py-4 z-20 lg:-bottom-8 w-full">
+        <div className="absolute -top-1 bg-white">
+          <p className="text-xs font-grotesk-medium">{imageDetails?.name}</p>
+        </div>
+        <div className="relative">
+          <button
+            disabled={uploadImageLoading}
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={onSend}
+            className={`absolute ${uploadImageLoading && "opacity-30"} right-4 z-10 cursor-pointer transition-all ${
+              expanded ? "top-3 translate-y-0" : "top-1/2 -translate-y-1/2"
+            }`}
+            aria-label="Send message"
+          >
+            <Image src={sendIcon} alt="" />
+          </button>
 
-        <button
-          type="button"
-          onMouseDown={(e) => e.preventDefault()}
-          className={`absolute left-4 z-10 cursor-pointer transition-all ${
-            expanded ? "top-3 translate-y-0" : "top-1/2 -translate-y-1/2"
-          }`}
-          aria-label="Attach file"
-        >
-          <input
-            onChange={(e) => {
-              getImageUrl(e.target.files?.[0]);
+          <button
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            className={`absolute left-4 z-10 cursor-pointer transition-all ${
+              expanded ? "top-3 translate-y-0" : "top-1/2 -translate-y-1/2"
+            }`}
+            aria-label="Attach file"
+            onClick={() => {
+              setOpenDrawer(true);
             }}
-            accept="image/*"
-            type="file"
-            className="absolute w-6 opacity-0 -left-2"
-          />
-          <Image src={fileUploadIcon} alt="" />
-        </button>
+          >
+            {/* <input
+              onChange={(e) => {
+                getImageUrl(e.target.files?.[0]);
+              }}
+              accept="image/*"
+              type="file"
+              className="absolute w-6 opacity-0 -left-2"
+            /> */}
 
-        <motion.textarea
-          ref={textareaRef}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          initial={false}
-          animate={{
-            height: expanded ? 120 : 48,
-            borderRadius: expanded ? 12 : 9999, // pill → rounded
-          }}
-          transition={{
-            height: { duration: 0.25, ease: "easeInOut" },
-            borderRadius: { duration: 0.2, ease: "easeInOut" },
-          }}
-          className={`w-full resize-none pr-12 pl-12 ${
-            bgWhite ? "bg-white" : "bg-bayfi-grey-300"
-          } py-3 outline-none`}
-          placeholder="Type a message..."
-          style={{
-            boxShadow: expanded ? "0 4px 12px rgba(0,0,0,0.06)" : "none",
-          }}
-        />
+            <Image src={fileUploadIcon} alt="" />
+          </button>
+
+          <motion.textarea
+            ref={textareaRef}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            initial={false}
+            animate={{
+              height: expanded ? 120 : 48,
+              borderRadius: expanded ? 12 : 9999, // pill → rounded
+            }}
+            transition={{
+              height: { duration: 0.25, ease: "easeInOut" },
+              borderRadius: { duration: 0.2, ease: "easeInOut" },
+            }}
+            className={`w-full resize-none pr-12 pl-12 ${
+              bgWhite ? "bg-white" : "bg-bayfi-grey-300"
+            } py-3 outline-none`}
+            placeholder="Type a message..."
+            style={{
+              boxShadow: expanded ? "0 4px 12px rgba(0,0,0,0.06)" : "none",
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
