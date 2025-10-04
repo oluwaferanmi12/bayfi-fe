@@ -24,7 +24,7 @@ export const MessageWrapper = ({
     firstPaint.current = false;
   }, [messages.length]);
   return (
-    <div>
+    <div >
       {messageLoading ? (
         <p>Loading</p>
       ) : (
@@ -51,7 +51,7 @@ export const MessageWrapper = ({
               </>
             );
           })}
-          <div ref={bottomRef} />
+          <div className="mt-20" ref={bottomRef} />
         </div>
       )}
     </div>

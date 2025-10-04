@@ -23,3 +23,10 @@ export const userChats = async (): Promise<ChatTransaction[]> => {
   );
   return data.data.contents;
 };
+
+export const getChatDetail = async (
+  chatId: string
+): Promise<MessagePayload> => {
+  const { data } = await axiosInstance.get(`/giftcards/chats/${chatId}`);
+  return data.data;
+};
