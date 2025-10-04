@@ -20,8 +20,6 @@ export const ChatContainer = ({
   const { client, isConnected, subscribe } = useStompClient();
   const [initMessage, setInitMessage] = useState<any>();
   const [messages, setMesssages] = useState<Message[]>([]);
-  //refs
-  const scrollAreaRef = useRef<HTMLDivElement | null>(null);
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
   const handleMessage = (m: Message) => {
@@ -42,7 +40,6 @@ export const ChatContainer = ({
       imageUrls: imageUrl ? [imageUrl] : [],
       chatId: initMessage.chatTransactionId,
     };
-    console.log(payload, "Payload value here");
     client?.publish({
       destination: "/app/chat.sendMessage",
       body: JSON.stringify(payload),
@@ -99,10 +96,10 @@ export const ChatContainer = ({
                     </div>
                   </>
                 )}
-                <div ref={bottomRef} />
               </>
             );
           })}
+          <div ref={bottomRef} />
         </div>
       )}
       <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />

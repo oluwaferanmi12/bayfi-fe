@@ -3,7 +3,6 @@
 import { Button } from "@/components/buttons";
 import { GInput } from "@/components/inputs/GInput";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
-import { MobileContactWrapper } from "@/components/mobile-components/wrappers/mobile-contact-wrapper";
 import React from "react";
 
 function Betting() {

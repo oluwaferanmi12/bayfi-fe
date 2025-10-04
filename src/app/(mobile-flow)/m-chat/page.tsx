@@ -7,10 +7,12 @@ import messageIcon from "@/assets/svg/chat-dark-icon.svg";
 import { useState } from "react";
 import Image from "next/image";
 import { useGetActivChat } from "@/hooks/query";
+import { useRouter } from "next/navigation";
 
 export default function MobileChatList() {
   const [activeTab, setActiveTab] = useState<"chat" | "support">("chat");
   const { data, isPending } = useGetActivChat();
+  const router = useRouter();
   return (
     <>
       <MobileNav />
@@ -18,7 +20,7 @@ export default function MobileChatList() {
         header="Chat & Support"
         subText="Giftcard chats & Supports"
       />
-      <div className="mt-20">
+      <div className="mt-20 pb-20">
         <div className="w-full flex items-center mb-4">
           <div
             onClick={() => {
@@ -38,13 +40,20 @@ export default function MobileChatList() {
             {activeTab === "support" && <Image src={messageIcon} alt="" />}
             <p className="text-lg font-grotesk-medium">Support</p>
           </div>
-        </div>
+      </div>
         {isPending ? (
           "loading..."
         ) : data?.length ? (
           <>
             {data.map((item) => (
-              <MobileChatListCard chat={item} key={item.id} />
+              <span
+                onClick={() => {
+                  router.push(`/m-chat/chat?id=${item.id}`);
+                }}
+                key={item.id}
+              >
+                <MobileChatListCard chat={item} key={item.id} />
+              </span>
             ))}
           </>
         ) : (
