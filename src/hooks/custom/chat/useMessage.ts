@@ -10,7 +10,8 @@ export const useChatMessage = (chatId: string) => {
     autoConnect: connectToChat,
   });
   const { data, isPending: messageLoading } = useGetOneChat(chatId!);
-  const { data: chatDetail } = useGetChatDetail(chatId);
+  const { data: chatDetail, isPending: chatDetailLoading } =
+    useGetChatDetail(chatId);
   const handleSendMessage = (message: string, imageUrl?: string) => {
     const payload = {
       message: message,
@@ -42,5 +43,11 @@ export const useChatMessage = (chatId: string) => {
     if (!isConnected || !client?.connected) return;
     subscribe(`/user/giftcard/messages`, handleMessage);
   }, [isConnected, client, subscribe]);
-  return { messages, messageLoading, handleSendMessage };
+  return {
+    messages,
+    messageLoading,
+    handleSendMessage,
+    chatDetail,
+    chatDetailLoading,
+  };
 };
