@@ -16,13 +16,16 @@ export interface MessagePayload {
   chatTransactionId: number;
   createdAt: string;
   chatDuration: number;
-  chatExpiryDate: number;
+  chatExpiryDate: string;
   isExpired: boolean;
   temporaryLockTime: number;
   senderId: string;
   isLocked: boolean;
+  chatType: string;
+  isProcessed: boolean;
+  isLogged: boolean;
   unreadForAdmin: number;
-  messages: Message[];
+  status: string;
 }
 
 export interface ChatTransaction {

@@ -21,7 +21,6 @@ import mobileIcon from "@/assets/svg/mobileIcon.svg";
 import { useRegister } from "@/hooks/query/useAuth";
 import { toast } from "sonner";
 
-
 const Register = () => {
   const router = useRouter();
   const [firstname, setFirstname] = useState("");
@@ -31,27 +30,20 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-
   const payloadObj = {
     firstname,
     lastname,
     email,
     phoneNumber,
     username,
-    password
-  }
+    password,
+  };
 
   const registerMutate = useRegister((data) => {
-    toast.success("Successfuly Registered")
-    localStorage.setItem("userEmail", email)
-    router.push("/otp")
+    toast.success("Successfuly Registered");
+    localStorage.setItem("userEmail", email);
+    router.push("/otp");
   });
-
-
-
-
-
-
 
   return (
     <Row className="h-full">
@@ -70,36 +62,6 @@ const Register = () => {
                     value="Login to continue your journey"
                   />
                 </div>
-              </div>
-
-              <div className="flex-between my-4">
-                <Image className="cursor-pointer" src={googleIcon} alt="" />
-                <Image className="cursor-pointer" src={facebookIcon} alt="" />
-                <Image className="cursor-pointer" src={appleIcon} alt="" />
-              </div>
-
-              <div className="w-[70%] flex-between mx-auto my-4">
-                <span className="w-full">
-                  <hr
-                    style={{
-                      height: "1px" /* Adjust thickness */,
-                      backgroundColor: "#DCDCDC" /* Sets the color */,
-                      border: "none",
-                    }}
-                  />
-                </span>
-                <span className="px-8">
-                  <Text value="OR" type="body-medium" />
-                </span>
-                <span className="w-full">
-                  <hr
-                    style={{
-                      height: "1px" /* Adjust thickness */,
-                      backgroundColor: "#DCDCDC" /* Sets the color */,
-                      border: "none",
-                    }}
-                  />
-                </span>
               </div>
 
               <div className="mt-6">
@@ -159,7 +121,7 @@ const Register = () => {
               <div className="mt-4">
                 <Button
                   action={() => {
-                    registerMutate.mutate(payloadObj)
+                    registerMutate.mutate(payloadObj);
                   }}
                   type="bgGreen"
                   text="Register"

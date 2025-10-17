@@ -23,17 +23,17 @@ export const ChatContainer = ({
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
   const handleMessage = (m: Message) => {
+    console.log(m, "Message result heree");
     if (m.amount && m.countryName && m.giftCardName) {
       setInitMessage(m);
     }
     setMesssages((prev) => [...prev, m]);
   };
-
   const { data: chatResponses, isPending: messsageLoading } = useGetOneChat(
     initMessage?.chatTransactionId
   );
 
-  const handleSendMessage = (message: string, imageUrl?: string) => {
+  const handleSendMessage = (message: string, imageUrl?: string[]) => {
     const payload = {
       message: message,
       chatMessageInitiator: "USER",

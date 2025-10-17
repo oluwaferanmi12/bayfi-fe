@@ -26,6 +26,7 @@ function MChatDetails() {
           messages={messages}
           messageLoading={messageLoading}
           bgWhite
+          chatDetail={chatDetail}
         />
 
         {!chatDetailLoading &&

@@ -1,17 +1,20 @@
-import { Message } from "@/types";
+import { Message, MessagePayload } from "@/types";
 import { UserChatHeader } from "./user/user-chat-header";
 import { UserResponseContainer } from "./user/user-response-container";
 import { SupportChatContainer } from "./support/support-chat-container";
 import { useEffect, useRef } from "react";
+import { ChatStatus } from "./status/chat-status";
 
 export const MessageWrapper = ({
   messages,
   messageLoading,
   bgWhite,
+  chatDetail,
 }: {
   messages: Message[];
   messageLoading: boolean;
   bgWhite: boolean;
+  chatDetail?: MessagePayload;
 }) => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
@@ -24,7 +27,7 @@ export const MessageWrapper = ({
     firstPaint.current = false;
   }, [messages.length]);
   return (
-    <div >
+    <div>
       {messageLoading ? (
         <p>Loading</p>
       ) : (
@@ -51,6 +54,17 @@ export const MessageWrapper = ({
               </>
             );
           })}
+          <ChatStatus
+            status={
+              chatDetail?.isExpired
+                ? "Expired"
+                : chatDetail?.isProcessed
+                  ? "Completed"
+                  : chatDetail?.isLocked
+                    ? "Locked"
+                    : null
+            }
+          />
           <div className="mt-20" ref={bottomRef} />
         </div>
       )}

@@ -24,14 +24,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const loginMutate = useLogin( (data) => {
-    Cookies.set("loginDetails", JSON.stringify(data))
+  const loginMutate = useLogin((data) => {
+    Cookies.set("loginDetails", JSON.stringify(data));
     toast.success("Login Successful");
     router.push("/dashboard");
-  })
-
-
-
+  });
 
   return (
     <Row className="h-full">
@@ -75,7 +72,7 @@ const Login = () => {
               <div className="mt-4">
                 <Button
                   action={() => {
-                    loginMutate.mutate({email, password})
+                    loginMutate.mutate({ email, password });
                   }}
                   type="bgGreen"
                   text="Login"
@@ -105,11 +102,6 @@ const Login = () => {
                     }}
                   />
                 </span>
-              </div>
-              <div className="flex-between my-4">
-                <Image  className="cursor-pointer border" src={googleIcon} alt="" />
-                <Image className="cursor-pointer" src={facebookIcon} alt="" />
-                <Image className="cursor-pointer" src={appleIcon} alt="" />
               </div>
               <div className="flex-center gap-1">
                 <Text value="Don't have an account?" type={"text-plain-18"} />

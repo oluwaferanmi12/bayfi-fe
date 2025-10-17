@@ -13,6 +13,7 @@ export const BottomDrawer = ({
   height,
   hideHeader,
   showNudge,
+  footer
 }: {
   onClose: () => void;
   open: boolean;
@@ -21,6 +22,7 @@ export const BottomDrawer = ({
   height?: "short" | "medium" | "full";
   hideHeader?: boolean;
   showNudge?: boolean;
+  footer?: ReactNode;
 }) => {
   return (
     <Drawer
@@ -28,16 +30,17 @@ export const BottomDrawer = ({
       width={500}
       closeIcon={false}
       onClose={onClose}
+      footer={footer}
       open={open}
       placement="bottom"
       height={
         height === "short"
-          ? "50%"
+          ? "50vh"
           : height === "medium"
-            ? "70%"
+            ? "70vh"
             : height === "full"
-              ? "100%"
-              : "50%"
+              ? "100vh"
+              : "50vh"
       }
     >
       {showNudge && (

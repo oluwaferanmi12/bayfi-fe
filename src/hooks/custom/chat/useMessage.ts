@@ -34,7 +34,8 @@ export const useChatMessage = (chatId: string) => {
   }, [data]);
 
   useEffect(() => {
-    if (!chatDetail?.isExpired) {
+    console.log(chatDetail, "Chat details here");
+    if (chatDetail && !chatDetail?.isExpired) {
       setConnectToChat(true);
     }
   }, [chatDetail]);
