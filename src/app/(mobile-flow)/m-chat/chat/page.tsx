@@ -20,7 +20,7 @@ function MChatDetails() {
   } = useChatMessage(chatId);
   return (
     <div className="h-full">
-      <PageTitle fixed title="Apple Giftcard Chat" />
+      <PageTitle fixed title={`Giftcard Chat`} />
       <div>
         <MessageWrapper
           messages={messages}
