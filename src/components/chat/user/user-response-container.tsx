@@ -16,7 +16,13 @@ export const UserResponseContainer = ({
   const [showPreview, setShowPreview] = useState(false);
   return (
     <>
-      <ImagePreviewWrapper show={showPreview} setShow={setShowPreview}>
+      <ImagePreviewWrapper
+        cleanUpFunc={() => {}}
+        show={showPreview}
+        setShow={() => {
+          setShowPreview(false);
+        }}
+      >
         <div className="relative w-[500px] aspect-square">
           <Image src={message.imageUrls[0]} alt="" fill />
         </div>

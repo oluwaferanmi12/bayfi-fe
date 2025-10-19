@@ -23,7 +23,6 @@ export const ChatContainer = ({
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
   const handleMessage = (m: Message) => {
-    console.log(m, "Message result heree");
     if (m.amount && m.countryName && m.giftCardName) {
       setInitMessage(m);
     }

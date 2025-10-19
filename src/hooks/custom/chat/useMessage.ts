@@ -12,11 +12,11 @@ export const useChatMessage = (chatId: string) => {
   const { data, isPending: messageLoading } = useGetOneChat(chatId!);
   const { data: chatDetail, isPending: chatDetailLoading } =
     useGetChatDetail(chatId);
-  const handleSendMessage = (message: string, imageUrl?: string) => {
+  const handleSendMessage = (message: string, imageUrls?: string[]) => {
     const payload = {
       message: message,
       chatMessageInitiator: "USER",
-      imageUrls: imageUrl ? [imageUrl] : [],
+      imageUrls: imageUrls && imageUrls.length ? imageUrls : [],
       chatId: chatId,
     };
     client?.publish({
@@ -34,7 +34,6 @@ export const useChatMessage = (chatId: string) => {
   }, [data]);
 
   useEffect(() => {
-    console.log(chatDetail, "Chat details here");
     if (chatDetail && !chatDetail?.isExpired) {
       setConnectToChat(true);
     }

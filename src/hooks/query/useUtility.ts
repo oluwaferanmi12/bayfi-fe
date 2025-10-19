@@ -1,4 +1,4 @@
-import { getCountries, saveImage } from "@/services";
+import { getCountries, removeImage, saveImage } from "@/services";
 import { ImageFolderType } from "@/types/utility.types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -13,6 +13,23 @@ export const useSaveImage = (sc: (val: any) => void) => {
     },
     onSuccess: (data) => {
       sc(data);
+    },
+  });
+};
+
+export const useDeleteImage = (
+  sc: (val: any) => void,
+  err: (val: any) => void
+) => {
+  return useMutation({
+    mutationFn: (imageUrl: string) => {
+      return removeImage(imageUrl);
+    },
+    onSuccess: (data) => {
+      sc(data);
+    },
+    onError: (data) => {
+      err(data);
     },
   });
 };
