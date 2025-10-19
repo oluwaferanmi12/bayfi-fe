@@ -1,23 +1,20 @@
 import { ReactNode, useEffect } from "react";
 
 export const ImagePreviewWrapper = ({
-  children,
   setShow,
   show,
-  cleanUpFunc,
+  imageUrl,
 }: {
-  children: ReactNode;
   setShow: () => void;
   show: boolean;
-  cleanUpFunc: () => void;
+  imageUrl?: string;
 }) => {
-  
   return (
     <>
       {show && (
         <section
           onClick={() => {
-            setShow()
+            setShow();
           }}
           className="h-screen bg-black/50 z-50 flex items-center justify-center w-screen fixed top-0 right-0 left-0 bottom-0"
         >
@@ -27,7 +24,13 @@ export const ImagePreviewWrapper = ({
             }}
             className="w-full"
           >
-            {children}
+            <div className="w-[90%] min-w-[90%] h-[200px] mx-auto ">
+              <img
+                src={imageUrl}
+                alt=""
+                className="object-cover h-full w-full rounded-lg min-w-full "
+              />
+            </div>
           </div>
         </section>
       )}

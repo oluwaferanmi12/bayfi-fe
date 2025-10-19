@@ -44,23 +44,13 @@ export const ChatSelecteFiles = ({
   return (
     <>
       <ImagePreviewWrapper
-        cleanUpFunc={() => {
-          setSelectedIndex(-1);
-        }}
         show={showActiveImage}
         setShow={() => {
           setShowActiveImage(false);
           setSelectedIndex(-1);
         }}
-      >
-        <div className="w-[90%] min-w-[90%] h-[200px] mx-auto ">
-          <img
-            src={previewUrls[selectedIndex]}
-            alt=""
-            className="object-cover h-full w-full rounded-lg min-w-full "
-          />
-        </div>
-      </ImagePreviewWrapper>
+        imageUrl={previewUrls[selectedIndex]}
+      />
       <CustomBottomDrawer
         open={open}
         onClose={() => {
