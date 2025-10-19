@@ -160,7 +160,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
           </div>
 
           <div
-            className={`absolute  w-[30px] h-[30px] ${convertedImageUrls.length ? "left-10" : "left-4"} z-10 cursor-pointer transition-all ${
+            className={`absolute  w-[30px] h-[30px] ${convertedImageUrls.length ? "left-10" : "left-1"} z-10 cursor-pointer transition-all ${
               expanded ? "top-3 translate-y-0" : "top-1/2 -translate-y-1/2"
             }`}
           >
@@ -206,7 +206,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
               height: { duration: 0.25, ease: "easeInOut" },
               borderRadius: { duration: 0.2, ease: "easeInOut" },
             }}
-            className={`w-full resize-none pr-12 ${convertedImageUrls.length ? "pl-18" : "pl-12"} ${
+            className={`w-full resize-none pr-12 ${convertedImageUrls.length ? "pl-18" : "pl-10"} ${
               bgWhite ? "bg-white" : "bg-bayfi-grey-300"
             } py-3 outline-none`}
             placeholder="Type a message..."

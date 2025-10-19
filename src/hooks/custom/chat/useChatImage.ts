@@ -108,7 +108,7 @@ export const useImageUtils = () => {
         //   .filter((r): r is PromiseFulfilledResult<string> => r.status === "fulfilled")
         //   .map((r) => r.value);
 
-        setConvertedImageUrls(urls);
+        setConvertedImageUrls((prev) => [...prev, ...urls]);
         // Now that ALL are done, do any per-batch UI (e.g., close the drawer)
         setOpenDrawer(false);
         return urls;
