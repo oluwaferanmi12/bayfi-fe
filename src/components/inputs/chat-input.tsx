@@ -88,7 +88,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
         setImageUrl={setConvertedImageUrls}
       />
 
-      <div className="fixed lg:static left-0 bottom-0 lg:px-0 px-2  z-50 w-full">
+      <div className="lg:static fixed left-0 bottom-0 lg:px-0 px-2  z-10 w-full">
         {topLabel && (
           <div className="absolute -top-1 bg-white">
             <p className="text-xs font-grotesk-medium">{topLabel}</p>

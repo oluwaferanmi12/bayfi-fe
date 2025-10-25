@@ -87,7 +87,7 @@ export const CustomBottomDrawer = ({
           aria-modal="true"
           role="dialog"
           aria-label="Bottom Drawer"
-          className={`${isInline ? `absolute ${stickMoreToBottom && "-bottom-6"}` : "fixed"} inset-0 z-30`}
+          className={`${isInline ? `absolute ${stickMoreToBottom && "-bottom-6"}` : "fixed"} inset-0 z-50`}
         >
           {/* Backdrop: fills parent if inline; viewport if body */}
           <motion.div
