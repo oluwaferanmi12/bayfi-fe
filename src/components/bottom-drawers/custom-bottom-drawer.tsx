@@ -15,6 +15,7 @@ export type BottomDrawerProps = {
    * - HTMLElement: portal to a specific container
    */
   portalTarget?: "body" | "inline" | HTMLElement | null;
+  stickMoreToBottom?: boolean;
 };
 
 const heightMap: Record<NonNullable<BottomDrawerProps["height"]>, string> = {
@@ -30,6 +31,7 @@ export const CustomBottomDrawer = ({
   children,
   className = "",
   portalTarget = "body",
+  stickMoreToBottom,
 }: BottomDrawerProps) => {
   const sheetRef = useRef<HTMLDivElement | null>(null);
   const mountedRef = useRef(false);
@@ -67,13 +69,16 @@ export const CustomBottomDrawer = ({
   };
 
   const isInline = portalTarget === "inline";
-  const isBody = portalTarget === "body" || portalTarget === null || portalTarget === undefined;
+  const isBody =
+    portalTarget === "body" ||
+    portalTarget === null ||
+    portalTarget === undefined;
   const targetEl =
     typeof portalTarget === "object" && portalTarget instanceof HTMLElement
       ? portalTarget
       : isBody
-      ? bodyEl
-      : null;
+        ? bodyEl
+        : null;
 
   const Wrapper = (
     <AnimatePresence>
@@ -82,7 +87,7 @@ export const CustomBottomDrawer = ({
           aria-modal="true"
           role="dialog"
           aria-label="Bottom Drawer"
-          className={`${isInline ? "absolute" : "fixed"} inset-0 z-30`}
+          className={`${isInline ? `absolute ${stickMoreToBottom && "-bottom-6"}` : "fixed"} inset-0 z-30`}
         >
           {/* Backdrop: fills parent if inline; viewport if body */}
           <motion.div

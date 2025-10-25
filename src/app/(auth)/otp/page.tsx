@@ -11,22 +11,28 @@ import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
 import { useOtp, useResendOtp } from "@/hooks/query";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Otp = () => {
-  const [otp, setOtp] = useState('');
-  const otpMedium = localStorage.getItem("userEmail") ?? ""
-  const email = localStorage.getItem("userEmail") ?? ""
+  const [otp, setOtp] = useState("");
+  const [otpMedium, setOtpMedium] = useState("");
+  const [email, setEmail] = useState("");
+  // const otpMedium = localStorage.getItem("userEmail") ?? "";
+  // const email = localStorage.getItem("userEmail") ?? "";
   const router = useRouter();
 
   const verifyOtpMutate = useOtp((data) => {
-    toast.success("Verification Successful")
-    router.push("/login")
-  })
+    toast.success("Verification Successful");
+    router.push("/login");
+  });
 
   const resendOtpMutate = useResendOtp((data) => {
-    toast.success("An Otp has been sent to your registered email")
-  })
+    toast.success("An Otp has been sent to your registered email");
+  });
+  useEffect(() => {
+    setOtpMedium(localStorage.getItem("userEmail") ?? "");
+    setEmail(localStorage.getItem("userEmail") ?? "");
+  }, []);
 
   return (
     <Row className="h-full">
@@ -41,10 +47,7 @@ const Otp = () => {
                 <div>
                   <Image src={likeIcon} alt="" />
                 </div>
-                <Text
-                  value="Account registered Successfuly"
-                  type="header-32"
-                />
+                <Text value="Account registered Successfuly" type="header-32" />
                 <div className="mt-2">
                   <Text
                     type="header-subtext"
@@ -62,20 +65,19 @@ const Otp = () => {
                   fullWidth
                   loading={verifyOtpMutate.isPending}
                   action={() => {
-                    verifyOtpMutate.mutate({otp, otpMedium})
-                    
+                    verifyOtpMutate.mutate({ otp, otpMedium });
                   }}
                 />
               </div>
               <div className="flex justify-center">
-                <Button 
-                type="bgPlain" 
-                text="Resend code" 
-                loading={resendOtpMutate.isPending}
-                action = { () => {
-                  resendOtpMutate.mutate({email})
-                } }
-                 />
+                <Button
+                  type="bgPlain"
+                  text="Resend code"
+                  loading={resendOtpMutate.isPending}
+                  action={() => {
+                    resendOtpMutate.mutate({ email });
+                  }}
+                />
               </div>
             </div>
           </Col>

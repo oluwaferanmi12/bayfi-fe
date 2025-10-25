@@ -6,6 +6,7 @@ import { Col, Row } from "antd";
 import Image from "next/image";
 import binIcon from "@/assets/svg/bin-icon.svg";
 import { useDeleteImage } from "@/hooks/query";
+import { Button } from "@/components/buttons";
 
 export const UploadedFilesDrawer = ({
   open,
@@ -57,6 +58,7 @@ export const UploadedFilesDrawer = ({
           handleClose();
         }}
         portalTarget={"inline"}
+        stickMoreToBottom
       >
         <div className="flex flex-col h-full min-h-full w-full">
           <div className="flex-1 min-h-0 overflow-y-auto p-2  mt-3">
@@ -104,6 +106,17 @@ export const UploadedFilesDrawer = ({
                 </Row>
               </motion.div>
             </AnimatePresence>
+          </div>
+          <div className="sticky bottom-0 left-0 right-0 p-2  bg-white">
+            <Button
+              action={() => {
+                handleClose();
+              }}
+              loading={false}
+              fullWidth
+              text="Close"
+              type="bgGreen"
+            />
           </div>
         </div>
       </CustomBottomDrawer>

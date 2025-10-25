@@ -69,7 +69,6 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
   return (
     <>
       <ChatSelecteFiles
-        setConvertedImageUrls={setConvertedImageUrls}
         previewUrls={previewUrls}
         open={openDrawer}
         handleClose={() => setOpenDrawer(false)}
@@ -89,7 +88,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
         setImageUrl={setConvertedImageUrls}
       />
 
-      <div className="lg:absolute fixed  left-0 bottom-0 lg:px-0 px-2 py-4 z-20 lg:-bottom-8 w-full">
+      <div className="fixed lg:static left-0 bottom-0 lg:px-0 px-2  z-50 w-full">
         {topLabel && (
           <div className="absolute -top-1 bg-white">
             <p className="text-xs font-grotesk-medium">{topLabel}</p>
@@ -146,7 +145,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
                       />
                     );
                   })}
-                  <div className="absolute z-40 top-1 ">
+                  <div className="absolute z-20 top-1 ">
                     <p
                       style={{ backgroundColor: "rgba(102, 102, 102, 0.5)" }}
                       className="text-white bg-bayfi-black-300 rounded-full w-4 aspect-square text-xs flex items-center justify-center"

@@ -1,7 +1,4 @@
-import { SupportChatContainer } from "@/components/chat/support/support-chat-container";
 import { SupportHeaderType } from "@/components/chat/support/support-header-type";
-import { UserChatHeader } from "@/components/chat/user/user-chat-header";
-import { UserResponseContainer } from "@/components/chat/user/user-response-container";
 import { ChatInput } from "@/components/inputs/chat-input";
 import { useChatMessage } from "@/hooks/custom/chat/useMessage";
 import { InitiateCardTxn, Message } from "@/types";
@@ -20,21 +17,13 @@ export const ChatContainer = ({
   const [initMessage, setInitMessage] = useState<any>();
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
-  const {
-    handleSendMessage,
-    messages,
-    messageLoading,
-    chatDetail,
-    chatDetailLoading,
-  } = useChatMessage(initMessage?.chatTransactionId, initTxn, true);
 
-  console.log(messages);
+  const { handleSendMessage, messages, messageLoading, chatDetail } =
+    useChatMessage(initMessage?.chatTransactionId, initTxn, true);
 
   useEffect(() => {
-    if (!initMessage && messages && messages.length) {
-      setInitMessage(messages[0]);
-    }
-  }, [messages]);
+    if (!initMessage && messages?.length) setInitMessage(messages[0]);
+  }, [messages, initMessage]);
 
   useEffect(() => {
     if (!bottomRef.current) return;
@@ -44,26 +33,35 @@ export const ChatContainer = ({
     });
     firstPaint.current = false;
   }, [messages.length]);
+
   return (
     <div
-      className={`overflow-y-scroll ${chatType && "bg-white p-4 rounded-lg"}  hide-scrollbar h-[85vh] relative `}
+      // Fills parent; becomes a column; only middle area scrolls
+      className={`h-[85vh] flex flex-col ${chatType ? "bg-white p-4 rounded-lg" : ""}`}
     >
       {chatType === "support" && <SupportHeaderType />}
-      {messageLoading ? (
-        <p>Loading</p>
-      ) : (
-        <div>
-          <MessageWrapper
-            bgWhite
-            messages={messages}
-            messageLoading={messageLoading}
-            chatDetail={chatDetail}
-          />
 
-          <div ref={bottomRef} />
-        </div>
-      )}
-      <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
+      {/* scrollable messages */}
+      <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar">
+        {messageLoading ? (
+          <p>Loading</p>
+        ) : (
+          <>
+            <MessageWrapper
+              bgWhite
+              messages={messages}
+              messageLoading={messageLoading}
+              chatDetail={chatDetail}
+            />
+            <div ref={bottomRef} />
+          </>
+        )}
+      </div>
+
+      {/* footer input (no fixed/absolute) */}
+      <div className="shrink-0">
+        <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
+      </div>
     </div>
   );
 };

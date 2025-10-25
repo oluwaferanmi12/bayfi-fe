@@ -19,7 +19,6 @@ export const ChatSelecteFiles = ({
   uploadLoading,
   uploadImage,
   convertedImageUrls,
-  setConvertedImageUrls,
 }: {
   open: boolean;
   handleClose: () => void;
@@ -29,7 +28,6 @@ export const ChatSelecteFiles = ({
   uploadLoading: boolean;
   uploadImage: () => Promise<string[]>;
   convertedImageUrls: string[];
-  setConvertedImageUrls: Dispatch<SetStateAction<string[]>>;
 }) => {
   const [showImages, setShowImages] = useState(true);
   const [showActiveImage, setShowActiveImage] = useState(false);
@@ -58,10 +56,11 @@ export const ChatSelecteFiles = ({
         }}
         height={showImages ? "medium" : "small"}
         portalTarget={"inline"}
+        stickMoreToBottom
       >
         <div className="flex flex-col h-full min-h-full w-full">
-          <div className="pt-4">
-            <div className="bg-[#F3F3FA] flex items-center w-full p-4 rounded-xl justify-between">
+          <div className="pt-4 px-4">
+            <div className="bg-[#F3F3FA] flex  items-center w-full p-4 rounded-xl justify-between">
               <div className="flex items-center gap-2">
                 <Image src={uploadIcon} alt="" />
                 <p className="text-[#0F1121] text-base font-grotesk-medium">
@@ -79,7 +78,7 @@ export const ChatSelecteFiles = ({
             </div>
           </div>
           {previewUrls.length > 4 && (
-            <div>
+            <div className="px-4">
               <p className="font-grotesk-medium text-[#EF4444] text-sm">
                 Only a maximum of{" "}
                 {MAX_FILE_TO_UPLOAD - convertedImageUrls.length} image(s) can be
@@ -88,7 +87,7 @@ export const ChatSelecteFiles = ({
             </div>
           )}
 
-          <div className="flex-1 min-h-0 overflow-y-auto p-2  mt-3">
+          <div className="flex-1 min-h-0 overflow-y-auto p-4  mt-3">
             <AnimatePresence>
               {showImages && (
                 <motion.div
