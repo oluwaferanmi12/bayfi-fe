@@ -5,11 +5,11 @@ import { ChatInput } from "@/components/inputs/chat-input";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
 import { useChatMessage } from "@/hooks/custom/chat/useMessage";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function MChatDetails() {
-  const searchParams = useSearchParams();
-  const chatId = searchParams.get("id") ?? "";
+  const [chatId, setChatId] = useState("");
+
   const {
     messageLoading,
     messages,
@@ -17,6 +17,11 @@ function MChatDetails() {
     chatDetail,
     chatDetailLoading,
   } = useChatMessage(chatId);
+
+  useEffect(() => {
+    const getId = new URLSearchParams(window.location.search);
+    setChatId(getId.get("id") ?? "");
+  }, []);
   return (
     <div className="h-full">
       <PageTitle fixed title={`Giftcard Chat`} />
