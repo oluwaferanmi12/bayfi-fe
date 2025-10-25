@@ -26,6 +26,7 @@ export const UserResponseContainer = ({
       <ImagePreviewWrapper
         show={showPreview}
         setShow={() => {
+          setSelectedIndex(-1);
           setShowPreview(false);
         }}
         imageUrl={message.imageUrls[selectedIndex]}
