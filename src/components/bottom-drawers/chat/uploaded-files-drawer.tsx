@@ -56,6 +56,7 @@ export const UploadedFilesDrawer = ({
         onClose={() => {
           handleClose();
         }}
+        portalTarget={"inline"}
       >
         <div className="flex flex-col h-full min-h-full w-full">
           <div className="flex-1 min-h-0 overflow-y-auto p-2  mt-3">

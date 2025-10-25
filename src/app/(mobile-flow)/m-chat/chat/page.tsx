@@ -1,7 +1,6 @@
 "use client";
 
 import { MessageWrapper } from "@/components/chat/message-wrapper";
-import { ChatStatus } from "@/components/chat/status/chat-status";
 import { ChatInput } from "@/components/inputs/chat-input";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
 import { useChatMessage } from "@/hooks/custom/chat/useMessage";

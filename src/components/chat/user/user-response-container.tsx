@@ -44,7 +44,7 @@ export const UserResponseContainer = ({
                     onClick={() => {
                       setSelectedIndex(index);
                     }}
-                    className="relative cursor-pointer my-2 w-full h-[80px]"
+                    className="relative cursor-pointer my-2 w-full lg:h-[120px] h-[80px]"
                   >
                     <Image
                       alt=""

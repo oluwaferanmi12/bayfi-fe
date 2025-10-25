@@ -19,7 +19,6 @@ export function useStompClient(opts: UseStompClientOptions = {}) {
     debug = false,
   } = opts;
 
-
   const clientRef = useRef<Client | null>(null);
   const [client, setClient] = useState<Client | null>(null); // <-- reactive
   const [isConnected, setIsConnected] = useState(false);
@@ -28,7 +27,6 @@ export function useStompClient(opts: UseStompClientOptions = {}) {
 
   const connect = useCallback(() => {
     if (clientRef.current?.connected) return;
-
     const c = new Client({
       brokerURL: url,
       reconnectDelay: 3000,
@@ -60,7 +58,6 @@ export function useStompClient(opts: UseStompClientOptions = {}) {
   const disconnect = useCallback(async () => {
     subsRef.current.forEach((arr) => arr.forEach((s) => s.unsubscribe()));
     subsRef.current.clear();
-
     setIsConnected(false);
     setClient(null);
     await clientRef.current?.deactivate?.();
@@ -70,7 +67,9 @@ export function useStompClient(opts: UseStompClientOptions = {}) {
   useEffect(() => {
     if (!autoConnect) return;
     connect();
-    return () => void disconnect();
+    return () => {
+      disconnect();
+    };
   }, [autoConnect, connect, disconnect]);
 
   const subscribe = useCallback(

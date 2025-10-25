@@ -57,6 +57,7 @@ export const ChatSelecteFiles = ({
           handleClose();
         }}
         height={showImages ? "medium" : "small"}
+        portalTarget={"inline"}
       >
         <div className="flex flex-col h-full min-h-full w-full">
           <div className="pt-4">

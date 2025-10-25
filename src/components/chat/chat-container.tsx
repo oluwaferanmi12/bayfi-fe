@@ -3,10 +3,10 @@ import { SupportHeaderType } from "@/components/chat/support/support-header-type
 import { UserChatHeader } from "@/components/chat/user/user-chat-header";
 import { UserResponseContainer } from "@/components/chat/user/user-response-container";
 import { ChatInput } from "@/components/inputs/chat-input";
-import { useGetOneChat } from "@/hooks/query";
-import { useStompClient } from "@/hooks/stomp/useChatStomp";
+import { useChatMessage } from "@/hooks/custom/chat/useMessage";
 import { InitiateCardTxn, Message } from "@/types";
 import { useEffect, useRef, useState } from "react";
+import { MessageWrapper } from "./message-wrapper";
 
 export const ChatContainer = ({
   chatType,
@@ -17,47 +17,24 @@ export const ChatContainer = ({
   bgWhite?: boolean;
   initTxn?: InitiateCardTxn;
 }) => {
-  const { client, isConnected, subscribe } = useStompClient();
   const [initMessage, setInitMessage] = useState<any>();
-  const [messages, setMesssages] = useState<Message[]>([]);
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
-  const handleMessage = (m: Message) => {
-    if (m.amount && m.countryName && m.giftCardName) {
-      setInitMessage(m);
-    }
-    setMesssages((prev) => [...prev, m]);
-  };
-  const { data: chatResponses, isPending: messsageLoading } = useGetOneChat(
-    initMessage?.chatTransactionId
-  );
+  const {
+    handleSendMessage,
+    messages,
+    messageLoading,
+    chatDetail,
+    chatDetailLoading,
+  } = useChatMessage(initMessage?.chatTransactionId, initTxn, true);
 
-  const handleSendMessage = (message: string, imageUrl?: string[]) => {
-    const payload = {
-      message: message,
-      chatMessageInitiator: "USER",
-      imageUrls: imageUrl ? [imageUrl] : [],
-      chatId: initMessage.chatTransactionId,
-    };
-    client?.publish({
-      destination: "/app/chat.sendMessage",
-      body: JSON.stringify(payload),
-    });
-  };
-  useEffect(() => {
-    if (!isConnected || !client?.connected) return;
-    subscribe(`/user/giftcard/messages`, handleMessage);
-    client?.publish({
-      destination: "/app/chat.sendMessage",
-      body: JSON.stringify({ ...initTxn }),
-    });
-  }, [isConnected, client, subscribe]);
+  console.log(messages);
 
   useEffect(() => {
-    if (chatResponses?.length) {
-      setMesssages(chatResponses);
+    if (!initMessage && messages && messages.length) {
+      setInitMessage(messages[0]);
     }
-  }, [chatResponses]);
+  }, [messages]);
 
   useEffect(() => {
     if (!bottomRef.current) return;
@@ -69,35 +46,20 @@ export const ChatContainer = ({
   }, [messages.length]);
   return (
     <div
-      className={`overflow-y-scroll ${chatType && "bg-white p-4 rounded-lg"}  hide-scrollbar h-[85vh]  `}
+      className={`overflow-y-scroll ${chatType && "bg-white p-4 rounded-lg"}  hide-scrollbar h-[85vh] relative `}
     >
       {chatType === "support" && <SupportHeaderType />}
-      {messsageLoading ? (
+      {messageLoading ? (
         <p>Loading</p>
       ) : (
         <div>
-          {messages.map((item) => {
-            return (
-              <>
-                {item.amount && item.countryName && item.giftCardName ? (
-                  <UserChatHeader message={item} bgWhite={bgWhite} />
-                ) : (
-                  <>
-                    <div className="mt-4">
-                      {item.messageInitiator === "USER" ? (
-                        <UserResponseContainer
-                          message={item}
-                          bgWhite={bgWhite}
-                        />
-                      ) : (
-                        <SupportChatContainer message={item} />
-                      )}
-                    </div>
-                  </>
-                )}
-              </>
-            );
-          })}
+          <MessageWrapper
+            bgWhite
+            messages={messages}
+            messageLoading={messageLoading}
+            chatDetail={chatDetail}
+          />
+
           <div ref={bottomRef} />
         </div>
       )}
