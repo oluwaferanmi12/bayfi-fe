@@ -4,11 +4,16 @@ import { Message } from "@/types";
 import { messageDateFormatter } from "@/utils/formatter";
 import { Col, Row } from "antd";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const SupportChatContainer = ({ message }: { message: Message }) => {
   const [showPreview, setShowPreview] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  useEffect(() => {
+    if (selectedIndex >= 0) {
+      setShowPreview(true);
+    }
+  }, [selectedIndex]);
   return (
     <>
       <ImagePreviewWrapper
