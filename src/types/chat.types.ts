@@ -26,6 +26,7 @@ export interface MessagePayload {
   isLogged: boolean;
   unreadForAdmin: number;
   status: string;
+  lockedUntil: string;
 }
 
 export interface ChatTransaction {

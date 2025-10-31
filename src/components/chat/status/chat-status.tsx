@@ -1,9 +1,13 @@
+import { CountDown } from "@/components/timer/countdown";
+import { MessagePayload } from "@/types";
 import Link from "next/link";
 
 export const ChatStatus = ({
   status,
+  chatDetails,
 }: {
   status: "Locked" | "Completed" | "Expired" | null;
+  chatDetails?: MessagePayload;
 }) => {
   return (
     <div>
@@ -13,7 +17,9 @@ export const ChatStatus = ({
         >
           <p>
             Chat locked Admin will respond in{" "}
-            <span className="font-grotesk-bold">5:00 mins</span>{" "}
+            <span className="font-grotesk-bold">
+              <CountDown duration={chatDetails?.lockedUntil ?? ""} /> mins
+            </span>{" "}
           </p>
         </div>
       ) : status === "Completed" ? (

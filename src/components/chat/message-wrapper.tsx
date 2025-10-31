@@ -2,7 +2,7 @@ import { Message, MessagePayload } from "@/types";
 import { UserChatHeader } from "./user/user-chat-header";
 import { UserResponseContainer } from "./user/user-response-container";
 import { SupportChatContainer } from "./support/support-chat-container";
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { ChatStatus } from "./status/chat-status";
 
 export const MessageWrapper = ({
@@ -32,9 +32,9 @@ export const MessageWrapper = ({
         <p>Loading</p>
       ) : (
         <div>
-          {messages.map((item) => {
+          {messages.map((item, index) => {
             return (
-              <>
+              <Fragment key={index}>
                 {item.amount && item.countryName && item.giftCardName ? (
                   <UserChatHeader message={item} bgWhite={bgWhite} />
                 ) : (
@@ -51,7 +51,7 @@ export const MessageWrapper = ({
                     </div>
                   </>
                 )}
-              </>
+              </Fragment>
             );
           })}
           <ChatStatus
@@ -64,6 +64,7 @@ export const MessageWrapper = ({
                     ? "Locked"
                     : null
             }
+            chatDetails={chatDetail}
           />
           <div className="mt-20" ref={bottomRef} />
         </div>

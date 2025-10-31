@@ -1,6 +1,7 @@
 import { useGetChatDetail, useGetOneChat } from "@/hooks/query";
 import { useStompClient } from "@/hooks/stomp/useChatStomp";
 import { InitiateCardTxn, Message } from "@/types";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 export const useChatMessage = (
@@ -8,6 +9,7 @@ export const useChatMessage = (
   initTxn?: InitiateCardTxn,
   autoConnect?: boolean
 ) => {
+  const queryClient = useQueryClient();
   const [messages, setMessages] = useState<Message[]>([]);
   const [connectToChat, setConnectToChat] = useState(autoConnect);
   const { client, isConnected, subscribe } = useStompClient({
@@ -31,6 +33,10 @@ export const useChatMessage = (
   const handleMessage = (m: Message) => {
     setMessages((prev) => [...prev, m]);
   };
+
+  const handleLockTriggered = (res: any) => {
+    queryClient.invalidateQueries({ queryKey: ["one-chat-detail"] });
+  };
   useEffect(() => {
     if (data) {
       setMessages(data);
@@ -46,6 +52,7 @@ export const useChatMessage = (
   useEffect(() => {
     if (!isConnected || !client?.connected) return;
     subscribe(`/user/giftcard/messages`, handleMessage);
+    subscribe(`/topic/admin/locks`, handleLockTriggered);
     if (initTxn) {
       client?.publish({
         destination: "/app/chat.sendMessage",
