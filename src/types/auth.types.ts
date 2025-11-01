@@ -66,4 +66,26 @@ export interface ResendOtpVerificationResponseInterface {
   timeStamp: string;
 }
 
+// Forget password
+export interface ForgotPasswordEmailInterface {
+  email: string;
+}
+
+export interface ResetPasswordInterface {
+  email: string;
+  otp: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
+export interface GeneralResponseInterface {
+  status: true;
+  statusCode: number;
+  message: string;
+  details: null;
+  data: string;
+  metadata: null;
+  timeStamp: string;
+}
+
 export type Role = "ADMIN" | "USER";

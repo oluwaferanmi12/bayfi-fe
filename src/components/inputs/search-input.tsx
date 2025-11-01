@@ -1,13 +1,35 @@
 import Image from "next/image";
 import searchIcon from "../../assets/svg/search-normal.svg";
+import { useState } from "react";
 
 export const SearchInput = ({
   bgGrey,
   bgWhite,
+  value,
+  onChange
 }: {
   bgGrey?: boolean;
   bgWhite?: boolean;
+  value?: string;
+  onChange?: (val: string) => void;
 }) => {
+  const [internalValue, setInternalValue] = useState("");
+  
+  // Use controlled value if provided, otherwise use internal state
+  const inputValue = value !== undefined ? value : internalValue;
+  
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    
+    if (onChange) {
+      onChange(newValue);
+    } else {
+      // If no onChange prop, manage internal state
+      setInternalValue(newValue);
+    }
+    console.log("searching", inputValue);
+  };
+
   return (
     <div className="relative ">
       <span className="absolute lg:top-4 top-[14px] left-4">
@@ -15,6 +37,8 @@ export const SearchInput = ({
       </span>
       <input
         placeholder="Search"
+        value={inputValue}
+        onChange={handleSearchInput}
         className={`border lg:py-3 py-2 px-4 placeholder:font-grotesk-regular outline-none text-base font-grotesk-semi-bold pl-10 placeholder:text-[#CBCBCB] w-full border-[#EBF1FF] rounded-lg ${bgWhite ? "bg-white" : bgGrey ? "bg-[#F5F5F5]" : ""}`}
       />
     </div>

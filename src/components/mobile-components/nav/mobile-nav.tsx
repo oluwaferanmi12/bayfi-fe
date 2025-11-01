@@ -9,60 +9,56 @@ import documentNormal2 from "@/assets/svg/document-normal-2.svg";
 import menu2 from "@/assets/svg/menu-2.svg";
 import mobileHomeActive from "@/assets/svg/home-2.svg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import navChatIcon from "@/assets/svg/nav-chat-icon.svg";
+import { usePathname, useRouter } from "next/navigation";
 
 export const MobileNav = () => {
   const router = useRouter();
+  const pathname = usePathname();
+
+
+  const mobileNavData = [
+    {
+      icon: mobileHome,
+      iconActive: mobileHomeActive,
+      navTitle: "Home",
+      navLink: "/dashboard"
+    },
+    {
+      icon: bitcoinConvertWhite,
+      iconActive: bitcoinConvert,
+      navTitle: "Services",
+      navLink: "/other-services"
+    },
+    {
+      icon: documentNormal,
+      iconActive: documentNormal2,
+      navTitle: "Transactions",
+      navLink: "/m-transaction"
+    },
+    {
+      icon: more,
+      iconActive: menu2,
+      navTitle: "More",
+      navLink: "/more"
+    },
+  ];
+
   return (
     <>
       <div className="fixed bottom-0 right-0 left-0 lg:hidden flex justify-between w-full bg-[#1F1F1F] p-4 py-2 z-50">
-        <MobileNavWrapper
-          icon={mobileHome}
-          active={true}
-          iconActive={mobileHomeActive}
-          text="Home"
-          action={() => {
-            router.push("/dashboard");
-          }}
-        />
-        <MobileNavWrapper
-          icon={bitcoinConvertWhite}
-          active={false}
-          iconActive={bitcoinConvert}
-          text="Services"
-          action={() => {
-            router.push("/other-services");
-          }}
-        />
-
-        <MobileNavWrapper
-          action={() => {
-            router.push("/m-transaction");
-          }}
-          icon={documentNormal}
-          active={false}
-          iconActive={documentNormal2}
-          text="Transactions"
-        />
-        <MobileNavWrapper
-          icon={navChatIcon}
-          active={false}
-          iconActive={navChatIcon}
-          text="Chat"
-          action={() => {
-            router.push("/m-chat");
-          }}
-        />
-        <MobileNavWrapper
-          icon={more}
-          active={false}
-          iconActive={menu2}
-          text="More"
-          action={() => {
-            router.push("/more");
-          }}
-        />
+        {mobileNavData.map((navItem) => (
+          <MobileNavWrapper
+            key={navItem.navTitle}
+            icon={navItem.icon}
+            active={pathname === navItem.navLink}
+            iconActive={navItem.iconActive}
+            text={navItem.navTitle}
+            action={() => {
+              router.push(navItem.navLink);
+            }}
+          />
+        ))
+        }
       </div>
     </>
   );

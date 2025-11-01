@@ -10,13 +10,38 @@ import profilePlaceholder from "@/assets/svg/profilePlaceholder.svg";
 import homeIcon from "@/assets/svg/homeIcon.svg";
 import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const router = useRouter();
+  const pathname = usePathname();
+
+  const navLinks = [
+    {
+      "navTitle": "Dashboard",
+      "navIcon": homeIcon,
+      "url": "/dashboard",
+    },
+    {
+      "navTitle": "Services",
+      "navIcon": homeIcon,
+      "url": "/services",
+    },
+    {
+      "navTitle": "Transactions",
+      "navIcon": homeIcon,
+      "url": "/transaction",
+    },
+    {
+      "navTitle": "Support",
+      "navIcon": homeIcon,
+      "url": "/support",
+    },
+  ];
+
   return (
     <>
       <div className="h-full min-h-screen  w-full lg:pt-24 bg-bayfi-grey-300">
@@ -24,9 +49,18 @@ export default function RootLayout({
           <Row justify={"center"} align={"middle"}>
             <Col xs={22}>
               <div className="flex justify-between items-center">
-                <Image src={logo} alt="" />
+                <Image onClick={() => router.push("/")} className="cursor-pointer" src={logo} alt="" />
                 <div className="flex items-center gap-8">
-                  <Link href={"/dashboard"}>
+                  {navLinks.map((nav) => (
+                    <Link key={nav.navTitle} href={nav.url}>
+                      <span className={` ${pathname === nav.url ? "px-4 py-2 bg-black rounded-lg" : ""} flex items-center gap-2`}>
+                        <Image src={nav.navIcon} alt="" />
+                        <Text value={nav.navTitle} type={pathname === nav.url ? "text-green-bold" : "nav-text"} />
+                      </span>
+                    </Link>
+                  ))
+                  }
+                  {/* <Link href={"/dashboard"}>
                     <span className="flex items-center gap-2 px-4 py-2 bg-black rounded-lg">
                       <Image src={homeIcon} alt="" />
                       <Text value="Dashboard" type="text-green-bold" />
@@ -34,17 +68,12 @@ export default function RootLayout({
                   </Link>
                   <Link href={"/services"}>
                     <Text type="nav-text" value="Services" />
-                  </Link>
-                  <Link href={"/transaction"}>
-                    <Text type="nav-text" value="Transactions" />
-                  </Link>
-                  <Link href={"/support"}>
-                    <Text type="nav-text" value="Support" />
-                  </Link>
+                  </Link> */}
                 </div>
                 <div className="flex items-center gap-4">
-                  <Image src={bellIcon} alt="" />
+                  <Image className="cursor-pointer" src={bellIcon} alt="" />
                   <Image
+                    className="cursor-pointer"
                     onClick={() => {
                       router.push("/profile");
                     }}

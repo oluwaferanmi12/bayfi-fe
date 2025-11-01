@@ -23,6 +23,7 @@ import {
   InitiateCardTxn,
 } from "@/types";
 import { text } from "stream/consumers";
+import { Spin } from "antd";
 
 export const GiftCardDrawer = ({
   handleClose,
@@ -61,6 +62,9 @@ export const GiftCardDrawer = ({
     },
   ]);
   const [selectedCard, setSelectedCard] = useState<CardInterface>();
+   const [searchValue, setSearchValue] = useState("");
+
+
 
   const handeUpdateBreadCrumb = (data: SideDrawerBreadCrumbProps) => {
     setBreadCrumbData((prev) => {
@@ -104,13 +108,13 @@ export const GiftCardDrawer = ({
         {showGiftCardList ? (
           <>
             <div className="my-2">
-              <SearchInput />
+              <SearchInput value={searchValue} onChange={setSearchValue} />
             </div>
 
             {isPending ? (
-              <p>loading...</p>
+            <Spin />
             ) : cards ? (
-              cards.map((item) => (
+              cards.filter((item) => item.cardName.toLowerCase().includes(searchValue.toLowerCase())).map((item) => (
                 <div
                   key={item.id}
                   className="cursor-pointer"

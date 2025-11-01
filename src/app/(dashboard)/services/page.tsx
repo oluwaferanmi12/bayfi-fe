@@ -18,6 +18,10 @@ import { Text } from "@/components/texts/text";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
 import { GiftCardDrawer } from "@/components/side-drawers/services/gift-card-drawer";
+import BettingDrawer from "@/components/side-drawers/services/betting-drawer";
+import AirtimeDrawer from "@/components/side-drawers/services/airtime-drawer";
+import MobileDataDrawer from "@/components/side-drawers/services/mobile-data-drawer";
+import CableTvDrawer from "@/components/side-drawers/services/cable-tv-drawer";
 
 const Services = () => {
   const [showAirtimeModal, setShowAirtimeModal] = useState(false);
@@ -25,7 +29,7 @@ const Services = () => {
   const [showBuyData, setShowBuyData] = useState(false);
   const [showCableTv, setShowCableTv] = useState(false);
   const [showGiftCard, setShowGiftCard] = useState(false);
-  
+
   const services = [
     {
       bgImage: giftCardBg,
@@ -88,149 +92,39 @@ const Services = () => {
         key={showGiftCard ? 1 : 2}
       />
 
-      <SideDrawer
-        title="Buy data"
-        open={showBuyData}
-        onClose={() => {
+      <MobileDataDrawer
+        handleClose={() => {
           setShowBuyData(false);
         }}
-      >
-        <div>
-          <div className="mt-2 mb-4">
-            <Text type="header-text-20" value="Recent beneficiaries" />
-          </div>
-          <div className="flex items-center justify-between">
-            <UserProfile />
-            <UserProfile />
-            <UserProfile />
-            <UserProfile />
-            <UserProfile />
-          </div>
+        showBuyData={showBuyData}
+        key={showBuyData ? 3 : 4}
+      />
 
-          <div className="my-4">
-            <GInput label="Select network type" placeholder="Airtel" />
-            <GInput label="Phone number" placeholder="Enter phone number" />
-            <GInput label="Enter amount" placeholder="0.00" />
-            <Button
-              loading={false}
-              fullWidth
-              text="Buy data"
-              type="bgGreen"
-              action={() => {
-                // setShowWithdrawOtp(true);
-              }}
-            />
-          </div>
-        </div>
-      </SideDrawer>
-
-      <SideDrawer
-        title="Buy airtime"
-        open={showAirtimeModal}
-        onClose={() => {
+      <AirtimeDrawer
+        handleClose={() => {
           setShowAirtimeModal(false);
         }}
-      >
-        <div>
-          <div className="mt-2 mb-4">
-            <Text type="header-text-20" value="Recent beneficiaries" />
-          </div>
-          <div className="flex items-center justify-between">
-            <UserProfile />
-            <UserProfile />
-            <UserProfile />
-            <UserProfile />
-            <UserProfile />
-          </div>
+        showAirtimeModal={showAirtimeModal}
+        key={showAirtimeModal ? 5 : 6}
+      />
 
-          <div className="my-4">
-            <GInput label="Select network type" placeholder="Airtel" />
-            <GInput label="Phone number" placeholder="Enter phone number" />
-            <GInput label="Enter amount" placeholder="0.00" />
-            <Button
-              loading={false}
-              fullWidth
-              text="Buy Airtime"
-              type="bgGreen"
-              action={() => {
-                // setShowWithdrawOtp(true);
-              }}
-            />
-          </div>
-        </div>
-      </SideDrawer>
-
-      <SideDrawer
-        title="Betting"
-        open={showBetting}
-        onClose={() => {
+      <BettingDrawer
+        handleClose={() => {
           setShowBetting(false);
         }}
-      >
-        <div className="my-3">
-          <div className="my-4">
-            <GInput label="Select provider" placeholder="Sporty" />
-            <GInput label="Username" placeholder="Enter your sporty name" />
-            <GInput label="Enter amount" placeholder="0.00" />
-            <div className="my-4 flex gap-2">
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-            </div>
-            <Button
-              loading={false}
-              fullWidth
-              text="Continue"
-              type="bgGreen"
-              action={() => {
-                // setShowWithdrawOtp(true);
-              }}
-            />
-          </div>
-        </div>
-      </SideDrawer>
+        showBetting={showBetting}
+        key={showBetting ? 7 : 8}
+      />
 
-      <SideDrawer
-        title="Cable Tv"
-        open={showCableTv}
-        onClose={() => {
+      <CableTvDrawer
+        handleClose={() => {
           setShowCableTv(false);
         }}
-      >
-        <div className="my-3">
-          <div className="my-4">
-            <GInput label="Select provider" placeholder="Sporty" />
-            <GInput label="Username" placeholder="Enter your sporty name" />
-            <GInput label="Enter amount" placeholder="0.00" />
-            <div className="my-4 flex gap-2">
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-            </div>
-            <Button
-              loading={false}
-              fullWidth
-              text="Continue"
-              type="bgGreen"
-              action={() => {
-                // setShowWithdrawOtp(true);
-              }}
-            />
-          </div>
-        </div>
-      </SideDrawer>
+        showCableTv={showCableTv}
+        key={showCableTv ? 9 : 10}
+      />
+
+
 
       <Row gutter={12} className="min-h-[80vh]">
         <Col xs={18}>

@@ -8,19 +8,112 @@ import giftCardPlaceHolder from "@/assets/svg/amazon-placeholder.svg";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { CardInterface, CountryResponseInterface } from "@/types";
+import { InitiateCardTxn } from "@/types";
+import placeholderImage from "@/assets/svg/placeholder.svg"
 
 function BuyCardDetails() {
+  const [selectedCard, setSelectedCard] = useState<CardInterface | null>(null);
+  const [countrySelected, setCountrySelected] = useState<CountryResponseInterface | null>(null);
+  const [giftCardAmount, setGiftCardAmount] = useState(0);
+  const [initiateCardTxn, setInitiateCardTxn] = useState<InitiateCardTxn>();
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+
+  const handleGetRate = () => {
+    const txn = {
+      amount: giftCardAmount,
+      chatId: null,
+      chatMessageInitiator: "USER",
+      countryName: countrySelected?.name ?? "",
+      giftCardName: selectedCard?.cardName ?? "",
+      imageUrls: [],
+      message: "I want to trade",
+    } as InitiateCardTxn;
+
+    // persist txn so the chat page can read it after navigation
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem("initiateCardTxn", JSON.stringify(txn));
+      } catch (err) {
+        // ignore storage errors
+        console.warn("Failed to persist initiateCardTxn", err);
+      }
+    }
+
+    setInitiateCardTxn(txn);
+    router.push("/giftcard/chat");
+  };
+
+  useEffect(() => {
+    setIsClient(true);
+    if (typeof window !== "undefined") {
+      try {
+        const card = localStorage.getItem("selectedCard");
+        const country = localStorage.getItem("selectedCountry");
+        setSelectedCard(card ? JSON.parse(card) : null);
+        setCountrySelected(country ? JSON.parse(country) : null);
+      } catch (error) {
+        console.warn("Failed to access localStorage:", error);
+      }
+    }
+  }, []);
+
+  if (!isClient) {
+    return (
+      <>
+        <PageTitle title="Giftcard/Sell" />
+        <div className="my-3">
+          <div className="bg-white flex rounded-lg justify-between items-center p-4">
+            <div className="flex items-center gap-3">
+              <div className="w-[24px] h-[24px] bg-gray-200 rounded-full animate-pulse"></div>
+              <div>
+                <div className="w-24 h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
+                <div className="w-16 h-3 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            </div>
+            <div className="w-[50px] h-[30px] bg-gray-200 rounded animate-pulse"></div>
+          </div>
+        </div>
+        <div className="bg-white p-4 rounded-lg">
+          <div className="mt-4 flex items-center gap-2">
+            <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center font-grotesk-medium">
+              $ 2000
+            </span>
+            <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center font-grotesk-medium">
+              $ 2000
+            </span>
+            <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 text-sm px-4 rounded-lg text-center font-grotesk-medium">
+              $ 2000
+            </span>
+          </div>
+          <div className="mt-4">
+            <GInput
+              inputVal={String(giftCardAmount)}
+              placeholder="0.00"
+              label="Enter amount"
+              setInput={(e) => {
+                setGiftCardAmount(+e);
+              }}
+            />
+          </div>
+          <Button action={handleGetRate} loading={false} text="Get rate" type="bgGreen" fullWidth />
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <PageTitle title="Giftcard/Sell" />
       <div className="my-3">
         <FullCardDetails
           bgWhite
-          flag={usIcon}
-          cardName="Amazon"
-          country="USA"
-          cardIcon={giftCardPlaceHolder}
+          flag={countrySelected?.logo_url || placeholderImage}
+          cardName={selectedCard?.cardName || ""}
+          country={countrySelected?.name || ""}
+          cardIcon={selectedCard?.avatarUrl || ""}
         />
       </div>
       <div className="bg-white p-4 rounded-lg">
@@ -36,17 +129,16 @@ function BuyCardDetails() {
           </span>
         </div>
         <div className="mt-4">
-          <GInput placeholder="0.00" label="Enter amount" />
+          <GInput
+            inputVal={String(giftCardAmount)}
+            placeholder="0.00"
+            label="Enter amount"
+            setInput={(e) => {
+              setGiftCardAmount(+e);
+            }}
+          />
         </div>
-        <Button
-          action={() => {
-            router.push("/giftcard/chat");
-          }}
-          loading={false}
-          text="Get rate"
-          type="bgGreen"
-          fullWidth
-        />
+        <Button action={handleGetRate} loading={false} text="Get rate" type="bgGreen" fullWidth />
       </div>
     </>
   );
