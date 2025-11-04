@@ -14,19 +14,19 @@ import { toast } from "sonner";
 import { useState } from "react";
 
 const VerifyOtp = () => {
-  const [otp, setOtp] = useState('');
-  const otpMedium = localStorage.getItem("userEmail") ?? ""
-  const email = localStorage.getItem("userEmail") ?? ""
+  const [otp, setOtp] = useState("");
+  const otpMedium = localStorage.getItem("userEmail") ?? "";
+  const email = localStorage.getItem("userEmail") ?? "";
   const router = useRouter();
 
   const verifyOtpMutate = useForgotPasswordOtp((data) => {
-    toast.success("Verification Successful")
-    router.push("/forgot-password/reset")
-  })
+    toast.success("Verification Successful");
+    router.push("/forgot-password/reset");
+  });
 
   const resendOtpMutate = useResendOtp((data) => {
-    toast.success("An Otp has been sent to your registered email")
-  })
+    toast.success("An Otp has been sent to your registered email");
+  });
 
   return (
     <Row className="h-full">
@@ -41,14 +41,11 @@ const VerifyOtp = () => {
                 <div>
                   <Image src={likeIcon} alt="" />
                 </div>
-                <Text
-                  value="Account registered Successfuly"
-                  type="header-32"
-                />
+                <Text value="Account registered Successfuly" type="header-32" />
                 <div className="mt-2">
                   <Text
                     type="header-subtext"
-                    value="Please confirm provide the OTP in your mailbox"
+                    value={`Please provide the OTP sent to ${email}`}
                   />
                 </div>
               </div>
@@ -62,20 +59,19 @@ const VerifyOtp = () => {
                   fullWidth
                   loading={verifyOtpMutate.isPending}
                   action={() => {
-                    verifyOtpMutate.mutate({otp, otpMedium})
-                    
+                    verifyOtpMutate.mutate({ otp, otpMedium });
                   }}
                 />
               </div>
               <div className="flex justify-center">
-                <Button 
-                type="bgPlain" 
-                text="Resend code" 
-                loading={resendOtpMutate.isPending}
-                action = { () => {
-                  resendOtpMutate.mutate({email})
-                } }
-                 />
+                <Button
+                  type="bgPlain"
+                  text="Resend code"
+                  loading={resendOtpMutate.isPending}
+                  action={() => {
+                    resendOtpMutate.mutate({ email });
+                  }}
+                />
               </div>
             </div>
           </Col>

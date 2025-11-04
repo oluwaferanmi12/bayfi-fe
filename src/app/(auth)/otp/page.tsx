@@ -51,7 +51,7 @@ const Otp = () => {
                 <div className="mt-2">
                   <Text
                     type="header-subtext"
-                    value="Please confirm provide the OTP in your mailbox"
+                    value={`Please confirm the OTP sent to ${email}`}
                   />
                 </div>
               </div>
