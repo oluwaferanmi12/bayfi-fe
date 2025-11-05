@@ -26,7 +26,7 @@ const OtherServices = () => {
             router.push("/giftcard");
           }}
           icon={otherGiftCardIcon}
-          text="Buy Gift Card"
+          text="Sell Gift Card"
         />
         <OtherServiceWrapper
           action={() => {
