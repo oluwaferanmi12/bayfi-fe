@@ -27,7 +27,7 @@ function GiftCard() {
   useEffect(() => {
     localStorage.setItem("selectedCard", JSON.stringify(selectedCard));
     localStorage.setItem("selectedCountry", JSON.stringify(countrySelected));
-  }, []);
+  }, [selectedCard, countrySelected]);
 
   return (
     <>
@@ -55,13 +55,6 @@ function GiftCard() {
             />
           );
         })}
-        {/* <CountryWrapper
-          action={() => {
-            router.push("/giftcard/buy-details");
-          }}
-          flag={usIcon}
-          countryName="USA"
-        /> */}
       </BottomDrawer>
       <PageTitle title="Giftcards" />
       <SearchInput value={searchValue} onChange={setSearchValue} bgWhite />

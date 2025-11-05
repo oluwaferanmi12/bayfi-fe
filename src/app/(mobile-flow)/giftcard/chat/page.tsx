@@ -6,7 +6,9 @@ import React, { useEffect, useState } from "react";
 import { InitiateCardTxn } from "@/types";
 
 function GiftCardChat() {
-  const [initTxn, setInitTxn] = useState<InitiateCardTxn | undefined>(undefined);
+  const [initTxn, setInitTxn] = useState<InitiateCardTxn | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -21,7 +23,7 @@ function GiftCardChat() {
       }
     }
   }, []);
-
+  console.log("init texn", initTxn);
   return (
     <>
       <PageTitle title="Giftcards/Sell" />

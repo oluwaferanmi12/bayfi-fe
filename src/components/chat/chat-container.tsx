@@ -24,6 +24,7 @@ export const ChatContainer = ({
   useEffect(() => {
     if (!initMessage && messages?.length) setInitMessage(messages[0]);
   }, [messages, initMessage]);
+  console.log(messages, "Messages value");
 
   useEffect(() => {
     if (!bottomRef.current) return;
