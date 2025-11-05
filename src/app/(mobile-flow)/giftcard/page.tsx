@@ -4,7 +4,7 @@ import { FlashSalesCard } from "@/components/giftcard/flash-sales";
 import { SearchInput } from "@/components/inputs/search-input";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
 import { GiftCardWrapper } from "@/components/wrappers/gift-card-wrapper";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import giftCardPlaceHolder from "@/assets/svg/amazon-placeholder.svg";
 import { BottomDrawer } from "@/components/bottom-drawers/bottom-drawer";
 import { CountryWrapper } from "@/components/wrappers/country-wrapper";
@@ -13,9 +13,7 @@ import { useRouter } from "next/navigation";
 import { useGetCards } from "@/hooks/query";
 import { Spin } from "antd";
 import { CardInterface, CountryResponseInterface } from "@/types";
-import placeholderImage from "@/assets/svg/placeholder.svg"
-
-
+import placeholderImage from "@/assets/svg/placeholder.svg";
 
 function GiftCard() {
   const [showCountryDrawer, setShowCountryDrawer] = useState(false);
@@ -26,11 +24,10 @@ function GiftCard() {
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface>();
 
-
-
-
-  localStorage.setItem("selectedCard", JSON.stringify(selectedCard));
-  localStorage.setItem("selectedCountry", JSON.stringify(countrySelected));
+  useEffect(() => {
+    localStorage.setItem("selectedCard", JSON.stringify(selectedCard));
+    localStorage.setItem("selectedCountry", JSON.stringify(countrySelected));
+  }, []);
 
   return (
     <>
@@ -51,9 +48,9 @@ function GiftCard() {
               key={item.id}
               action={() => {
                 router.push("/giftcard/buy-details");
-                setCountrySelected(item)
+                setCountrySelected(item);
               }}
-              flag={item.logo_url?? placeholderImage}
+              flag={item.logo_url ?? placeholderImage}
               countryName={item.name}
             />
           );
@@ -65,7 +62,6 @@ function GiftCard() {
           flag={usIcon}
           countryName="USA"
         /> */}
-
       </BottomDrawer>
       <PageTitle title="Giftcards" />
       <SearchInput value={searchValue} onChange={setSearchValue} bgWhite />
@@ -74,23 +70,25 @@ function GiftCard() {
         {isPending ? (
           <Spin />
         ) : cards ? (
-          cards.filter((item) => item.cardName.toLowerCase().includes(searchValue.toLowerCase())).map((item) => (
-            <GiftCardWrapper
-              key={item.id}
-              whiteBg
-              action={() => {
-                setShowCountryDrawer(true);
-                setSelectedCard(item);
-              }}
-              text={item.cardName}
-              image={item?.avatarUrl}
-            />
-          ))
+          cards
+            .filter((item) =>
+              item.cardName.toLowerCase().includes(searchValue.toLowerCase())
+            )
+            .map((item) => (
+              <GiftCardWrapper
+                key={item.id}
+                whiteBg
+                action={() => {
+                  setShowCountryDrawer(true);
+                  setSelectedCard(item);
+                }}
+                text={item.cardName}
+                image={item?.avatarUrl}
+              />
+            ))
         ) : (
           "No data available"
         )}
-
-
       </div>
     </>
   );

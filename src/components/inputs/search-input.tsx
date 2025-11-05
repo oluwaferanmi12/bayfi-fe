@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import searchIcon from "../../assets/svg/search-normal.svg";
 import { useState } from "react";
@@ -6,7 +7,7 @@ export const SearchInput = ({
   bgGrey,
   bgWhite,
   value,
-  onChange
+  onChange,
 }: {
   bgGrey?: boolean;
   bgWhite?: boolean;
@@ -14,13 +15,13 @@ export const SearchInput = ({
   onChange?: (val: string) => void;
 }) => {
   const [internalValue, setInternalValue] = useState("");
-  
+
   // Use controlled value if provided, otherwise use internal state
   const inputValue = value !== undefined ? value : internalValue;
-  
+
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    
+
     if (onChange) {
       onChange(newValue);
     } else {

@@ -11,12 +11,12 @@ import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
 import { useForgotPasswordOtp, useOtp, useResendOtp } from "@/hooks/query";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const VerifyOtp = () => {
   const [otp, setOtp] = useState("");
-  const otpMedium = localStorage.getItem("userEmail") ?? "";
-  const email = localStorage.getItem("userEmail") ?? "";
+  const [otpMedium, setOtpMedium] = useState("");
+  const [email, setEmail] = useState("");
   const router = useRouter();
 
   const verifyOtpMutate = useForgotPasswordOtp((data) => {
@@ -27,6 +27,12 @@ const VerifyOtp = () => {
   const resendOtpMutate = useResendOtp((data) => {
     toast.success("An Otp has been sent to your registered email");
   });
+
+  useEffect(() => {
+    const _email = localStorage.getItem("userEmail") ?? "";
+    setEmail(_email);
+    setOtpMedium(_email);
+  }, []);
 
   return (
     <Row className="h-full">
