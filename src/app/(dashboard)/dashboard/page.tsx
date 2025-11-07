@@ -1,14 +1,10 @@
 "use client";
-import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { Col, Row } from "antd";
 import bgImage from "@/assets/svg/walletCardImage.svg";
 import Image from "next/image";
 import eyeIcon from "@/assets/svg/eye-icon-black.svg";
 import { Text } from "@/components/texts/text";
 import { Button } from "@/components/buttons";
-import bidirectionIcon from "@/assets/svg/arrow-bidirection.svg";
-import arrowSlantDown from "@/assets/svg/bulkSendIcon.svg";
-import arrowSlantUp from "@/assets/svg/bulkSendUp.svg";
 import bulkCard from "@/assets/svg/bulkCard.svg";
 import bulkCall from "@/assets/svg/bulkCall.svg";
 import bulkGlobal from "@/assets/svg/bulkGlobal.svg";
@@ -16,7 +12,6 @@ import wifiSquare from "@/assets/svg/wifi-square.svg";
 import cableIcon from "@/assets/svg/bulkMonitor.svg";
 import dollarSquare from "@/assets/svg/dollarSquare.svg";
 import chartPlaceholder from "@/assets/svg/chartPlaceholder.svg";
-
 import { useState } from "react";
 import { SideDrawer } from "@/components/side-drawers/side-drawer";
 import bitCoinGroup from "@/assets/svg/bitCoinGroup.svg";
@@ -39,6 +34,9 @@ import dollarCircle from "@/assets/svg/dollar-circle.svg";
 import bitcoinInputIcon from "@/assets/svg/bitcoing-(btc).svg";
 import { DashboardMobile } from "@/components/mobile-screens/dashboard-mobile";
 import { TransactionWrapper } from "@/components/transaction/transaction-wrapper";
+import giftCardActionIcon from "@/assets/svg/trade-giftcard-dashboard.svg";
+import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
+import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
 
 function Dashboard() {
   const [depositModal, setDepositModal] = useState(false);
@@ -332,7 +330,7 @@ function Dashboard() {
         </SideDrawer>
         <Row gutter={12}>
           <Col xs={16}>
-            <div className="bg-white relative py-12 text-center items-center  rounded-xl p-4 ">
+            <div className="bg-white relative py-8 text-center items-center  rounded-4xl p-4 ">
               <span className="absolute left-0 top-0">
                 <Image src={bgImage} alt="" />
               </span>
@@ -349,40 +347,43 @@ function Dashboard() {
                   </div>
                 </div>
 
-                <div className="py-6">
+                <div className="py-4">
                   <Text type="number-big" value="NGN 200,000.00" />
                 </div>
                 <div className="flex items-center gap-2 justify-center">
-                  <Button
-                    loading={false}
-                    text="Trade crypto"
-                    icon={bidirectionIcon}
-                    type="bgGreen"
-                    lessRounded
-                    action={() => {
+                  <button
+                    onClick={() => {
                       setShowCryptoModal(true);
                     }}
-                  />
-                  <Button
-                    loading={false}
-                    text="Deposit"
-                    icon={arrowSlantDown}
-                    type="bgGreen"
-                    lessRounded
-                    action={() => {
+                    className="flex items-center border cursor-pointer border-[#E9EBF8] p-1 rounded-xl pr-4"
+                  >
+                    <Image src={giftCardActionIcon} alt="" />
+                    <p className="text-[#444D5A] font-grotesk-bold text-base">
+                      Trade Giftcard
+                    </p>
+                  </button>
+                  <button
+                    onClick={() => {
                       setDepositModal(true);
                     }}
-                  />
-                  <Button
-                    loading={false}
-                    text="Withdraw"
-                    icon={arrowSlantUp}
-                    type="bgGreen"
-                    action={() => {
+                    className="flex items-center border gap-2 pl-2  border-[#E9EBF8] p-1 rounded-xl pr-4"
+                  >
+                    <Image src={cryptoActionIcon} alt="" />
+                    <p className="text-[#444D5A] cursor-pointer font-grotesk-bold text-base">
+                      Trade Crypto
+                    </p>
+                  </button>
+                  <button
+                    onClick={() => {
                       setShowWithdrawModal(true);
                     }}
-                    lessRounded
-                  />
+                    className="flex items-center gap-2 pl-2 cursor-pointer border border-[#E9EBF8] p-1 rounded-xl pr-4"
+                  >
+                    <Image src={withdrawActionIcon} alt="" />
+                    <p className="text-[#444D5A] font-grotesk-bold text-base">
+                      Withdraw
+                    </p>
+                  </button>
                 </div>
               </div>
             </div>
@@ -416,7 +417,7 @@ function Dashboard() {
             </div>
           </Col>
           <Col xs={8}>
-            <div className="bg-white min-h-[80vh] rounded-lg p-4">
+            <div className="bg-white min-h-[80vh] rounded-3xl p-4">
               <Text type="main-text-regular" value="Transaction history" />
               <div className="mt-3 border border-[#EAECF0] rounded-lg bg-[#FDFEFF] p-4">
                 <TransactionWrapper />

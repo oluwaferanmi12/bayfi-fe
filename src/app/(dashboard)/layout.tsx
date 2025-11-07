@@ -21,45 +21,58 @@ export default function RootLayout({
 
   const navLinks = [
     {
-      "navTitle": "Dashboard",
-      "navIcon": homeIcon,
-      "url": "/dashboard",
+      navTitle: "Dashboard",
+      navIcon: homeIcon,
+      url: "/dashboard",
     },
     {
-      "navTitle": "Services",
-      "navIcon": homeIcon,
-      "url": "/services",
+      navTitle: "Services",
+      navIcon: homeIcon,
+      url: "/services",
     },
     {
-      "navTitle": "Transactions",
-      "navIcon": homeIcon,
-      "url": "/transaction",
+      navTitle: "Transactions",
+      navIcon: homeIcon,
+      url: "/transaction",
     },
     {
-      "navTitle": "Support",
-      "navIcon": homeIcon,
-      "url": "/support",
+      navTitle: "Support",
+      navIcon: homeIcon,
+      url: "/support",
     },
   ];
 
   return (
     <>
-      <div className="h-full min-h-screen  w-full lg:pt-24 bg-bayfi-grey-300">
+      <div className="h-full min-h-screen  w-full lg:pt-24 bg-[#F6F4F0]">
         <div className="fixed hidden lg:block  top-0 w-full z-50 bg-white border border-[#EAECF0] py-4">
           <Row justify={"center"} align={"middle"}>
             <Col xs={22}>
               <div className="flex justify-between items-center">
-                <Image onClick={() => router.push("/")} className="cursor-pointer" src={logo} alt="" />
+                <Image
+                  onClick={() => router.push("/")}
+                  className="cursor-pointer"
+                  src={logo}
+                  alt=""
+                />
                 <div className="flex items-center gap-8">
                   {navLinks.map((nav) => (
                     <Link key={nav.navTitle} href={nav.url}>
-                      <span className={` ${pathname === nav.url ? "px-4 py-2 bg-black rounded-lg" : ""} flex items-center gap-2`}>
+                      <span
+                        className={` ${pathname === nav.url ? "px-4 py-2 bg-black rounded-lg" : ""} flex items-center gap-2`}
+                      >
                         <Image src={nav.navIcon} alt="" />
-                        <Text value={nav.navTitle} type={pathname === nav.url ? "text-green-bold" : "nav-text"} />
+                        <Text
+                          value={nav.navTitle}
+                          type={
+                            pathname === nav.url
+                              ? "text-green-bold"
+                              : "nav-text"
+                          }
+                        />
                       </span>
                     </Link>
-                  ))
-                  }
+                  ))}
                   {/* <Link href={"/dashboard"}>
                     <span className="flex items-center gap-2 px-4 py-2 bg-black rounded-lg">
                       <Image src={homeIcon} alt="" />

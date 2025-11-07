@@ -130,8 +130,8 @@ const TransactionWrapper = ({
         </div>
       </div>
       <div>
-        <p className="text-[#171717] font-grotesk-bold text-lg">NGN {date}</p>
-        <p className="text-[#747474] text-sm font-grotesk-medium">{date}</p>
+        <p className="text-[#171717] font-grotesk-bold text-lg">NGN {amount}</p>
+        <p className="text-[#747474] text-sm font-grotesk-medium text-right">{date}</p>
       </div>
     </div>
   );
