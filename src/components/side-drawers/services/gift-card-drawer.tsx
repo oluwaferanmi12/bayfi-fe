@@ -1,4 +1,3 @@
-
 import { SideDrawerBreadCrumb } from "@/components/breadcrumb/side-drawer-bread-crumb";
 import { SideDrawer } from "../side-drawer";
 import { GiftCardWrapper } from "@/components/wrappers/gift-card-wrapper";
@@ -24,6 +23,7 @@ import {
 } from "@/types";
 import { text } from "stream/consumers";
 import { Spin } from "antd";
+import { toast } from "sonner";
 
 export const GiftCardDrawer = ({
   handleClose,
@@ -38,11 +38,6 @@ export const GiftCardDrawer = ({
   const { data: cards, isPending } = useGetCards({ page: 1, pageSize: 100 });
   const [showGiftcardChat, setGiftCardChat] = useState(false);
   const [initiateCardTxn, setInitiateCardTxn] = useState<InitiateCardTxn>();
-  // const initiateTxn = useInitiateCardTxn((data) => {
-  //   setShowGiftCardAmount(false)
-  //   setGiftCardChat(true);
-  //   setGiftCardChat(true);
-  // });
   const [giftCardAmount, setGiftCardAmount] = useState(0);
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface>();
@@ -62,9 +57,8 @@ export const GiftCardDrawer = ({
     },
   ]);
   const [selectedCard, setSelectedCard] = useState<CardInterface>();
-   const [searchValue, setSearchValue] = useState("");
-
-
+  const [searchValue, setSearchValue] = useState("");
+  const defaultAmounts = [25, 50, 100, 200, 500];
 
   const handeUpdateBreadCrumb = (data: SideDrawerBreadCrumbProps) => {
     setBreadCrumbData((prev) => {
@@ -112,41 +106,47 @@ export const GiftCardDrawer = ({
             </div>
 
             {isPending ? (
-            <Spin />
+              <Spin />
             ) : cards ? (
-              cards.filter((item) => item.cardName.toLowerCase().includes(searchValue.toLowerCase())).map((item) => (
-                <div
-                  key={item.id}
-                  className="cursor-pointer"
-                  onClick={() => {
-                    setShowGiftCardList(false);
-                    setShowCountry(true);
-                    setSelectedCard(item);
-                    setBreadCrumbData((prev) => {
-                      const newData = prev.map((item) => ({
-                        ...item,
-                        active: false,
-                      }));
-                      return [
-                        ...newData,
-                        {
-                          text: "Countries",
-                          action: () => {
-                            setShowCountry(true);
-                            handlRemoveFromBreadCrumb("Countries");
+              cards
+                .filter((item) =>
+                  item.cardName
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase())
+                )
+                .map((item) => (
+                  <div
+                    key={item.id}
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setShowGiftCardList(false);
+                      setShowCountry(true);
+                      setSelectedCard(item);
+                      setBreadCrumbData((prev) => {
+                        const newData = prev.map((item) => ({
+                          ...item,
+                          active: false,
+                        }));
+                        return [
+                          ...newData,
+                          {
+                            text: "Countries",
+                            action: () => {
+                              setShowCountry(true);
+                              handlRemoveFromBreadCrumb("Countries");
+                            },
+                            active: true,
                           },
-                          active: true,
-                        },
-                      ];
-                    });
-                  }}
-                >
-                  <GiftCardWrapper
-                    text={item.cardName}
-                    image={item.avatarUrl}
-                  />
-                </div>
-              ))
+                        ];
+                      });
+                    }}
+                  >
+                    <GiftCardWrapper
+                      text={item.cardName}
+                      image={item.avatarUrl}
+                    />
+                  </div>
+                ))
             ) : (
               "No data available"
             )}
@@ -194,15 +194,19 @@ export const GiftCardDrawer = ({
               />
             </div>
             <div className="mt-4 flex items-center gap-2">
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
-              <span className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium">
-                $ 2000
-              </span>
+              {defaultAmounts.map((item) => {
+                return (
+                  <button
+                    onClick={() => {
+                      setGiftCardAmount(item);
+                    }}
+                    key={item}
+                    className="bg-[#F6F6F6] cursor-pointer w-full text-text-color-500 border border-[#DCDCDC] py-2 px-4 rounded-lg text-center font-grotesk-medium"
+                  >
+                    $ {item}
+                  </button>
+                );
+              })}
             </div>
             <div className="mt-4">
               <GInput
@@ -217,6 +221,10 @@ export const GiftCardDrawer = ({
             <Button
               action={() => {
                 // setShowGiftCardAmount(false);
+                if (!giftCardAmount) {
+                  toast.error("Kindly select an amount");
+                  return;
+                }
                 setInitiateCardTxn({
                   amount: giftCardAmount,
                   chatId: null,
@@ -239,23 +247,6 @@ export const GiftCardDrawer = ({
           </div>
         ) : (
           <>
-            <div
-              onClick={() => {
-                setShowGiftCardList(true);
-              }}
-              className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
-            >
-              <div>
-                <Text value="Buy Giftcard" type="text-plain-dark-18" />
-                <div className="w-[80%]">
-                  <Text
-                    value="Swift and reliable trading of any Giftcard"
-                    type="text-small-light"
-                  />
-                </div>
-              </div>
-              <Image src={bitCoinGroup} alt="" />
-            </div>
             <div
               onClick={() => {
                 setShowGiftCardList(true);
@@ -283,6 +274,23 @@ export const GiftCardDrawer = ({
                 </div>
               </div>
               <Image src={sellCryptoIcon} alt="" />
+            </div>
+            <div
+              onClick={() => {
+                setShowGiftCardList(true);
+              }}
+              className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
+            >
+              <div>
+                <Text value="Buy Giftcard" type="text-plain-dark-18" />
+                <div className="w-[80%]">
+                  <Text
+                    value="Swift and reliable trading of any Giftcard"
+                    type="text-small-light"
+                  />
+                </div>
+              </div>
+              <Image src={bitCoinGroup} alt="" />
             </div>
           </>
         )}

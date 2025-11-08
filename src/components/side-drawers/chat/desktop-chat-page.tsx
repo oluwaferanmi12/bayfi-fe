@@ -31,7 +31,7 @@ export const DesktopChatSideDrawer = ({
       >
         <div className="relative">
           <div className="flex flex-col  h-[90vh]">
-            <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar">
+            <div className="flex-1d min-h-0 overflow-y-auto hide-scrollbar">
               <MessageWrapper
                 messages={messages}
                 messageLoading={messageLoading}
@@ -40,7 +40,7 @@ export const DesktopChatSideDrawer = ({
               />
             </div>
 
-            <div className="shrink-0">
+            <div className="">
               {!chatDetailLoading &&
                 !chatDetail?.isExpired &&
                 !chatDetail?.isLocked && (

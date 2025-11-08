@@ -15,8 +15,6 @@ export const ChatContainer = ({
   initTxn?: InitiateCardTxn;
 }) => {
   const [initMessage, setInitMessage] = useState<any>();
-  const bottomRef = useRef<HTMLDivElement | null>(null);
-  const firstPaint = useRef(true);
 
   const {
     handleSendMessage,
@@ -29,16 +27,6 @@ export const ChatContainer = ({
   useEffect(() => {
     if (!initMessage && messages?.length) setInitMessage(messages[0]);
   }, [messages, initMessage]);
-  console.log(messages, "Messages value");
-
-  useEffect(() => {
-    if (!bottomRef.current) return;
-    bottomRef.current.scrollIntoView({
-      behavior: firstPaint.current ? "auto" : "smooth",
-      block: "end",
-    });
-    firstPaint.current = false;
-  }, [messages.length]);
 
   return (
     <div
@@ -59,7 +47,6 @@ export const ChatContainer = ({
               messageLoading={messageLoading}
               chatDetail={chatDetail}
             />
-            <div ref={bottomRef} />
           </>
         )}
       </div>

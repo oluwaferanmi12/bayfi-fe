@@ -66,7 +66,7 @@ export const MessageWrapper = ({
             }
             chatDetails={chatDetail}
           />
-          <div className="mt-20" ref={bottomRef} />
+          <div className="mt-4" ref={bottomRef} />
         </div>
       )}
     </div>
