@@ -29,19 +29,26 @@ export const DesktopChatSideDrawer = ({
         open={open}
         title="Giftcard Chat"
       >
-        <div>
-          <MessageWrapper
-            messages={messages}
-            messageLoading={messageLoading}
-            bgWhite
-            chatDetail={chatDetail}
-          />
+        <div className="relative">
+          <div className="flex flex-col  h-[90vh]">
+            <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar">
+              <MessageWrapper
+                messages={messages}
+                messageLoading={messageLoading}
+                bgWhite
+                chatDetail={chatDetail}
+              />
+            </div>
+
+            <div className="shrink-0">
+              {!chatDetailLoading &&
+                !chatDetail?.isExpired &&
+                !chatDetail?.isLocked && (
+                  <ChatInput bgWhite handleMessage={handleSendMessage} />
+                )}
+            </div>
+          </div>
         </div>
-        {!chatDetailLoading &&
-          !chatDetail?.isExpired &&
-          !chatDetail?.isLocked && (
-            <ChatInput bgWhite handleMessage={handleSendMessage} />
-          )}
       </SideDrawer>
     </>
   );

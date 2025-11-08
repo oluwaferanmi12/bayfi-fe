@@ -18,8 +18,13 @@ export const ChatContainer = ({
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
 
-  const { handleSendMessage, messages, messageLoading, chatDetail } =
-    useChatMessage(initMessage?.chatTransactionId, initTxn, true);
+  const {
+    handleSendMessage,
+    messages,
+    messageLoading,
+    chatDetail,
+    chatDetailLoading,
+  } = useChatMessage(initMessage?.chatTransactionId, initTxn, true);
 
   useEffect(() => {
     if (!initMessage && messages?.length) setInitMessage(messages[0]);
@@ -61,7 +66,11 @@ export const ChatContainer = ({
 
       {/* footer input (no fixed/absolute) */}
       <div className="shrink-0">
-        <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
+        {!chatDetailLoading &&
+          !chatDetail?.isExpired &&
+          !chatDetail?.isLocked && (
+            <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
+          )}
       </div>
     </div>
   );
