@@ -1,5 +1,7 @@
-import { TransactionWrapper } from "@/components/transaction/transaction-wrapper";
-
+import {
+  DashboardTransactionWrapper,
+  DashboardTransactionWrapper as TransactionWrapper,
+} from "@/components/transaction/dashboard-transaction-wrapper";
 
 export const MobileTransactionWrapper = () => {
   return (
@@ -8,11 +10,12 @@ export const MobileTransactionWrapper = () => {
         Transaction History
       </p>
       <div className="bg-white border p-4 rounded-lg border-[#EAECF0]">
-        <TransactionWrapper />
-        <TransactionWrapper />
-        <TransactionWrapper />
-        <TransactionWrapper />
+        <DashboardTransactionWrapper type="withdraw" />
+        <DashboardTransactionWrapper type="bitcoin" />
+        <DashboardTransactionWrapper type="giftcard" />
+        <DashboardTransactionWrapper type="top-up" />
+        <DashboardTransactionWrapper type="giftcard" />
       </div>
     </div>
   );
-};
+}

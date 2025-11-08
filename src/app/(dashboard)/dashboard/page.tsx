@@ -33,7 +33,7 @@ import buyCryptoIcon from "@/assets/svg/buyCrypto.svg";
 import dollarCircle from "@/assets/svg/dollar-circle.svg";
 import bitcoinInputIcon from "@/assets/svg/bitcoing-(btc).svg";
 import { DashboardMobile } from "@/components/mobile-screens/dashboard-mobile";
-import { TransactionWrapper } from "@/components/transaction/transaction-wrapper";
+import { DashboardTransactionWrapper } from "@/components/transaction/dashboard-transaction-wrapper";
 import giftCardActionIcon from "@/assets/svg/trade-giftcard-dashboard.svg";
 import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
 import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
@@ -417,12 +417,14 @@ function Dashboard() {
             </div>
           </Col>
           <Col xs={8}>
-            <div className="bg-white min-h-[80vh] rounded-3xl p-4">
+            <div className="bg-white min-h-[80vh] rounded-3xl p-4 py-8">
               <Text type="main-text-regular" value="Transaction history" />
-              <div className="mt-3 border border-[#EAECF0] rounded-lg bg-[#FDFEFF] p-4">
-                <TransactionWrapper />
-                <TransactionWrapper />
-                <TransactionWrapper />
+              <div className="mt-3 rounded-lg ">
+                <DashboardTransactionWrapper type="withdraw" />
+                <DashboardTransactionWrapper type="bitcoin" />
+                <DashboardTransactionWrapper type="giftcard" />
+                <DashboardTransactionWrapper type="top-up" />
+                <DashboardTransactionWrapper type="giftcard" />
               </div>
             </div>
           </Col>

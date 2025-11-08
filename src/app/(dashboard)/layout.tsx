@@ -11,6 +11,7 @@ import homeIcon from "@/assets/svg/homeIcon.svg";
 import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
 import { usePathname, useRouter } from "next/navigation";
+import { FloatingDraggable } from "@/components/buttons/float-button";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,7 +45,8 @@ export default function RootLayout({
 
   return (
     <>
-      <div className="h-full min-h-screen  w-full lg:pt-24 bg-[#F6F4F0]">
+      <FloatingDraggable />
+      <div className="h-full min-h-screen   w-full lg:pt-28 bg-[#F6F4F0]">
         <div className="fixed hidden lg:block  top-0 w-full z-50 bg-white border border-[#EAECF0] py-4">
           <Row justify={"center"} align={"middle"}>
             <Col xs={22}>
@@ -73,15 +75,6 @@ export default function RootLayout({
                       </span>
                     </Link>
                   ))}
-                  {/* <Link href={"/dashboard"}>
-                    <span className="flex items-center gap-2 px-4 py-2 bg-black rounded-lg">
-                      <Image src={homeIcon} alt="" />
-                      <Text value="Dashboard" type="text-green-bold" />
-                    </span>
-                  </Link>
-                  <Link href={"/services"}>
-                    <Text type="nav-text" value="Services" />
-                  </Link> */}
                 </div>
                 <div className="flex items-center gap-4">
                   <Image className="cursor-pointer" src={bellIcon} alt="" />
