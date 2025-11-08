@@ -46,14 +46,14 @@ export default function MobileChatList() {
         ) : data?.length ? (
           <>
             {data.map((item) => (
-              <span
+              <div
                 onClick={() => {
                   router.push(`/m-chat/chat?id=${item.id}`);
                 }}
                 key={item.id}
               >
                 <MobileChatListCard chat={item} key={item.id} />
-              </span>
+              </div>
             ))}
           </>
         ) : (

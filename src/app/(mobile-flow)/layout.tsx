@@ -1,6 +1,5 @@
 import mobileFlowIcon from "@/assets/svg/mobileFlowIcon.svg";
 import Image from "next/image";
-
 export default function RootLayout({
   children,
 }: Readonly<{

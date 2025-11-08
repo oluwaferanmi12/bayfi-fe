@@ -12,6 +12,9 @@ import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
 import { usePathname, useRouter } from "next/navigation";
 import { FloatingDraggable } from "@/components/buttons/float-button";
+import floatMessageIcon from "@/assets/svg/floatint-message-icon.svg";
+import { DesktopChatListDrawer } from "@/components/side-drawers/chat/desktop-chat-list-drawer";
+import { useState } from "react";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +22,7 @@ export default function RootLayout({
 }>) {
   const router = useRouter();
   const pathname = usePathname();
-
+  const [showChatList, setShowChatList] = useState(false);
   const navLinks = [
     {
       navTitle: "Dashboard",
@@ -45,7 +48,25 @@ export default function RootLayout({
 
   return (
     <>
-      <FloatingDraggable />
+      {showChatList && (
+        <DesktopChatListDrawer
+          open={showChatList}
+          handleClose={() => {
+            setShowChatList(false);
+          }}
+        />
+      )}
+
+      <button
+        onClick={() => {
+          setShowChatList(true);
+        }}
+        className="fixed cursor-pointer right-6 bottom-6 pointer-events-auto"
+      >
+        <div className="bg-bayfi-green-500 p-3 rounded-full shadow">
+          <Image src={floatMessageIcon} alt="Chat" />
+        </div>
+      </button>
       <div className="h-full min-h-screen   w-full lg:pt-28 bg-[#F6F4F0]">
         <div className="fixed hidden lg:block  top-0 w-full z-50 bg-white border border-[#EAECF0] py-4">
           <Row justify={"center"} align={"middle"}>
