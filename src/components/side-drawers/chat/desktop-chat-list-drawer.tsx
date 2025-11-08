@@ -5,9 +5,11 @@ import { MobileChatListCard } from "@/components/mobile-components/wrappers/mobi
 export const DesktopChatListDrawer = ({
   open,
   handleClose,
+  onSelect,
 }: {
   open: boolean;
   handleClose: () => void;
+  onSelect: (val: number) => void;
 }) => {
   const { data, isPending } = useGetActivChat();
   return (
@@ -26,7 +28,12 @@ export const DesktopChatListDrawer = ({
             <>
               {data.map((item) => {
                 return (
-                  <div onClick={() => {}} key={item.id}>
+                  <div
+                    onClick={() => {
+                      onSelect(item.id);
+                    }}
+                    key={item.id}
+                  >
                     <MobileChatListCard chat={item} key={item.id} />
                   </div>
                 );

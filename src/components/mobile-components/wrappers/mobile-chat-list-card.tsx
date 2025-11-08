@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const MobileChatListCard = ({ chat }: { chat: ChatTransaction }) => {
   return (
-    <div className="bg-white lg:hover:bg-[#F6F6F6] gap-4 p-3 rounded-lg mb-2 flex items-center">
+    <div className="bg-white cursor-pointer lg:hover:bg-[#F6F6F6] gap-4 p-3 rounded-lg mb-2 flex items-center">
       <span>
         <Image src={message2Icon} alt="" />
       </span>

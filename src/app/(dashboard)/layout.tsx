@@ -15,6 +15,7 @@ import { FloatingDraggable } from "@/components/buttons/float-button";
 import floatMessageIcon from "@/assets/svg/floatint-message-icon.svg";
 import { DesktopChatListDrawer } from "@/components/side-drawers/chat/desktop-chat-list-drawer";
 import { useState } from "react";
+import { DesktopChatSideDrawer } from "@/components/side-drawers/chat/desktop-chat-page";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,6 +24,14 @@ export default function RootLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [showChatList, setShowChatList] = useState(false);
+  const [showChatPage, setShowChatPage] = useState(false);
+  const [activeChatId, setActiveChatId] = useState<null | number>(null);
+
+  const onChatSelected = (id: number) => {
+    setActiveChatId(id);
+    setShowChatList(false);
+    setShowChatPage(true);
+  };
   const navLinks = [
     {
       navTitle: "Dashboard",
@@ -54,6 +63,18 @@ export default function RootLayout({
           handleClose={() => {
             setShowChatList(false);
           }}
+          onSelect={onChatSelected}
+        />
+      )}
+
+      {showChatPage && (
+        <DesktopChatSideDrawer
+          open={showChatPage}
+          handleClose={() => {
+            setShowChatPage(false);
+            setShowChatList(true);
+          }}
+          chatId={String(activeChatId)}
         />
       )}
 
