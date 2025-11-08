@@ -196,6 +196,11 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
             onChange={(e) => setMessage(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
+            onKeyUp={(e) => {
+              if (e.keyCode === 13) {
+                onSend();
+              }
+            }}
             initial={false}
             animate={{
               height: expanded ? 120 : 48,
