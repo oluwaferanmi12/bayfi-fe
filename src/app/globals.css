@@ -5,8 +5,6 @@
   --foreground: #171717;
 }
 
-
-
 @font-face {
   font-family: "grotesk-light";
   src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-Light.ttf");
@@ -37,12 +35,81 @@
   src: url("../assets/fonts/Darker_Grotesque/static/DarkerGrotesque-ExtraBold.ttf");
 }
 
+@font-face {
+  font-family: "manrope-light";
+  src: url("../assets/fonts/manrope/light.otf");
+}
+@font-face {
+  font-family: "manrope-regular";
+  src: url("../assets/fonts/manrope/regular.otf");
+}
+@font-face {
+  font-family: "manrope-medium";
+  src: url("../assets/fonts/manrope/medium.otf");
+}
+@font-face {
+  font-family: "manrope-bold";
+  src: url("../assets/fonts/manrope/bold.otf");
+}
+@font-face {
+  font-family: "manrope-semibold";
+  src: url("../assets/fonts/manrope/semibold.otf");
+}
+
+@font-face {
+  font-family: "inter-light";
+  src: url("../assets/fonts/inter/Inter-Light-BETA.otf");
+}
+@font-face {
+  font-family: "inter-regular";
+  src: url("../assets/fonts/inter/Inter-Regular.otf");
+}
+@font-face {
+  font-family: "inter-medium";
+  src: url("../assets/fonts/inter/Inter-Medium.otf");
+}
+@font-face {
+  font-family: "inter-bold";
+  src: url("../assets/fonts/inter/Inter-Bold.otf");
+}
+@font-face {
+  font-family: "inter-semi-bold";
+  src: url("../assets/fonts/inter/Inter-SemiBold.otf");
+}
+
+@font-face {
+  font-family: "jakarta-regular";
+  src: url("../assets/fonts/plus-jakarta-sans/PlusJakartaSans[wght].ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "jakarta-medium";
+  src: url("../assets/fonts/plus-jakarta-sans/PlusJakartaSans[wght].ttf");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "jakarta-semi-bold";
+  src: url("../assets/fonts/plus-jakarta-sans/PlusJakartaSans[wght].ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "jakarta-bold";
+  src: url("../assets/fonts/plus-jakarta-sans/PlusJakartaSans[wght].ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
 .fixed-background {
   background-image: url("../assets/svg/white-mobile-header.svg");
   background-repeat: no-repeat;
   background-position: right;
   background-size: contain;
-  
 }
 
 @theme inline {
@@ -103,7 +170,20 @@
   --font-grotesk-medium: "grotesk-medium";
   --font-grotesk-semi-bold: "grotesk-semi-bold";
   --font-grotesk-extra-bold: "grotesk-extra-bold";
-
+  --font-manrope-medium: "manrope-medium";
+  --font-manrope-light: "manrope-light";
+  --font-manrope-regular: "manrope-regular";
+  --font-manrope-bold: "manrope-bold";
+  --font-manrope-semibold: "manrope-semibold";
+  --font-inter-light: "inter-light";
+  --font-inter-regular: "inter-regular";
+  --font-inter-medium: "inter-medium";
+  --font-inter-bold: "inter-bold";
+  --font-inter-semibold: "inter-semi-bold";
+  --font-jakarta-regular: "jakarta-regular";
+  --font-jakarta-medium: "jakarta-medium";
+  --font-jakarta-semibold: "jakarta-semi-bold";
+  --font-jakarta-bold: "jakarta-bold";
   /*--font-sans: var(--font-geist-sans);*/
   /*--font-mono: var(--font-geist-mono);*/
 }
@@ -200,7 +280,6 @@
   background-size: cover;
   background-position: center;
 }
-
 
 .ant-switch-checked {
   background-color: black !important;
