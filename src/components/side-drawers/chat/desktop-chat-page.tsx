@@ -43,8 +43,9 @@ export const DesktopChatSideDrawer = ({
             <div className="">
               {!chatDetailLoading &&
                 !chatDetail?.isExpired &&
-                !chatDetail?.isLocked && (
-                  <ChatInput bgWhite handleMessage={handleSendMessage} />
+                !chatDetail?.isLocked &&
+                !chatDetail?.isProcessed && (
+                  <ChatInput  handleMessage={handleSendMessage} />
                 )}
             </div>
           </div>
