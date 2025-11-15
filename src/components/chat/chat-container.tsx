@@ -55,7 +55,8 @@ export const ChatContainer = ({
       <div className="shrink-0">
         {!chatDetailLoading &&
           !chatDetail?.isExpired &&
-          !chatDetail?.isLocked && (
+          !chatDetail?.isLocked &&
+          !chatDetail?.isProcessed && (
             <ChatInput handleMessage={handleSendMessage} bgWhite={bgWhite} />
           )}
       </div>
