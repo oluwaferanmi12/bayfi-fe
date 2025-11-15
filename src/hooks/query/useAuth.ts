@@ -95,6 +95,6 @@ export const useLogout = (sc : (val: any) => void) => {
     },
     onSuccess: (data) => {
       sc(data)
-    }
+    },
   })
 }

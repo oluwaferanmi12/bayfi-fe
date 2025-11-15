@@ -64,9 +64,9 @@ export const UserResponseContainer = ({
 
         <div className="mt-2">
           {message.message && (
-            <p className="text-[#292929] text-sm font-grotesk-medium">
+            <pre className="text-[#292929] whitespace-pre-wrap text-sm font-grotesk-medium">
               {message.message}
-            </p>
+            </pre>
           )}
         </div>
         <div className="mt-2">

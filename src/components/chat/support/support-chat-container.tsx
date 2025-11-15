@@ -59,9 +59,9 @@ export const SupportChatContainer = ({ message }: { message: Message }) => {
           </Row>
         )}
         <div>
-          <p className="text-[#292929] text-sm font-grotesk-medium">
+          <pre className="text-[#292929] whitespace-pre-wrap text-sm font-grotesk-medium">
             {message.message}
-          </p>
+          </pre>
           <div className="mt-2">
             <p className="font-grotesk-regular text-xs">
               {messageDateFormatter(message.createdAt)}

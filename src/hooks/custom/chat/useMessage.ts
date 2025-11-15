@@ -15,6 +15,7 @@ export const useChatMessage = (
   const { client, isConnected, subscribe } = useStompClient({
     autoConnect: connectToChat,
   });
+  const [showInput, setShowInput] = useState(false);
   const { data, isPending: messageLoading } = useGetOneChat(chatId!);
   const { data: chatDetail, isPending: chatDetailLoading } =
     useGetChatDetail(chatId);
@@ -61,11 +62,23 @@ export const useChatMessage = (
     }
   }, [isConnected, client, subscribe]);
 
+  useEffect(() => {
+    if (
+      !chatDetailLoading &&
+      !chatDetail?.isExpired &&
+      !chatDetail?.isLocked &&
+      !chatDetail?.isProcessed
+    ) {
+      setShowInput(true);
+    }
+  }, [chatDetail, chatDetailLoading]);
+
   return {
     messages,
     messageLoading,
     handleSendMessage,
     chatDetail,
     chatDetailLoading,
+    showInput
   };
 };

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { MessageWrapper } from "@/components/chat/message-wrapper";
@@ -17,6 +16,7 @@ function MChatDetails() {
     handleSendMessage,
     chatDetail,
     chatDetailLoading,
+    showInput,
   } = useChatMessage(chatId);
 
   useEffect(() => {
@@ -34,11 +34,7 @@ function MChatDetails() {
           chatDetail={chatDetail}
         />
 
-        {!chatDetailLoading &&
-          !chatDetail?.isExpired &&
-          !chatDetail?.isLocked && (
-            <ChatInput bgWhite handleMessage={handleSendMessage} />
-          )}
+        {showInput && <ChatInput bgWhite handleMessage={handleSendMessage} />}
       </div>
     </div>
   );
