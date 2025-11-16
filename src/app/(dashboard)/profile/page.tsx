@@ -9,47 +9,23 @@ import profilePlaceholder from "@/assets/svg/profile-default-avatar.svg";
 import Image from "next/image";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
-import { useFetchProfile, useUpdateProfile } from "@/hooks/query/useProfile";
-import { ProfileDataInterface } from "@/types/profile.types";
-import { useQueryClient } from "@tanstack/react-query";
+import { useCustomProfile } from "@/hooks/custom/profile/useCustomProfile";
 
 function ProfileSetting() {
-  const queryClient = useQueryClient();
-  const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    verified: false,
-  });
-  const { data: profileData } = useFetchProfile();
-  const profileMutate = useUpdateProfile(() => {
-    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
-  });
-  const handleUpdateProfile = () => {
-    const { firstName, lastName, phoneNumber } = formData;
-    profileMutate.mutate({
-      firstName,
-      lastName,
-      phoneNumber,
-      avatar: "avatar-1",
-    });
-  };
-
-  // Update form data when profile data is loaded
-  useEffect(() => {
-    if (profileData) {
-      setFormData({
-        firstName: profileData.firstName || "",
-        lastName: profileData.lastName || "",
-        email: profileData.email || "",
-        phoneNumber: profileData.phoneNumber || "",
-        verified: profileData.verified,
-      });
-    }
-  }, [profileData]);
-
+  const {
+    activeProfile,
+    formData,
+    setFormData,
+    saveProfileLoading,
+    handleUpdateProfile,
+    setActiveProfile,
+    handlePreviewImage,
+    handleRemoveProfileImage,
+    previewUrl,
+    inputRef,
+    handleSaveImage,
+    saveImageLoading,
+  } = useCustomProfile();
   return (
     <div className="rounded-lg bg-white ">
       <div className="p-4 border-b border-[#EAECF0]">
@@ -75,13 +51,59 @@ function ProfileSetting() {
                   <div className="flex flex-col items-center justify-center">
                     {activeProfile === "setting" && (
                       <div className="w-full flex flex-col items-center justify-center">
-                        <span>
-                          <Image
-                            className="w-[120px] aspect-square"
-                            src={profilePlaceholder}
-                            alt=""
-                          />
-                        </span>
+                        <div className="flex flex-col items-center">
+                          <div className="relative">
+                            <span className="absolute w-[120px] opacity-0 overflow-hidden h-[120px]">
+                              <input
+                                ref={inputRef}
+                                onChange={(e) => {
+                                  if (e.target.files) {
+                                    handlePreviewImage(e.target.files[0]);
+                                  }
+                                }}
+                                className="h-full"
+                                accept="image/*"
+                                type="file"
+                              />
+                            </span>
+                            <Image
+                              width={120}
+                              height={120}
+                              className="w-[120px] aspect-square rounded-full object-cover"
+                              src={
+                                formData.avatar
+                                  ? formData.avatar
+                                  : profilePlaceholder
+                              }
+                              alt=""
+                            />
+                          </div>
+                          <div className="flex items-center mt-2 gap-2">
+                            {(formData.avatar || previewUrl) && (
+                              <Button
+                                loading={saveProfileLoading}
+                                text="Remove"
+                                type="bgPlain"
+                                smallerType
+                                action={() => {
+                                  handleRemoveProfileImage();
+                                }}
+                              />
+                            )}
+                            {previewUrl && (
+                              <Button
+                                loading={saveImageLoading}
+                                text="Save Image"
+                                type="bgGreen"
+                                action={() => {
+                                  handleSaveImage();
+                                }}
+                                smallerType
+                              />
+                            )}
+                          </div>
+                        </div>
+
                         <div className="mt-4 w-full">
                           <div className="flex items-center gap-4 w-full">
                             <GInput
@@ -127,16 +149,9 @@ function ProfileSetting() {
                               }))
                             }
                           />
-                          {/* <GInput
-                            label="Date of Birth"
-                            placeholder="DD-MM-YYYY"
-                          />
-                          <GInput
-                            label="Address"
-                            placeholder="Street Address"
-                          /> */}
+
                           <Button
-                            loading={profileMutate.isPending}
+                            loading={saveProfileLoading}
                             text="Save changes"
                             type="bgGreen"
                             fullWidth

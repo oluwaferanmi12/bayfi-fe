@@ -30,7 +30,9 @@ export const Button = ({
             iconPosition === "both" &&
             iconLeft && <Image src={iconLeft} alt="" />
           )}
-          <p className="flex items-center text-sm font-grotesk-semi-bold lg:text-base">
+          <p
+            className={`flex items-center text-sm font-grotesk-semi-bold lg:text-base ${smallerType && "mb-1"}`}
+          >
             {text}
           </p>
           {icon && iconPosition === "right" ? (

@@ -4,4 +4,4 @@ export interface Country {
   name: string;
 }
 
-export type ImageFolderType = "flag" | "cards" | 'chat-transaction'
+export type ImageFolderType = "flag" | "cards" | "chat-transaction" | "profile";
