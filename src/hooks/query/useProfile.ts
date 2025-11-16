@@ -22,3 +22,12 @@ export const useUpdateProfile = (sc: (val: any) => void) => {
     onSuccess: sc,
   });
 };
+
+export const useUpdatePin = () => {
+
+}
+
+
+export const useSavePin = () => {
+  
+}
