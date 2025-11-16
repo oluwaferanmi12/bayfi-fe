@@ -37,6 +37,8 @@ import { DashboardTransactionWrapper } from "@/components/transaction/dashboard-
 import giftCardActionIcon from "@/assets/svg/trade-giftcard-dashboard.svg";
 import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
 import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
+import { useGetWallet } from "@/hooks/query/useWallet";
+import { FormatNumber } from "@/utils/formatter";
 
 function Dashboard() {
   const [depositModal, setDepositModal] = useState(false);
@@ -50,6 +52,7 @@ function Dashboard() {
   const [showDepositQR, setShowDepositQR] = useState(false);
   const [showBuyCrypto, setShowBuyCrypto] = useState(false);
   const [showSelectWallet, setShowSelectWallet] = useState(false);
+  const { data: walletDetails } = useGetWallet();
   return (
     <>
       <div className="hidden lg:block">
@@ -348,7 +351,10 @@ function Dashboard() {
                 </div>
 
                 <div className="py-4">
-                  <Text type="number-big" value="NGN 200,000.00" />
+                  <Text
+                    type="number-big"
+                    value={`NGN ${FormatNumber(walletDetails?.walletBalance ?? 0)}`}
+                  />
                 </div>
                 <div className="flex items-center gap-2 justify-center">
                   <button
