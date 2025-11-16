@@ -1,11 +1,24 @@
-import { fetchUserProfileService } from "@/services/profile.service";
-import { useQuery } from "@tanstack/react-query";
+import {
+  fetchUserProfileService,
+  updateProfile,
+} from "@/services/profile.service";
+import { PostProfileInterface } from "@/types/profile.types";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useFetchProfile = () => {
-    return useQuery({
-        queryFn: async () => {
-            return await fetchUserProfileService();
-        },
-        queryKey: ["get-profile"],
-    });
-}
+  return useQuery({
+    queryFn: async () => {
+      return await fetchUserProfileService();
+    },
+    queryKey: ["get-profile"],
+  });
+};
+
+export const useUpdateProfile = (sc: (val: any) => void) => {
+  return useMutation({
+    mutationFn: (payload: PostProfileInterface) => {
+      return updateProfile(payload);
+    },
+    onSuccess: sc,
+  });
+};

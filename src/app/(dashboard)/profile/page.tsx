@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text } from "@/components/texts/text";
 import { Col, Row } from "antd";
 import { ProfileNav } from "@/components/wrappers/profile/profile-nav";
@@ -9,34 +9,47 @@ import profilePlaceholder from "@/assets/svg/profile-default-avatar.svg";
 import Image from "next/image";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
-import { useFetchProfile } from "@/hooks/query/useProfile";
+import { useFetchProfile, useUpdateProfile } from "@/hooks/query/useProfile";
 import { ProfileDataInterface } from "@/types/profile.types";
+import { useQueryClient } from "@tanstack/react-query";
 
 function ProfileSetting() {
+  const queryClient = useQueryClient();
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
-    phoneNumber: ""
+    phoneNumber: "",
+    verified: false,
   });
-  
-  const profileDataFn = useFetchProfile();
-  const profileData: ProfileDataInterface = profileDataFn?.data;
+  const { data: profileData } = useFetchProfile();
+  const profileMutate = useUpdateProfile(() => {
+    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+  });
+  const handleUpdateProfile = () => {
+    const { firstName, lastName, phoneNumber } = formData;
+    profileMutate.mutate({
+      firstName,
+      lastName,
+      phoneNumber,
+      avatar: "avatar-1",
+    });
+  };
 
   // Update form data when profile data is loaded
-  React.useEffect(() => {
+  useEffect(() => {
     if (profileData) {
       setFormData({
         firstName: profileData.firstName || "",
         lastName: profileData.lastName || "",
         email: profileData.email || "",
-        phoneNumber: profileData.phoneNumber || ""
+        phoneNumber: profileData.phoneNumber || "",
+        verified: profileData.verified,
       });
     }
   }, [profileData]);
- 
- 
+
   return (
     <div className="rounded-lg bg-white ">
       <div className="p-4 border-b border-[#EAECF0]">
@@ -71,31 +84,48 @@ function ProfileSetting() {
                         </span>
                         <div className="mt-4 w-full">
                           <div className="flex items-center gap-4 w-full">
-                            <GInput 
-                              label="First name" 
+                            <GInput
+                              label="First name"
                               placeholder="Enter first name"
                               inputVal={formData.firstName}
-                              setInput={(val) => setFormData(prev => ({ ...prev, firstName: val }))}
+                              setInput={(val) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  firstName: val,
+                                }))
+                              }
                             />
-                            <GInput 
-                              label="Last name" 
+                            <GInput
+                              label="Last name"
                               placeholder="Enter last name"
                               inputVal={formData.lastName}
-                              setInput={(val) => setFormData(prev => ({ ...prev, lastName: val }))}
+                              setInput={(val) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  lastName: val,
+                                }))
+                              }
                             />
                           </div>
                           <GInput
                             label="Email address"
                             placeholder="Enter your email"
                             inputVal={formData.email}
-                            setInput={(val) => setFormData(prev => ({ ...prev, email: val }))}
+                            setInput={(val) =>
+                              setFormData((prev) => ({ ...prev, email: val }))
+                            }
                             disabled
                           />
                           <GInput
                             label="Phone Number"
                             placeholder="Enter your phone number"
                             inputVal={formData.phoneNumber}
-                            setInput={(val) => setFormData(prev => ({ ...prev, phoneNumber: val }))}
+                            setInput={(val) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                phoneNumber: val,
+                              }))
+                            }
                           />
                           {/* <GInput
                             label="Date of Birth"
@@ -106,10 +136,13 @@ function ProfileSetting() {
                             placeholder="Street Address"
                           /> */}
                           <Button
-                            loading={false}
+                            loading={profileMutate.isPending}
                             text="Save changes"
                             type="bgGreen"
                             fullWidth
+                            action={() => {
+                              handleUpdateProfile();
+                            }}
                           />
                         </div>
                       </div>

@@ -5,3 +5,4 @@ export * from "./transaction.service";
 export * from "./chat.service";
 export * from "./wallet.service";
 export * from "./payment.service";
+export * from "./profile.service";

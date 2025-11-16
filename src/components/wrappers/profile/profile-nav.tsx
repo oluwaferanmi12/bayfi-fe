@@ -32,8 +32,6 @@ export const ProfileNav = ({
   const profileDataFn =  useFetchProfile();
   const profileData: ProfileDataInterface | undefined = profileDataFn?.data;
 
-  console.log("Profile data", profileData);
-
   // const logoutMutate = useLogout((data) => {
   //   // Cookies.remove("loginDetails");
   //   router.push("/login");

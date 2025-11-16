@@ -5,3 +5,10 @@ export interface ProfileDataInterface {
   phoneNumber: string;
   verified: boolean;
 }
+
+export interface PostProfileInterface {
+  firstName: string;
+  lastName: string;
+  avatar: string;
+  phoneNumber: string;
+}
