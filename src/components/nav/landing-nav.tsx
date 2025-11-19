@@ -8,7 +8,7 @@ export const LandingNav = () => {
   return (
     <nav className="fixed top-0 w-full">
       <GeneralLandingPageWrapper>
-        <div className="flex items-center justify-between py-5">
+        <div className="flex items-center justify-between py-5 ">
           <span>
             <Image src={logoWhite} alt="" />
           </span>

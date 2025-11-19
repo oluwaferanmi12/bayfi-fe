@@ -2,6 +2,7 @@ import { Col, Row } from "antd";
 import Link from "next/link";
 import bitcoins from "@/assets/svg/bitcoin-landing.svg";
 import Image from "next/image";
+import landingPhone from "@/assets/svg/landing-page-phone.svg";
 
 export default function Home() {
   return (
@@ -10,9 +11,9 @@ export default function Home() {
         <Row className="w-full" justify={"center"}>
           <Col xs={12}>
             <div className="text-[64px] relative text-white text-center font-manrope-medium">
-              <h1>Trade it, Get Cash</h1>
+              <h1 className="text-center">Trade it, Get Cash</h1>
               <h1 className="bg-gradient-to-b from-white to-white/20 bg-clip-text text-transparent">
-                <span>Fast fast. No Wahala</span>
+                <span>Fast fast, No Wahala</span>
               </h1>
             </div>
             <p className="text-[#EAEAF1] font-manrope-regular text-lg my-4 text-center">
@@ -29,6 +30,9 @@ export default function Home() {
             </div>
             <div className="flex items-center justify-center mt-4">
               <Image src={bitcoins} alt="" />
+            </div>
+            <div className="absolute border border-[red] w-full flex justify-center">
+              <Image src={landingPhone} alt="" />
             </div>
           </Col>
         </Row>
