@@ -1,5 +1,6 @@
 import {
   fetchUserProfileService,
+  logout,
   updateProfile,
 } from "@/services/profile.service";
 import { PostProfileInterface } from "@/types/profile.types";
@@ -23,11 +24,13 @@ export const useUpdateProfile = (sc: (val: any) => void) => {
   });
 };
 
-export const useUpdatePin = () => {
+export const useUpdatePin = () => {};
 
-}
+export const useSavePin = () => {};
 
-
-export const useSavePin = () => {
-  
-}
+export const useLogout = (sc: (val: any) => void) => {
+  return useMutation({
+    mutationFn: logout,
+    onSuccess: sc,
+  });
+};

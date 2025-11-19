@@ -15,8 +15,8 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useFetchProfile } from "@/hooks/query/useProfile";
 import { ProfileDataInterface } from "@/types/profile.types";
+import { useLogout } from "@/hooks/query";
 // import { useLogout } from "@/hooks/query";
-
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -29,13 +29,14 @@ export const ProfileNav = ({
 }) => {
   const router = useRouter();
 
-  const profileDataFn =  useFetchProfile();
+  const profileDataFn = useFetchProfile();
   const profileData: ProfileDataInterface | undefined = profileDataFn?.data;
-  const logoutFn = (() => {
+  const logOutMutate = useLogout((val) => {
+    console.log(val);
     Cookies.remove("loginDetails");
     router.push("/login");
   });
-  
+
   return (
     <>
       <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
@@ -49,7 +50,9 @@ export const ProfileNav = ({
         <IncompleteKycBadge />
         <div className="flex items-center flex-col  justify-center">
           <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl">
-            {profileData ? `${profileData.firstName} ${profileData.lastName}` : 'Loading...'}
+            {profileData
+              ? `${profileData.firstName} ${profileData.lastName}`
+              : "Loading..."}
           </p>
           <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base">
             Kiitan234
@@ -99,7 +102,7 @@ export const ProfileNav = ({
             icon={logoutIcon}
             text="Logout"
             logoutType
-            clickAction={() => logoutFn()}
+            clickAction={() => logOutMutate.mutate()}
           />
         </div>
       </div>

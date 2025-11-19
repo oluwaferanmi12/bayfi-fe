@@ -12,3 +12,8 @@ export interface PostProfileInterface {
   avatar: string;
   phoneNumber: string;
 }
+
+export interface UpdatePin {
+  oldPin: string;
+  newPin: string;
+}
