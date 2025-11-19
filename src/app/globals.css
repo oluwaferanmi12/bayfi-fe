@@ -286,3 +286,10 @@
 }
 
 /* Optional: change the handle color too */
+
+.hero-bg {
+  background-image: url("../assets/svg/hero-bg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
