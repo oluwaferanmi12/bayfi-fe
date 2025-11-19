@@ -31,8 +31,8 @@ export default function Home() {
             <div className="flex items-center justify-center mt-4">
               <Image src={bitcoins} alt="" />
             </div>
-            <div className="absolute border border-[red] w-full flex justify-center">
-              <Image src={landingPhone} alt="" />
+            <div className="absolute w-full flex justify-center ">
+              <Image src={landingPhone} alt="" className="border-6 rounded-[48px] border-[#BEDD3A]" />
             </div>
           </Col>
         </Row>

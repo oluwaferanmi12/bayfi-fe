@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const LandingNav = () => {
   return (
-    <nav className="fixed top-0 w-full">
+    <nav className="fixed top-0 w-full z-20">
       <GeneralLandingPageWrapper>
         <div className="flex items-center justify-between py-5 ">
           <span>
