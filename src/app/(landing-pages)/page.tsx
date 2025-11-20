@@ -11,7 +11,7 @@ import seamlessIntegration from "@/assets/svg/seamless-integration.svg";
 export default function Home() {
   return (
     <>
-      <section className="min-h-screen mb-[500px] h-screen bg-[#1C1B1F] hero-bg flex justify-center items-center flex-col">
+      <section className="min-h-screen mb-[600px] h-screen bg-[#1C1B1F] hero-bg flex justify-center items-center flex-col">
         <Row className="w-full" justify={"center"}>
           <Col xs={12}>
             <div className="text-[64px] relative text-white text-center font-manrope-medium">
@@ -56,7 +56,7 @@ export default function Home() {
           </div>
           <Row gutter={24} className="my-20">
             <Col xs={8}>
-              <div className="min-h-[520px] flex flex-col items-center w-full p-4 py-8 bg-[#000000] rounded-[10px]">
+              <div className="min-h-[520px] h-[520px] flex flex-col items-center w-full p-4 py-8 bg-[#000000] rounded-[10px]">
                 <p className="text-white font-inter-medium text-xl text-center">
                   Bouncer Level Security
                 </p>
@@ -72,7 +72,7 @@ export default function Home() {
               </div>
             </Col>
             <Col xs={8}>
-              <div className="min-h-[520px] flex flex-col items-center p-4 py-8 w-full bg-bayfi-grey-500 rounded-[10px]">
+              <div className="min-h-[520px] h-[520px] flex flex-col items-center p-4 py-8 w-full bg-bayfi-grey-500 rounded-[10px]">
                 <p className="font-inter-medium text-xl text-black text-center">
                   First Time Ease
                 </p>
@@ -87,7 +87,7 @@ export default function Home() {
               </div>
             </Col>
             <Col xs={8}>
-              <div className="min-h-[520px] flex flex-col items-center p-4 py-8 w-full bg-[#9FE870] rounded-[10px]">
+              <div className="min-h-[520px] h-[520px] flex flex-col items-center p-4 py-8 w-full bg-[#9FE870] rounded-[10px]">
                 <p className="font-inter-medium text-xl text-black text-center">
                   Seamless Integration
                 </p>
@@ -100,6 +100,13 @@ export default function Home() {
               </div>
             </Col>
           </Row>
+        </GeneralLandingPageWrapper>
+      </section>
+      <section className="bg-black">
+        <GeneralLandingPageWrapper>
+          <div className="my-12">
+
+          </div>
         </GeneralLandingPageWrapper>
       </section>
     </>
