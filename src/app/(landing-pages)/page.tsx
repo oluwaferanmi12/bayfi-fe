@@ -7,8 +7,39 @@ import GeneralLandingPageWrapper from "@/components/wrappers/lading-wrapper/gene
 import bouncer from "@/assets/svg/bouncer.svg";
 import firstTimeEase from "@/assets/svg/first-time-ease.svg";
 import seamlessIntegration from "@/assets/svg/seamless-integration.svg";
+import arrowWithBg from "@/assets/svg/arrow-with-white-bg.svg";
+import feature1 from "@/assets/svg/feature-1.svg";
+import feature2 from "@/assets/svg/feature-2.svg";
+import feature3 from "@/assets/svg/feature-3.svg";
+import feature4 from "@/assets/svg/feature-4.svg";
 
 export default function Home() {
+  const featureArray = [
+    {
+      mainText: "Trade Giftcards",
+      subText:
+        "Turn your giftcards to instant credit alerts. We accept Apple, RazerGold, Steam, Sephora and lots more.",
+      icon: feature1,
+    },
+    {
+      mainText: "Trade Crypto",
+      subText:
+        "Swap your Bitcoin and other coins faster than Aviator eats your money",
+      icon: feature2,
+    },
+    {
+      mainText: "The Calma Experience",
+      subText:
+        "You can now chat with a representative while your transaction is processing. Your funds are secure with us.",
+      icon: feature3,
+    },
+    {
+      mainText: "Pay for Services (Coming soon)",
+      subText:
+        "Airtime, data, electricity, and other utilities — Pay fast and secure",
+      icon: feature4,
+    },
+  ];
   return (
     <>
       <section className="min-h-screen mb-[600px] h-screen bg-[#1C1B1F] hero-bg flex justify-center items-center flex-col">
@@ -104,9 +135,64 @@ export default function Home() {
       </section>
       <section className="bg-black">
         <GeneralLandingPageWrapper>
-          <div className="my-12">
-
-          </div>
+          <Row className="my-20">
+            <Col xs={12} className="border-r border-[rgba(255,255,255,0.2)]">
+              <h3>
+                <span className="rounded-full font-jakarta-semibold text-white border border-[#9FE870] py-2 px-4">
+                  FEATURES
+                </span>
+              </h3>
+              <div className="text-white text-5xl font-jakarta-semibold my-6 leading-16">
+                <p>Our You-nique</p>
+                <p>Features</p>
+              </div>
+              <div>
+                <p className="text-[#9A9A9A] text-lg font-jakarta-regular w-4/5">
+                  Automation & workflow features include a drag & drop builder,
+                  automated task assignments, conditional with good triggers,
+                  and api integrations.
+                </p>
+              </div>
+              <div className="flex gap-4 border-b border-[rgba(255,255,255,0.2)] w-4/5 py-16">
+                <div>
+                  <div className="h-[30px] border border-[#9FE870]"></div>
+                  <div className="h-[30px] border border-[#9A9A9A]"></div>
+                  <div className="h-[30px] border border-[#9A9A9A]"></div>
+                </div>
+                <div>
+                  <p className="text-[#9A9A9A] font-jakarta-regular  text-lg">
+                    “Working with Silver feels like a partnership; as we
+                    continued to use their tool and found more use cases. ”
+                  </p>
+                </div>
+              </div>
+              <div className="mt-12">
+                <button className="bg-[#9FE870] rounded-full py-2 px-4 flex items-center gap-4 font-jakarta-semibold">
+                  <p>Try it now</p>
+                  <Image src={arrowWithBg} alt="" />
+                </button>
+              </div>
+            </Col>
+            <Col xs={12}>
+              <div className="w-4/5 ml-auto">
+                {featureArray.map((item, index) => {
+                  return (
+                    <div key={index} className="flex items-start gap-6 mb-16">
+                      <Image src={item.icon} alt="" />
+                      <div>
+                        <p className="text-xl font-jakarta-semibold mb-4 text-white">
+                          {item.mainText}
+                        </p>
+                        <p className="text-[#9A9A9A] text-lg font-jakarta-regular">
+                          {item.subText}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Col>
+          </Row>
         </GeneralLandingPageWrapper>
       </section>
     </>

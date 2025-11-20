@@ -4,7 +4,6 @@ import Image from "next/image";
 import GeneralLandingPageWrapper from "../wrappers/lading-wrapper/general-landing-wrapper";
 import Link from "next/link";
 
-
 export const LandingNav = () => {
   return (
     <nav className="fixed top-0 w-full z-20">
