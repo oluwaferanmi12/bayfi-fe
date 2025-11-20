@@ -3,11 +3,15 @@ import Link from "next/link";
 import bitcoins from "@/assets/svg/bitcoin-landing.svg";
 import Image from "next/image";
 import landingPhone from "@/assets/svg/landing-page-phone.svg";
+import GeneralLandingPageWrapper from "@/components/wrappers/lading-wrapper/general-landing-wrapper";
+import bouncer from "@/assets/svg/bouncer.svg";
+import firstTimeEase from "@/assets/svg/first-time-ease.svg";
+import seamlessIntegration from "@/assets/svg/seamless-integration.svg";
 
 export default function Home() {
   return (
     <>
-      <section className="min-h-screen mb-[480px] h-screen bg-[#1C1B1F] hero-bg flex justify-center items-center flex-col">
+      <section className="min-h-screen mb-[500px] h-screen bg-[#1C1B1F] hero-bg flex justify-center items-center flex-col">
         <Row className="w-full" justify={"center"}>
           <Col xs={12}>
             <div className="text-[64px] relative text-white text-center font-manrope-medium">
@@ -41,7 +45,63 @@ export default function Home() {
           </Col>
         </Row>
       </section>
-      <div className="text-black">Next content to be tested</div>
+      <section>
+        <GeneralLandingPageWrapper>
+          <p className="text-[#232323] text-center font-inter-semibold text-5xl">
+            Bayfi makes life eazii
+          </p>
+          <div className="text-[#9A9A9A] w-1/2 mx-auto text-center mt-4 font-inter-light text-lg">
+            <p>With our user-friendly interface, you can change all</p>
+            <p>your crypto and giftcards to cash in seconds.</p>
+          </div>
+          <Row gutter={24} className="my-20">
+            <Col xs={8}>
+              <div className="min-h-[520px] flex flex-col items-center w-full p-4 py-8 bg-[#000000] rounded-[10px]">
+                <p className="text-white font-inter-medium text-xl text-center">
+                  Bouncer Level Security
+                </p>
+                <div className="mt-4">
+                  <Image src={bouncer} alt="" />
+                </div>
+                <div>
+                  <p className="text-lg font-inter-regular text-[#9A9A9A]">
+                    Trade crypto sell gift cards or withdraw funds in just a few
+                    taps all protected with top level security.
+                  </p>
+                </div>
+              </div>
+            </Col>
+            <Col xs={8}>
+              <div className="min-h-[520px] flex flex-col items-center p-4 py-8 w-full bg-bayfi-grey-500 rounded-[10px]">
+                <p className="font-inter-medium text-xl text-black text-center">
+                  First Time Ease
+                </p>
+                <div className="mt-4">
+                  <Image src={firstTimeEase} alt="" />
+                </div>
+                <p className="text-lg font-inter-regular text-black mt-12">
+                  Setting up your account, eazi! Trading digital assets, eazi!
+                  No need to ask for a masterclass or any format. Enjoy 24/7
+                  soft transactions.
+                </p>
+              </div>
+            </Col>
+            <Col xs={8}>
+              <div className="min-h-[520px] flex flex-col items-center p-4 py-8 w-full bg-[#9FE870] rounded-[10px]">
+                <p className="font-inter-medium text-xl text-black text-center">
+                  Seamless Integration
+                </p>
+                <div className="mt-4">
+                  <Image src={seamlessIntegration} alt="" />
+                </div>
+                <p className="text-lg font-inter-regular text-black text-justify mt-12">
+                  Keep your wallet safe by using triple protection.
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </GeneralLandingPageWrapper>
+      </section>
     </>
   );
 }
