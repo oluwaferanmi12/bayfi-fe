@@ -303,3 +303,10 @@
   background-color: transparent;
 
 }
+
+.zigZagBg {
+  background-image: url("../assets/svg/zig-zag.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  
+}
