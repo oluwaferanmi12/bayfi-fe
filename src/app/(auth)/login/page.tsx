@@ -8,9 +8,6 @@ import { Col, Row } from "antd";
 import logo from "@/assets/svg/logo.svg";
 import Image from "next/image";
 import inputPasswordIcon from "@/assets/svg/input-password-icon.svg";
-import googleIcon from "@/assets/svg/googleIcon.svg";
-import facebookIcon from "@/assets/svg/facebookIcon.svg";
-import appleIcon from "@/assets/svg/appleIcon.svg";
 import Link from "next/link";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
@@ -26,8 +23,15 @@ const Login = () => {
 
   const loginMutate = useLogin((data) => {
     Cookies.set("loginDetails", JSON.stringify(data));
-    toast.success("Login Successful");
-    router.push("/dashboard");
+    if (data?.userDetailsResponse?.verified) {
+      toast.success("Login Successful");
+      router.push("/dashboard");
+    } else {
+      const { email } = data.userDetailsResponse;
+      localStorage.setItem("userEmail", email);
+      router.push("/otp");
+      toast.warning("Verification required");
+    }
   });
 
   return (

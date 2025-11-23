@@ -18,7 +18,7 @@ const ForgotPassword = () => {
 
   const forgotPasswordEmailMutate = useForgotPasswordEmail((data) => {
     toast.success("An otp was sent to your email");
-    router.push("/forgot-password/verify-otp");
+    router.replace("/forgot-password/verify-otp");
 
   });
 
@@ -55,7 +55,7 @@ const ForgotPassword = () => {
                     forgotPasswordEmailMutate.mutate({email})
                   }}
                   type="bgGreen"
-                  text="Send reset link"
+                  text="Submit"
                   fullWidth
                   loading={forgotPasswordEmailMutate.isPending}
                 />

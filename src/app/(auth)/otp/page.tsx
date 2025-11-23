@@ -20,7 +20,6 @@ const Otp = () => {
   // const otpMedium = localStorage.getItem("userEmail") ?? "";
   // const email = localStorage.getItem("userEmail") ?? "";
   const router = useRouter();
-
   const verifyOtpMutate = useOtp((data) => {
     toast.success("Verification Successful");
     router.push("/login");

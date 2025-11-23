@@ -14,93 +14,91 @@ import appleIcon from "@/assets/svg/appleIcon.svg";
 import Link from "next/link";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLogin, useResetPassowrd } from "@/hooks/query";
 import { toast } from "sonner";
 import Cookies from "js-cookie";
 import { OTPInput } from "@/components/inputs/otp-input";
 
 const ResetPassword = () => {
-    const [email, setEmail] = useState("");
-    const [otp, setOtp] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmNewPassword, setConfirmNewPassword] = useState("");
-    const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const router = useRouter();
 
-    const resetPasswordMutate = useResetPassowrd((data) => {
-        toast.success("Reset Successful");
-        router.push("/login");
-    });
+  const resetPasswordMutate = useResetPassowrd((data) => {
+    toast.success("Reset Successful");
+    router.replace("/login");
+  });
 
+  useEffect(() => {
+    const email_ = localStorage.getItem("userEmail");
+    const otp = localStorage.getItem("otp");
+    setEmail(email_ ?? "");
+    setOtp(otp ?? "");
+  }, []);
 
+  return (
+    <Row className="h-full">
+      <Col lg={16} xs={24}>
+        <Row className="h-full" justify={"center"} align={"middle"}>
+          <Col lg={12} xs={22}>
+            <div className="mb-6">
+              <Image src={logo} alt="" />
+            </div>
+            <div className="bg-white  border border-bayfi-green-50 rounded-lg p-8 ">
+              <div className="flex justify-center flex-col items-center">
+                <Text value="Reset Password" type="header-32" />
+                <div className="mt-2">
+                  <Text
+                    type="header-subtext"
+                    value="Fill in correct details to reset your password"
+                  />
+                </div>
+              </div>
 
-
-    return (
-        <Row className="h-full">
-            <Col lg={16} xs={24}>
-                <Row className="h-full" justify={"center"} align={"middle"}>
-                    <Col lg={12} xs={22}>
-                        <div className="mb-6">
-                            <Image src={logo} alt="" />
-                        </div>
-                        <div className="bg-white  border border-bayfi-green-50 rounded-lg p-8 ">
-                            <div className="flex justify-center flex-col items-center">
-                                <Text value="Reset Password" type="header-32" />
-                                <div className="mt-2">
-                                    <Text
-                                        type="header-subtext"
-                                        value="Fill in correct details to reset your password"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="mt-6">
-                                <GInput
-                                    label="Email"
-                                    placeholder="Your email address"
-                                    icon={mailIcon}
-                                    setInput={setEmail}
-                                />
-
-                                <div className="flex flex-col gap-1 mb-1">
-                                    <Text type="input-text" value="Enter Otp" />
-                                    <OTPInput centered={false} value={otp} onChange={setOtp} />
-                                </div>
-                                <GInput
-                                    label="Password"
-                                    placeholder="Enter password"
-                                    icon={inputPasswordIcon}
-                                    type={"password"}
-                                    setInput={setNewPassword}
-                                />
-                                <GInput
-                                    label="Confirm Password"
-                                    placeholder="Confirm password"
-                                    icon={inputPasswordIcon}
-                                    type={"password"}
-                                    setInput={setConfirmNewPassword}
-                                />
-                            </div>
-                            <div className="mt-4">
-                                <Button
-                                    action={() => {
-                                        resetPasswordMutate.mutate({ email, otp, newPassword, confirmNewPassword });
-                                    }}
-                                    type="bgGreen"
-                                    text="Reset Password"
-                                    fullWidth
-                                    loading={resetPasswordMutate.isPending}
-                                />
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-            </Col>
-            <Col className="hideContainer" xs={8}>
-                <AnimatedAuthSide />
-            </Col>
+              <div className="mt-6">
+                <GInput
+                  label="Password"
+                  placeholder="Enter password"
+                  icon={inputPasswordIcon}
+                  type={"password"}
+                  setInput={setNewPassword}
+                />
+                <GInput
+                  label="Confirm Password"
+                  placeholder="Confirm password"
+                  icon={inputPasswordIcon}
+                  type={"password"}
+                  setInput={setConfirmNewPassword}
+                />
+              </div>
+              <div className="mt-4">
+                <Button
+                  action={() => {
+                    resetPasswordMutate.mutate({
+                      email,
+                      otp,
+                      newPassword,
+                      confirmNewPassword,
+                    });
+                  }}
+                  type="bgGreen"
+                  text="Reset Password"
+                  fullWidth
+                  loading={resetPasswordMutate.isPending}
+                />
+              </div>
+            </div>
+          </Col>
         </Row>
-    );
+      </Col>
+      <Col className="hideContainer" xs={8}>
+        <AnimatedAuthSide />
+      </Col>
+    </Row>
+  );
 };
 
 export default ResetPassword;

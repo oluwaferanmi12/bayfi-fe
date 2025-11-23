@@ -20,8 +20,9 @@ const VerifyOtp = () => {
   const router = useRouter();
 
   const verifyOtpMutate = useForgotPasswordOtp((data) => {
+    localStorage.setItem("otp", otp);
     toast.success("Verification Successful");
-    router.push("/forgot-password/reset");
+    router.replace("/forgot-password/reset");
   });
 
   const resendOtpMutate = useResendOtp((data) => {
@@ -47,7 +48,7 @@ const VerifyOtp = () => {
                 <div>
                   <Image src={likeIcon} alt="" />
                 </div>
-                <Text value="Account registered Successfuly" type="header-32" />
+                <Text value="Enter OTP" type="header-32" />
                 <div className="mt-2">
                   <Text
                     type="header-subtext"
