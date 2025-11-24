@@ -192,19 +192,7 @@ export default function Home() {
                   and api integrations.
                 </p>
               </div>
-              <div className="flex gap-4 border-b border-[rgba(255,255,255,0.2)] w-4/5 py-16">
-                <div>
-                  <div className="h-[30px] border border-[#9FE870]"></div>
-                  <div className="h-[30px] border border-[#9A9A9A]"></div>
-                  <div className="h-[30px] border border-[#9A9A9A]"></div>
-                </div>
-                <div>
-                  <p className="text-[#9A9A9A] font-jakarta-regular  text-lg">
-                    “Working with Silver feels like a partnership; as we
-                    continued to use their tool and found more use cases. ”
-                  </p>
-                </div>
-              </div>
+              
               <div className="mt-12">
                 <button className="bg-[#9FE870] rounded-full py-2 px-4 flex items-center gap-4 font-jakarta-semibold">
                   <p>Try it now</p>

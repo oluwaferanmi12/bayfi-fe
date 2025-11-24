@@ -12,6 +12,7 @@ export interface UserDetailResponse {
   role: string;
   userType: string;
   verified: boolean;
+  isPinCreated: boolean;
 }
 
 export interface LoginResponse {
