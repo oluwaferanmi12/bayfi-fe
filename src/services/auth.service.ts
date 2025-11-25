@@ -42,6 +42,10 @@ export const resetPasswordService = async(payload: ResetPasswordInterface) : Pro
   return data.data
 }
 
+export const createTransactionPin = async () => {
+  const result = await axiosInstance.post("/")
+}
+
 export const logoutService = async (): Promise<GeneralResponseInterface> => {
   const { data } = await axiosInstance.post("/auth/logout")
   return data.data

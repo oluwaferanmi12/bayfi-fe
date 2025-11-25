@@ -8,7 +8,7 @@ import helpIcon from "@/assets/svg/profile-help-icon.svg";
 import aboutIcon from "@/assets/svg/profile-about-icon.svg";
 import logoutIcon from "@/assets/svg/profile-logout-icon.svg";
 import arrowRightTop from "@/assets/svg/arrow-right-top.svg";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
 import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ import Cookies from "js-cookie";
 import { useFetchProfile } from "@/hooks/query/useProfile";
 import { ProfileDataInterface } from "@/types/profile.types";
 import { useLogout } from "@/hooks/query";
+import { isValidImageUrl } from "@/utils/checkValidImage";
 // import { useLogout } from "@/hooks/query";
 
 export const ProfileNav = ({
@@ -28,26 +29,41 @@ export const ProfileNav = ({
   noBg?: boolean;
 }) => {
   const router = useRouter();
-
+  const [imageUrl, setImageUrl] = useState("");
   const profileDataFn = useFetchProfile();
   const profileData: ProfileDataInterface | undefined = profileDataFn?.data;
   const logOutMutate = useLogout((val) => {
-    console.log(val);
     Cookies.remove("loginDetails");
     router.push("/login");
   });
+
+  useEffect(() => {
+    const checkImage = async () => {
+      try {
+        const result = await isValidImageUrl(profileData?.avatar ?? "");
+        if (result) {
+          setImageUrl(profileData?.avatar ?? "");
+        }
+      } catch (e) {}
+    };
+    checkImage();
+  }, [profileData]);
 
   return (
     <>
       <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
         <div className="flex items-center justify-center ">
-          <Image
-            className="border border-[#CBE461] rounded-full"
-            src={avatarPlacholder}
-            alt=""
-          />
+          <div className="w-[60px] h-[60px] overflow-hidden relative">
+            <Image
+              className="border object-cover w-full border-[#CBE461] rounded-full"
+              src={imageUrl ? imageUrl : avatarPlacholder}
+              alt=""
+              layout="fill"
+            />
+          </div>
         </div>
-        <IncompleteKycBadge />
+        {!profileData?.verified && <IncompleteKycBadge />}
+
         <div className="flex items-center flex-col  justify-center">
           <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl">
             {profileData
@@ -55,7 +71,7 @@ export const ProfileNav = ({
               : "Loading..."}
           </p>
           <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base">
-            Kiitan234
+            {profileData?.username}
           </p>
         </div>
         <div className="mt-4 pb-28 lg:pb-0">

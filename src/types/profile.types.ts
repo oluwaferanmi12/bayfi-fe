@@ -1,8 +1,14 @@
 export interface ProfileDataInterface {
+  id: string;
+  username: string;
   email: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  avatar: string;
+  role: string;
+  userType: string;
+  isPinCreated: boolean;
   verified: boolean;
 }
 

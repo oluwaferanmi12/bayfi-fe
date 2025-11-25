@@ -1,4 +1,4 @@
-import { forgotPasswordEmailService, forgotPasswordOtpVerificationService, login, logoutService, otpVerificationService, register, resendOtpVerificationService, resetPasswordService } from "@/services";
+import { createTransactionPin, forgotPasswordEmailService, forgotPasswordOtpVerificationService, login, logoutService, otpVerificationService, register, resendOtpVerificationService, resetPasswordService } from "@/services";
 import { ForgotPasswordEmailInterface, OtpVerificationInterface, PostLoginInterface, RegisterInterface, ResendOtpVerificationInterface, ResetPasswordInterface } from "@/types/auth.types";
 import { useMutation } from "@tanstack/react-query";
 
@@ -87,6 +87,14 @@ export const useResetPassowrd = (sc : (val: any) => void) => {
 }
 //############################## 
 
+export const useCreateTransactionPin = () => {
+  return useMutation({
+    mutationFn: () => {
+      return createTransactionPin()
+    }
+  })
+}
+
 // Logout
 export const useLogout = (sc : (val: any) => void) => {
   return useMutation({
@@ -98,3 +106,5 @@ export const useLogout = (sc : (val: any) => void) => {
     },
   })
 }
+
+

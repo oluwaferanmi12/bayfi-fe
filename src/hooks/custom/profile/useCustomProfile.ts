@@ -11,7 +11,7 @@ export const useCustomProfile = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const imageMutate = useSaveImage(() => {
+  const imageMutate = useSaveImage(async () => {
     setPreviewUrl("");
     // Before invalidating , delete the existinf file
     if (profileData?.avatar) {
@@ -19,9 +19,10 @@ export const useCustomProfile = () => {
     }
     handleInvalidateGetProfile();
   });
+
   const imageDeleteMutate = useDeleteImage(
     () => {
-      console.log("Value here");
+      // save the new image here
     },
     () => {}
   );
@@ -54,7 +55,9 @@ export const useCustomProfile = () => {
       firstName,
       lastName,
       phoneNumber,
-      avatar: "avatar-1",
+      avatar: imageMutate?.data?.data
+        ? imageMutate?.data?.data
+        : profileData?.avatar,
     });
   };
 
@@ -98,10 +101,16 @@ export const useCustomProfile = () => {
         email: profileData.email || "",
         phoneNumber: profileData.phoneNumber || "",
         verified: profileData.verified,
-        avatar: "",
+        avatar: profileData.avatar,
       });
     }
   }, [profileData]);
+
+  useEffect(() => {
+    if (imageMutate.data) {
+      handleUpdateProfile();
+    }
+  }, [imageMutate.data]);
 
   return {
     activeProfile,

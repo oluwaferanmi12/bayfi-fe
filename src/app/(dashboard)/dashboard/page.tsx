@@ -39,6 +39,7 @@ import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
 import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
 import { useGetWallet } from "@/hooks/query/useWallet";
 import { FormatNumber } from "@/utils/formatter";
+import { useGetTransaction } from "@/hooks/query";
 
 function Dashboard() {
   const [depositModal, setDepositModal] = useState(false);
@@ -53,6 +54,8 @@ function Dashboard() {
   const [showBuyCrypto, setShowBuyCrypto] = useState(false);
   const [showSelectWallet, setShowSelectWallet] = useState(false);
   const { data: walletDetails } = useGetWallet();
+  const { data: transactions, isPending: transactionLoading } =
+    useGetTransaction();
   return (
     <>
       <div className="hidden lg:block">
@@ -424,14 +427,18 @@ function Dashboard() {
           </Col>
           <Col xs={8}>
             <div className="bg-white min-h-[80vh] rounded-3xl p-4 py-8">
-              <Text type="main-text-regular" value="Transaction history" />
-              <div className="mt-3 rounded-lg ">
-                <DashboardTransactionWrapper type="withdraw" />
-                <DashboardTransactionWrapper type="bitcoin" />
-                <DashboardTransactionWrapper type="giftcard" />
-                <DashboardTransactionWrapper type="top-up" />
-                <DashboardTransactionWrapper type="giftcard" />
-              </div>
+              {transactionLoading ? (
+                <p className="text-center my-4">loading...</p>
+              ) : transactions && transactions.length ? (
+                <>
+                  <Text type="main-text-regular" value="Transaction history" />
+                  <div className="mt-3 rounded-lg ">
+                    <DashboardTransactionWrapper type="withdraw" />
+                  </div>
+                </>
+              ) : (
+                <p className="text-center my-4">No transactions found</p>
+              )}
             </div>
           </Col>
         </Row>

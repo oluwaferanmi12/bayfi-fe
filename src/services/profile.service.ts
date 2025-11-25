@@ -1,13 +1,14 @@
 import { axiosInstance } from "@/axios";
-import { PostProfileInterface, UpdatePin } from "@/types";
+import { PostProfileInterface, ProfileDataInterface, UpdatePin } from "@/types";
 
-export const fetchUserProfileService = async () => {
-  const { data } = await axiosInstance.get("/user/profile");
-  return data.data;
-};
+export const fetchUserProfileService =
+  async (): Promise<ProfileDataInterface> => {
+    const { data } = await axiosInstance.get("/user/profile");
+    return data.data;
+  };
 
 export const updateProfile = async (payload: PostProfileInterface) => {
-  const { data } = await axiosInstance.post("/user/profile", payload);
+  const { data } = await axiosInstance.put("/user/profile", payload);
   return data;
 };
 

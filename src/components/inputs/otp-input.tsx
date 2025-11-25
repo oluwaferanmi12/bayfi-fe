@@ -2,7 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export const OTPInput = ({ value, onChange, centered= true }: { value: string; onChange: (val: string) => void; centered? : boolean }) => {
+export const OTPInput = ({
+  value,
+  onChange,
+  centered = true,
+  noOfInput,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  centered?: boolean;
+  noOfInput?: number;
+}) => {
   const [arrayInput, setArrayInput] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const backSpaceRef = useRef<boolean>(false);
@@ -10,6 +20,12 @@ export const OTPInput = ({ value, onChange, centered= true }: { value: string; o
   useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
+
+  useEffect(() => {
+    if (noOfInput) {
+      setArrayInput(Array(noOfInput).fill(""));
+    }
+  }, [noOfInput]);
 
   useEffect(() => {
     // Sync arrayInput with value from parent
