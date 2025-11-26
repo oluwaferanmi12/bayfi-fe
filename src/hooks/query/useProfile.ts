@@ -12,6 +12,10 @@ export const useFetchProfile = () => {
       return await fetchUserProfileService();
     },
     queryKey: ["get-profile"],
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false, 
   });
 };
 

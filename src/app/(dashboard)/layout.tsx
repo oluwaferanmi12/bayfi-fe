@@ -6,7 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Text } from "@/components/texts/text";
 import bellIcon from "@/assets/svg/bellIcon.svg";
-import profilePlaceholder from "@/assets/svg/profilePlaceholder.svg";
+import profilePlaceholder from "@/assets/svg/profile-default-avatar.svg";
+
 import homeIcon from "@/assets/svg/homeIcon.svg";
 import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
@@ -16,6 +17,7 @@ import floatMessageIcon from "@/assets/svg/floatint-message-icon.svg";
 import { DesktopChatListDrawer } from "@/components/side-drawers/chat/desktop-chat-list-drawer";
 import { useState } from "react";
 import { DesktopChatSideDrawer } from "@/components/side-drawers/chat/desktop-chat-page";
+import { useFetchProfile } from "@/hooks/query/useProfile";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,6 +28,7 @@ export default function RootLayout({
   const [showChatList, setShowChatList] = useState(false);
   const [showChatPage, setShowChatPage] = useState(false);
   const [activeChatId, setActiveChatId] = useState<null | number>(null);
+  const { data: profileDetails } = useFetchProfile();
 
   const onChatSelected = (id: number) => {
     setActiveChatId(id);
@@ -120,12 +123,19 @@ export default function RootLayout({
                 </div>
                 <div className="flex items-center gap-4">
                   <Image className="cursor-pointer" src={bellIcon} alt="" />
+
                   <Image
-                    className="cursor-pointer"
+                    width={40}
+                    height={40}
+                    className="cursor-pointer aspect-square rounded-full object-cover"
                     onClick={() => {
                       router.push("/profile");
                     }}
-                    src={profilePlaceholder}
+                    src={
+                      profileDetails?.avatar
+                        ? profileDetails.avatar
+                        : profilePlaceholder
+                    }
                     alt=""
                   />
                 </div>
