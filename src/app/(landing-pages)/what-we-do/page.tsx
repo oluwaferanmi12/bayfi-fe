@@ -14,6 +14,9 @@ import Link from "next/link";
 import headPhonIcon from "@/assets/svg/headphone-icon.svg";
 import seamlessIntegration from "@/assets/svg/seamless-integration.svg";
 import googleBing from "@/assets/svg/google-bing-card.svg";
+import TradingArea from "@/components/UIs/landing/trading-area";
+import Footer from "@/components/UIs/landing/footer";
+import { Faq } from "@/components/UIs/landing/faq";
 
 const WhatWeDo = () => {
   const router = useRouter();
@@ -72,7 +75,7 @@ const WhatWeDo = () => {
         </section>
       </GeneralLandingPageWrapper>
 
-      <section className="bg-[#FAFAF9] py-20">
+      <section className="bg-[#FAFAF9] py-30">
         <GeneralLandingPageWrapper>
           <div className="flex justify-center">
             <div className="font-jakarta-regular text-5xl text-center leading-16">
@@ -243,6 +246,9 @@ multi factor verification`}
           </Row>
         </GeneralLandingPageWrapper>
       </section>
+      <Faq />
+      <TradingArea />
+      <Footer />
     </>
   );
 };

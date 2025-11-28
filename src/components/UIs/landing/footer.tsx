@@ -92,12 +92,12 @@ function Footer() {
             </div>
           </Col>
         </Row>
-        <div className="m-0 mt-20 p-0 leading-40">
-          <p className="text-[280px] w-full text-center whitespace-nowrap text-white font-jakarta-bold">
-            BAYFI LTD
-          </p>
-        </div>
       </GeneralLandingPageWrapper>
+      <div className="m-0 mt-30 p-0 leading-40">
+        <p className="text-[280px] w-full text-center whitespace-nowrap text-white font-jakarta-bold">
+          BAYFI LTD
+        </p>
+      </div>
     </section>
   );
 }
