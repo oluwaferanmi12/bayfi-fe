@@ -11,6 +11,9 @@ import badge from "@/assets/svg/shieldBadge.svg";
 import riskyIcon from "@/assets/svg/risky-icon.svg";
 import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
 import Link from "next/link";
+import headPhonIcon from "@/assets/svg/headphone-icon.svg";
+import seamlessIntegration from "@/assets/svg/seamless-integration.svg";
+import googleBing from "@/assets/svg/google-bing-card.svg";
 
 const WhatWeDo = () => {
   const router = useRouter();
@@ -119,7 +122,7 @@ const WhatWeDo = () => {
       </section>
       <section className="bg-[#0A0D14] py-20">
         <GeneralLandingPageWrapper>
-          <Row align={"middle"}>
+          <Row align={"middle"} className="mb-20">
             <Col xs={12}>
               <div>
                 <h1 className="text-[#F9F9F9] text-3xl font-inter-semibold">
@@ -139,8 +142,102 @@ const WhatWeDo = () => {
               </div>
             </Col>
             <Col xs={12}>
-              <div className="min-h-[560px] bg-[#9FE870] rounded-xl w-4/5 mx-auto">
-
+              <div className="min-h-[560px] bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl w-4/5 mx-auto">
+                <div className="flex items-center gap-3">
+                  <Image src={headPhonIcon} alt="" />
+                  <p className="font-jakarta-semibold text-xl">
+                    Our RATES walk in HIGH heels.
+                  </p>
+                </div>
+                <div className="my-12 h-[200px]">
+                  <Image src={seamlessIntegration} alt="" />
+                </div>
+                <div className="w-4/5">
+                  <p className="text-center font-inter-regular text-lg">
+                    {`Curious to know how high? There's a "Trade Now" button close
+                    by. Use it!`}
+                  </p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row align={"middle"} className="mb-20">
+            <Col xs={12}>
+              <div>
+                <h1 className="text-[#F9F9F9] text-3xl font-inter-semibold">
+                  CRYPTO TRADE
+                </h1>
+                <p className="my-4 font-inter-regular text-[#F2F2F2] text-2xl w-4/5">
+                  Create a plan that works for your unique needs and goals with
+                  our easy-to-use budgeting structure.
+                </p>
+                <Link href={"/login"}>
+                  <button className="flex items-center gap-2 mt-4">
+                    <p className="text-[#879D29] font-inter-medium">
+                      Start Trading Now
+                    </p>
+                    <Image src={arrowRightGreen} alt="" />
+                  </button>
+                </Link>
+              </div>
+            </Col>
+            <Col xs={12}>
+              <div className="min-h-[560px] bg-[#FFFFFF] border border-[#DEDEDE] py-8 flex flex-col  items-center rounded-xl w-4/5 mx-auto">
+                <div className="flex items-center gap-3">
+                  <Image src={headPhonIcon} alt="" />
+                  <p className="font-jakarta-semibold text-xl">
+                    {`Buy or Sell, you're getting the best deal ever.`}
+                  </p>
+                </div>
+                <div className="my-12 h-[200px]">
+                  <Image src={googleBing} alt="" />
+                </div>
+                <div className="w-4/5">
+                  <p className="text-center font-inter-regular text-lg">
+                    {`All in one kind of alerts from
+one place`}
+                  </p>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row align={"middle"} className="mb-20">
+            <Col xs={12}>
+              <div>
+                <h1 className="text-[#F9F9F9] text-3xl font-inter-semibold">
+                  BILL PAYMENTS
+                </h1>
+                <p className="my-4 font-inter-regular text-[#F2F2F2] text-2xl w-4/5">
+                  Create a plan that works for your unique needs and goals with
+                  our easy-to-use budgeting structure.
+                </p>
+                <Link href={"/login"}>
+                  <button className="flex items-center gap-2 mt-4">
+                    <p className="text-[#879D29] font-inter-medium">
+                      Start Trading Now
+                    </p>
+                    <Image src={arrowRightGreen} alt="" />
+                  </button>
+                </Link>
+              </div>
+            </Col>
+            <Col xs={12}>
+              <div className="min-h-[560px] bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl w-4/5 mx-auto">
+                <div className="flex items-center gap-3">
+                  <Image src={headPhonIcon} alt="" />
+                  <p className="font-jakarta-semibold text-xl">
+                    Seamless Integration
+                  </p>
+                </div>
+                <div className="my-12 h-[200px]">
+                  <Image src={seamlessIntegration} alt="" />
+                </div>
+                <div className="w-4/5">
+                  <p className="text-center font-inter-regular text-lg">
+                    {`Secure authentication with
+multi factor verification`}
+                  </p>
+                </div>
               </div>
             </Col>
           </Row>
