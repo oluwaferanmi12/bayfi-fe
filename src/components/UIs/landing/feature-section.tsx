@@ -8,6 +8,7 @@ import feature2 from "@/assets/svg/feature-2.svg";
 import feature3 from "@/assets/svg/feature-3.svg";
 import feature4 from "@/assets/svg/feature-4.svg";
 import playIcon from "@/assets/svg/playBgIcon.svg";
+import RevealOnScroll from "@/components/animation/reveal-on-scroll";
 
 export const FeatureSection = () => {
   const featureArray = [
@@ -41,45 +42,58 @@ export const FeatureSection = () => {
       <GeneralLandingPageWrapper>
         <Row className="my-20">
           <Col xs={12} className="border-r border-[rgba(255,255,255,0.2)]">
-            <h3>
-              <span className="rounded-full font-jakarta-semibold text-white border border-[#9FE870] py-2 px-4">
-                FEATURES
-              </span>
-            </h3>
-            <div className="text-white text-5xl font-jakarta-semibold my-6 leading-16">
-              <p>Our You-nique</p>
-              <p>Features</p>
-            </div>
-            <div>
-              <p className="text-[#9A9A9A] text-lg font-jakarta-regular w-4/5">
-                Automation & workflow features include a drag & drop builder,
-                automated task assignments, conditional with good triggers, and
-                api integrations.
-              </p>
-            </div>
-
-            <div className="mt-12">
-              <button className="bg-[#9FE870] rounded-full py-2 px-4 flex items-center gap-4 font-jakarta-semibold">
-                <p>Try it now</p>
-                <Image src={arrowWithBg} alt="" />
-              </button>
-            </div>
+            <RevealOnScroll delay={3}>
+              <h3>
+                <span className="rounded-full font-jakarta-semibold text-white border border-[#9FE870] py-2 px-4">
+                  FEATURES
+                </span>
+              </h3>
+            </RevealOnScroll>
+            <RevealOnScroll duration={1}>
+              <div className="text-white text-5xl font-jakarta-semibold my-6 leading-16">
+                <p>Our You-nique</p>
+                <p>Features</p>
+              </div>
+            </RevealOnScroll>
+            <RevealOnScroll duration={2}>
+              <div>
+                <p className="text-[#9A9A9A] text-lg font-jakarta-regular w-4/5">
+                  Automation & workflow features include a drag & drop builder,
+                  automated task assignments, conditional with good triggers,
+                  and api integrations.
+                </p>
+              </div>
+            </RevealOnScroll>
+            <RevealOnScroll duration={4}>
+              <div className="mt-12">
+                <button className="bg-[#9FE870] rounded-full py-2 px-4 flex items-center gap-4 font-jakarta-semibold">
+                  <p>Try it now</p>
+                  <Image src={arrowWithBg} alt="" />
+                </button>
+              </div>
+            </RevealOnScroll>
           </Col>
           <Col xs={12}>
             <div className="w-4/5 ml-auto">
               {featureArray.map((item, index) => {
                 return (
-                  <div key={index} className="flex items-start gap-6 mb-16">
-                    <Image src={item.icon} alt="" />
-                    <div>
-                      <p className="text-xl font-jakarta-semibold mb-4 text-white">
-                        {item.mainText}
-                      </p>
-                      <p className="text-[#9A9A9A] text-lg font-jakarta-regular">
-                        {item.subText}
-                      </p>
+                  <RevealOnScroll
+                    delay={(index + 1) * 0.5}
+                    direction="left"
+                    key={index}
+                  >
+                    <div key={index} className="flex items-start gap-6 mb-16">
+                      <Image src={item.icon} alt="" />
+                      <div>
+                        <p className="text-xl font-jakarta-semibold mb-4 text-white">
+                          {item.mainText}
+                        </p>
+                        <p className="text-[#9A9A9A] text-lg font-jakarta-regular">
+                          {item.subText}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </RevealOnScroll>
                 );
               })}
             </div>
