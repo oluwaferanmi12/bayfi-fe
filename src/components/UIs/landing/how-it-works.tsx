@@ -8,6 +8,8 @@ import Image from "next/image";
 import beginIcon from "@/assets/svg/landing-support.svg";
 import serviceIcon from "@/assets/svg/service-landing.svg";
 import strategyIcon from "@/assets/svg/strategy.svg";
+import combinedImage from "@/assets/svg/combined-image.svg";
+import RevealOnScroll from "@/components/animation/reveal-on-scroll";
 
 export const HowItWorks = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,47 +39,56 @@ export const HowItWorks = () => {
         <Row>
           <Col xs={12}>
             <div>
-              <span className="border px-4 rounded-full py-2 border-[#DEDEDE] font-jakarta-regular">
-                How it works
-              </span>
-              <div className="mt-8 w-4/5">
-                <p className="text-5xl font-jakarta-medium leading-16">
-                  Save time and get more done with Bayfi
-                </p>
-              </div>
+              <RevealOnScroll delay={0.5}>
+                <span className="border px-4 rounded-full py-2 border-[#DEDEDE] font-jakarta-regular">
+                  How it works
+                </span>
+              </RevealOnScroll>
+              <RevealOnScroll delay={1}>
+                <div className="mt-8 w-4/5">
+                  <p className="text-5xl font-jakarta-medium leading-16">
+                    Save time and get more done with Bayfi
+                  </p>
+                </div>
+              </RevealOnScroll>
               <div className="mt-8">
                 {journeyArray.map((item, idx) => {
                   return (
-                    <div
-                      key={idx}
-                      className="py-6 border-b border-[#DEDEDE] w-4/5"
-                    >
-                      <div className="flex items-center gap-4 ">
-                        <span>
-                          <Image alt="" src={item.icon} />
-                        </span>
-                        <p className="font-jakarta-semibold text-xl">
-                          {item.mainText}
-                        </p>
+                    <RevealOnScroll delay={(idx + 1) * 0.8} key={idx}>
+                      <div
+                        key={idx}
+                        className="py-6 border-b border-[#DEDEDE] w-4/5"
+                      >
+                        <div className="flex items-center gap-4 ">
+                          <span>
+                            <Image alt="" src={item.icon} />
+                          </span>
+                          <p className="font-jakarta-semibold text-xl">
+                            {item.mainText}
+                          </p>
+                        </div>
+                        {activeIndex === idx && (
+                          <p className=" text-[#666666] mt-4 text-lg font-jakarta-regular">
+                            {item.textVal}
+                          </p>
+                        )}
                       </div>
-                      {activeIndex === idx && (
-                        <p className=" text-[#666666] mt-4 text-lg font-jakarta-regular">
-                          {item.textVal}
-                        </p>
-                      )}
-                    </div>
+                    </RevealOnScroll>
                   );
                 })}
               </div>
             </div>
           </Col>
           <Col xs={12}>
-            <div>
-              <p className="text-lg text-[#666666] font-inter-regular">
-                We believe trading crypto should be easy and hassle-free - buy,
-                trade and sell with no wahala.
-              </p>
-            </div>
+            <RevealOnScroll delay={0.5}>
+              <div className="mb-16">
+                <p className="text-lg text-[#666666] font-inter-regular">
+                  We believe trading crypto should be easy and hassle-free -
+                  buy, trade and sell with no wahala.
+                </p>
+              </div>
+              <Image src={combinedImage} alt="" />
+            </RevealOnScroll>
           </Col>
         </Row>
       </GeneralLandingPageWrapper>
