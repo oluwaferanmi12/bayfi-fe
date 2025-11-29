@@ -130,8 +130,8 @@ export const FeatureSection = () => {
         </motion.div>
       </div>
       <GeneralLandingPageWrapper>
-        <div className="mt-12 h-[800px] rounded-t-lg bg-[#D9D9D9] flex items-center justify-center">
-          <div className="bg-white h-[120px] aspect-square rounded-full flex items-center justify-center">
+        <div className="mt-12 h-[400px] lg:h-[800px] rounded-t-lg bg-[#D9D9D9] flex items-center justify-center">
+          <div className="bg-white h-[60px] lg:h-[120px] aspect-square rounded-full flex items-center justify-center">
             <Image src={playIcon} alt="" />
           </div>
         </div>
