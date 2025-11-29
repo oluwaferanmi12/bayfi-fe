@@ -9,6 +9,7 @@ import serviceIcon from "@/assets/svg/service-landing.svg";
 import strategyIcon from "@/assets/svg/strategy.svg";
 import combinedImage from "@/assets/svg/combined-image.svg";
 import RevealOnScroll from "@/components/animation/reveal-on-scroll";
+import ipadPhone from "@/assets/svg/ipad-pro.svg";
 
 export const HowItWorks = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,9 +46,16 @@ export const HowItWorks = () => {
               </RevealOnScroll>
               <RevealOnScroll delay={1}>
                 <div className="lg:mt-8 mt-4 lg:w-4/5">
-                  <p className="lg:text-5xl text-3xl font-jakarta-medium leading-12 lg:leading-16">
+                  <p className="lg:text-5xl text-3xl font-jakarta-medium leading-10 lg:leading-16">
                     Save time and get more done with Bayfi
                   </p>
+                  <p className="lg:text-lg text-base mt-3 lg:hidden text-[#666666] font-inter-regular">
+                    We believe trading crypto should be easy and hassle-free -
+                    buy, trade and sell with no wahala.
+                  </p>
+                  <div className="mt-8 lg:hidden">
+                    <Image src={ipadPhone} alt="" />
+                  </div>
                 </div>
               </RevealOnScroll>
               <div className="mt-8">
@@ -78,7 +86,7 @@ export const HowItWorks = () => {
               </div>
             </div>
           </Col>
-          <Col lg={12} xs={24}>
+          <Col lg={12} xs={0}>
             <RevealOnScroll delay={0.5}>
               <div className="mb-16">
                 <p className="text-lg text-[#666666] font-inter-regular">
