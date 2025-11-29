@@ -42,11 +42,11 @@ export const FeatureSection = () => {
   return (
     <section className="bg-black">
       <GeneralLandingPageWrapper>
-        <Row className="my-20">
+        <Row className="lg:my-20 my-10">
           <Col
             xs={24}
             lg={12}
-            className="border-r border-[rgba(255,255,255,0.2)]"
+            className="lg:border-r border-[rgba(255,255,255,0.2)]"
           >
             <RevealOnScroll delay={3}>
               <h3>
@@ -56,14 +56,14 @@ export const FeatureSection = () => {
               </h3>
             </RevealOnScroll>
             <RevealOnScroll duration={1}>
-              <div className="text-white text-5xl font-jakarta-semibold my-6 leading-16">
+              <div className="text-white lg:text-5xl text-3xl font-jakarta-semibold my-6 leading-10 lg:leading-16">
                 <p>Our You-nique</p>
                 <p>Features</p>
               </div>
             </RevealOnScroll>
             <RevealOnScroll duration={2}>
               <div>
-                <p className="text-[#9A9A9A] text-lg font-jakarta-regular w-4/5">
+                <p className="text-[#9A9A9A] lg:text-lg font-jakarta-regular text-base lg:w-4/5">
                   Automation & workflow features include a drag & drop builder,
                   automated task assignments, conditional with good triggers,
                   and api integrations.
@@ -80,7 +80,7 @@ export const FeatureSection = () => {
             </RevealOnScroll>
           </Col>
           <Col xs={24} lg={12}>
-            <div className="w-4/5 ml-auto">
+            <div className="lg:w-4/5 w-full lg:ml-auto mr-auto mt-16 lg:mt-0 ">
               {featureArray.map((item, index) => {
                 return (
                   <RevealOnScroll
@@ -89,12 +89,16 @@ export const FeatureSection = () => {
                     key={index}
                   >
                     <div key={index} className="flex items-start gap-6 mb-16">
-                      <Image src={item.icon} alt="" />
+                      <Image
+                        src={item.icon}
+                        className="lg:w-[45px] w-[24px] aspect-square"
+                        alt=""
+                      />
                       <div>
-                        <p className="text-xl font-jakarta-semibold mb-4 text-white">
+                        <p className="lg:text-xl text-lg font-jakarta-semibold mb-4 text-white">
                           {item.mainText}
                         </p>
-                        <p className="text-[#9A9A9A] text-lg font-jakarta-regular">
+                        <p className="text-[#9A9A9A] text-base lg:text-lg font-jakarta-regular">
                           {item.subText}
                         </p>
                       </div>
@@ -117,10 +121,10 @@ export const FeatureSection = () => {
             ease: "linear",
           }}
         >
-          <span className="text-[#FFFFFF] font-jakarta-medium text-[80px] text-nowrap">
+          <span className="text-[#FFFFFF] font-jakarta-medium text-4xl lg:text-[80px] text-nowrap">
             The Trading App That Gets You The Trading App That Gets You
           </span>
-          <span className="text-[#FFFFFF] font-jakarta-medium text-[80px] text-nowrap">
+          <span className="text-[#FFFFFF] font-jakarta-medium text-4xl lg:text-[80px] text-nowrap">
             The Trading App That Gets You The Trading App That Gets You
           </span>
         </motion.div>

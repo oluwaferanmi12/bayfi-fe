@@ -33,10 +33,10 @@ export const HowItWorks = () => {
     },
   ];
   return (
-    <section className="bg-[#F7F8FA] pt-28 pb-10">
+    <section className="bg-[#F7F8FA] lg:pt-28 pt-10 pb-10">
       <GeneralLandingPageWrapper>
         <Row>
-          <Col xs={12}>
+          <Col lg={12} xs={24}>
             <div>
               <RevealOnScroll delay={0.5}>
                 <span className="border px-4 rounded-full py-2 border-[#DEDEDE] font-jakarta-regular">
@@ -44,8 +44,8 @@ export const HowItWorks = () => {
                 </span>
               </RevealOnScroll>
               <RevealOnScroll delay={1}>
-                <div className="mt-8 w-4/5">
-                  <p className="text-5xl font-jakarta-medium leading-16">
+                <div className="lg:mt-8 mt-4 lg:w-4/5">
+                  <p className="lg:text-5xl text-3xl font-jakarta-medium leading-12 lg:leading-16">
                     Save time and get more done with Bayfi
                   </p>
                 </div>
@@ -78,7 +78,7 @@ export const HowItWorks = () => {
               </div>
             </div>
           </Col>
-          <Col xs={12}>
+          <Col lg={12} xs={24}>
             <RevealOnScroll delay={0.5}>
               <div className="mb-16">
                 <p className="text-lg text-[#666666] font-inter-regular">
