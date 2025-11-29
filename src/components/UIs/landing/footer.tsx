@@ -16,13 +16,13 @@ function Footer() {
     <section className="bg-black pt-20 relative overflow-hidden">
       <GeneralLandingPageWrapper>
         <Row>
-          <Col xs={14}>
-            <div className="flex items-start justify-between">
+          <Col xs={24} lg={14}>
+            <div className="flex lg:flex-row flex-col items-start justify-between">
               <div>
                 <p className="text-[#FEFBF6] font-inter-semibold text-xl">
                   COMPANY
                 </p>
-                <div className="mt-8">
+                <div className="lg:mt-8 mt-4">
                   {companyArray.map((item, index) => {
                     return (
                       <Link key={index} href={""}>
@@ -38,7 +38,7 @@ function Footer() {
                 <p className="text-[#FEFBF6] font-inter-semibold text-xl">
                   SERVICES
                 </p>
-                <div className="mt-8">
+                <div className="lg:mt-8 mt-4">
                   {serviceArray.map((item, index) => {
                     return (
                       <Link key={index} href={""}>
@@ -54,7 +54,7 @@ function Footer() {
                 <p className="text-[#FEFBF6] font-inter-semibold text-xl">
                   CLIENTS
                 </p>
-                <div className="mt-8">
+                <div className="lg:mt-8 mt-4">
                   {clientsArray.map((item, index) => {
                     return (
                       <Link key={index} href={""}>
@@ -68,10 +68,12 @@ function Footer() {
               </div>
             </div>
           </Col>
-          <Col xs={10}>
-            <div className="bg-[#FEFBF61A] rounded-[20px] p-6 w-[80%] ml-auto">
-              <p className="text-[#FEFBF6] text-xl">SUBSCRIBE TO OUR</p>
-              <p className="text-6xl font-jakarta-bold text-[#FEFBF6] mt-2">
+          <Col xs={24} lg={10}>
+            <div className="bg-[#FEFBF61A] rounded-[20px] p-6 w-full lg:w-[80%] ml-auto">
+              <p className="text-[#FEFBF6] text-base lg:text-xl">
+                SUBSCRIBE TO OUR
+              </p>
+              <p className="lg:text-6xl text-3xl font-jakarta-bold text-[#FEFBF6] mt-2">
                 NEWSLETTER
               </p>
               <Row align="middle" className="flex mt-12">
@@ -93,8 +95,8 @@ function Footer() {
           </Col>
         </Row>
       </GeneralLandingPageWrapper>
-      <div className="m-0 mt-30 p-0 leading-40">
-        <p className="text-[280px] w-full text-center whitespace-nowrap text-white font-jakarta-bold">
+      <div className="m-0 lg:mt-30 mt-10 p-0 leading-40">
+        <p className="lg:text-[280px] text-[120px] w-full text-center whitespace-nowrap text-white font-jakarta-bold">
           BAYFI LTD
         </p>
       </div>
