@@ -28,7 +28,7 @@ export const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative lg:h-[200vh] bg-[#1C1B1F] hero-bg mb-20"
+      className="relative h-[200vh] bg-[#1C1B1F] hero-bg mb-20"
     >
       <div className="top-0 sticky h-screen flex justify-center items-center flex-col">
         <Row className="w-full" justify={"center"}>
@@ -78,7 +78,7 @@ export const HeroSection = () => {
               }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              <div className="absolute w-full flex justify-center ">
+              <div className="absolute w-full flex justify-center  ">
                 <Image src={landingPhone} alt="" />
               </div>
             </motion.div>

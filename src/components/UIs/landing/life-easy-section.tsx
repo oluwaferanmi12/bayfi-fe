@@ -33,14 +33,14 @@ export const LifeEasySection = () => {
           <Col xs={24} lg={8}>
             <RevealOnScroll duration={1} direction="right">
               <div className="min-h-[520px] h-[520px] mb-4 lg:mb-0 flex flex-col items-center w-full p-4 py-8 bg-[#000000] rounded-[10px]">
-                <p className="text-white font-inter-medium text-xl text-center">
+                <p className="text-white font-inter-medium text-lg lg:text-xl text-center">
                   Bouncer Level Security
                 </p>
                 <div className="mt-4">
                   <Image src={bouncer} alt="" />
                 </div>
                 <div>
-                  <p className="text-lg font-inter-regular text-center text-[#9A9A9A]">
+                  <p className="lg:text-lg text-base font-inter-regular text-center text-[#9A9A9A]">
                     Trade crypto sell gift cards or withdraw funds in just a few
                     taps all protected with top level security.
                   </p>
@@ -51,13 +51,13 @@ export const LifeEasySection = () => {
           <Col xs={24} lg={8}>
             <RevealOnScroll duration={0.5}>
               <div className="min-h-[520px] h-[520px] mb-4 lg:mb-0 flex flex-col items-center p-4 py-8 w-full bg-bayfi-grey-500 rounded-[10px]">
-                <p className="font-inter-medium text-xl text-black text-center">
+                <p className="font-inter-medium text-lg lg:text-xl text-black text-center">
                   First Time Ease
                 </p>
                 <div className="mt-4">
                   <Image src={firstTimeEase} alt="" />
                 </div>
-                <p className="text-lg font-inter-regular text-center text-black mt-12">
+                <p className="lg:text-lg text-base font-inter-regular text-center text-black mt-12">
                   Setting up your account, eazi! Trading digital assets, eazi!
                   No need to ask for a masterclass or any format. Enjoy 24/7
                   soft transactions.
@@ -68,13 +68,13 @@ export const LifeEasySection = () => {
           <Col xs={24} lg={8}>
             <RevealOnScroll duration={1} direction="left">
               <div className="min-h-[520px] h-[520px] mb-4 lg:mb-0 flex flex-col items-center p-4 py-8 w-full bg-[#9FE870] rounded-[10px]">
-                <p className="font-inter-medium text-xl text-black text-center">
+                <p className="font-inter-medium text-lg lg:text-xl text-black text-center">
                   Seamless Integration
                 </p>
                 <div className="mt-4">
                   <Image src={seamlessIntegration} alt="" />
                 </div>
-                <p className="text-lg font-inter-regular  text-black text-center mt-12">
+                <p className="lg:text-lg text-base font-inter-regular  text-black text-center mt-12">
                   Keep your wallet safe by using triple protection.
                 </p>
               </div>

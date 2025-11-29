@@ -11,13 +11,13 @@ function TradingArea() {
       <GeneralLandingPageWrapper>
         <div className="bg-black rounded-lg">
           <Row>
-            <Col xs={12} className="zigZagBg">
-              <div className=" w-[70%] mx-auto py-20">
-                <p className="font-jakarta-semibold text-5xl leading-16 text-white">
+            <Col xs={24} lg={12} className="zigZagBg">
+              <div className=" lg:w-[70%] w-full mx-auto py-10 lg:py-20 px-4">
+                <p className="font-jakarta-semibold text-3xl lg:text-5xl leading-10 lg:leading-16 text-white">
                   Trading Giftcards is easier than Further Maths
                 </p>
                 <div className="my-8">
-                  <p className="text-[#9A9A9A] text-lg font-jakarta-regular">
+                  <p className="text-[#9A9A9A] text-base lg:text-lg font-jakarta-regular">
                     Automation & workflow features include a drag & drop
                     builder, automated task assignments, conditional with good
                     triggers, and api integrations.
@@ -33,7 +33,7 @@ function TradingArea() {
                 </div>
               </div>
             </Col>
-            <Col xs={12}>
+            <Col xs={24} lg={12}>
               <div className="relative h-full w-full flex items-center justify-center">
                 <Image src={ipadPhone} alt="" />
               </div>

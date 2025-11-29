@@ -64,7 +64,7 @@ export const HowItWorks = () => {
                     <RevealOnScroll delay={(idx + 1) * 0.8} key={idx}>
                       <div
                         key={idx}
-                        className="py-6 border-b border-[#DEDEDE] w-4/5"
+                        className="py-6 border-b border-[#DEDEDE] lg:w-4/5"
                       >
                         <div className="flex items-center gap-4 ">
                           <span>
