@@ -26,7 +26,7 @@ export const LandingNav = () => {
     }
   }, [pathName]);
   return (
-    <nav className="fixed top-0 w-full z-20">
+    <nav className="fixed top-0 w-full z-20 hidden lg:block">
       <GeneralLandingPageWrapper>
         <div className="flex items-center justify-between py-5 ">
           <Link href={"/"}>

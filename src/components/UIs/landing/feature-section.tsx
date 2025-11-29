@@ -43,7 +43,11 @@ export const FeatureSection = () => {
     <section className="bg-black">
       <GeneralLandingPageWrapper>
         <Row className="my-20">
-          <Col xs={12} className="border-r border-[rgba(255,255,255,0.2)]">
+          <Col
+            xs={24}
+            lg={12}
+            className="border-r border-[rgba(255,255,255,0.2)]"
+          >
             <RevealOnScroll delay={3}>
               <h3>
                 <span className="rounded-full font-jakarta-semibold text-white border border-[#9FE870] py-2 px-4">
@@ -75,7 +79,7 @@ export const FeatureSection = () => {
               </div>
             </RevealOnScroll>
           </Col>
-          <Col xs={12}>
+          <Col xs={24} lg={12}>
             <div className="w-4/5 ml-auto">
               {featureArray.map((item, index) => {
                 return (

@@ -28,16 +28,16 @@ export const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative h-[200vh] bg-[#1C1B1F] hero-bg mb-20"
+      className="relative lg:h-[200vh] bg-[#1C1B1F] hero-bg mb-20"
     >
-      <div className=" top-0 sticky h-screen flex justify-center items-center flex-col">
+      <div className="top-0 sticky h-screen flex justify-center items-center flex-col">
         <Row className="w-full" justify={"center"}>
-          <Col xs={12} className="relative flex flex-col items-center">
+          <Col xs={24} lg={12} className="relative flex flex-col items-center">
             <motion.div
               style={{ opacity: textOpacity, y: textY }}
               className="text-center text-white"
             >
-              <div className="text-[64px] relative text-white text-center font-manrope-medium">
+              <div className="lg:text-[64px] text-4xl relative mb-10 lg:mb-0 text-white text-center font-manrope-medium leading-14 lg:leading-normal">
                 <RevealOnScroll direction="up" withOpacity duration={1}>
                   <h1 className="text-center">Trade it, Get Cash</h1>
                 </RevealOnScroll>
