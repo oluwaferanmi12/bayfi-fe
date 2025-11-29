@@ -4,7 +4,6 @@ import GeneralLandingPageWrapper from "@/components/wrappers/lading-wrapper/gene
 import React, { useState } from "react";
 import { Col, Row } from "antd";
 import Image from "next/image";
-
 import beginIcon from "@/assets/svg/landing-support.svg";
 import serviceIcon from "@/assets/svg/service-landing.svg";
 import strategyIcon from "@/assets/svg/strategy.svg";
