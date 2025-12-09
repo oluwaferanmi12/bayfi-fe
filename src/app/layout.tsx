@@ -1,10 +1,7 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import QueryProvider from "@/react-query/query-provider";
 import { Toaster } from "sonner";
-
 
 export default function RootLayout({
   children,

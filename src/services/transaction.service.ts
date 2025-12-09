@@ -1,6 +1,7 @@
 import { axiosInstance } from "@/axios";
+import { Transaction } from "@/types";
 
-export const transactions = async () => {
+export const transactions = async (): Promise<Transaction[]> => {
   const { data } = await axiosInstance.get(`/transactions`);
   return data.data.contents;
 };

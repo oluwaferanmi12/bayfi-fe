@@ -56,6 +56,7 @@ function Dashboard() {
   const { data: walletDetails } = useGetWallet();
   const { data: transactions, isPending: transactionLoading } =
     useGetTransaction();
+  console.log(transactions, "Transactions");
   return (
     <>
       <div className="hidden lg:block">
@@ -432,9 +433,16 @@ function Dashboard() {
               ) : transactions && transactions.length ? (
                 <>
                   <Text type="main-text-regular" value="Transaction history" />
-                  <div className="mt-3 rounded-lg ">
-                    <DashboardTransactionWrapper type="withdraw" />
-                  </div>
+                  {transactions.map((item) => {
+                    return (
+                      <div key={item.id} className="mt-3 rounded-lg ">
+                        <DashboardTransactionWrapper
+                          transaction={item}
+                          type="withdraw"
+                        />
+                      </div>
+                    );
+                  })}
                 </>
               ) : (
                 <p className="text-center my-4">No transactions found</p>

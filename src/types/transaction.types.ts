@@ -1,0 +1,29 @@
+export interface Transaction {
+  id: string;
+  amount: number;
+  currency: string;
+  receiverId: string;
+  receiverName: string;
+  receiver_account_number: string;
+  receiverAccountBalanceBefore: number;
+  receiverAccountBalanceAfter: number;
+  transactionReference: string;
+  transactionType: "CREDIT" | "DEBIT";
+  transactionStatus: string;
+  transactionCategory: TransactionCategory;
+  units: number;
+  isLogged: boolean;
+}
+
+export enum TransactionCategory {
+  BUY_GIFT_CARD = "Giftcard Purchase",
+  SELL_GIFT_CARD = "Giftcard Sale",
+  BUY_CRYPTO = "Crypto Purchase",
+  SELL_CRYPTO = "Crypto Sales",
+  AIRTIME = "Airtime",
+  FUND_WALLET = "Wallet Funding",
+  WALLET_WITHDRAWAL = "Wallet Withdrawal",
+  DATA = "Mobile Data",
+  CABLE_TV = "Cable Tv",
+  REWARD_BONUS = "Reward Bonus",
+}
