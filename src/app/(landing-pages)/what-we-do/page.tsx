@@ -207,10 +207,10 @@ one place`}
           <Row align={"middle"} className="mb-20">
             <Col lg={12} xs={24}>
               <div>
-                <h1 className="text-[#F9F9F9] text-3xl font-inter-semibold">
+                <h1 className="text-[#F9F9F9] text-2xl lg:text-3xl font-inter-semibold">
                   BILL PAYMENTS
                 </h1>
-                <p className="my-4 font-inter-regular text-[#F2F2F2] text-2xl w-4/5">
+                <p className="my-4 font-inter-regular text-[#F2F2F2] text-base lg:text-2xl lg:w-4/5">
                   Create a plan that works for your unique needs and goals with
                   our easy-to-use budgeting structure.
                 </p>
@@ -225,18 +225,18 @@ one place`}
               </div>
             </Col>
             <Col lg={12} xs={24}>
-              <div className="min-h-[560px] bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl w-4/5 mx-auto">
+              <div className="lg:min-h-[560px] min-h-[400px] bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl lg:w-4/5 mx-auto mt-8 lg:mt-0">
                 <div className="flex items-center gap-3">
                   <Image src={headPhonIcon} alt="" />
-                  <p className="font-jakarta-semibold text-xl">
+                  <p className="font-jakarta-semibold lg:text-xl">
                     Seamless Integration
                   </p>
                 </div>
-                <div className="my-12 h-[200px]">
+                <div className="my-12 h-[150px] lg:h-[200px]">
                   <Image src={seamlessIntegration} alt="" />
                 </div>
-                <div className="w-4/5">
-                  <p className="text-center font-inter-regular text-lg">
+                <div className="lg:w-4/5 w-full">
+                  <p className="text-center font-inter-regular lg:text-lg">
                     {`Secure authentication with
 multi factor verification`}
                   </p>

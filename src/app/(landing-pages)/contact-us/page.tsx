@@ -10,21 +10,21 @@ const ContactUs = () => {
       <section className="min-h-screen h-screen bg-[#F2F4F1]">
         <GeneralLandingPageWrapper>
           <Row align={"middle"} justify={"center"}>
-            <Col xs={12}>
+            <Col lg={12} xs={24}>
               <div>
-                <p className=" text-6xl font-inter-medium text-[#242628] leading-18">
+                <p className="text-3xl lg:text-6xl font-inter-medium text-[#242628] lg:leading-18">
                   Contact us for <br />{" "}
                   <span className="font-inter-bold">questions, help,</span>{" "}
                   <br /> and more.
                 </p>
                 <div className="mt-8">
-                  <div className="flex items-center gap-2 text-xl mb-4 ">
+                  <div className="flex items-center gap-2 text-base lg:text-xl mb-4 ">
                     <p className="text-[#586068] font-inter-light">Hotline:</p>
                     <p className="text-[#242628] font-inter-medium">
                       +234-802-345-6789
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 text-xl mb-4 ">
+                  <div className="flex items-center gap-2 text-base lg:text-xl mb-4 ">
                     <p className="text-[#586068] font-inter-light">
                       Product questions?
                     </p>
@@ -32,7 +32,7 @@ const ContactUs = () => {
                       Schedule a meeting
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 text-xl mb-4 ">
+                  <div className="flex items-center gap-2 text-base lg:text-xl mb-4 ">
                     <p className="text-[#586068] font-inter-light">
                       For support,
                     </p>
@@ -43,12 +43,12 @@ const ContactUs = () => {
                 </div>
               </div>
             </Col>
-            <Col xs={12}>
-              <div className="p-8 rounded-lg border border-[#E5E8E3] bg-white">
+            <Col lg={12} xs={24}>
+              <div className="lg:p-8 p-4 rounded-lg border border-[#E5E8E3] bg-white">
                 <Row gutter={24}>
-                  <Col xs={12}>
+                  <Col lg={12} xs={24}>
                     <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
+                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
                         First name*
                       </p>
                       <input
@@ -57,9 +57,9 @@ const ContactUs = () => {
                       />
                     </div>
                   </Col>
-                  <Col xs={12}>
+                  <Col lg={12} xs={24}>
                     <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
+                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
                         First name*
                       </p>
                       <input
@@ -68,9 +68,9 @@ const ContactUs = () => {
                       />
                     </div>
                   </Col>
-                  <Col xs={12}>
+                  <Col lg={12} xs={24}>
                     <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
+                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
                         First name*
                       </p>
                       <input
@@ -79,9 +79,9 @@ const ContactUs = () => {
                       />
                     </div>
                   </Col>
-                  <Col xs={12}>
+                  <Col lg={12} xs={24}>
                     <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
+                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
                         First name*
                       </p>
                       <input
@@ -90,9 +90,9 @@ const ContactUs = () => {
                       />
                     </div>
                   </Col>
-                  <Col xs={12}>
+                  <Col lg={12} xs={24}>
                     <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
+                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
                         First name*
                       </p>
                       <input
@@ -101,9 +101,9 @@ const ContactUs = () => {
                       />
                     </div>
                   </Col>
-                  <Col xs={12}>
+                  <Col lg={12} xs={24}>
                     <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
+                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
                         First name*
                       </p>
                       <input
@@ -112,31 +112,10 @@ const ContactUs = () => {
                       />
                     </div>
                   </Col>
-                  <Col xs={12}>
-                    <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
-                        First name*
-                      </p>
-                      <input
-                        placeholder="Enter name"
-                        className="w-full placeholder:text-[rgb(188,188,188)] font-inter-regular border border-[#E5E8E3] p-2 rounded-lg"
-                      />
-                    </div>
-                  </Col>
-                  <Col xs={12}>
-                    <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
-                        First name*
-                      </p>
-                      <input
-                        placeholder="Enter name"
-                        className="w-full placeholder:text-[rgb(188,188,188)] font-inter-regular border border-[#E5E8E3] p-2 rounded-lg"
-                      />
-                    </div>
-                  </Col>
+
                   <Col xs={24}>
                     <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium mb-2">
+                      <p className="text-[#586068] text-sm font-inter-medium mb-1 lg:mb-2">
                         Message*
                       </p>
                       <textarea

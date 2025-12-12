@@ -39,7 +39,7 @@ export const Faq = () => {
               <div key={index} className="pb-6 border-b border-[#D6D6D6] mb-6">
                 <div className="flex items-center gap-2">
                   <p
-                    className={`text-3xl ${index === activeIndex ? "text-black" : "text-[#737373]"} font-jakarta-medium`}
+                    className={`lg:text-3xl text-xl ${index === activeIndex ? "text-black" : "text-[#737373]"} font-jakarta-medium`}
                   >
                     {item.question}
                   </p>
@@ -52,11 +52,12 @@ export const Faq = () => {
                     <Image
                       src={activeIndex === index ? minusCircle : plusCircle}
                       alt=""
+                      className="min-w-[24px] min-h-[24px] h-[24px] w-[24px]"
                     />
                   </span>
                 </div>
                 {activeIndex === index && (
-                  <p className="text-[#242628] font-inter-light w-4/5 text-2xl mt-4 mb-6">
+                  <p className="text-[#242628] font-inter-light lg:w-4/5 text-base lg:text-2xl mt-4 mb-6">
                     {item.answer}
                   </p>
                 )}
