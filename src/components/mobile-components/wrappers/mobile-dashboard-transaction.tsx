@@ -10,11 +10,11 @@ export const MobileTransactionWrapper = () => {
         Transaction History
       </p>
       <div className="bg-white border p-4 rounded-lg border-[#EAECF0]">
-        <DashboardTransactionWrapper type="withdraw" />
-        <DashboardTransactionWrapper type="bitcoin" />
-        <DashboardTransactionWrapper type="giftcard" />
-        <DashboardTransactionWrapper type="top-up" />
-        <DashboardTransactionWrapper type="giftcard" />
+        <DashboardTransactionWrapper />
+        <DashboardTransactionWrapper  />
+        <DashboardTransactionWrapper  />
+        <DashboardTransactionWrapper  />
+        <DashboardTransactionWrapper  />
       </div>
     </div>
   );

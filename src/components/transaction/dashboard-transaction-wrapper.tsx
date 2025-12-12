@@ -9,7 +9,7 @@ import { Transaction, TransactionCategory } from "@/types";
 export const DashboardTransactionWrapper = ({
   transaction,
 }: {
-  transaction: Transaction;
+  transaction?: Transaction;
 }) => {
   const iconType = useMemo(() => {
     if (transaction?.transactionCategory?.toLowerCase()?.includes("bitcoin")) {
@@ -19,11 +19,11 @@ export const DashboardTransactionWrapper = ({
     ) {
       return blueGiftCardIcon;
     } else if (
-      transaction.transactionCategory.toLowerCase().includes("wallet")
+      transaction?.transactionCategory.toLowerCase().includes("wallet")
     ) {
       return topUpIcon;
     } else if (
-      transaction.transactionCategory.toLowerCase().includes("withdraw")
+      transaction?.transactionCategory.toLowerCase().includes("withdraw")
     ) {
       return withdrawIcon;
     }
