@@ -438,7 +438,6 @@ function Dashboard() {
                       <div key={item.id} className="mt-3 rounded-lg ">
                         <DashboardTransactionWrapper
                           transaction={item}
-                          type="withdraw"
                         />
                       </div>
                     );

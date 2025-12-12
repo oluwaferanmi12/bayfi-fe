@@ -4,13 +4,11 @@ import bitcoinIcon from "@/assets/svg/bitcoing1Icon.svg";
 import topUpIcon from "@/assets/svg/topUpIcon.svg";
 import blueGiftCardIcon from "@/assets/svg/blue-giftcard-icon.svg";
 import { useMemo } from "react";
-import { Transaction } from "@/types";
+import { Transaction, TransactionCategory } from "@/types";
 
 export const DashboardTransactionWrapper = ({
-  type,
   transaction,
 }: {
-  type: "withdraw" | "top-up" | "bitcoin" | "giftcard";
   transaction: Transaction;
 }) => {
   const iconType = useMemo(() => {
@@ -20,9 +18,13 @@ export const DashboardTransactionWrapper = ({
       transaction?.transactionCategory?.toLowerCase().includes("giftcard")
     ) {
       return blueGiftCardIcon;
-    } else if (type === "top-up") {
+    } else if (
+      transaction.transactionCategory.toLowerCase().includes("wallet")
+    ) {
       return topUpIcon;
-    } else if (type === "withdraw") {
+    } else if (
+      transaction.transactionCategory.toLowerCase().includes("withdraw")
+    ) {
       return withdrawIcon;
     }
   }, [transaction]);
@@ -32,7 +34,7 @@ export const DashboardTransactionWrapper = ({
         <Image className="w-[40px] aspect-square" src={iconType} alt="" />
         <div>
           <p className="text-[#171717] font-grotesk-semi-bold text-lg">
-            {transaction?.transactionCategory}
+            {/* {TransactionCategory[transaction.transactionCategory]} */}
           </p>
           <p className="text-[#747474] text-sm font-grotesk-medium">Bitcoin</p>
         </div>
