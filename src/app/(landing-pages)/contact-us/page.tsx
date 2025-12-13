@@ -7,7 +7,7 @@ import React from "react";
 const ContactUs = () => {
   return (
     <>
-      <section className="min-h-screen h-screen bg-[#F2F4F1]">
+      <section className="heightAdjustment bg-[#F2F4F1]">
         <GeneralLandingPageWrapper>
           <Row align={"middle"} justify={"center"}>
             <Col lg={12} xs={24}>

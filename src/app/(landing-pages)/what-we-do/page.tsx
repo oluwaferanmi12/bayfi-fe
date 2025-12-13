@@ -23,7 +23,7 @@ const WhatWeDo = () => {
   return (
     <>
       <GeneralLandingPageWrapper>
-        <section className="h-screen min-h-screen bg-white  flex items-center justify-center">
+        <section className="heightAdjustment bg-white  flex items-center justify-center">
           <div className="w-full h-full flex flex-col items-center justify-center">
             <Row align={"middle"} className="w-full">
               <Col lg={12} xs={24}>
