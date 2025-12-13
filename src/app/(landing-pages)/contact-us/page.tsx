@@ -12,10 +12,15 @@ const ContactUs = () => {
           <Row align={"middle"} justify={"center"}>
             <Col lg={12} xs={24}>
               <div>
-                <p className="text-3xl lg:text-6xl font-inter-medium text-[#242628] lg:leading-18">
+                <p className="text-3xl hidden lg:text-6xl font-inter-medium text-[#242628] lg:leading-18">
                   Contact us for <br />{" "}
                   <span className="font-inter-bold">questions, help,</span>{" "}
                   <br /> and more.
+                </p>
+                 <p className="text-3xl lg:hidden lg:text-6xl font-inter-medium text-[#242628] lg:leading-18">
+                  Contact us for {" "}
+                  <span className="font-inter-bold">questions, help,</span>{" "}
+                   and more.
                 </p>
                 <div className="mt-8">
                   <div className="flex items-center gap-2 text-base lg:text-xl mb-4 ">
