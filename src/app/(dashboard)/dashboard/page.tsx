@@ -40,8 +40,12 @@ import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
 import { useGetWallet, useToggleWalletStatus } from "@/hooks/query/useWallet";
 import { FormatNumber } from "@/utils/formatter";
 import { useGetTransaction } from "@/hooks/query";
+import { useProfileStore } from "@/store/userProfileStore";
+import { useQueryClient } from "@tanstack/react-query";
+import eyeSlash from "@/assets/svg/eye-slash.svg";
 
 function Dashboard() {
+  const queryClient = useQueryClient();
   const [depositModal, setDepositModal] = useState(false);
   const [showCryptoModal, setShowCryptoModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -57,8 +61,9 @@ function Dashboard() {
   const { data: transactions, isPending: transactionLoading } =
     useGetTransaction();
   const mutateWalletStatus = useToggleWalletStatus((data) => {
-    console.log(data);
+    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
   });
+  const { profile } = useProfileStore();
 
   return (
     <>
@@ -349,24 +354,35 @@ function Dashboard() {
               </span>
               <div>
                 <div className="flex justify-center">
-                  <button
-                    disabled={mutateWalletStatus.isPending}
-                    onClick={() => {
-                      mutateWalletStatus.mutate(true);
-                    }}
-                    className="bg-bayfi-green-100 rounded-full px-4 py-1 flex items-center gap-2"
-                  >
-                    <span>
-                      <Image src={eyeIcon} alt="" />
-                    </span>
-                    <Text type="text-plain-dark-16" value="Wallet balance" />
-                  </button>
+                  {profile && (
+                    <button
+                      disabled={mutateWalletStatus.isPending}
+                      onClick={() => {
+                        mutateWalletStatus.mutate(!profile.isBalanceVisible);
+                      }}
+                      className={`bg-bayfi-green-100 ${mutateWalletStatus.isPending && "opacity-50"} rounded-full px-4 py-1 flex items-center gap-2`}
+                    >
+                      <span>
+                        <Image
+                          src={profile.isBalanceVisible ? eyeIcon : eyeSlash}
+                          alt=""
+                          width={20}
+                          height={20}
+                        />
+                      </span>
+                      <Text type="text-plain-dark-16" value="Wallet balance" />
+                    </button>
+                  )}
                 </div>
 
                 <div className="py-4">
                   <Text
                     type="number-big"
-                    value={`NGN ${FormatNumber(walletDetails?.walletBalance ?? 0)}`}
+                    value={
+                      profile?.isBalanceVisible
+                        ? `NGN ${FormatNumber(walletDetails?.walletBalance ?? 0)}`
+                        : "****"
+                    }
                   />
                 </div>
                 <div className="flex items-center gap-2 justify-center">

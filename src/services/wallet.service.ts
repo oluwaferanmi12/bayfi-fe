@@ -8,7 +8,7 @@ export const getWallet = async (): Promise<Wallet> => {
 
 export const toggleStatus = async (visibility: boolean) => {
   const result = await axiosInstance.put(
-    `/wallets/toggle-status?visibility=${visibility}`
+    `/wallets/toggle-status?isBalanceVisible=${visibility}`
   );
   return result.data;
 };

@@ -10,6 +10,7 @@ export interface ProfileDataInterface {
   userType: string;
   isPinCreated: boolean;
   verified: boolean;
+  isBalanceVisible: boolean;
 }
 
 export interface PostProfileInterface {
