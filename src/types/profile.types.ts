@@ -23,3 +23,8 @@ export interface UpdatePin {
   oldPin: string;
   newPin: string;
 }
+
+export interface ChangePasswordPayload {
+  oldPassword: string;
+  newPassword: string;
+}

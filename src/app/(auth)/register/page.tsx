@@ -16,6 +16,7 @@ import { useState } from "react";
 import mobileIcon from "@/assets/svg/mobileIcon.svg";
 import { useRegister } from "@/hooks/query/useAuth";
 import { toast } from "sonner";
+import { PasswordValidation } from "@/components/validation/password-validation";
 
 const Register = () => {
   const router = useRouter();
@@ -25,6 +26,15 @@ const Register = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordValidated, setPasswordValidated] = useState(false);
+  const [errorPayload, setErrorPayload] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    userName: "",
+    phoneNumber: "",
+  });
 
   const payloadObj = {
     firstname,
@@ -33,6 +43,81 @@ const Register = () => {
     phoneNumber,
     username,
     password,
+  };
+
+  const handleValidate = () => {
+    let validated = true;
+    if (!payloadObj.firstname) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        firstName: "First name is required",
+      }));
+      validated = false;
+    } else {
+      setErrorPayload((prev) => ({
+        ...prev,
+        firstName: "",
+      }));
+    }
+    if (!payloadObj.lastname) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        lastName: "Last name is required",
+      }));
+      validated = false;
+    } else {
+      setErrorPayload((prev) => ({
+        ...prev,
+        lastName: "",
+      }));
+    }
+
+    if (!payloadObj.username) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        userName: "Username is required",
+      }));
+      validated = false;
+    } else {
+      setErrorPayload((prev) => ({
+        ...prev,
+        userName: "",
+      }));
+    }
+
+    if (!payloadObj.phoneNumber) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        phoneNumber: "Phone number is required",
+      }));
+      validated = false;
+    } else {
+      setErrorPayload((prev) => ({
+        ...prev,
+        phoneNumber: "",
+      }));
+    }
+
+    if (!payloadObj.email) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        phoneNumber: "Email is required",
+      }));
+      validated = false;
+    } else if (email) {
+    } else {
+      setErrorPayload((prev) => ({
+        ...prev,
+        phoneNumber: "",
+      }));
+    }
+
+    return validated;
+  };
+
+  const handleSubmit = () => {
+    const validated = handleValidate();
+    registerMutate.mutate(payloadObj);
   };
 
   const registerMutate = useRegister((data) => {
@@ -68,6 +153,7 @@ const Register = () => {
                       placeholder="Enter your first name"
                       icon={userIconButton}
                       setInput={setFirstname}
+                      error={errorPayload.firstName}
                     />
                   </div>
 
@@ -77,6 +163,7 @@ const Register = () => {
                       placeholder="Enter your last name"
                       icon={userIconButton}
                       setInput={setLastname}
+                      error={errorPayload.lastName}
                     />
                   </div>
                 </div>
@@ -87,6 +174,7 @@ const Register = () => {
                       placeholder="Your username"
                       icon={userIconButton}
                       setInput={setUsername}
+                      error={errorPayload.userName}
                     />
                   </div>
                   <div className="w-full">
@@ -95,6 +183,7 @@ const Register = () => {
                       icon={mobileIcon}
                       placeholder="Your phone number"
                       setInput={setPhoneNumber}
+                      error={errorPayload.phoneNumber}
                     />
                   </div>
                 </div>
@@ -104,6 +193,7 @@ const Register = () => {
                   placeholder="Your email address"
                   icon={mailIcon}
                   setInput={setEmail}
+                  error={errorPayload.email}
                 />
 
                 <GInput
@@ -112,12 +202,19 @@ const Register = () => {
                   icon={inputPasswordIcon}
                   type={"password"}
                   setInput={setPassword}
+                  error={errorPayload.password}
+                />
+              </div>
+              <div>
+                <PasswordValidation
+                  setPasswordValidated={setPasswordValidated}
+                  password={password}
                 />
               </div>
               <div className="mt-4">
                 <Button
                   action={() => {
-                    registerMutate.mutate(payloadObj);
+                    handleSubmit();
                   }}
                   type="bgGreen"
                   text="Register"

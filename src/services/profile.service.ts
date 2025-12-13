@@ -1,5 +1,10 @@
 import { axiosInstance } from "@/axios";
-import { PostProfileInterface, ProfileDataInterface, UpdatePin } from "@/types";
+import {
+  ChangePasswordPayload,
+  PostProfileInterface,
+  ProfileDataInterface,
+  UpdatePin,
+} from "@/types";
 
 export const fetchUserProfileService =
   async (): Promise<ProfileDataInterface> => {
@@ -19,6 +24,11 @@ export const updatePin = async (payload: UpdatePin) => {
 
 export const getUser = async () => {
   const { data } = await axiosInstance.get("/user");
+  return data;
+};
+
+export const changePassword = async (payload: ChangePasswordPayload) => {
+  const { data } = await axiosInstance.post(`/user/password`, payload);
   return data;
 };
 

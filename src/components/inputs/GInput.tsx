@@ -15,6 +15,7 @@ export const GInput = ({
   setInput,
   inputVal,
   disabled,
+  error,
 }: {
   label: string;
   placeholder: string;
@@ -24,6 +25,7 @@ export const GInput = ({
   setInput?: (val: string) => void;
   inputVal?: string;
   disabled?: boolean;
+  error?: string;
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -64,6 +66,7 @@ export const GInput = ({
           placeholder={placeholder}
           className={`bg-bayfi-grey-400 font-grotesk-medium placeholder:font-grotesk-regular text-base rounded-lg p-2 lg:py-3 ${icon && " px-9"}  w-full outline-none border border-bayfi-grey-600 ${disabled && "cursor-not-allowed"}`}
         />
+        {error && <p className="text-[#EF4444] text-xs mt-1">{error}</p>}
       </div>
     </div>
   );

@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import { Text } from "@/components/texts/text";
 import { Col, Row } from "antd";
 import { ProfileNav } from "@/components/wrappers/profile/profile-nav";
-import { ProfileType } from "@/interfaces/interfaces-ui";
 import profilePlaceholder from "@/assets/svg/profile-default-avatar.svg";
 import Image from "next/image";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
 import { useCustomProfile } from "@/hooks/custom/profile/useCustomProfile";
+import { useChangePasswordHook } from "@/hooks/custom/profile/useChangePasswordHook";
 
 function ProfileSetting() {
   const {
@@ -26,6 +26,8 @@ function ProfileSetting() {
     handleSaveImage,
     saveImageLoading,
   } = useCustomProfile();
+  const { handleChangePassword, passwordLoading, payload, setPayload } =
+    useChangePasswordHook();
   return (
     <div className="rounded-lg bg-white ">
       <div className="p-4 border-b border-[#EAECF0]">
@@ -170,18 +172,37 @@ function ProfileSetting() {
                               Password settings
                             </p>
                             <Button
-                              loading={false}
+                              loading={passwordLoading}
                               type="bgGreen"
                               text="Change password"
                               lessRounded
+                              action={() => {
+                                handleChangePassword();
+                              }}
                             />
                           </div>
                           <div className="mt-4 w-full">
                             <GInput
+                              type="password"
+                              inputVal={payload.oldPassword}
+                              setInput={(e) => {
+                                setPayload((prev) => ({
+                                  ...prev,
+                                  oldPassword: e,
+                                }));
+                              }}
                               label="Old Password"
                               placeholder="Insert old password"
                             />
                             <GInput
+                              type="password"
+                              inputVal={payload.newPassword}
+                              setInput={(e) => {
+                                setPayload((prev) => ({
+                                  ...prev,
+                                  newPassword: e,
+                                }));
+                              }}
                               label="New Password"
                               placeholder="Insert old password"
                             />

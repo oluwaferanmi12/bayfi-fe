@@ -1,4 +1,5 @@
 import {
+  changePassword,
   fetchUserProfileService,
   getUser,
   logout,
@@ -33,6 +34,13 @@ export const useGetUser = () => {
   return useQuery({
     queryFn: getUser,
     queryKey: ["get-user"],
+  });
+};
+
+export const useChangePassword = (sc: (data: any) => void) => {
+  return useMutation({
+    mutationFn: changePassword,
+    onSuccess: sc,
   });
 };
 
