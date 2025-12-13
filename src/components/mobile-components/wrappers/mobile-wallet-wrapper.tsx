@@ -10,8 +10,14 @@ import { BottomDrawer } from "@/components/bottom-drawers/bottom-drawer";
 import nairaGreyIcon from "@/assets/svg/naira-grey.svg";
 import sellCryptoIcon from "@/assets/svg/sellCryptoIcon.svg";
 import { useRouter } from "next/navigation";
+import { Wallet } from "@/types";
+import { FormatNumber } from "@/utils/formatter";
 
-export const MobileWalletWrapper = () => {
+export const MobileWalletWrapper = ({
+  walletDetails,
+}: {
+  walletDetails?: Wallet;
+}) => {
   const [showTradeModal, setShowTradeModal] = useState(false);
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
@@ -109,7 +115,7 @@ export const MobileWalletWrapper = () => {
           </p>
         </div>
         <p className="text-2xl font-grotesk-bold py-3 border-b w-full text-center border-[#F0F0F0]">
-          NGN200,000.00
+          {"NGN"} {FormatNumber(walletDetails?.walletBalance ?? 0)}
         </p>
         <div className="py-3 flex px-6 items-center justify-between w-full">
           <div

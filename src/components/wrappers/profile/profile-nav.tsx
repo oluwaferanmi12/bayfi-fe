@@ -17,7 +17,6 @@ import { useFetchProfile } from "@/hooks/query/useProfile";
 import { ProfileDataInterface } from "@/types/profile.types";
 import { useLogout } from "@/hooks/query";
 import { isValidImageUrl } from "@/utils/checkValidImage";
-// import { useLogout } from "@/hooks/query";
 
 export const ProfileNav = ({
   setActiveProfile,

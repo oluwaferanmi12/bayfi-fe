@@ -17,6 +17,7 @@ import { DesktopChatListDrawer } from "@/components/side-drawers/chat/desktop-ch
 import { useEffect, useState } from "react";
 import { DesktopChatSideDrawer } from "@/components/side-drawers/chat/desktop-chat-page";
 import { useFetchProfile, useGetUser } from "@/hooks/query/useProfile";
+import { useProfileStore } from "@/store/userProfileStore";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +29,7 @@ export default function RootLayout({
   const [showChatPage, setShowChatPage] = useState(false);
   const [activeChatId, setActiveChatId] = useState<null | number>(null);
   const { data: profileDetails } = useFetchProfile();
-  const { data: user } = useGetUser();
+  const { setProfile } = useProfileStore();
 
   const onChatSelected = (id: number) => {
     setActiveChatId(id);
@@ -59,8 +60,10 @@ export default function RootLayout({
   ];
 
   useEffect(() => {
-    console.log(user, "User");
-  }, [user]);
+    if (profileDetails) {
+      setProfile(profileDetails);
+    }
+  }, [profileDetails]);
 
   return (
     <>
@@ -95,7 +98,7 @@ export default function RootLayout({
           <Image src={floatMessageIcon} alt="Chat" />
         </div>
       </button>
-      <div className="h-full min-h-screen   w-full lg:pt-28 bg-[#F6F4F0]">
+      <div className="h-full min-h-screen w-full lg:pt-28 bg-[#F6F4F0]">
         <div className="fixed hidden lg:block  top-0 w-full z-50 bg-white border border-[#EAECF0] py-4">
           <Row justify={"center"} align={"middle"}>
             <Col xs={22}>
@@ -127,7 +130,6 @@ export default function RootLayout({
                 </div>
                 <div className="flex items-center gap-4">
                   <Image className="cursor-pointer" src={bellIcon} alt="" />
-
                   <Image
                     width={40}
                     height={40}

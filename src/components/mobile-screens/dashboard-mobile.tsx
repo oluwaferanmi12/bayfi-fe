@@ -7,7 +7,10 @@ import { MobileWrapper } from "@/components/mobile-components/wrappers/mobile-wr
 import { SupportWaiting } from "@/components/mobile-components/wrappers/support-waiting";
 import { Transaction, Wallet } from "@/types";
 
-export const DashboardMobile = ({}: {
+export const DashboardMobile = ({
+  transactions,
+  walletDetails,
+}: {
   transactions?: Transaction[];
   walletDetails?: Wallet;
 }) => {
@@ -15,11 +18,11 @@ export const DashboardMobile = ({}: {
     <>
       <MobileWrapper>
         <DashboardHeader />
-        <SupportWaiting />
-        <MobileWalletWrapper />
+        {/* <SupportWaiting /> */}
+        <MobileWalletWrapper walletDetails={walletDetails} />
         <MobileDashboardService />
         <MobileDashboardAdvertise />
-        <MobileTransactionWrapper />
+        <MobileTransactionWrapper transactions={transactions} />
       </MobileWrapper>
     </>
   );
