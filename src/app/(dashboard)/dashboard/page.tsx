@@ -436,9 +436,7 @@ function Dashboard() {
                   {transactions.map((item) => {
                     return (
                       <div key={item.id} className="mt-3 rounded-lg ">
-                        <DashboardTransactionWrapper
-                          transaction={item}
-                        />
+                        <DashboardTransactionWrapper transaction={item} />
                       </div>
                     );
                   })}

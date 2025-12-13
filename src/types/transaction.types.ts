@@ -10,7 +10,7 @@ export interface Transaction {
   transactionReference: string;
   transactionType: "CREDIT" | "DEBIT";
   transactionStatus: string;
-  transactionCategory: TransactionCategory;
+  transactionCategory: keyof typeof TransactionCategory;
   units: number;
   isLogged: boolean;
 }
