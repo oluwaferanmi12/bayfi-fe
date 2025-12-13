@@ -6,14 +6,18 @@ import { toast } from "sonner";
 export const useChangePasswordHook = () => {
   const mutate = useChangePassword(() => {
     toast.success("Password saved");
+    setPayload({ oldPassword: "", newPassword: "" });
   });
+  const [passwordValidated, setPasswordValidated] = useState(false);
   const [payload, setPayload] = useState<ChangePasswordPayload>({
     oldPassword: "",
     newPassword: "",
   });
   const handleChangePassword = () => {
     // validate that the two passwords match
-    mutate.mutate(payload);
+    if (passwordValidated) {
+      mutate.mutate(payload);
+    }
   };
 
   return {
@@ -21,5 +25,6 @@ export const useChangePasswordHook = () => {
     passwordLoading: mutate.isPending,
     payload,
     setPayload,
+    setPasswordValidated,
   };
 };

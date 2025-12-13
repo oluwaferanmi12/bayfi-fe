@@ -6,6 +6,18 @@ import { useState } from "react";
 import eyeIcon from "@/assets/svg/eyeIcon.svg";
 import eyeIconSlash from "@/assets/svg/eye-slash.svg";
 
+type GInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> & {
+  label: string;
+  placeholder: string;
+  type?: "password" | "text" | "number";
+  icon?: string;
+  noMarginBottom?: boolean;
+  setInput?: (val: string) => void;
+  inputVal?: string;
+  disabled?: boolean;
+  error?: string;
+};
+
 export const GInput = ({
   label,
   placeholder,
@@ -16,17 +28,8 @@ export const GInput = ({
   inputVal,
   disabled,
   error,
-}: {
-  label: string;
-  placeholder: string;
-  type?: "password" | "text" | "number";
-  icon?: string;
-  noMarginBottom?: boolean;
-  setInput?: (val: string) => void;
-  inputVal?: string;
-  disabled?: boolean;
-  error?: string;
-}) => {
+  ...props
+}: GInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div className={`${noMarginBottom ? "mb-0" : "mb-4"} w-full`}>
@@ -65,6 +68,7 @@ export const GInput = ({
           type={type === "password" ? (showPassword ? "text" : type) : type}
           placeholder={placeholder}
           className={`bg-bayfi-grey-400 font-grotesk-medium placeholder:font-grotesk-regular text-base rounded-lg p-2 lg:py-3 ${icon && " px-9"}  w-full outline-none border border-bayfi-grey-600 ${disabled && "cursor-not-allowed"}`}
+          {...props}
         />
         {error && <p className="text-[#EF4444] text-xs mt-1">{error}</p>}
       </div>

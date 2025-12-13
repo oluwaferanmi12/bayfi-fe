@@ -10,6 +10,7 @@ import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
 import { useCustomProfile } from "@/hooks/custom/profile/useCustomProfile";
 import { useChangePasswordHook } from "@/hooks/custom/profile/useChangePasswordHook";
+import { PasswordValidation } from "@/components/validation/password-validation";
 
 function ProfileSetting() {
   const {
@@ -26,8 +27,13 @@ function ProfileSetting() {
     handleSaveImage,
     saveImageLoading,
   } = useCustomProfile();
-  const { handleChangePassword, passwordLoading, payload, setPayload } =
-    useChangePasswordHook();
+  const {
+    handleChangePassword,
+    passwordLoading,
+    payload,
+    setPayload,
+    setPasswordValidated,
+  } = useChangePasswordHook();
   return (
     <div className="rounded-lg bg-white ">
       <div className="p-4 border-b border-[#EAECF0]">
@@ -206,6 +212,12 @@ function ProfileSetting() {
                               label="New Password"
                               placeholder="Insert old password"
                             />
+                            <div>
+                              <PasswordValidation
+                                password={payload.newPassword}
+                                setPasswordValidated={setPasswordValidated}
+                              />
+                            </div>
                           </div>
                         </div>
                         <div className="py-3 border-b border-[#EAECF0] w-full">

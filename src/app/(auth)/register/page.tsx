@@ -46,8 +46,6 @@ const Register = () => {
     password,
   };
 
-  console.log(passwordValidated, "Password validated");
-
   const handleValidate = () => {
     let validated = true;
     if (!payloadObj.firstname) {
