@@ -17,6 +17,7 @@ import mobileIcon from "@/assets/svg/mobileIcon.svg";
 import { useRegister } from "@/hooks/query/useAuth";
 import { toast } from "sonner";
 import { PasswordValidation } from "@/components/validation/password-validation";
+import { isValidEmail } from "@/utils/email-validate";
 
 const Register = () => {
   const router = useRouter();
@@ -44,6 +45,8 @@ const Register = () => {
     username,
     password,
   };
+
+  console.log(passwordValidated, "Password validated");
 
   const handleValidate = () => {
     let validated = true;
@@ -101,14 +104,38 @@ const Register = () => {
     if (!payloadObj.email) {
       setErrorPayload((prev) => ({
         ...prev,
-        phoneNumber: "Email is required",
+        email: "Email is required",
       }));
       validated = false;
-    } else if (email) {
+    } else if (!isValidEmail(payloadObj.email)) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        email: "Invalid email format",
+      }));
+      validated = false;
     } else {
       setErrorPayload((prev) => ({
         ...prev,
-        phoneNumber: "",
+        email: "",
+      }));
+    }
+
+    if (!payloadObj.password) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        password: "Password is required",
+      }));
+      validated = false;
+    } else if (!passwordValidated) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        password: "Password does not match requirement",
+      }));
+      validated = false;
+    } else {
+      setErrorPayload((prev) => ({
+        ...prev,
+        password: "",
       }));
     }
 
@@ -117,6 +144,9 @@ const Register = () => {
 
   const handleSubmit = () => {
     const validated = handleValidate();
+    if (!validated) {
+      return;
+    }
     registerMutate.mutate(payloadObj);
   };
 
