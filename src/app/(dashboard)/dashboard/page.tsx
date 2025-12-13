@@ -37,7 +37,7 @@ import { DashboardTransactionWrapper } from "@/components/transaction/dashboard-
 import giftCardActionIcon from "@/assets/svg/trade-giftcard-dashboard.svg";
 import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
 import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
-import { useGetWallet } from "@/hooks/query/useWallet";
+import { useGetWallet, useToggleWalletStatus } from "@/hooks/query/useWallet";
 import { FormatNumber } from "@/utils/formatter";
 import { useGetTransaction } from "@/hooks/query";
 
@@ -56,7 +56,10 @@ function Dashboard() {
   const { data: walletDetails } = useGetWallet();
   const { data: transactions, isPending: transactionLoading } =
     useGetTransaction();
-  console.log(transactions, "Transactions");
+  const mutateWalletStatus = useToggleWalletStatus((data) => {
+    console.log(data);
+  });
+
   return (
     <>
       <div className="hidden lg:block">
@@ -346,12 +349,18 @@ function Dashboard() {
               </span>
               <div>
                 <div className="flex justify-center">
-                  <div className="bg-bayfi-green-100 rounded-full px-4 py-1 flex items-center gap-2">
+                  <button
+                    disabled={mutateWalletStatus.isPending}
+                    onClick={() => {
+                      mutateWalletStatus.mutate(true);
+                    }}
+                    className="bg-bayfi-green-100 rounded-full px-4 py-1 flex items-center gap-2"
+                  >
                     <span>
                       <Image src={eyeIcon} alt="" />
                     </span>
                     <Text type="text-plain-dark-16" value="Wallet balance" />
-                  </div>
+                  </button>
                 </div>
 
                 <div className="py-4">
@@ -448,7 +457,10 @@ function Dashboard() {
           </Col>
         </Row>
       </div>
-      <DashboardMobile />
+      <DashboardMobile
+        transactions={transactions}
+        walletDetails={walletDetails}
+      />
     </>
   );
 }

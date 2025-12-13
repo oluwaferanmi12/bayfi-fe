@@ -5,8 +5,12 @@ import { MobileDashboardService } from "@/components/mobile-components/wrappers/
 import { MobileWalletWrapper } from "@/components/mobile-components/wrappers/mobile-wallet-wrapper";
 import { MobileWrapper } from "@/components/mobile-components/wrappers/mobile-wrapper";
 import { SupportWaiting } from "@/components/mobile-components/wrappers/support-waiting";
+import { Transaction, Wallet } from "@/types";
 
-export const DashboardMobile = () => {
+export const DashboardMobile = ({}: {
+  transactions?: Transaction[];
+  walletDetails?: Wallet;
+}) => {
   return (
     <>
       <MobileWrapper>

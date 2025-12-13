@@ -1,5 +1,6 @@
 import {
   fetchUserProfileService,
+  getUser,
   logout,
   updateProfile,
 } from "@/services/profile.service";
@@ -15,7 +16,7 @@ export const useFetchProfile = () => {
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
-    refetchOnMount: false, 
+    refetchOnMount: false,
   });
 };
 
@@ -25,6 +26,13 @@ export const useUpdateProfile = (sc: (val: any) => void) => {
       return updateProfile(payload);
     },
     onSuccess: sc,
+  });
+};
+
+export const useGetUser = () => {
+  return useQuery({
+    queryFn: getUser,
+    queryKey: ["get-user"],
   });
 };
 

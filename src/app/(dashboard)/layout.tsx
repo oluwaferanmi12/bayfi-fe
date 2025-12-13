@@ -12,12 +12,11 @@ import homeIcon from "@/assets/svg/homeIcon.svg";
 import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
 import { usePathname, useRouter } from "next/navigation";
-import { FloatingDraggable } from "@/components/buttons/float-button";
 import floatMessageIcon from "@/assets/svg/floatint-message-icon.svg";
 import { DesktopChatListDrawer } from "@/components/side-drawers/chat/desktop-chat-list-drawer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DesktopChatSideDrawer } from "@/components/side-drawers/chat/desktop-chat-page";
-import { useFetchProfile } from "@/hooks/query/useProfile";
+import { useFetchProfile, useGetUser } from "@/hooks/query/useProfile";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,6 +28,7 @@ export default function RootLayout({
   const [showChatPage, setShowChatPage] = useState(false);
   const [activeChatId, setActiveChatId] = useState<null | number>(null);
   const { data: profileDetails } = useFetchProfile();
+  const { data: user } = useGetUser();
 
   const onChatSelected = (id: number) => {
     setActiveChatId(id);
@@ -57,6 +57,10 @@ export default function RootLayout({
       url: "/support",
     },
   ];
+
+  useEffect(() => {
+    console.log(user, "User");
+  }, [user]);
 
   return (
     <>

@@ -1,7 +1,6 @@
 import notificationIcon from "@/assets/svg/notification.svg";
 import Image from "next/image";
 import placeholderAvatar from "@/assets/svg/dashboard-placeholder.svg";
-import { Text } from "@/components/texts/text";
 
 export const DashboardHeader = () => {
   return (

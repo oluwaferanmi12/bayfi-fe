@@ -17,6 +17,11 @@ export const updatePin = async (payload: UpdatePin) => {
   return data;
 };
 
+export const getUser = async () => {
+  const { data } = await axiosInstance.get("/user");
+  return data;
+};
+
 export const logout = async () => {
   const { data } = await axiosInstance.post(`/auth/logout`);
   return data;
