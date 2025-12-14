@@ -6,6 +6,7 @@ import blueGiftCardIcon from "@/assets/svg/blue-giftcard-icon.svg";
 import { useMemo } from "react";
 import { Transaction, TransactionCategory } from "@/types";
 import { FormatNumber } from "@/utils/formatter";
+import { momentLocal } from "@/utils/moment-local";
 
 export const DashboardTransactionWrapper = ({
   transaction,
@@ -45,13 +46,15 @@ export const DashboardTransactionWrapper = ({
         )}
       </div>
       <div>
-        <p className="text-[#171717] font-grotesk-bold text-lg">
+        <p className="text-[#171717] font-grotesk-bold text-right text-lg">
           {(transaction?.currency ?? "NGN") +
             " " +
             `${FormatNumber(transaction?.amount ?? 0)}`}
         </p>
         <p className="text-[#747474] text-sm font-grotesk-medium text-right">
-          11:45 AM
+          {transaction?.createdAt
+            ? momentLocal(transaction.createdAt).format("YYYY-MM-DD HH:mm")
+            : ""}
         </p>
       </div>
     </div>

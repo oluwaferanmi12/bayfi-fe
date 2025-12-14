@@ -13,6 +13,7 @@ export interface Transaction {
   transactionCategory: keyof typeof TransactionCategory;
   units: number;
   isLogged: boolean;
+  createdAt: string;
 }
 
 export enum TransactionCategory {

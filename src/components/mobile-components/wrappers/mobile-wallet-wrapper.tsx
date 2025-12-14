@@ -12,16 +12,25 @@ import sellCryptoIcon from "@/assets/svg/sellCryptoIcon.svg";
 import { useRouter } from "next/navigation";
 import { Wallet } from "@/types";
 import { FormatNumber } from "@/utils/formatter";
+import { useProfileStore } from "@/store/userProfileStore";
+import eyeSlash from "@/assets/svg/eye-slash.svg";
+import { useToggleWalletStatus } from "@/hooks/query";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const MobileWalletWrapper = ({
   walletDetails,
 }: {
   walletDetails?: Wallet;
 }) => {
+  const queryClient = useQueryClient();
   const [showTradeModal, setShowTradeModal] = useState(false);
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const mutateWalletStatus = useToggleWalletStatus((data) => {
+    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+  });
   const router = useRouter();
+  const { profile } = useProfileStore();
   return (
     <>
       <BottomDrawer
@@ -108,15 +117,31 @@ export const MobileWalletWrapper = ({
       </BottomDrawer>
 
       <div className="bg-white p-4 my-2 rounded-2xl flex flex-col justify-center items-center">
-        <div className="flex items-center gap-2 ">
-          <Image src={eyeIcon} alt="" />
+        <button
+          onClick={() => {
+            mutateWalletStatus.mutate(!profile?.isBalanceVisible);
+          }}
+          className="flex items-center gap-2 "
+        >
+          <Image
+            width={20}
+            height={20}
+            src={profile?.isBalanceVisible ? eyeIcon : eyeSlash}
+            alt=""
+          />
           <p className="text-bayfi-grey-900 font-grotesk-medium text-sm">
             Wallet Balance
           </p>
-        </div>
-        <p className="text-2xl font-grotesk-bold py-3 border-b w-full text-center border-[#F0F0F0]">
-          {"NGN"} {FormatNumber(walletDetails?.walletBalance ?? 0)}
-        </p>
+        </button>
+        {profile && (
+          <p className="text-2xl font-grotesk-bold py-3 border-b w-full text-center border-[#F0F0F0]">
+            {"NGN"}{" "}
+            {profile.isBalanceVisible
+              ? FormatNumber(walletDetails?.walletBalance ?? 0)
+              : "****"}
+          </p>
+        )}
+
         <div className="py-3 flex px-6 items-center justify-between w-full">
           <div
             onClick={() => {
