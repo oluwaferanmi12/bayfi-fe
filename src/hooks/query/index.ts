@@ -4,3 +4,5 @@ export * from "./useUtility";
 export * from "./useChat";
 export * from "./useTransaction";
 export * from "./useWallet";
+export * from "./usePin"
+export * from "./useProfile"

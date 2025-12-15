@@ -17,10 +17,7 @@ export const updateProfile = async (payload: PostProfileInterface) => {
   return data;
 };
 
-export const updatePin = async (payload: UpdatePin) => {
-  const { data } = await axiosInstance.put(`/user/pin`);
-  return data;
-};
+
 
 export const getUser = async () => {
   const { data } = await axiosInstance.get("/user");

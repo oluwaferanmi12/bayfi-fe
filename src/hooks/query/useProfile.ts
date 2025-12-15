@@ -44,13 +44,3 @@ export const useChangePassword = (sc: (data: any) => void) => {
   });
 };
 
-export const useUpdatePin = () => {};
-
-export const useSavePin = () => {};
-
-export const useLogout = (sc: (val: any) => void) => {
-  return useMutation({
-    mutationFn: logout,
-    onSuccess: sc,
-  });
-};

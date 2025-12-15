@@ -7,7 +7,6 @@ import Link from "next/link";
 import { Text } from "@/components/texts/text";
 import bellIcon from "@/assets/svg/bellIcon.svg";
 import profilePlaceholder from "@/assets/svg/profile-default-avatar.svg";
-
 import homeIcon from "@/assets/svg/homeIcon.svg";
 import { GPageWrapper } from "@/components/wrappers/GPageWrapper";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
@@ -18,6 +17,7 @@ import { useEffect, useState } from "react";
 import { DesktopChatSideDrawer } from "@/components/side-drawers/chat/desktop-chat-page";
 import { useFetchProfile, useGetUser } from "@/hooks/query/useProfile";
 import { useProfileStore } from "@/store/userProfileStore";
+import { SetPinModal } from "@/components/modals/pin/set-pin-modal";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,6 +29,7 @@ export default function RootLayout({
   const [showChatPage, setShowChatPage] = useState(false);
   const [activeChatId, setActiveChatId] = useState<null | number>(null);
   const { data: profileDetails } = useFetchProfile();
+  const [showPinModal, setShowPinModal] = useState(true);
   const { setProfile } = useProfileStore();
 
   const onChatSelected = (id: number) => {
@@ -63,10 +64,19 @@ export default function RootLayout({
     if (profileDetails) {
       setProfile(profileDetails);
     }
+    if (profileDetails && !profileDetails?.isPinCreated) {
+      setShowPinModal(true);
+    }
   }, [profileDetails]);
 
   return (
     <>
+      <SetPinModal
+        open={showPinModal}
+        close={() => {
+          setShowPinModal(false);
+        }}
+      />
       {showChatList && (
         <DesktopChatListDrawer
           open={showChatList}
