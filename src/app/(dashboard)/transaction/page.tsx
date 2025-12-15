@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
 import React from "react";
@@ -6,8 +8,10 @@ import { SearchInput } from "@/components/inputs/search-input";
 import { TableInput } from "@/components/inputs/table-input";
 import { TablePagination } from "@/components/pagination/table-pagination";
 import { TransactionTable } from "@/components/tables/transaction-table";
+import { useGetTransaction } from "@/hooks/query";
 
 function Transaction() {
+  const { isPending, data } = useGetTransaction();
   return (
     <div className="bg-white rounded-lg p-4">
       <div className="flex justify-between border-b border-gray-200 pb-3">
@@ -40,7 +44,7 @@ function Transaction() {
         <TableInput placeholder="Search" />
         <TablePagination />
       </div>
-        <TransactionTable />
+      {data && <TransactionTable data={data} />}
     </div>
   );
 }

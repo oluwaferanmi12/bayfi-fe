@@ -17,20 +17,26 @@ import { SideDrawer } from "@/components/side-drawers/side-drawer";
 import bitcoinSmallIcon from "@/assets/svg/bitcoin-small-icon.svg";
 import { Button } from "@/components/buttons";
 import chatIcon from "@/assets/svg/chat-message-icon.svg";
+import { Transaction } from "@/types";
+import { momentLocal } from "@/utils/moment-local";
 
-export const TransactionTable = () => {
+export const TransactionTable = ({ data }: { data: Transaction[] }) => {
   const [showSideDrawer, setShowSideDrawer] = useState(false);
-  const columnHelper = createColumnHelper<TransactionInterface>();
+  const columnHelper = createColumnHelper<Transaction>();
   const columns = [
-    columnHelper.accessor("date", {
-      cell: (info) => <TableText text={info.getValue()} />,
+    columnHelper.accessor("createdAt", {
+      cell: (info) => (
+        <TableText
+          text={momentLocal(info.getValue()).format("YYYY-MM-DD HH:mm")}
+        />
+      ),
       header: (info) => <TableText text="Date" headerType />,
     }),
     columnHelper.accessor("amount", {
-      cell: (info) => <TableText text={info.getValue()} />,
+      cell: (info) => <TableText text={"NGN" + " " + info.getValue()} />,
       header: (info) => <TableText text="Amount" headerType />,
     }),
-    columnHelper.accessor("channel", {
+    columnHelper.accessor("transactionCategory", {
       cell: (info) => (
         <div className="flex items-center gap-2 justify-center">
           <Image src={walletTopUpIcon} alt="" />{" "}
@@ -39,7 +45,7 @@ export const TransactionTable = () => {
       ),
       header: (info) => <TableText text="Channel" headerType />,
     }),
-    columnHelper.accessor("status", {
+    columnHelper.accessor("transactionStatus", {
       cell: (info) => (
         <div className="flex items-center  justify-center">
           {info.getValue() === "Completed" ? (
@@ -70,7 +76,7 @@ export const TransactionTable = () => {
   ];
 
   const table = useReactTable({
-    data: transactionData,
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -142,7 +148,7 @@ export const TransactionTable = () => {
       <div className="mt-4">
         <table className="w-full">
           <thead>
-            {table.getHeaderGroups().map((headerGroup , index) => {
+            {table.getHeaderGroups().map((headerGroup, index) => {
               return (
                 <tr key={index} className="  min-w-full w-full">
                   {headerGroup.headers.map((header, index, rootData) => {
