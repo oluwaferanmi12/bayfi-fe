@@ -14,3 +14,4 @@ export const useProfileStore = create<ProfileState>((set) => ({
   },
   clearProfile: () => set({ profile: null }),
 }));
+

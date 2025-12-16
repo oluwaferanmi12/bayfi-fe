@@ -3,7 +3,7 @@ import { AccountLookUpInterface, Beneficiary } from "@/types";
 
 export const getBeneficiary = async (): Promise<Beneficiary[]> => {
   const { data } = await axiosInstance.get(`/bank/beneficiaries`);
-  return data;
+  return data.data;
 };
 
 export const saveBeneficiary = async (payload: Beneficiary) => {

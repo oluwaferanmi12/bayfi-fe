@@ -15,9 +15,11 @@ import floatMessageIcon from "@/assets/svg/floatint-message-icon.svg";
 import { DesktopChatListDrawer } from "@/components/side-drawers/chat/desktop-chat-list-drawer";
 import { useEffect, useState } from "react";
 import { DesktopChatSideDrawer } from "@/components/side-drawers/chat/desktop-chat-page";
-import { useFetchProfile, useGetUser } from "@/hooks/query/useProfile";
+import { useFetchProfile } from "@/hooks/query/useProfile";
 import { useProfileStore } from "@/store/userProfileStore";
 import { SetPinModal } from "@/components/modals/pin/set-pin-modal";
+import { useGetWallet } from "@/hooks/query";
+import { useWalletStore } from "@/store/walletStore";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +33,9 @@ export default function RootLayout({
   const { data: profileDetails } = useFetchProfile();
   const [showPinModal, setShowPinModal] = useState(false);
   const { setProfile } = useProfileStore();
-
+  const { setWallet } = useWalletStore();
+  const { data: walletDetails, isPending: walletDetailsLoading } =
+    useGetWallet();
   const onChatSelected = (id: number) => {
     setActiveChatId(id);
     setShowChatList(false);
@@ -68,6 +72,12 @@ export default function RootLayout({
       setShowPinModal(true);
     }
   }, [profileDetails]);
+
+  useEffect(() => {
+    if (!walletDetailsLoading && walletDetails) {
+      setWallet(walletDetails);
+    }
+  }, [walletDetails, walletDetailsLoading]);
 
   return (
     <>

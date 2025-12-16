@@ -1,7 +1,8 @@
 import moment from "moment";
 
 export const FormatNumber = (val: number) => {
-  return val.toLocaleString();
+  const numberValue = val.toFixed(2);
+  return numberValue.toLocaleString();
 };
 
 export const messageDateFormatter = (val: string) => {
