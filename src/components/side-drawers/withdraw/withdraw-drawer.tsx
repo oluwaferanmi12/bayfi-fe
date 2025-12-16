@@ -9,7 +9,7 @@ import { Text } from "@/components/texts/text";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
-import { useGetBeneficiary } from "@/hooks/query/usePayment";
+import { useGetBankList, useGetBeneficiary } from "@/hooks/query/usePayment";
 import { useWalletStore } from "@/store/walletStore";
 
 export const WithdrawDrawer = ({
@@ -22,7 +22,8 @@ export const WithdrawDrawer = ({
   const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
   const [showReciept, setShowReciept] = useState(false);
   const { data, isPending } = useGetBeneficiary();
-  
+  const { data: bank_lists, isPending: bankListLoading } = useGetBankList();
+
   return (
     <SideDrawer title="Withdraw" open={open} onClose={close}>
       {!showWithdrawOtp ? (

@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/axios";
-import { AccountLookUpInterface, Beneficiary } from "@/types";
+import { AccountLookUpInterface, Bank, Beneficiary } from "@/types";
 
 export const getBeneficiary = async (): Promise<Beneficiary[]> => {
   const { data } = await axiosInstance.get(`/bank/beneficiaries`);
@@ -25,8 +25,8 @@ export const bankSearch = async (query: string) => {
   return data.data;
 };
 
-export const bankList = async () => {
-  const { data } = await axiosInstance.get(`/payment/banks/search`);
+export const bankList = async (): Promise<Bank> => {
+  const { data } = await axiosInstance.get(`payment/bank/list`);
   return data.data;
 };
 

@@ -6,7 +6,7 @@ import {
   getBeneficiary,
   saveBeneficiary,
 } from "@/services";
-import { AccountLookUpInterface } from "@/types";
+import { AccountLookUpInterface, Bank } from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetBeneficiary = () => {

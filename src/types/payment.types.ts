@@ -14,3 +14,10 @@ export interface AccountLookUpInterface {
   bankCode: string;
   accountNumber: string;
 }
+
+export interface Bank {
+  name: string;
+  bankCode: string;
+  category: string;
+  bankLogoUrl: string;
+}
