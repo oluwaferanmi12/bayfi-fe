@@ -1,0 +1,52 @@
+import {
+  accountNameLookup,
+  bankList,
+  bankSearch,
+  deleteBeneficiary,
+  getBeneficiary,
+  saveBeneficiary,
+} from "@/services";
+import { AccountLookUpInterface } from "@/types";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+export const useGetBeneficiary = () => {
+  return useQuery({
+    queryKey: ["get-beneficiary"],
+    queryFn: getBeneficiary,
+  });
+};
+
+export const useSaveBeneficiary = (sc: (val: any) => void) => {
+  return useMutation({
+    mutationFn: saveBeneficiary,
+    onSuccess: sc,
+  });
+};
+
+export const useDeleteBeneficiary = (sc: (val: any) => void) => {
+  return useMutation({
+    mutationFn: deleteBeneficiary,
+    onSuccess: sc,
+  });
+};
+
+export const useGetBankSearch = (query: string) => {
+  return useQuery({
+    queryKey: ["bank-search", query],
+    queryFn: () => bankSearch(query),
+  });
+};
+
+export const useGetBankList = () => {
+  return useQuery({
+    queryKey: ["get-banks"],
+    queryFn: bankList,
+  });
+};
+
+export const useAccountLookup = (payload: AccountLookUpInterface) => {
+  return useQuery({
+    queryKey: [payload, "account-lookup"],
+    queryFn: () => accountNameLookup(payload),
+  });
+};

@@ -29,7 +29,7 @@ export default function RootLayout({
   const [showChatPage, setShowChatPage] = useState(false);
   const [activeChatId, setActiveChatId] = useState<null | number>(null);
   const { data: profileDetails } = useFetchProfile();
-  const [showPinModal, setShowPinModal] = useState(true);
+  const [showPinModal, setShowPinModal] = useState(false);
   const { setProfile } = useProfileStore();
 
   const onChatSelected = (id: number) => {

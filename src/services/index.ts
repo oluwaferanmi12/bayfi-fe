@@ -7,3 +7,4 @@ export * from "./wallet.service";
 export * from "./payment.service";
 export * from "./profile.service";
 export * from "./pin.service";
+export * from "./payment.service";
