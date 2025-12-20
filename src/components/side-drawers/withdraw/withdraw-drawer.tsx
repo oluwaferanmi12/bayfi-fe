@@ -21,6 +21,8 @@ import { Select, Spin } from "antd";
 import { FormatNumber } from "@/utils/formatter";
 import { DisburseResponse } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
+import { useProfileStore } from "@/store/userProfileStore";
+import { usePinStore } from "@/store/usePinStore";
 type BankOption = {
   label: string;
   value: string;
@@ -41,6 +43,8 @@ export const WithdrawDrawer = ({
   const [searchedValue, setSearchedValue] = useState("");
   const bankSearch = useDebounce(searchedValue, 500);
   const [showReciept, setShowReciept] = useState(false);
+  const { profile } = useProfileStore();
+  const { showPinModal, setShowPinModal } = usePinStore();
   const [disburseResponse, setDisburseResponse] =
     useState<DisburseResponse | null>(null);
   const { data, isPending } = useGetBeneficiary();
@@ -65,6 +69,14 @@ export const WithdrawDrawer = ({
       })),
     [bankList]
   );
+
+  const handleShowOtp = () => {
+    if (profile?.isPinCreated) {
+      setShowWithdrawOtp(true);
+    } else {
+      setShowPinModal(true);
+    }
+  };
 
   const handleWithdraw = () => {
     disburse.mutate({
@@ -146,7 +158,7 @@ export const WithdrawDrawer = ({
                 text="Continue"
                 type="bgGreen"
                 action={() => {
-                  setShowWithdrawOtp(true);
+                  handleShowOtp();
                 }}
               />
             </div>

@@ -62,14 +62,12 @@ function Dashboard() {
   return (
     <>
       <div className="hidden lg:block">
-        {showWithdrawModal && (
-          <WithdrawDrawer
-            open={showWithdrawModal}
-            close={() => {
-              setShowWithdrawModal(false);
-            }}
-          />
-        )}
+        <WithdrawDrawer
+          open={showWithdrawModal}
+          close={() => {
+            setShowWithdrawModal(false);
+          }}
+        />
         <SideDrawer
           onClose={() => {
             setShowCryptoModal(false);

@@ -20,6 +20,7 @@ import { useProfileStore } from "@/store/userProfileStore";
 import { SetPinModal } from "@/components/modals/pin/set-pin-modal";
 import { useGetWallet } from "@/hooks/query";
 import { useWalletStore } from "@/store/walletStore";
+import { usePinStore } from "@/store/usePinStore";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +32,7 @@ export default function RootLayout({
   const [showChatPage, setShowChatPage] = useState(false);
   const [activeChatId, setActiveChatId] = useState<null | number>(null);
   const { data: profileDetails } = useFetchProfile();
-  const [showPinModal, setShowPinModal] = useState(false);
+  const { showPinModal, setShowPinModal } = usePinStore();
   const { setProfile } = useProfileStore();
   const { setWallet } = useWalletStore();
   const { data: walletDetails, isPending: walletDetailsLoading } =
