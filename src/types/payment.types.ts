@@ -21,3 +21,20 @@ export interface Bank {
   category: string;
   bankLogoUrl: string;
 }
+
+export interface AccountLookUp {
+  bankCode: string;
+  bankName: string;
+  accountNumber: string;
+  accountName: string;
+  accountStatus: string;
+}
+
+export interface Disburse {
+  pin: string;
+  amount: number;
+  accountNumber: string;
+  accountName: string;
+  bankCode: string;
+  key: string;
+}

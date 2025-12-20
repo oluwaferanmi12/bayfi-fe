@@ -320,3 +320,50 @@
     min-height: 120vh;
   }
 }
+
+
+.bayfi-select .ant-select-selector {
+  background: var(--bayfi-grey-400) !important;
+  border: 1px solid var(--bayfi-grey-600) !important;
+  border-radius: 0.5rem !important; /* rounded-lg */
+  box-shadow: none !important;
+  padding: 0.5rem 0.5rem !important; /* p-2 feel */
+  font-size: 1rem !important; /* text-base */
+  font-family: var(--font-grotesk-medium) !important;
+}
+
+/* Remove AntD focus border + glow */
+.bayfi-select.ant-select-focused .ant-select-selector {
+  border: 1px solid var(--bayfi-grey-600) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Remove hover changing border */
+.bayfi-select .ant-select-selector:hover {
+  border: 1px solid var(--bayfi-grey-600) !important;
+}
+
+/* The actual typing input inside the Select */
+.bayfi-select .ant-select-selection-search-input {
+  font-family: var(--font-grotesk-medium) !important;
+  font-size: 1rem !important;
+}
+
+/* Placeholder style */
+.bayfi-select .ant-select-selection-placeholder {
+  font-family: var(--font-grotesk-regular) !important;
+  opacity: 0.8;
+}
+
+/* Make "large" size match your lg:py-3 feel */
+.bayfi-select.ant-select-lg .ant-select-selector {
+  min-height: 48px !important; /* close to lg:py-3 */
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Optional: dropdown item font consistency */
+.ant-select-dropdown .ant-select-item {
+  font-family: var(--font-grotesk-medium) !important;
+}

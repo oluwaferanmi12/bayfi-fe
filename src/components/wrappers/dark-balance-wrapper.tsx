@@ -1,3 +1,5 @@
+"use client";
+
 import eyeIcon from "@/assets/svg/eyeIconWhite.svg";
 import { Text } from "@/components/texts/text";
 import { useProfileStore } from "@/store/userProfileStore";

@@ -1,5 +1,11 @@
 import { axiosInstance } from "@/axios";
-import { AccountLookUpInterface, Bank, Beneficiary } from "@/types";
+import {
+  AccountLookUp,
+  AccountLookUpInterface,
+  Bank,
+  Beneficiary,
+  Disburse,
+} from "@/types";
 
 export const getBeneficiary = async (): Promise<Beneficiary[]> => {
   const { data } = await axiosInstance.get(`/bank/beneficiaries`);
@@ -18,7 +24,7 @@ export const deleteBeneficiary = async (beneficiaryId: string) => {
   return data;
 };
 
-export const bankSearch = async (query: string) => {
+export const bankSearch = async (query: string): Promise<Bank[]> => {
   const { data } = await axiosInstance.get(
     `/payment/banks/search?query=${query}`
   );
@@ -33,9 +39,19 @@ export const bankList = async (): Promise<Bank> => {
 export const accountNameLookup = async ({
   bankCode,
   accountNumber,
-}: AccountLookUpInterface) => {
+}: AccountLookUpInterface): Promise<AccountLookUp> => {
   const { data } = await axiosInstance.get(
     `/payment/account/name/lookup?bankCode=${bankCode}&accountNumber=${accountNumber}`
   );
+  return data.data;
+};
+
+export const disburse = async (payload: Disburse) => {
+  const { key, ...rest } = payload;
+  const { data } = await axiosInstance.post(`/payment/disbursement`, rest, {
+    headers: {
+      "Idempotency-Key": key,
+    },
+  });
   return data.data;
 };

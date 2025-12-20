@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SideDrawer } from "../side-drawer";
 import { UserProfile } from "@/components/UIs/user-name-profile";
 import { DarkBalanceWrapper } from "@/components/wrappers/dark-balance-wrapper";
@@ -9,9 +9,20 @@ import { Text } from "@/components/texts/text";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
-import { useGetBankList, useGetBeneficiary } from "@/hooks/query/usePayment";
-import { useWalletStore } from "@/store/walletStore";
-
+import { v4 as uuidv4 } from "uuid";
+import {
+  useAccountLookup,
+  useDisburse,
+  useGetBankSearch,
+  useGetBeneficiary,
+} from "@/hooks/query/usePayment";
+import { useDebounce } from "@/hooks/custom/debounce/useDebounce";
+import { Select, Spin } from "antd";
+import { FormatNumber } from "@/utils/formatter";
+type BankOption = {
+  label: string;
+  value: string;
+};
 export const WithdrawDrawer = ({
   open,
   close,
@@ -20,10 +31,44 @@ export const WithdrawDrawer = ({
   close: () => void;
 }) => {
   const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
+  const [pin, setPin] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [selectedBank, setSelectedBank] = useState<BankOption | null>(null);
+  const [accountNumber, setAccountNumber] = useState("");
+  const [searchedValue, setSearchedValue] = useState("");
+  const bankSearch = useDebounce(searchedValue, 500);
   const [showReciept, setShowReciept] = useState(false);
   const { data, isPending } = useGetBeneficiary();
-  const { data: bank_lists, isPending: bankListLoading } = useGetBankList();
+  const disburse = useDisburse(() => {
+    setShowReciept(true);
+  });
+  const activeKey = uuidv4();
+  const { data: bankAccount } = useAccountLookup({
+    accountNumber,
+    bankCode: selectedBank?.value ?? "",
+  });
+  const { data: bankList, isLoading: bankListLoading } =
+    useGetBankSearch(bankSearch);
 
+  const bankOptions = useMemo(
+    () =>
+      (bankList ?? []).map((b) => ({
+        label: b.name,
+        value: b.bankCode,
+      })),
+    [bankList]
+  );
+
+  const handleWithdraw = () => {
+    disburse.mutate({
+      accountName: bankAccount?.accountName ?? "",
+      accountNumber,
+      amount,
+      bankCode: bankAccount?.bankCode ?? "",
+      key: activeKey,
+      pin,
+    });
+  };
   return (
     <SideDrawer title="Withdraw" open={open} onClose={close}>
       {!showWithdrawOtp ? (
@@ -38,7 +83,6 @@ export const WithdrawDrawer = ({
               </div>
             </>
           )}
-
           <div className="my-4">
             <DarkBalanceWrapper />
           </div>
@@ -46,21 +90,59 @@ export const WithdrawDrawer = ({
             <GInput
               label="How much would you like to withdraw?"
               placeholder="0.00"
-            />
-            <GInput label="Select bank" placeholder="0.00" />
-            <GInput
-              label="Recipient Account"
-              placeholder="Enter 10 digits account number"
-            />
-            <Button
-              loading={false}
-              fullWidth
-              text="Continue"
-              type="bgGreen"
-              action={() => {
-                setShowWithdrawOtp(true);
+              onChange={(e) => {
+                setAmount(+e.target.value);
               }}
             />
+            <div className={`mb-4 w-full`}>
+              <Text type="input-text" value={"Select bank"} />
+              <div className="mt-1 relative">
+                <Select
+                  showSearch
+                  searchValue={searchedValue}
+                  value={selectedBank?.value}
+                  placeholder="Type to search bank..."
+                  options={bankOptions}
+                  filterOption={false} // IMPORTANT: remote search (don't filter locally)
+                  onSearch={(val) => {
+                    setSearchedValue(val);
+                    if (selectedBank) setSelectedBank(null);
+                  }}
+                  onChange={(value, option) => {
+                    // option can be BankOption when options provided
+                    setSelectedBank(option as BankOption);
+                    setSearchedValue("");
+                  }}
+                  notFoundContent={
+                    bankListLoading ? <Spin size="small" /> : "No bank found"
+                  }
+                  className="w-full bayfi-select"
+                  size="large"
+                />
+              </div>
+            </div>
+            <GInput
+              onChange={(e) => {
+                setAccountNumber(e.target.value);
+              }}
+              label="Recipient Account"
+              placeholder="Enter 10 digits account number"
+              noMarginBottom
+            />
+            <p className="font-grotesk-semi-bold text-bayfi-green-600">
+              {bankAccount?.accountName}
+            </p>
+            <div className="mt-2">
+              <Button
+                loading={false}
+                fullWidth
+                text="Continue"
+                type="bgGreen"
+                action={() => {
+                  setShowWithdrawOtp(true);
+                }}
+              />
+            </div>
           </div>
         </div>
       ) : showReciept ? (
@@ -68,11 +150,14 @@ export const WithdrawDrawer = ({
       ) : (
         <div className="flex items-center justify-center flex-col">
           <Text type="header-text-20" value="You are about to send" />
-          <Text type="text-green-24" value="NGN 200,000.00" />
+          <Text type="text-green-24" value={`NGN ${FormatNumber(amount)}`} />
           <div>
             <Text type="main-text-regular" value="to " />
-            <Text type="main-text-bold" value=" Akinlade Olaitan A" />
-            <Text type="text-green-24" value=" OPAY" />
+            <Text
+              type="main-text-bold"
+              value={bankAccount?.accountName ?? ""}
+            />{" "}
+            <Text type="text-green-24" value={bankAccount?.bankName ?? ""} />
           </div>
           <div className="my-6">
             <Image src={padLockIcon} alt="" />
@@ -80,14 +165,20 @@ export const WithdrawDrawer = ({
           <div className="mb-4">
             <Text type="input-text" value="Enter your pin to confirm" />
           </div>
-          <OTPInput onChange={() => {}} value="" />
+          <OTPInput
+            onChange={(e) => {
+              setPin(e);
+            }}
+            value={pin}
+            noOfInput={4}
+          />
           <div className="my-4 w-full">
             <Button
               action={() => {
-                setShowReciept(true);
+                handleWithdraw();
               }}
               fullWidth
-              loading={false}
+              loading={disburse.isPending}
               type="bgGreen"
               text="Withdraw money"
             />
