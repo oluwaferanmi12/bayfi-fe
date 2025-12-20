@@ -97,6 +97,7 @@ export const OTPInput = ({
       {arrayInput.map((item, index) => {
         return (
           <input
+            inputMode="numeric"
             onPaste={handlePaste}
             onKeyDown={(e) => {
               handleKeyDown(e, index);
