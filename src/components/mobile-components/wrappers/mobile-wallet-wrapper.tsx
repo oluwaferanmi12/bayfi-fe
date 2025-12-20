@@ -16,6 +16,8 @@ import { useProfileStore } from "@/store/userProfileStore";
 import eyeSlash from "@/assets/svg/eye-slash.svg";
 import { useToggleWalletStatus } from "@/hooks/query";
 import { useQueryClient } from "@tanstack/react-query";
+import eyeGreyBg from "@/assets/svg/eye-grey-bg.svg";
+import mobileBgPattern from "@/assets/svg/mobile-bg-pattern.svg";
 
 export const MobileWalletWrapper = ({
   walletDetails,
@@ -115,6 +117,41 @@ export const MobileWalletWrapper = ({
           </div>
         </>
       </BottomDrawer>
+
+      <div className="bg-bayfi-black-600 min-h-25 relative p-4 rounded-xl mt-4">
+        <div className="absolute  right-0  ">
+          <Image src={mobileBgPattern} alt="" />
+        </div>
+        <div
+          onClick={() => {
+            mutateWalletStatus.mutate(!profile?.isBalanceVisible);
+          }}
+          className="flex items-center gap-2"
+        >
+          <Image
+            className={`${mutateWalletStatus.isPending && "opacity-50"}`}
+            src={eyeGreyBg}
+            alt=""
+          />
+          <button
+            disabled={mutateWalletStatus.isPending}
+            className={`border border-[#F0F0F033]  rounded-full bg-[#F0F0F066] px-4 gap-2 ${mutateWalletStatus.isPending && "opacity-50"}`}
+          >
+            <p className="font-grotesk-medium text-base text-[#FBFBFB]">
+              Bayfi Balance
+            </p>
+          </button>
+        </div>
+        <div>
+          {profile && (
+            <p className="text-[32px] text-[#F6F4F0] font-grotesk-bold py-3 w-full">
+              {profile.isBalanceVisible
+                ? `NGN ${FormatNumber(walletDetails?.walletBalance ?? 0)}`
+                : "****"}
+            </p>
+          )}
+        </div>
+      </div>
 
       <div className="bg-white p-4 my-2 rounded-2xl flex flex-col justify-center items-center">
         <button
