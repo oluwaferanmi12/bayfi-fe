@@ -12,7 +12,7 @@ export const KycWrapper = () => {
           <Image src={kycBadge} alt="" />
           <p className="text-[#4B5563] text-xs font-medium">Complete your kyc</p>
         </div>
-        <div className="bg-[#F5F5F5] rounded-full flex items-center gap-2 p-3">
+        <div className="bg-[#F5F5F5] rounded-full flex items-center gap-2 py-1 px-4">
           <p className="text-[#3C444F] text-xs">Verify</p>
           <Image src={arrowRightSvg} alt="" />
         </div>
