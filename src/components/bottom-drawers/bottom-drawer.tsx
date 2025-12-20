@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Text } from "@/components/texts/text";
 import cancelIcon from "@/assets/svg/cancelIcon.svg";
 import rectangularNudge from "@/assets/svg/modal-horizontal-bar.svg";
+import { useBottomDrawerSize } from "@/hooks/custom/others/useBottomDrawerSize";
 
 export const BottomDrawer = ({
   onClose,
@@ -13,7 +14,7 @@ export const BottomDrawer = ({
   height,
   hideHeader,
   showNudge,
-  footer
+  footer,
 }: {
   onClose: () => void;
   open: boolean;
@@ -24,24 +25,16 @@ export const BottomDrawer = ({
   showNudge?: boolean;
   footer?: ReactNode;
 }) => {
+  const size = useBottomDrawerSize(open, height);
   return (
     <Drawer
-      destroyOnClose={true}
-      width={500}
+      destroyOnHidden={true}
       closeIcon={false}
       onClose={onClose}
       footer={footer}
       open={open}
       placement="bottom"
-      height={
-        height === "short"
-          ? "50vh"
-          : height === "medium"
-            ? "70vh"
-            : height === "full"
-              ? "100vh"
-              : "50vh"
-      }
+      size={size}
     >
       {showNudge && (
         <div className="flex items-center justify-center">

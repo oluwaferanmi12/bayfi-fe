@@ -30,9 +30,11 @@ type BankOption = {
 export const WithdrawDrawer = ({
   open,
   close,
+  handleOpenModal,
 }: {
   open: boolean;
   close: () => void;
+  handleOpenModal: () => void;
 }) => {
   const queryClient = useQueryClient();
   const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
@@ -74,9 +76,15 @@ export const WithdrawDrawer = ({
     if (profile?.isPinCreated) {
       setShowWithdrawOtp(true);
     } else {
+      // close();
       setShowPinModal(true);
     }
   };
+  useEffect(() => {
+    if (!showPinModal && profile?.isPinCreated) {
+      setShowWithdrawOtp(true);
+    }
+  }, [showPinModal, profile]);
 
   const handleWithdraw = () => {
     disburse.mutate({
@@ -89,7 +97,12 @@ export const WithdrawDrawer = ({
     });
   };
   return (
-    <SideDrawer title="Withdraw" open={open} onClose={close}>
+    <SideDrawer
+      destroyOnClose={false}
+      title="Withdraw"
+      open={open}
+      onClose={close}
+    >
       {!showWithdrawOtp ? (
         <div>
           {data && data.length > 0 && (

@@ -22,6 +22,7 @@ export const ModalWrapper = ({
   return (
     <>
       <Modal
+        zIndex={2000}
         footer={false}
         closeIcon={false}
         onCancel={onClose}
