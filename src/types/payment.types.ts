@@ -38,3 +38,14 @@ export interface Disburse {
   bankCode: string;
   key: string;
 }
+
+export interface DisburseResponse {
+  accountName: string;
+  accountNumber: string;
+  amount: number;
+  processorStatusCode: string;
+  providerReference: string | null;
+  reference: string;
+  status: string;
+  bankName: string;
+}

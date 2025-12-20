@@ -19,6 +19,8 @@ import {
 import { useDebounce } from "@/hooks/custom/debounce/useDebounce";
 import { Select, Spin } from "antd";
 import { FormatNumber } from "@/utils/formatter";
+import { DisburseResponse } from "@/types";
+import { useQueryClient } from "@tanstack/react-query";
 type BankOption = {
   label: string;
   value: string;
@@ -30,6 +32,7 @@ export const WithdrawDrawer = ({
   open: boolean;
   close: () => void;
 }) => {
+  const queryClient = useQueryClient();
   const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
   const [pin, setPin] = useState("");
   const [amount, setAmount] = useState(0);
@@ -38,9 +41,13 @@ export const WithdrawDrawer = ({
   const [searchedValue, setSearchedValue] = useState("");
   const bankSearch = useDebounce(searchedValue, 500);
   const [showReciept, setShowReciept] = useState(false);
+  const [disburseResponse, setDisburseResponse] =
+    useState<DisburseResponse | null>(null);
   const { data, isPending } = useGetBeneficiary();
-  const disburse = useDisburse(() => {
+  const disburse = useDisburse((data) => {
+    setDisburseResponse(data);
     setShowReciept(true);
+    queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
   });
   const activeKey = uuidv4();
   const { data: bankAccount } = useAccountLookup({
@@ -145,8 +152,8 @@ export const WithdrawDrawer = ({
             </div>
           </div>
         </div>
-      ) : showReciept ? (
-        <GReceipt />
+      ) : showReciept && disburseResponse ? (
+        <GReceipt payload={disburseResponse} />
       ) : (
         <div className="flex items-center justify-center flex-col">
           <Text type="header-text-20" value="You are about to send" />
