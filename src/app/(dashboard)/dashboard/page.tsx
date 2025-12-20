@@ -68,7 +68,6 @@ function Dashboard() {
           close={() => {
             setShowWithdrawModal(false);
           }}
-          handleOpenModal={() => setShowWithdrawModal(true)}
         />
         <SideDrawer
           onClose={() => {

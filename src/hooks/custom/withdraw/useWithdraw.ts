@@ -11,6 +11,7 @@ import {
   useGetBankSearch,
   useGetBeneficiary,
 } from "@/hooks/query/usePayment";
+import { BankOption } from "@/interfaces/interfaces";
 
 
 export const useWithdraw = () => {
