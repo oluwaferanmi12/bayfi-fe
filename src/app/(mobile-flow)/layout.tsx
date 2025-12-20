@@ -31,7 +31,7 @@ export default function RootLayout({
     }
   }, [walletDetails, walletDetailsLoading]);
   return (
-    <div className={"min-h-screen h-full bg-[#F6F4F0] relative p-4 pt-8"}>
+    <div className={"min-h-screen h-full bg-white relative p-4 pt-8"}>
       <span className="fixed top-0 right-0">
         <Image src={mobileFlowIcon} alt="" />
       </span>

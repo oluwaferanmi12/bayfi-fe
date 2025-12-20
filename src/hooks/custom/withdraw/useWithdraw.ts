@@ -13,7 +13,6 @@ import {
 } from "@/hooks/query/usePayment";
 import { BankOption } from "@/interfaces/interfaces";
 
-
 export const useWithdraw = () => {
   const queryClient = useQueryClient();
   const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
@@ -150,5 +149,6 @@ export const useWithdraw = () => {
     amount,
     setPin,
     pin,
+    beneficiaryLoading: isPending,
   };
 };
