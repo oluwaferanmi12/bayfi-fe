@@ -157,7 +157,12 @@ export const MobileWalletWrapper = ({
       </div>
 
       <div className="my-4 flex items-center gap-3">
-        <button className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4  flex flex-col items-center justify-center">
+        <button
+          onClick={() => {
+            setShowTradeModal(true);
+          }}
+          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4  flex flex-col items-center justify-center"
+        >
           <div>
             <Image src={giftCardActionIcon} alt="" />
           </div>
@@ -165,7 +170,12 @@ export const MobileWalletWrapper = ({
             Trade Giftcard
           </p>
         </button>
-        <button className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center">
+        <button
+          onClick={() => {
+            setShowDepositModal(true);
+          }}
+          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center"
+        >
           <div>
             <Image src={cryptoActionIcon} alt="" />
           </div>
@@ -173,7 +183,12 @@ export const MobileWalletWrapper = ({
             Trade Crypto
           </p>
         </button>
-        <button className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center">
+        <button
+          onClick={() => {
+            router.push("withdrawal");
+          }}
+          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center"
+        >
           <div>
             <Image src={withdrawActionIcon} alt="" />
           </div>
@@ -183,7 +198,7 @@ export const MobileWalletWrapper = ({
         </button>
       </div>
 
-      <div className="bg-white p-4 my-2 rounded-2xl flex flex-col justify-center items-center">
+      {/* <div className="bg-white p-4 my-2 rounded-2xl flex flex-col justify-center items-center">
         <button
           onClick={() => {
             mutateWalletStatus.mutate(!profile?.isBalanceVisible);
@@ -244,7 +259,7 @@ export const MobileWalletWrapper = ({
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
