@@ -2,8 +2,10 @@ import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
 import { DisburseResponse } from "@/types";
 import { FormatNumber } from "@/utils/formatter";
+import { useRouter } from "next/navigation";
 
 export const GReceipt = ({ payload }: { payload: DisburseResponse }) => {
+  const router = useRouter();
   return (
     <>
       <div className="bg-bayfi-black-500 rounded-2xl p-4">
@@ -44,7 +46,12 @@ export const GReceipt = ({ payload }: { payload: DisburseResponse }) => {
         </div>
         <div className="mt-4">
           <Button text="Get receipt" type="bgGreen" fullWidth loading={false} />
-          <div className="flex justify-center mt-3">
+          <div
+            className="flex justify-center mt-3 cursor-pointer"
+            onClick={() => {
+              router.push("/dashboard");
+            }}
+          >
             <Text type="text-small-green" value="Continue to homepage" />
           </div>
         </div>
