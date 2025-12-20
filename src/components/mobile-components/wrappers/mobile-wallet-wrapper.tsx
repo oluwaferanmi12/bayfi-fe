@@ -18,6 +18,9 @@ import { useToggleWalletStatus } from "@/hooks/query";
 import { useQueryClient } from "@tanstack/react-query";
 import eyeGreyBg from "@/assets/svg/eye-grey-bg.svg";
 import mobileBgPattern from "@/assets/svg/mobile-bg-pattern.svg";
+import giftCardActionIcon from "@/assets/svg/trade-giftcard-dashboard.svg";
+import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
+import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
 
 export const MobileWalletWrapper = ({
   walletDetails,
@@ -151,6 +154,33 @@ export const MobileWalletWrapper = ({
             </p>
           )}
         </div>
+      </div>
+
+      <div className="my-4 flex items-center gap-3">
+        <button className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4  flex flex-col items-center justify-center">
+          <div>
+            <Image src={giftCardActionIcon} alt="" />
+          </div>
+          <p className="text-[#444D5A] font-grotesk-bold text-base mt-1">
+            Trade Giftcard
+          </p>
+        </button>
+        <button className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center">
+          <div>
+            <Image src={cryptoActionIcon} alt="" />
+          </div>
+          <p className="text-[#444D5A] font-grotesk-bold text-base mt-1">
+            Trade Crypto
+          </p>
+        </button>
+        <button className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center">
+          <div>
+            <Image src={withdrawActionIcon} alt="" />
+          </div>
+          <p className="text-[#444D5A] font-grotesk-bold text-base mt-1">
+            Withdraw
+          </p>
+        </button>
       </div>
 
       <div className="bg-white p-4 my-2 rounded-2xl flex flex-col justify-center items-center">
