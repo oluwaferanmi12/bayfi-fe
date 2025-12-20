@@ -10,10 +10,10 @@ export const KycWrapper = () => {
       <div className="rounded-xl relative bg-white p-2 w-full border border-[#DCDCDC80] flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Image src={kycBadge} alt="" />
-          <p className="text-[#4B5563] font-medium">Complete your kyc</p>
+          <p className="text-[#4B5563] text-xs font-medium">Complete your kyc</p>
         </div>
         <div className="bg-[#F5F5F5] rounded-full flex items-center gap-2 p-3">
-          <p className="text-[#3C444F]">Verify</p>
+          <p className="text-[#3C444F] text-xs">Verify</p>
           <Image src={arrowRightSvg} alt="" />
         </div>
       </div>

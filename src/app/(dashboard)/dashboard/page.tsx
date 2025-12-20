@@ -39,7 +39,6 @@ import { useProfileStore } from "@/store/userProfileStore";
 import { useQueryClient } from "@tanstack/react-query";
 import eyeSlash from "@/assets/svg/eye-slash.svg";
 import { WithdrawDrawer } from "@/components/side-drawers/withdraw/withdraw-drawer";
-import { usePinStore } from "@/store/usePinStore";
 
 function Dashboard() {
   const queryClient = useQueryClient();

@@ -166,7 +166,7 @@ export const MobileWalletWrapper = ({
           <div>
             <Image src={giftCardActionIcon} alt="" />
           </div>
-          <p className="text-[#444D5A] font-grotesk-bold text-base mt-1">
+          <p className="text-[#444D5A] font-grotesk-bold text-xs mt-1">
             Trade Giftcard
           </p>
         </button>
@@ -179,7 +179,7 @@ export const MobileWalletWrapper = ({
           <div>
             <Image src={cryptoActionIcon} alt="" />
           </div>
-          <p className="text-[#444D5A] font-grotesk-bold text-base mt-1">
+          <p className="text-[#444D5A] font-grotesk-bold text-xs mt-1">
             Trade Crypto
           </p>
         </button>
@@ -192,7 +192,7 @@ export const MobileWalletWrapper = ({
           <div>
             <Image src={withdrawActionIcon} alt="" />
           </div>
-          <p className="text-[#444D5A] font-grotesk-bold text-base mt-1">
+          <p className="text-[#444D5A] font-grotesk-bold text-xs mt-1">
             Withdraw
           </p>
         </button>
