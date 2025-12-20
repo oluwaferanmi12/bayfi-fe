@@ -30,12 +30,5 @@ export default function RootLayout({
       setWallet(walletDetails);
     }
   }, [walletDetails, walletDetailsLoading]);
-  return (
-    <div className={"min-h-screen h-full bg-[#F6F4F0] relative p-4 pt-8"}>
-      <span className="fixed top-0 right-0">
-        <Image src={mobileFlowIcon} alt="" />
-      </span>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }

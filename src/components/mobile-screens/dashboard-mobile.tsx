@@ -6,6 +6,7 @@ import { MobileWalletWrapper } from "@/components/mobile-components/wrappers/mob
 import { MobileWrapper } from "@/components/mobile-components/wrappers/mobile-wrapper";
 import { SupportWaiting } from "@/components/mobile-components/wrappers/support-waiting";
 import { Transaction, Wallet } from "@/types";
+import { KycWrapper } from "../mobile-components/wrappers/kyc-wrapper";
 
 export const DashboardMobile = ({
   transactions,
@@ -18,6 +19,7 @@ export const DashboardMobile = ({
     <>
       <MobileWrapper>
         <DashboardHeader />
+        <KycWrapper />
         {/* <SupportWaiting /> */}
         <MobileWalletWrapper walletDetails={walletDetails} />
         <MobileDashboardService />
