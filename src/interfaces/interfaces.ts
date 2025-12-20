@@ -66,3 +66,8 @@ export interface SupportInterface {
   ticketId: string;
   status: "open" | "closed" | "resolved";
 }
+
+export type BankOption = {
+  label: string;
+  value: string;
+};

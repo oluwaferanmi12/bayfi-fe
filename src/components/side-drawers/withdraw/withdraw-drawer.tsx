@@ -9,96 +9,44 @@ import { Text } from "@/components/texts/text";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
-import { v4 as uuidv4 } from "uuid";
-import {
-  useAccountLookup,
-  useDisburse,
-  useGetBankSearch,
-  useGetBeneficiary,
-} from "@/hooks/query/usePayment";
-import { useDebounce } from "@/hooks/custom/debounce/useDebounce";
 import { Select, Spin } from "antd";
 import { FormatNumber } from "@/utils/formatter";
-import { DisburseResponse } from "@/types";
-import { useQueryClient } from "@tanstack/react-query";
-import { useProfileStore } from "@/store/userProfileStore";
-import { usePinStore } from "@/store/usePinStore";
-type BankOption = {
-  label: string;
-  value: string;
-};
+import { useWithdraw } from "@/hooks/custom/withdraw/useWithdraw";
+import { BankOption } from "@/interfaces/interfaces";
+
 export const WithdrawDrawer = ({
   open,
   close,
-  handleOpenModal,
 }: {
   open: boolean;
   close: () => void;
-  handleOpenModal: () => void;
 }) => {
-  const queryClient = useQueryClient();
-  const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
-  const [pin, setPin] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [selectedBank, setSelectedBank] = useState<BankOption | null>(null);
-  const [accountNumber, setAccountNumber] = useState("");
-  const [searchedValue, setSearchedValue] = useState("");
-  const bankSearch = useDebounce(searchedValue, 500);
-  const [showReciept, setShowReciept] = useState(false);
-  const { profile } = useProfileStore();
-  const { showPinModal, setShowPinModal } = usePinStore();
-  const [disburseResponse, setDisburseResponse] =
-    useState<DisburseResponse | null>(null);
-  const { data, isPending } = useGetBeneficiary();
-  const disburse = useDisburse((data) => {
-    setDisburseResponse(data);
-    setShowReciept(true);
-    queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
-  });
-  const activeKey = uuidv4();
-  const { data: bankAccount } = useAccountLookup({
-    accountNumber,
-    bankCode: selectedBank?.value ?? "",
-  });
-  const { data: bankList, isLoading: bankListLoading } =
-    useGetBankSearch(bankSearch);
-
-  const bankOptions = useMemo(
-    () =>
-      (bankList ?? []).map((b) => ({
-        label: b.name,
-        value: b.bankCode,
-      })),
-    [bankList]
-  );
-
-  const handleShowOtp = () => {
-    if (profile?.isPinCreated) {
-      setShowWithdrawOtp(true);
-    } else {
-      // close();
-      setShowPinModal(true);
-    }
-  };
-  useEffect(() => {
-    if (!showPinModal && profile?.isPinCreated) {
-      setShowWithdrawOtp(true);
-    }
-  }, [showPinModal, profile]);
-
-  const handleWithdraw = () => {
-    disburse.mutate({
-      accountName: bankAccount?.accountName ?? "",
-      accountNumber,
-      amount,
-      bankCode: bankAccount?.bankCode ?? "",
-      key: activeKey,
-      pin,
-    });
-  };
+  const {
+    showReciept,
+    showWithdrawOtp,
+    data,
+    setAmount,
+    accountLookupLoading,
+    bankAccount,
+    bankListLoading,
+    disburse,
+    disburseResponse,
+    handleShowOtp,
+    handleWithdraw,
+    payloadError,
+    searchedValue,
+    selectedBank,
+    setSearchedValue,
+    setSelectedBank,
+    setAccountNumber,
+    bankOptions,
+    amount,
+    setPin,
+    pin,
+  } = useWithdraw();
   return (
     <SideDrawer
-      destroyOnClose={false}
+      destroyOnClose={true}
       title="Withdraw"
       open={open}
       onClose={close}
@@ -125,6 +73,7 @@ export const WithdrawDrawer = ({
               onChange={(e) => {
                 setAmount(+e.target.value);
               }}
+              error={payloadError.amount}
             />
             <div className={`mb-4 w-full`}>
               <Text type="input-text" value={"Select bank"} />
@@ -151,9 +100,15 @@ export const WithdrawDrawer = ({
                   className="w-full bayfi-select"
                   size="large"
                 />
+                {payloadError.bankName && (
+                  <p className="text-[#EF4444] text-xs mt-1">
+                    {payloadError.bankName}
+                  </p>
+                )}
               </div>
             </div>
             <GInput
+              error={payloadError.accountNumber}
               onChange={(e) => {
                 setAccountNumber(e.target.value);
               }}
@@ -164,9 +119,9 @@ export const WithdrawDrawer = ({
             <p className="font-grotesk-semi-bold text-bayfi-green-600">
               {bankAccount?.accountName}
             </p>
-            <div className="mt-2">
+            <div className="mt-4">
               <Button
-                loading={false}
+                loading={accountLookupLoading}
                 fullWidth
                 text="Continue"
                 type="bgGreen"
