@@ -239,14 +239,13 @@
 }
 
 .mobileWrapper {
-  background-image: url("../assets/svg/glowImage.svg");
+  background-image: url("../assets/svg/glow-bg.svg");
   background-position: top;
   background-size: contain;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: #f6f4f0;
-  min-height: 100vh;
-  height: 100%;
+  min-height: 30vh;
+  height: 30vh;
 }
 
 @media (max-width: 992px) {
@@ -320,7 +319,6 @@
     min-height: 120vh;
   }
 }
-
 
 .bayfi-select .ant-select-selector {
   background: var(--bayfi-grey-400) !important;
