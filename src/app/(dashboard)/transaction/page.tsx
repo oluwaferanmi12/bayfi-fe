@@ -9,6 +9,10 @@ import { TableInput } from "@/components/inputs/table-input";
 import { TablePagination } from "@/components/pagination/table-pagination";
 import { TransactionTable } from "@/components/tables/transaction-table";
 import { useGetTransaction } from "@/hooks/query";
+import { Col, Row } from "antd";
+import arrowDownGreen from "@/assets/svg/arrow-down-green.svg";
+import arrowUpOrange from "@/assets/svg/arrow-up-orange.svg";
+import Image from "next/image";
 
 function Transaction() {
   const { isPending, data } = useGetTransaction();
@@ -40,6 +44,42 @@ function Transaction() {
           />
         </div>
       </div>
+      <Row gutter={12} className="my-4">
+        <Col xs={12}>
+          <div className="bg-[#F6F4F0] p-4 rounded-2xl">
+            <div className="flex items-center justify-between">
+              <p className="text-[#747474] font-grotesk-semi-bold text-base">
+                Money in{" "}
+              </p>
+              <div>
+                <Image src={arrowDownGreen} alt="" />
+              </div>
+            </div>
+            <div className="mt-2">
+              <p className="text-[#171717] text-2xl font-grotesk-semi-bold">
+                NGN500.00k
+              </p>
+            </div>
+          </div>
+        </Col>
+        <Col xs={12}>
+          <div className="bg-[#F6F4F0] p-4 rounded-2xl">
+            <div className="flex items-center justify-between">
+              <p className="text-[#747474] font-grotesk-semi-bold text-base">
+                Money out{" "}
+              </p>
+              <div>
+                <Image src={arrowUpOrange} alt="" />
+              </div>
+            </div>
+            <div className="mt-2">
+              <p className="text-[#171717] text-2xl font-grotesk-semi-bold">
+                NGN500.00k
+              </p>
+            </div>
+          </div>
+        </Col>
+      </Row>
       <div className="py-3 flex items-center justify-between">
         <TableInput placeholder="Search" />
         <TablePagination />
