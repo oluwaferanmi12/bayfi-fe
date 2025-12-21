@@ -84,39 +84,7 @@ const ContactUs = () => {
                       />
                     </div>
                   </Col>
-                  <Col lg={12} xs={24}>
-                    <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
-                        First name*
-                      </p>
-                      <input
-                        placeholder="Enter name"
-                        className="w-full placeholder:text-[rgb(188,188,188)] font-inter-regular border border-[#E5E8E3] p-2 rounded-lg"
-                      />
-                    </div>
-                  </Col>
-                  <Col lg={12} xs={24}>
-                    <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
-                        First name*
-                      </p>
-                      <input
-                        placeholder="Enter name"
-                        className="w-full placeholder:text-[rgb(188,188,188)] font-inter-regular border border-[#E5E8E3] p-2 rounded-lg"
-                      />
-                    </div>
-                  </Col>
-                  <Col lg={12} xs={24}>
-                    <div className="mb-4">
-                      <p className="text-[#586068] text-sm font-inter-medium lg:mb-2 mb-1">
-                        First name*
-                      </p>
-                      <input
-                        placeholder="Enter name"
-                        className="w-full placeholder:text-[rgb(188,188,188)] font-inter-regular border border-[#E5E8E3] p-2 rounded-lg"
-                      />
-                    </div>
-                  </Col>
+                  
 
                   <Col xs={24}>
                     <div className="mb-4">
