@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 
 
 const navObjects = [
+    { href: "/", text: "Homepage" },
     { href: "/about", text: "About us" },
     { href: "/what-we-do", text: "Stuff we do" },
     { href: "/updates", text: "Sharp updates" },
@@ -65,13 +66,10 @@ export const MobileLandingNav = () => {
                                         key={item.href}
                                         href={item.href}
                                         onClick={() => setOpen(false)}
-                                        className={`
-          text-2xl font-manrope-regular transition
-          ${isActive
+                                        className={`text-2xl font-manrope-regular transition ${isActive
                                                 ? "text-bayfi-green-500 drop-shadow-[0_0_8px_rgba(163,230,53,0.35)]"
                                                 : "text-white/80 hover:text-white"
-                                            }
-        `}
+                                            } `}
                                     >
                                         {item.text}
                                     </Link>
