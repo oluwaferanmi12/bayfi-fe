@@ -17,8 +17,6 @@ export const updateProfile = async (payload: PostProfileInterface) => {
   return data;
 };
 
-
-
 export const getUser = async () => {
   const { data } = await axiosInstance.get("/user");
   return data;
@@ -31,5 +29,10 @@ export const changePassword = async (payload: ChangePasswordPayload) => {
 
 export const logout = async () => {
   const { data } = await axiosInstance.post(`/auth/logout`);
+  return data;
+};
+
+export const doKyc = async () => {
+  const { data } = await axiosInstance.post(`/kyc/bvn/verify`);
   return data;
 };

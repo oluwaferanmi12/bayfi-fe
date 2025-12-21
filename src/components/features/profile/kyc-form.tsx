@@ -2,8 +2,6 @@ import { Text } from "@/components/texts/text";
 import { GInput } from "@/components/inputs/GInput";
 import verifyBvn from "@/assets/svg/verify-badge.svg";
 import { Button } from "@/components/buttons";
-import { UIProfile } from "@/interfaces/interfaces";
-import { Dispatch, SetStateAction } from "react";
 import { useKycProfile } from "@/hooks/custom/profile/useKycProfile";
 
 export const KycForm = () => {
