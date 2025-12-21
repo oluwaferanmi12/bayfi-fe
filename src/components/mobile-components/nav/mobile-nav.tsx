@@ -9,17 +9,20 @@ import documentNormal2 from "@/assets/svg/document-normal-2.svg";
 import menu2 from "@/assets/svg/menu-2.svg";
 import mobileHomeActive from "@/assets/svg/home-2.svg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import navChatIcon from "@/assets/svg/nav-chat-icon.svg";
+import chatActive from "@/assets/svg/chat-active.svg"
 
 export const MobileNav = () => {
   const router = useRouter();
+  const path = usePathname();
+  console.log(path, "Path value here");
   return (
     <>
       <div className="fixed bottom-0 right-0 left-0 lg:hidden flex justify-between w-full bg-[#1F1F1F] p-4 py-2 z-50">
         <MobileNavWrapper
           icon={mobileHome}
-          active={true}
+          active={path.includes("dashboard")}
           iconActive={mobileHomeActive}
           text="Home"
           action={() => {
@@ -28,7 +31,7 @@ export const MobileNav = () => {
         />
         <MobileNavWrapper
           icon={bitcoinConvertWhite}
-          active={false}
+          active={path.includes("service")}
           iconActive={bitcoinConvert}
           text="Services"
           action={() => {
@@ -41,14 +44,14 @@ export const MobileNav = () => {
             router.push("/m-transaction");
           }}
           icon={documentNormal}
-          active={false}
+          active={path.includes("transaction")}
           iconActive={documentNormal2}
           text="Transactions"
         />
         <MobileNavWrapper
           icon={navChatIcon}
-          active={false}
-          iconActive={navChatIcon}
+          active={path.includes("chat")}
+          iconActive={chatActive}
           text="Chat"
           action={() => {
             router.push("/m-chat");
@@ -56,7 +59,7 @@ export const MobileNav = () => {
         />
         <MobileNavWrapper
           icon={more}
-          active={false}
+          active={path.includes("more")}
           iconActive={menu2}
           text="More"
           action={() => {
