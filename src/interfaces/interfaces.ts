@@ -71,3 +71,12 @@ export type BankOption = {
   label: string;
   value: string;
 };
+
+export interface UIProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  verified: boolean;
+  avatar: string;
+}

@@ -17,14 +17,13 @@ import { useFetchProfile } from "@/hooks/query/useProfile";
 import { ProfileDataInterface } from "@/types/profile.types";
 import { useLogout } from "@/hooks/query";
 import { isValidImageUrl } from "@/utils/checkValidImage";
+import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper";
 
 export const ProfileNav = ({
   setActiveProfile,
-  activeProfile,
   noBg,
 }: {
   setActiveProfile: Dispatch<SetStateAction<ProfileType>>;
-  activeProfile: ProfileType;
   noBg?: boolean;
 }) => {
   const router = useRouter();
@@ -51,8 +50,14 @@ export const ProfileNav = ({
   return (
     <>
       <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
-        <div className="flex items-center justify-center ">
-          <div className="w-[60px] h-[60px] overflow-hidden relative">
+        <KycWrapper
+          clickAction={() => {
+            setActiveProfile("kyc");
+          }}
+          desktopType
+        />
+        <div className="flex items-center justify-center mt-4 ">
+          <div className="w-15 h-15 overflow-hidden relative">
             <Image
               className="border object-cover w-full border-[#CBE461] rounded-full"
               src={imageUrl ? imageUrl : avatarPlacholder}

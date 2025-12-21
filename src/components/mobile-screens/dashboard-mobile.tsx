@@ -19,7 +19,7 @@ export const DashboardMobile = ({
     <>
       <MobileWrapper>
         <DashboardHeader />
-        <KycWrapper />
+        <KycWrapper clickAction={() => {}} />
         {/* <SupportWaiting /> */}
         <MobileWalletWrapper walletDetails={walletDetails} />
         <MobileDashboardService />
