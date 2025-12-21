@@ -33,6 +33,7 @@ export const MobileWalletWrapper = ({
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
   const mutateWalletStatus = useToggleWalletStatus((data) => {
     queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+    queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
   });
   const router = useRouter();
   const { profile } = useProfileStore();

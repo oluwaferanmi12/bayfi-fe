@@ -56,6 +56,7 @@ function Dashboard() {
     useGetTransaction();
   const mutateWalletStatus = useToggleWalletStatus((data) => {
     queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+    queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
   });
   const { profile } = useProfileStore();
 
