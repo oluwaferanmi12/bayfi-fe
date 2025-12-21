@@ -29,3 +29,9 @@ export interface ChangePasswordPayload {
   oldPassword: string;
   newPassword: string;
 }
+
+export interface KYC {
+  firstName: string;
+  lastName: string;
+  bvn: string;
+}

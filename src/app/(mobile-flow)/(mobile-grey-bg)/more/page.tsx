@@ -15,7 +15,6 @@ function More() {
       <div className="mt-20">
         <ProfileNav
           noBg
-          activeProfile={activeProfile}
           setActiveProfile={setActiveProfile}
         />
       </div>
