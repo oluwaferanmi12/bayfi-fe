@@ -1,5 +1,6 @@
 import { useDeleteImage, useSaveImage } from "@/hooks/query";
 import { useFetchProfile, useUpdateProfile } from "@/hooks/query/useProfile";
+import { UIProfile } from "@/interfaces/interfaces";
 import { ProfileType } from "@/interfaces/interfaces-ui";
 import { convertImageToBlob } from "@/utils";
 import { useQueryClient } from "@tanstack/react-query";
@@ -7,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 
 export const useCustomProfile = () => {
   const queryClient = useQueryClient();
-  const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -32,7 +32,7 @@ export const useCustomProfile = () => {
     queryClient.invalidateQueries({ queryKey: ["get-profile"] });
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<UIProfile>({
     firstName: "",
     lastName: "",
     email: "",
@@ -113,12 +113,10 @@ export const useCustomProfile = () => {
   }, [imageMutate.data]);
 
   return {
-    activeProfile,
     formData,
     setFormData,
     saveProfileLoading: profileMutate.isPending,
     handleUpdateProfile,
-    setActiveProfile,
     handlePreviewImage,
     handleRemoveProfileImage,
     previewUrl,

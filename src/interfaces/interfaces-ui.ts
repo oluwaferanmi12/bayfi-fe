@@ -7,7 +7,7 @@ export interface ServiceContentInterface {
     clickAction: () => void
 }
 
-export type ProfileType = "leaderboard" | 'setting' | 'security' 
+export type ProfileType = "leaderboard" | 'setting' | 'security' | 'kyc'
 
      
 export interface SideDrawerBreadCrumbProps {

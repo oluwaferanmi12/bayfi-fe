@@ -1,6 +1,6 @@
 "use client";
 
-import { FlashSalesCard } from "@/components/giftcard/flash-sales";
+import { FlashSalesCard } from "@/components/features/giftcard/flash-sales";
 import { SearchInput } from "@/components/inputs/search-input";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
 import { GiftCardWrapper } from "@/components/wrappers/gift-card-wrapper";

@@ -39,6 +39,7 @@ import { useProfileStore } from "@/store/userProfileStore";
 import { useQueryClient } from "@tanstack/react-query";
 import eyeSlash from "@/assets/svg/eye-slash.svg";
 import { WithdrawDrawer } from "@/components/side-drawers/withdraw/withdraw-drawer";
+import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper";
 
 function Dashboard() {
   const queryClient = useQueryClient();
@@ -271,7 +272,8 @@ function Dashboard() {
         </SideDrawer>
         <Row gutter={12}>
           <Col xs={16}>
-            <div className="bg-white relative py-8 text-center items-center  rounded-4xl p-4 ">
+            <KycWrapper clickAction={() => {}} desktopType />
+            <div className="bg-white relative mt-3 py-8 text-center items-center  rounded-4xl p-4 ">
               <span className="absolute left-0 top-0">
                 <Image src={bgImage} alt="" />
               </span>
