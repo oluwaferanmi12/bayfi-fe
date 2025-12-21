@@ -95,9 +95,9 @@ function Footer() {
           </Col>
         </Row>
       </GeneralLandingPageWrapper>
-      <div className="m-0 lg:mt-30 mt-10 p-0 leading-40">
+      <div className="m-0 lg:mt-30 mt-10 p-0 leading-40 overflow-hidden">
         <p className="lg:text-[280px] text-[120px] w-full text-center whitespace-nowrap text-white font-jakarta-bold">
-          BAYFI LTD
+          BAYFI
         </p>
       </div>
     </section>

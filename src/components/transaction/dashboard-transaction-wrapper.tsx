@@ -31,9 +31,9 @@ export const DashboardTransactionWrapper = ({
     }
   }, [transaction]);
   return (
-    <div className="hover:bg-[#F6F6F6] mb-2 px-4 py-2 rounded-lg flex items-center justify-between">
+    <div className="hover:bg-[#F6F6F6] mb-2 lg:px-4  lg:py-2 rounded-lg flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <Image className="w-[40px] aspect-square" src={iconType} alt="" />
+        <Image className="w-10 aspect-square" src={iconType} alt="" />
         {transaction && (
           <div>
             <p className="text-[#171717] font-grotesk-semi-bold text-lg">
