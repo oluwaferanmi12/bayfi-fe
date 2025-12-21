@@ -36,7 +36,8 @@ export const LandingNav = () => {
             className={`flex text-white items-center gap-4 rounded-full ${darkMode ? "bg-[#FFFFFF14]" : "bg-[#0A0D1414]"}   backdrop-blur-lg p-4`}
           >
             {navObjects.map((item, index) => {
-              return <NavLink key={index} {...item} darkMode={darkMode} />;
+              return <NavLink key={index} {...item} darkMode={darkMode} pathname={pathName}
+              />;
             })}
           </div>
           <div className="text-white">
@@ -52,19 +53,33 @@ export const LandingNav = () => {
   );
 };
 
+
 const NavLink = ({
   href,
   text,
   darkMode,
+  pathname,
 }: {
   href: string;
   text: string;
   darkMode: boolean;
+  pathname: string;
 }) => {
+  const isActive = pathname === href;
+
   return (
     <Link href={href}>
       <p
-        className={`${darkMode ? "text-white" : "text-[#0B0B0B]"} font-manrope-regular px-4 text-base`}
+        className={`
+          font-manrope-regular px-4 text-base transition-colors duration-200
+          ${
+            isActive
+              ? "text-bayfi-green-900 drop-shadow-[0_0_6px_rgba(163,230,53,0.35)]"
+              : darkMode
+              ? "text-white/90 hover:text-white"
+              : "text-[#0B0B0B]/80 hover:text-[#0B0B0B]"
+          }
+        `}
       >
         {text}
       </p>
