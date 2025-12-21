@@ -78,20 +78,6 @@ export const MobileLandingNav = () => {
                                 );
                             })}
                         </div>
-
-                        {/* <div className="flex flex-col items-center gap-8 text-center">
-              {navObjects.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="text-2xl font-manrope-regular text-white/90 transition hover:text-white"
-                >
-                  {item.text}
-                </Link>
-              ))}
-            </div> */}
-
                         {/* CTA */}
                         <Link href="/login" onClick={() => setOpen(false)}>
                             <button className="w-full rounded-full bg-bayfi-green-500 py-4 text-lg font-manrope-regular text-black">
