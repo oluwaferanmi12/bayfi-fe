@@ -27,7 +27,7 @@ const Login = () => {
       toast.success("Login Successful");
       router.push("/dashboard");
     } else {
-      const { email } = data.userDetailsResponse;
+      const { email } = data;
       localStorage.setItem("userEmail", email);
       router.push("/otp");
       toast.warning("Verification required");
