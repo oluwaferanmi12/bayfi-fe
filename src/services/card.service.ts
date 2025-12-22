@@ -15,7 +15,7 @@ export const getCards = async ({
   pageSize: number;
 }): Promise<CardInterface[]> => {
   const { data } = await axiosInstance.get(
-    `/admin/giftcards?page=${page}&pageSize=${pageSize}`
+    `/giftcards/fetch/active/${page}/${pageSize}`
   );
   return data.data.contents;
 };
@@ -65,5 +65,3 @@ export const initiateGiftCardTxn = async (payload: InitiateCardTxn) => {
   );
   return data.data;
 };
-
-
