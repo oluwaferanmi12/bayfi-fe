@@ -3,9 +3,11 @@ import { GInput } from "@/components/inputs/GInput";
 import verifyBvn from "@/assets/svg/verify-badge.svg";
 import { Button } from "@/components/buttons";
 import { useKycProfile } from "@/hooks/custom/profile/useKycProfile";
+import { useDoKyc } from "@/hooks/query";
 
 export const KycForm = () => {
-  const { formData, setFormData } = useKycProfile();
+  const { formData, setFormData, bvn, setBvn } = useKycProfile();
+  const doKyc = useDoKyc(() => {});
   return (
     <div className="w-full">
       <div>
@@ -43,6 +45,10 @@ export const KycForm = () => {
           />
         </div>
         <GInput
+          value={bvn}
+          onChange={(e) => {
+            setBvn(e.target.value);
+          }}
           label="Bvn"
           placeholder="Enter your BVN number"
           setInput={(val) => setFormData((prev) => ({ ...prev, email: val }))}
@@ -50,12 +56,17 @@ export const KycForm = () => {
         />
 
         <Button
-          loading={false}
+          loading={doKyc.isPending}
           text="Save changes"
           type="bgGreen"
           fullWidth
           action={() => {
             // handleUpdateProfile();
+            doKyc.mutate({
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              bvn,
+            });
           }}
         />
       </div>

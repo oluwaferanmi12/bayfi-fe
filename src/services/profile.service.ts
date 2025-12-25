@@ -1,6 +1,7 @@
 import { axiosInstance } from "@/axios";
 import {
   ChangePasswordPayload,
+  KYC,
   PostProfileInterface,
   ProfileDataInterface,
   UpdatePin,
@@ -32,7 +33,7 @@ export const logout = async () => {
   return data;
 };
 
-export const doKyc = async () => {
-  const { data } = await axiosInstance.post(`/kyc/bvn/verify`);
+export const doKyc = async (payload: KYC) => {
+  const { data } = await axiosInstance.post(`/kyc/bvn/verify`, payload);
   return data;
 };

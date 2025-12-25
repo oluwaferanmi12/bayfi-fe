@@ -16,7 +16,6 @@ import chatActive from "@/assets/svg/chat-active.svg"
 export const MobileNav = () => {
   const router = useRouter();
   const path = usePathname();
-  console.log(path, "Path value here");
   return (
     <>
       <div className="fixed bottom-0 right-0 left-0 lg:hidden flex justify-between w-full bg-[#1F1F1F] p-4 py-2 z-50">

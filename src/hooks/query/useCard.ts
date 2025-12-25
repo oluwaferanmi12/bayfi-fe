@@ -4,6 +4,7 @@ import {
   deleteCard,
   editCard,
   getCards,
+  giftcardCountries,
   initiateGiftCardTxn,
   manageCard,
 } from "@/services/card.service";
@@ -87,5 +88,13 @@ export const useInitiateCardTxn = (sc: (val: any) => void) => {
     onSuccess: (val) => {
       sc(val);
     },
+  });
+};
+
+export const useGetCardCountries = (id: string) => {
+  return useQuery({
+    queryFn: () => giftcardCountries(id),
+    queryKey: ["giftcard-country", id],
+    enabled: !!id,
   });
 };

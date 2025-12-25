@@ -12,6 +12,7 @@ export const useKycProfile = () => {
     phoneNumber: "",
     verified: false,
   });
+  const [bvn, setBvn] = useState("");
   useEffect(() => {
     if (profile) {
       setFormData({
@@ -24,5 +25,5 @@ export const useKycProfile = () => {
       });
     }
   }, [profile]);
-  return { formData, setFormData };
+  return { formData, setFormData , setBvn, bvn};
 };

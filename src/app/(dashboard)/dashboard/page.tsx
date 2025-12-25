@@ -40,6 +40,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import eyeSlash from "@/assets/svg/eye-slash.svg";
 import { WithdrawDrawer } from "@/components/side-drawers/withdraw/withdraw-drawer";
 import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper";
+import { useRouter } from "next/navigation";
 
 function Dashboard() {
   const queryClient = useQueryClient();
@@ -60,6 +61,7 @@ function Dashboard() {
     queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
   });
   const { profile } = useProfileStore();
+  const router = useRouter();
 
   return (
     <>
@@ -272,7 +274,12 @@ function Dashboard() {
         </SideDrawer>
         <Row gutter={12}>
           <Col xs={16}>
-            <KycWrapper clickAction={() => {}} desktopType />
+            <KycWrapper
+              clickAction={() => {
+                router.push("/profile?type=kyc");
+              }}
+              desktopType
+            />
             <div className="bg-white relative mt-3 py-8 text-center items-center  rounded-4xl p-4 ">
               <span className="absolute left-0 top-0">
                 <Image src={bgImage} alt="" />

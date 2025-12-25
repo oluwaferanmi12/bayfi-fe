@@ -58,6 +58,13 @@ export const manageCard = async (payload: ManageCardInterface) => {
   return data.data;
 };
 
+export const giftcardCountries = async (id: string) => {
+  const { data } = await axiosInstance(
+    `/api/v1/giftcards/fetch/giftcard/countries/${id}`
+  );
+  return data;
+};
+
 export const initiateGiftCardTxn = async (payload: InitiateCardTxn) => {
   const { data } = await axiosInstance.post(
     `/giftcards/initiate/chat/transaction`,

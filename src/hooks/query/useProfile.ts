@@ -1,5 +1,6 @@
 import {
   changePassword,
+  doKyc,
   fetchUserProfileService,
   getUser,
   logout,
@@ -44,5 +45,9 @@ export const useChangePassword = (sc: (data: any) => void) => {
   });
 };
 
-
-
+export const useDoKyc = (sc: (val: any) => void) => {
+  return useMutation({
+    mutationFn: doKyc,
+    onSuccess: sc,
+  });
+};

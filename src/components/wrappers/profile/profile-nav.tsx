@@ -66,7 +66,6 @@ export const ProfileNav = ({
             />
           </div>
         </div>
-        {!profileData?.verified && <IncompleteKycBadge />}
 
         <div className="flex items-center flex-col  justify-center">
           <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl">

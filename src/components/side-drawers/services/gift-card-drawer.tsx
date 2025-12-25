@@ -3,8 +3,11 @@ import { SideDrawer } from "../side-drawer";
 import { GiftCardWrapper } from "@/components/wrappers/gift-card-wrapper";
 import { useEffect, useState } from "react";
 import { SearchInput } from "@/components/inputs/search-input";
-import { useGetCards, useInitiateCardTxn } from "@/hooks/query";
-import giftCardPlaceHolder from "@/assets/svg/amazon-placeholder.svg";
+import {
+  useGetCardCountries,
+  useGetCards,
+  useInitiateCardTxn,
+} from "@/hooks/query";
 import { ChatContainer } from "@/components/chat/chat-container";
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
@@ -57,7 +60,10 @@ export const GiftCardDrawer = ({
   ]);
   const [selectedCard, setSelectedCard] = useState<CardInterface>();
   const [searchValue, setSearchValue] = useState("");
+  const countryResponses = useGetCardCountries(selectedCard?.id ?? "");
   const defaultAmounts = [25, 50, 100, 200, 500];
+
+  console.log(selectedCard, "Selected card value");
 
   const handeUpdateBreadCrumb = (data: SideDrawerBreadCrumbProps) => {
     setBreadCrumbData((prev) => {
@@ -155,32 +161,32 @@ export const GiftCardDrawer = ({
             <div className="my-2">
               <SearchInput />
             </div>
-
-            {selectedCard?.countryResponses.map((item) => {
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => {
-                    setShowGiftCardAmount(true);
-                    setShowCountry(false);
-                    setCountrySelected(item);
-                    handeUpdateBreadCrumb({
-                      text: "Details",
-                      action: () => {
-                        handlRemoveFromBreadCrumb("Details");
-                      },
-                      active: true,
-                    });
-                  }}
-                  className="cursor-pointer"
-                >
-                  <CountryWrapper
-                    flag={item.logo_url}
-                    countryName={item.name}
-                  />
-                </div>
-              );
-            })}
+            {countryResponses.data &&
+              countryResponses.data.map((item: any) => {
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => {
+                      setShowGiftCardAmount(true);
+                      setShowCountry(false);
+                      setCountrySelected(item);
+                      handeUpdateBreadCrumb({
+                        text: "Details",
+                        action: () => {
+                          handlRemoveFromBreadCrumb("Details");
+                        },
+                        active: true,
+                      });
+                    }}
+                    className="cursor-pointer"
+                  >
+                    <CountryWrapper
+                      flag={item.logo_url}
+                      countryName={item.name}
+                    />
+                  </div>
+                );
+              })}
           </>
         ) : showGiftCardAmount ? (
           <div>

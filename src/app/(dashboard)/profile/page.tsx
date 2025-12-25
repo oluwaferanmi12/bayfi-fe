@@ -5,11 +5,23 @@ import { ProfileNav } from "@/components/wrappers/profile/profile-nav";
 import { KycForm } from "@/components/features/profile/kyc-form";
 import { PasswordForm } from "@/components/features/profile/password-form";
 import { ProfileForm } from "@/components/features/profile/profile-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
+import { useSearchParams } from "next/navigation";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
+  const params = useSearchParams();
+  useEffect(() => {
+    if (params) {
+      const kycVal = params.get("type");
+      if (kycVal === "kyc") {
+        setActiveProfile("kyc");
+      } else {
+        setActiveProfile("setting");
+      }
+    }
+  }, [params]);
   return (
     <div className="rounded-lg bg-white ">
       <div className="p-4 border-b border-[#EAECF0]">
