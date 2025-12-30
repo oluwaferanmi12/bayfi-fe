@@ -8,5 +8,5 @@ export const transactions = async (): Promise<Transaction[]> => {
 
 export const getTransactionDetail = async (transactionId: string) => {
   const { data } = await axiosInstance.get(`/transactions/${transactionId}`);
-  return data.data.contents;
+  return data.data;
 };

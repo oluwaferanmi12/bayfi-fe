@@ -44,7 +44,7 @@ function ProfileSetting() {
               <Image
                 width={120}
                 height={120}
-                className="w-[120px] aspect-square rounded-full object-cover"
+                className="w-30 aspect-square rounded-full object-cover"
                 src={formData.avatar ? formData.avatar : profilePlaceholder}
                 alt=""
               />
