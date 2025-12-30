@@ -109,11 +109,11 @@ export const useWithdraw = () => {
     // handleValidation first here
     if (!handleValidate()) {
       return;
-    }
-    console.log(profile, "profile");
+    }  
     if (profile?.isPinCreated) {
       setShowWithdrawOtp(true);
     } else {
+      console.log("Got inside this block");
       setShowPinModal(true);
     }
   };

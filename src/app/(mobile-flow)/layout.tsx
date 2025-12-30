@@ -2,6 +2,7 @@
 import mobileFlowIcon from "@/assets/svg/mobileFlowIcon.svg";
 import { SetPinModal } from "@/components/modals/pin/set-pin-modal";
 import { useFetchProfile, useGetWallet } from "@/hooks/query";
+import { usePinStore } from "@/store/usePinStore";
 import { useProfileStore } from "@/store/userProfileStore";
 import { useWalletStore } from "@/store/walletStore";
 import Image from "next/image";
@@ -16,7 +17,7 @@ export default function RootLayout({
   const { data: profileDetails } = useFetchProfile();
   const { data: walletDetails, isPending: walletDetailsLoading } =
     useGetWallet();
-  const [showPinModal, setShowPinModal] = useState(false);
+  const { showPinModal, setShowPinModal } = usePinStore();
   useEffect(() => {
     if (profileDetails) {
       setProfile(profileDetails);
@@ -31,7 +32,6 @@ export default function RootLayout({
       setWallet(walletDetails);
     }
   }, [walletDetails, walletDetailsLoading]);
-  console.log(showPinModal, "Show pin modal");
   return (
     <>
       <SetPinModal
