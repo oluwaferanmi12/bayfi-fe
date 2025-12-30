@@ -15,12 +15,17 @@ export const MobileTransactionWrapper = ({
         Transaction History
       </p>
       <div className="bg-white border p-4 rounded-lg border-[#EAECF0]">
-        {transactions &&
+        {transactions && transactions.length ? (
           transactions.map((item) => {
             return (
               <DashboardTransactionWrapper key={item.id} transaction={item} />
             );
-          })}
+          })
+        ) : (
+          <div>
+            <p className="text-center">No transactions</p>
+          </div>
+        )}
       </div>
     </div>
   );

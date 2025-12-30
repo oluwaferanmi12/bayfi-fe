@@ -35,6 +35,7 @@ export const useWithdraw = () => {
     useState<DisburseResponse | null>(null);
   const { data, isPending } = useGetBeneficiary();
   const disburse = useDisburse((data) => {
+    
     setDisburseResponse(data);
     setShowReciept(true);
     queryClient.invalidateQueries({ queryKey: ["get-wallet"] });

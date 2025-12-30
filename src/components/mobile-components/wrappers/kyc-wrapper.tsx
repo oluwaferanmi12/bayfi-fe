@@ -13,7 +13,7 @@ export const KycWrapper = ({
   const { profile } = useProfileStore();
   return (
     <>
-      {profile && !profile.verified && (
+      {profile && !profile.isBvnVerified && (
         <div
           className={`relative flex flex-col ${desktopType ? "mt-4" : "mt-10"} justify-center items-center`}
         >

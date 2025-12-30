@@ -11,6 +11,7 @@ export interface ProfileDataInterface {
   isPinCreated: boolean;
   verified: boolean;
   isBalanceVisible: boolean;
+  isBvnVerified: boolean;
 }
 
 export interface PostProfileInterface {

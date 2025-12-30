@@ -17,6 +17,7 @@ export const ProfileForm = () => {
     inputRef,
     handleSaveImage,
     saveImageLoading,
+    profile,
   } = useCustomProfile();
   return (
     <div className="w-full flex flex-col items-center justify-center">
@@ -73,6 +74,7 @@ export const ProfileForm = () => {
         <div className="flex items-center gap-4 w-full">
           <GInput
             label="First name"
+            disabled={profile?.verified}
             placeholder="Enter first name"
             inputVal={formData.firstName}
             setInput={(val) =>
@@ -83,6 +85,7 @@ export const ProfileForm = () => {
             }
           />
           <GInput
+            disabled={profile?.verified}
             label="Last name"
             placeholder="Enter last name"
             inputVal={formData.lastName}

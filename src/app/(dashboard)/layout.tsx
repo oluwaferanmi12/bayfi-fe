@@ -80,6 +80,11 @@ export default function RootLayout({
     }
   }, [walletDetails, walletDetailsLoading]);
 
+  useEffect(() => {
+    console.log("RootLayout mounted");
+    return () => console.log("RootLayout unmounted");
+  }, []);
+
   return (
     <>
       <SetPinModal
@@ -113,7 +118,7 @@ export default function RootLayout({
         onClick={() => {
           setShowChatList(true);
         }}
-        className="fixed cursor-pointer right-6 bottom-6 pointer-events-auto"
+        className="fixed cursor-pointer right-6 bottom-6 pointer-events-auto z-30"
       >
         <div className="bg-bayfi-green-500 p-3 rounded-full shadow">
           <Image src={floatMessageIcon} alt="Chat" />

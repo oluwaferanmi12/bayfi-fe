@@ -41,6 +41,8 @@ const WithdrawalMobile = () => {
     pin,
   } = useWithdraw();
 
+  
+
   return (
     <>
       <PageTitle title="Withdraw" />

@@ -2,6 +2,7 @@ import { useDeleteImage, useSaveImage } from "@/hooks/query";
 import { useFetchProfile, useUpdateProfile } from "@/hooks/query/useProfile";
 import { UIProfile } from "@/interfaces/interfaces";
 import { ProfileType } from "@/interfaces/interfaces-ui";
+import { useProfileStore } from "@/store/userProfileStore";
 import { convertImageToBlob } from "@/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +11,7 @@ export const useCustomProfile = () => {
   const queryClient = useQueryClient();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const { profile } = useProfileStore();
 
   const imageMutate = useSaveImage(async () => {
     setPreviewUrl("");
@@ -123,5 +125,6 @@ export const useCustomProfile = () => {
     inputRef,
     handleSaveImage,
     saveImageLoading: imageMutate.isPending,
+    profile,
   };
 };
