@@ -11,8 +11,6 @@ import { useSearchParams } from "next/navigation";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
-
-  const params = useSearchParams();
   useEffect(() => {
     const urlParam = new URLSearchParams(window.location.search);
     const kycVal = urlParam.get("type");
