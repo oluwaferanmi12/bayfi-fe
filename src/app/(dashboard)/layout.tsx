@@ -80,10 +80,7 @@ export default function RootLayout({
     }
   }, [walletDetails, walletDetailsLoading]);
 
-  useEffect(() => {
-    console.log("RootLayout mounted");
-    return () => console.log("RootLayout unmounted");
-  }, []);
+ 
 
   return (
     <>

@@ -35,7 +35,6 @@ export const useWithdraw = () => {
     useState<DisburseResponse | null>(null);
   const { data, isPending } = useGetBeneficiary();
   const disburse = useDisburse((data) => {
-    
     setDisburseResponse(data);
     setShowReciept(true);
     queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
@@ -111,6 +110,7 @@ export const useWithdraw = () => {
     if (!handleValidate()) {
       return;
     }
+    console.log(profile, "profile");
     if (profile?.isPinCreated) {
       setShowWithdrawOtp(true);
     } else {

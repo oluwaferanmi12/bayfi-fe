@@ -41,8 +41,6 @@ const WithdrawalMobile = () => {
     pin,
   } = useWithdraw();
 
-  
-
   return (
     <>
       <PageTitle title="Withdraw" />
@@ -68,9 +66,10 @@ const WithdrawalMobile = () => {
               onChange={(e) => {
                 setAmount(+e.target.value);
               }}
-              label="Amount"
+              label="How much do you want to withdraw?"
               error={payloadError.amount}
               placeholder="Enter amount"
+              inputMode="numeric"
             />
             <div className={`mb-4 w-full`}>
               <Text type="input-text" value={"Select bank"} />
@@ -111,6 +110,7 @@ const WithdrawalMobile = () => {
               label="Recipient account"
               placeholder="Enter 10 digits account number"
               error={payloadError.accountNumber}
+              inputMode="numeric"
             />
             {bankAccount?.accountName && (
               <p className="text-sm font-grotesk-semi-bold mb-4 text-bayfi-green-900">

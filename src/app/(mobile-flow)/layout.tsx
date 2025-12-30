@@ -1,5 +1,6 @@
 "use client";
 import mobileFlowIcon from "@/assets/svg/mobileFlowIcon.svg";
+import { SetPinModal } from "@/components/modals/pin/set-pin-modal";
 import { useFetchProfile, useGetWallet } from "@/hooks/query";
 import { useProfileStore } from "@/store/userProfileStore";
 import { useWalletStore } from "@/store/walletStore";
@@ -30,5 +31,16 @@ export default function RootLayout({
       setWallet(walletDetails);
     }
   }, [walletDetails, walletDetailsLoading]);
-  return <div>{children}</div>;
+  console.log(showPinModal, "Show pin modal");
+  return (
+    <>
+      <SetPinModal
+        open={showPinModal}
+        close={() => {
+          setShowPinModal(false);
+        }}
+      />
+      {children}
+    </>
+  );
 }
