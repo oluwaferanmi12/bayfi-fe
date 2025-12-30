@@ -3,7 +3,7 @@ import { Transaction } from "@/types";
 
 export const transactions = async (): Promise<Transaction[]> => {
   const { data } = await axiosInstance.get(`/transactions`);
-  return data.data.contents;
+  return data.data;
 };
 
 export const getTransactionDetail = async (transactionId: string) => {

@@ -50,12 +50,23 @@ export const ProfileNav = ({
   return (
     <>
       <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
-        <KycWrapper
-          clickAction={() => {
-            setActiveProfile("kyc");
-          }}
-          desktopType
-        />
+        <div className="lg:block hidden">
+          <KycWrapper
+            clickAction={() => {
+              setActiveProfile("kyc");
+            }}
+            desktopType
+          />
+        </div>
+        <div className="lg:hidden">
+          <KycWrapper
+            clickAction={() => {
+              router.push("/complete-kyc");
+            }}
+            desktopType
+          />
+        </div>
+
         <div className="flex items-center justify-center mt-4 ">
           <div className="w-15 h-15 overflow-hidden relative">
             <Image

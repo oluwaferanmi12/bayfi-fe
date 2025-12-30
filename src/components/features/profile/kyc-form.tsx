@@ -1,26 +1,35 @@
+"use client";
 import { Text } from "@/components/texts/text";
 import { GInput } from "@/components/inputs/GInput";
 import verifyBvn from "@/assets/svg/verify-badge.svg";
 import { Button } from "@/components/buttons";
 import { useKycProfile } from "@/hooks/custom/profile/useKycProfile";
 import { useDoKyc } from "@/hooks/query";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export const KycForm = () => {
   const { formData, setFormData, bvn, setBvn } = useKycProfile();
-  const doKyc = useDoKyc(() => {});
+  const router = useRouter();
+  const doKyc = useDoKyc(() => {
+    toast.success("KYC completed successfully");
+    router.push("/dashboard");
+  });
   return (
     <div className="w-full">
-      <div>
-        <Text type="header-32" value="Complete Kyc" />
-      </div>
-      <div className="mt-1">
-        <Text
-          type="body-medium"
-          value="Kindly complete the kyc to enable you perform more actions on Bayfi"
-        />
+      <div className="hidden lg:block">
+        <div>
+          <Text type="header-32" value="Complete Kyc" />
+        </div>
+        <div className="mt-1">
+          <Text
+            type="body-medium"
+            value="Kindly complete the kyc to enable you perform more actions on Bayfi"
+          />
+        </div>
       </div>
       <div className="mt-4 w-full">
-        <div className="flex items-center gap-4 w-full">
+        <div className="flex lg:flex-row flex-col items-center lg:gap-4 w-full">
           <GInput
             label="First name"
             placeholder="Enter first name"

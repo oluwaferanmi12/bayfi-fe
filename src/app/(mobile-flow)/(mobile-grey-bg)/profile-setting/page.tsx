@@ -28,7 +28,7 @@ function ProfileSetting() {
         <div className="flex items-center justify-center ">
           <div>
             <div className="relative flex items-center justify-center">
-              <span className="absolute w-[120px] opacity-0 overflow-hidden h-[120px]">
+              <span className="absolute w-30 opacity-0 overflow-hidden h-30">
                 <input
                   ref={inputRef}
                   onChange={(e) => {

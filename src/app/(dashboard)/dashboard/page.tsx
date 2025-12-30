@@ -63,6 +63,8 @@ function Dashboard() {
   const { profile } = useProfileStore();
   const router = useRouter();
 
+  console.log(transactions, "Transactions Data");
+
   return (
     <>
       <div className="hidden lg:block">

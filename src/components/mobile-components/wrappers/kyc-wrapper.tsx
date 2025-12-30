@@ -15,7 +15,7 @@ export const KycWrapper = ({
     <>
       {profile && !profile.isBvnVerified && (
         <div
-          className={`relative flex flex-col ${desktopType ? "mt-4" : "mt-10"} justify-center items-center`}
+          className={`relative flex flex-col ${desktopType ? "mt-4" : "mt-10"}  justify-center items-center`}
         >
           <div className="bg-[#ECECEC] w-[90%] border border-[#FFFFFF99] -top-4 mx-auto absolute p-4 rounded-xl"></div>
           <div className="bg-[#F9F9F9] w-[95%] border border-[#FFFFFF99] -top-2 mx-auto absolute p-4 rounded-xl"></div>
