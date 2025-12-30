@@ -5,6 +5,7 @@ import {
   Bank,
   Beneficiary,
   Disburse,
+  DisburseResponse,
 } from "@/types";
 
 export const getBeneficiary = async (): Promise<Beneficiary[]> => {
@@ -46,7 +47,9 @@ export const accountNameLookup = async ({
   return data.data;
 };
 
-export const disburse = async (payload: Disburse) => {
+export const disburse = async (
+  payload: Disburse
+): Promise<DisburseResponse> => {
   const { key, ...rest } = payload;
   const { data } = await axiosInstance.post(`/payment/disbursement`, rest, {
     headers: {

@@ -13,34 +13,37 @@ export const GReceipt = ({ payload }: { payload: DisburseResponse }) => {
           <Text type="header-text-white-20" value="You sent" />
           <Text
             type="text-green-24"
-            value={`NGN ${FormatNumber(payload.amount)}`}
+            value={`NGN ${FormatNumber(payload.transactionValueAmount)}`}
           />
           <div>
             <Text type="header-text-white-20" value="to" />{" "}
             <Text
               type="header-text-white-bold-20"
-              value={payload.accountName}
+              value={payload.beneficiaryAccountName}
             />{" "}
-            <Text type="text-green-24" value={payload.bankName} />
+            <Text type="text-green-24" value={payload.beneficiaryBankName} />
           </div>
         </div>
         <div className="border border-bayfi-black-400 py-8 px-4 mt-8 rounded-3xl">
           <BrokenRecieptRecord
             leftText="Account number"
-            rightText={payload.accountNumber}
+            rightText={payload.beneficiaryAccountNumber}
           />
           <BrokenRecieptRecord
             leftText="Account name"
-            rightText={payload.accountName}
+            rightText={payload.beneficiaryAccountName}
           />
-          <BrokenRecieptRecord leftText="Bank name" rightText={"-"} />
+          <BrokenRecieptRecord
+            leftText="Bank name"
+            rightText={payload.beneficiaryBankName}
+          />
           <BrokenRecieptRecord
             leftText="Reference"
             rightText={payload.reference}
           />
           <BrokenRecieptRecord
             leftText="Amount"
-            rightText={FormatNumber(payload.amount)}
+            rightText={FormatNumber(payload.transactionValueAmount)}
             hideBorder
           />
         </div>
