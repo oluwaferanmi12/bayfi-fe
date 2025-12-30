@@ -11,17 +11,18 @@ import { useSearchParams } from "next/navigation";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
+
   const params = useSearchParams();
   useEffect(() => {
-    if (params) {
-      const kycVal = params.get("type");
-      if (kycVal === "kyc") {
-        setActiveProfile("kyc");
-      } else {
-        setActiveProfile("setting");
-      }
+    const urlParam = new URLSearchParams(window.location.search);
+    const kycVal = urlParam.get("type");
+    console.log(kycVal, "Kyc Value here");
+    if (kycVal === "kyc") {
+      setActiveProfile("kyc");
+    } else {
+      setActiveProfile("setting");
     }
-  }, [params]);
+  }, []);
   return (
     <div className="rounded-lg bg-white ">
       <div className="p-4 border-b border-[#EAECF0]">
