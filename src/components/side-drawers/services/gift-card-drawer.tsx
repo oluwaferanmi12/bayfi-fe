@@ -62,9 +62,6 @@ export const GiftCardDrawer = ({
   const [searchValue, setSearchValue] = useState("");
   const countryResponses = useGetCardCountries(selectedCard?.id ?? "");
   const defaultAmounts = [25, 50, 100, 200, 500];
-
-  console.log(selectedCard, "Selected card value");
-
   const handeUpdateBreadCrumb = (data: SideDrawerBreadCrumbProps) => {
     setBreadCrumbData((prev) => {
       const newData = prev.map((data_) => ({ ...data_, active: false }));
@@ -77,7 +74,6 @@ export const GiftCardDrawer = ({
     setBreadCrumbData((prev) => {
       const activeIndex = prev.findIndex((item) => item.text === id);
       if (activeIndex === -1) return prev;
-
       const trimmed = prev.slice(0, activeIndex + 1);
       const updated = trimmed.map((item, idx, arr) => ({
         ...item,

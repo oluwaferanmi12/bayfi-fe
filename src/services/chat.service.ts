@@ -14,14 +14,14 @@ export const getOneChatMessages = async (
   const { data } = await axiosInstance.get(
     `/giftcards/chats/${chatId}/messages`
   );
-  return data.data.contents;
+  return data.data;
 };
 
 export const userChats = async (): Promise<ChatTransaction[]> => {
   const { data } = await axiosInstance.get(
     "/giftcards/chats?page=1&pageSize=1000"
   );
-  return data.data.contents;
+  return data.data;
 };
 
 export const getChatDetail = async (

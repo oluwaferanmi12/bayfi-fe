@@ -17,7 +17,7 @@ export const getCards = async ({
   const { data } = await axiosInstance.get(
     `/giftcards/fetch/active/${page}/${pageSize}`
   );
-  return data.data.contents;
+  return data.data;
 };
 
 export const createCard = async (payload: CreateCardInterface) => {
@@ -60,9 +60,9 @@ export const manageCard = async (payload: ManageCardInterface) => {
 
 export const giftcardCountries = async (id: string) => {
   const { data } = await axiosInstance(
-    `/api/v1/giftcards/fetch/giftcard/countries/${id}`
+    `/giftcards/fetch/giftcard/countries/${id}`
   );
-  return data;
+  return data.data.countryResponses;
 };
 
 export const initiateGiftCardTxn = async (payload: InitiateCardTxn) => {
