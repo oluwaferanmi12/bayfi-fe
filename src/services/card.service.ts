@@ -6,6 +6,7 @@ import {
   InitiateCardTxn,
   ManageCardInterface,
 } from "@/types";
+import { Country } from "@/types/utility.types";
 
 export const getCards = async ({
   page,
@@ -58,7 +59,7 @@ export const manageCard = async (payload: ManageCardInterface) => {
   return data.data;
 };
 
-export const giftcardCountries = async (id: string) => {
+export const giftcardCountries = async (id: string): Promise<Country[]> => {
   const { data } = await axiosInstance(
     `/giftcards/fetch/giftcard/countries/${id}`
   );

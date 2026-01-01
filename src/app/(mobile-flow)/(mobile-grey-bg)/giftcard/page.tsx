@@ -4,13 +4,11 @@ import { FlashSalesCard } from "@/components/features/giftcard/flash-sales";
 import { SearchInput } from "@/components/inputs/search-input";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
 import { GiftCardWrapper } from "@/components/wrappers/gift-card-wrapper";
-import React, { useEffect, useState } from "react";
-import giftCardPlaceHolder from "@/assets/svg/amazon-placeholder.svg";
+import { useEffect, useState } from "react";
 import { BottomDrawer } from "@/components/bottom-drawers/bottom-drawer";
 import { CountryWrapper } from "@/components/wrappers/country-wrapper";
-import usIcon from "@/assets/svg/us-icon.svg";
 import { useRouter } from "next/navigation";
-import { useGetCards } from "@/hooks/query";
+import { useGetCardCountries, useGetCards } from "@/hooks/query";
 import { Spin } from "antd";
 import { CardInterface, CountryResponseInterface } from "@/types";
 import placeholderImage from "@/assets/svg/placeholder.svg";
@@ -23,6 +21,7 @@ function GiftCard() {
   const [selectedCard, setSelectedCard] = useState<CardInterface>();
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface>();
+  const countryResponses = useGetCardCountries(selectedCard?.id ?? "");
 
   useEffect(() => {
     localStorage.setItem("selectedCard", JSON.stringify(selectedCard));
@@ -42,19 +41,21 @@ function GiftCard() {
         <div className="mb-2">
           <SearchInput bgGrey />
         </div>
-        {selectedCard?.countryResponses.map((item) => {
-          return (
-            <CountryWrapper
-              key={item.id}
-              action={() => {
-                router.push("/giftcard/buy-details");
-                setCountrySelected(item);
-              }}
-              flag={item.logo_url ?? placeholderImage}
-              countryName={item.name}
-            />
-          );
-        })}
+        {countryResponses.isLoading
+          ? "Loading"
+          : countryResponses.data?.map((item) => {
+              return (
+                <CountryWrapper
+                  key={item.id}
+                  action={() => {
+                    router.push("/giftcard/buy-details");
+                    setCountrySelected(item);
+                  }}
+                  flag={item.logo_url ?? placeholderImage}
+                  countryName={item.name}
+                />
+              );
+            })}
       </BottomDrawer>
       <PageTitle title="Giftcards" />
       <SearchInput value={searchValue} onChange={setSearchValue} bgWhite />
