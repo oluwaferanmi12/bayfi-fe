@@ -1,4 +1,8 @@
-import { getTransactionDetail, transactions } from "@/services";
+import {
+  getTransactionDetail,
+  transactions,
+  transactionSummary,
+} from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetTransaction = () => {
@@ -17,4 +21,9 @@ export const useGetTransactionId = (transactionId: string) => {
   });
 };
 
-
+export const useGetTransactionSummary = () => {
+  return useQuery({
+    queryFn: () => transactionSummary(),
+    queryKey: ["transaction-summary"],
+  });
+};

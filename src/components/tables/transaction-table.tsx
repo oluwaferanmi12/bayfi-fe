@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-table";
 import eyeIcon from "@/assets/svg/table-eye-icon.svg";
 import Image from "next/image";
-import { transactionData } from "@/data/transaction-data";
 import walletTopUpIcon from "@/assets/svg/wallet-icon.svg";
 import { TableStatus } from "@/components/status/table-status";
 import { useState } from "react";
@@ -19,8 +18,12 @@ import { Button } from "@/components/buttons";
 import chatIcon from "@/assets/svg/chat-message-icon.svg";
 import { Transaction } from "@/types";
 import { momentLocal } from "@/utils/moment-local";
+import { useGetTransaction } from "@/hooks/query";
+import { TableInput } from "../inputs/table-input";
+import { TablePagination } from "../pagination/table-pagination";
 
-export const TransactionTable = ({ data }: { data: Transaction[] }) => {
+export const TransactionTable = () => {
+  const { isPending, data } = useGetTransaction();
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const columnHelper = createColumnHelper<Transaction>();
   const columns = [
@@ -48,9 +51,9 @@ export const TransactionTable = ({ data }: { data: Transaction[] }) => {
     columnHelper.accessor("transactionStatus", {
       cell: (info) => (
         <div className="flex items-center  justify-center">
-          {info.getValue() === "Completed" ? (
+          {info.getValue().toLowerCase().includes("success") ? (
             <TableStatus type="Success" text="Completed" />
-          ) : info.getValue() === "In progress" ? (
+          ) : info.getValue().toLowerCase().includes("pend") ? (
             <TableStatus type={"Pending"} text="In progress" />
           ) : (
             <TableStatus text="Failed" type="Failed" />
@@ -76,7 +79,7 @@ export const TransactionTable = ({ data }: { data: Transaction[] }) => {
   ];
 
   const table = useReactTable({
-    data,
+    data: data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -145,6 +148,10 @@ export const TransactionTable = ({ data }: { data: Transaction[] }) => {
           </div>
         </div>
       </SideDrawer>
+      <div className="py-3 flex items-center justify-between">
+        <TableInput placeholder="Search" />
+        <TablePagination />
+      </div>
       <div className="mt-4">
         <table className="w-full">
           <thead>

@@ -28,3 +28,14 @@ export enum TransactionCategory {
   CABLE_TV = "Cable Tv",
   REWARD_BONUS = "Reward Bonus",
 }
+
+export interface InnerTransactionSummary {
+  btc: number;
+  giftcard: number;
+  others: number;
+  total: number;
+}
+export interface TransactionSummary {
+  inflow: InnerTransactionSummary;
+  outflow: InnerTransactionSummary;
+}

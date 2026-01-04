@@ -2,20 +2,20 @@
 
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
-import React from "react";
 import exportIcon from "@/assets/svg/export-icon.svg";
-import { SearchInput } from "@/components/inputs/search-input";
 import { TableInput } from "@/components/inputs/table-input";
 import { TablePagination } from "@/components/pagination/table-pagination";
 import { TransactionTable } from "@/components/tables/transaction-table";
-import { useGetTransaction } from "@/hooks/query";
+import { useGetTransaction, useGetTransactionSummary } from "@/hooks/query";
 import { Col, Row } from "antd";
 import arrowDownGreen from "@/assets/svg/arrow-down-green.svg";
 import arrowUpOrange from "@/assets/svg/arrow-up-orange.svg";
 import Image from "next/image";
+import { FormatNumber } from "@/utils/formatter";
 
 function Transaction() {
   const { isPending, data } = useGetTransaction();
+  const transactionSummary = useGetTransactionSummary();
   return (
     <div className="bg-white rounded-lg p-4">
       <div className="flex justify-between border-b border-gray-200 pb-3">
@@ -57,7 +57,7 @@ function Transaction() {
             </div>
             <div className="mt-2">
               <p className="text-[#171717] text-2xl font-grotesk-semi-bold">
-                NGN500.00k
+                NGN{FormatNumber(transactionSummary.data?.inflow.total || 0)}
               </p>
             </div>
           </div>
@@ -74,17 +74,13 @@ function Transaction() {
             </div>
             <div className="mt-2">
               <p className="text-[#171717] text-2xl font-grotesk-semi-bold">
-                NGN500.00k
+                NGN{FormatNumber(transactionSummary.data?.outflow.total || 0)}
               </p>
             </div>
           </div>
         </Col>
       </Row>
-      <div className="py-3 flex items-center justify-between">
-        <TableInput placeholder="Search" />
-        <TablePagination />
-      </div>
-      {data && <TransactionTable data={data} />}
+      {data && <TransactionTable />}
     </div>
   );
 }
