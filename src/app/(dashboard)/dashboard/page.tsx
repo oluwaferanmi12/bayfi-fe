@@ -41,6 +41,7 @@ import eyeSlash from "@/assets/svg/eye-slash.svg";
 import { WithdrawDrawer } from "@/components/side-drawers/withdraw/withdraw-drawer";
 import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper";
 import { useRouter } from "next/navigation";
+import { Loader } from "@/components/loader/general-loader";
 
 function Dashboard() {
   const queryClient = useQueryClient();
@@ -63,7 +64,6 @@ function Dashboard() {
   const { profile } = useProfileStore();
   const router = useRouter();
 
-  
   return (
     <>
       <div className="hidden lg:block">
@@ -390,7 +390,7 @@ function Dashboard() {
           <Col xs={8}>
             <div className="bg-white min-h-[80vh] rounded-3xl p-4 py-8">
               {transactionLoading ? (
-                <p className="text-center my-4">loading...</p>
+                <Loader />
               ) : transactions && transactions.length ? (
                 <>
                   <Text type="main-text-regular" value="Transaction history" />

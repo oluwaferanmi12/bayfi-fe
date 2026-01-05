@@ -8,6 +8,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useGetActivChat } from "@/hooks/query";
 import { useRouter } from "next/navigation";
+import { Loader } from "@/components/loader/general-loader";
 
 export default function MobileChatList() {
   const [activeTab, setActiveTab] = useState<"chat" | "support">("chat");
@@ -42,7 +43,7 @@ export default function MobileChatList() {
           </div>
       </div>
         {isPending ? (
-          "loading..."
+          <Loader />
         ) : data?.length ? (
           <>
             {data.map((item) => (

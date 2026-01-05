@@ -18,6 +18,7 @@ import { ProfileDataInterface } from "@/types/profile.types";
 import { useLogout } from "@/hooks/query";
 import { isValidImageUrl } from "@/utils/checkValidImage";
 import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper";
+import { Loader } from "@/components/loader/general-loader";
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -80,9 +81,11 @@ export const ProfileNav = ({
 
         <div className="flex items-center flex-col  justify-center">
           <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl">
-            {profileData
-              ? `${profileData.firstName} ${profileData.lastName}`
-              : "Loading..."}
+            {profileData ? (
+              `${profileData.firstName} ${profileData.lastName}`
+            ) : (
+              <Loader />
+            )}
           </p>
           <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base">
             {profileData?.username}

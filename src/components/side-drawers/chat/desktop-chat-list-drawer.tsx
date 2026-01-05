@@ -1,6 +1,7 @@
 import { useGetActivChat } from "@/hooks/query";
 import { SideDrawer } from "../side-drawer";
 import { MobileChatListCard } from "@/components/mobile-components/wrappers/mobile-chat-list-card";
+import { Loader } from "@/components/loader/general-loader";
 
 export const DesktopChatListDrawer = ({
   open,
@@ -23,7 +24,7 @@ export const DesktopChatListDrawer = ({
       >
         <>
           {isPending ? (
-            "Loading"
+            <Loader />
           ) : data?.length ? (
             <>
               {data.map((item) => {
