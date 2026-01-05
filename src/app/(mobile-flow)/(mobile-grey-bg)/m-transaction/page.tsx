@@ -1,21 +1,22 @@
-import { FixedMobileHeader } from "@/components/mobile-components/headers/fixed-mobile-header";
+"use client";
 import { MobileNav } from "@/components/mobile-components/nav/mobile-nav";
-import React from "react";
 import filterIcon from "@/assets/svg/filter.svg";
 import Image from "next/image";
 import { Col, Row } from "antd";
 import moneyInIcon from "@/assets/svg/moneyInIcon.svg";
 import moneyOutIcon from "@/assets/svg/moneyOutIcon.svg";
-import withdrawIcon from "@/assets/svg/green-withdraw-icon.svg";
-import bitcoinIcon from "@/assets/svg/bitcoing1Icon.svg";
-import topUpIcon from "@/assets/svg/topUpIcon.svg";
-import blueGiftCardIcon from "@/assets/svg/blue-giftcard-icon.svg";
+import { useGetTransaction, useGetTransactionSummary } from "@/hooks/query";
+import { FormatNumber } from "@/utils/formatter";
+import { Transaction, TransactionCategory } from "@/types";
+import { momentLocal, timeDefault } from "@/utils/moment-local";
+import { useGetTransactionIconType } from "@/hooks/custom/others/useGetIconType";
 
 function MobileTransaction() {
+  const transactionSummary = useGetTransactionSummary();
+  const { isPending, data } = useGetTransaction();
   return (
     <>
       <MobileNav />
-      {/* <FixedMobileHeader header="Transaction" subText="See your transaction" /> */}
       <div className="flex items-center justify-between">
         <p className="text-bayfi-black-600 text-xl font-grotesk-semi-bold">
           Transaction
@@ -38,7 +39,9 @@ function MobileTransaction() {
                 <Image src={moneyInIcon} alt="" />
               </div>
               <div className="mt-3">
-                <p className="text-xl font-grotesk-semi-bold ">NGN500.00k</p>
+                <p className="text-xl font-grotesk-semi-bold ">
+                  NGN{FormatNumber(transactionSummary.data?.inflow.total ?? 0)}
+                </p>
               </div>
             </div>
           </Col>
@@ -51,7 +54,10 @@ function MobileTransaction() {
                 <Image src={moneyOutIcon} alt="" />
               </div>
               <div className="mt-3">
-                <p className="text-xl font-grotesk-semi-bold ">NGN500.00k</p>
+                <p className="text-xl font-grotesk-semi-bold ">
+                  NGN
+                  {FormatNumber(transactionSummary.data?.outflow.total ?? 0)}
+                </p>
               </div>
             </div>
           </Col>
@@ -59,41 +65,11 @@ function MobileTransaction() {
         <div className="mt-3">
           <p className="font-grotesk-medium">List of transactions</p>
           <div className="mt-1">
-            <TransactionWrapper
-              icon={withdrawIcon}
-              amount="2,240.00"
-              date="11:45am"
-              subText="Bank account"
-              title="Withdrawal"
-            />
-            <TransactionWrapper
-              icon={bitcoinIcon}
-              amount="2,240.00"
-              date="11:45am"
-              subText="Bitcoin"
-              title="Crypto Purchase"
-            />
-            <TransactionWrapper
-              icon={topUpIcon}
-              amount="2,240.00"
-              date="11:45am"
-              subText="Wallet"
-              title="Top up"
-            />
-            <TransactionWrapper
-              icon={blueGiftCardIcon}
-              amount="2,240.00"
-              date="11:45am"
-              subText="Other services"
-              title="Gift card trade"
-            />
-            <TransactionWrapper
-              icon={topUpIcon}
-              amount="2,240.00"
-              date="11:45am"
-              subText="Wallet"
-              title="Top up"
-            />
+            {data &&
+              data.length &&
+              data.map((item) => {
+                return <TransactionWrapper key={item.id} transaction={item} />;
+              })}
           </div>
         </div>
       </div>
@@ -103,35 +79,28 @@ function MobileTransaction() {
 
 export default MobileTransaction;
 
-const TransactionWrapper = ({
-  icon,
-  title,
-  subText,
-  amount,
-  date,
-}: {
-  icon: string;
-  title: string;
-  subText: string;
-  amount: string;
-  date: string;
-}) => {
+const TransactionWrapper = ({ transaction }: { transaction: Transaction }) => {
+  const iconType = useGetTransactionIconType(transaction);
   return (
     <div className="bg-[#F6F6F6] mb-2 px-4 py-2 rounded-lg flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <Image src={icon} alt="" />
+        <Image src={iconType} alt="" />
         <div>
           <p className="text-[#171717] font-grotesk-semi-bold text-lg">
-            {title}
+            {TransactionCategory[transaction!.transactionCategory]}
           </p>
           <p className="text-[#747474] text-sm font-grotesk-medium">
-            {subText}
+            {transaction.transactionType}
           </p>
         </div>
       </div>
       <div>
-        <p className="text-[#171717] font-grotesk-bold text-lg">NGN {amount}</p>
-        <p className="text-[#747474] text-sm font-grotesk-medium text-right">{date}</p>
+        <p className="text-[#171717] font-grotesk-bold text-lg">
+          NGN {FormatNumber(transaction.amount)}
+        </p>
+        <p className="text-[#747474] text-sm font-grotesk-medium text-right">
+          {timeDefault(transaction.createdAt)}
+        </p>
       </div>
     </div>
   );

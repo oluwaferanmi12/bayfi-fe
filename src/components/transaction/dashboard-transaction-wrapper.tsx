@@ -1,35 +1,15 @@
 import Image from "next/image";
-import withdrawIcon from "@/assets/svg/green-withdraw-icon.svg";
-import bitcoinIcon from "@/assets/svg/bitcoing1Icon.svg";
-import topUpIcon from "@/assets/svg/topUpIcon.svg";
-import blueGiftCardIcon from "@/assets/svg/blue-giftcard-icon.svg";
-import { useMemo } from "react";
 import { Transaction, TransactionCategory } from "@/types";
 import { FormatNumber } from "@/utils/formatter";
 import { momentLocal } from "@/utils/moment-local";
+import { useGetTransactionIconType } from "@/hooks/custom/others/useGetIconType";
 
 export const DashboardTransactionWrapper = ({
   transaction,
 }: {
   transaction?: Transaction;
 }) => {
-  const iconType = useMemo(() => {
-    if (transaction?.transactionCategory?.toLowerCase()?.includes("bitcoin")) {
-      return bitcoinIcon;
-    } else if (
-      transaction?.transactionCategory?.toLowerCase().includes("gift")
-    ) {
-      return blueGiftCardIcon;
-    } else if (
-      transaction?.transactionCategory.toLowerCase().includes("wallet")
-    ) {
-      return topUpIcon;
-    } else if (
-      transaction?.transactionCategory.toLowerCase().includes("withdraw")
-    ) {
-      return withdrawIcon;
-    }
-  }, [transaction]);
+  const iconType = useGetTransactionIconType(transaction);
   return (
     <div className="hover:bg-[#F6F6F6] mb-2 lg:px-4  lg:py-2 rounded-lg flex items-center justify-between">
       <div className="flex items-center gap-2">

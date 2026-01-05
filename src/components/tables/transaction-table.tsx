@@ -21,11 +21,13 @@ import { momentLocal } from "@/utils/moment-local";
 import { useGetTransaction } from "@/hooks/query";
 import { TableInput } from "../inputs/table-input";
 import { TablePagination } from "../pagination/table-pagination";
+import { FormatNumber } from "@/utils/formatter";
 
 export const TransactionTable = () => {
   const { isPending, data } = useGetTransaction();
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const columnHelper = createColumnHelper<Transaction>();
+  const [selectedTxn, setSelectedTxn] = useState<Transaction>();
   const columns = [
     columnHelper.accessor("createdAt", {
       cell: (info) => (
@@ -67,6 +69,7 @@ export const TransactionTable = () => {
       cell: (info) => (
         <div
           onClick={() => {
+            setSelectedTxn(info.row.original);
             setShowSideDrawer(true);
           }}
           className="flex items-center cursor-pointer gap-2"
@@ -96,12 +99,12 @@ export const TransactionTable = () => {
           <div className="bg-bayfi-black-700 p-4 rounded-lg flex flex-col items-center justify-center gap-1">
             <TableStatus text="Completed" type="Success" />
             <p className="text-bayfi-green-500 text-2xl font-grotesk-medium">
-              NGN555,000.00
+              NGN{FormatNumber(selectedTxn?.amount ?? 0)}
             </p>
             <div className="text-white text-base font-grotesk-regular">
               to{" "}
               <span className="text-white font-grotesk-semi-bold">
-                Akinlade Olaitan
+                {selectedTxn?.receiverName}
               </span>{" "}
               <span className="text-[#BEDD3A] font-grotesk-medium">OPAY</span>
             </div>
@@ -125,11 +128,14 @@ export const TransactionTable = () => {
             />
             <TransactionText leftText="Bank name" rightText="Opay" />
             <TransactionText leftText="Date" rightText="02-14-2025 9:30" />
-            <TransactionText leftText="Reference" rightText="00998709888776" />
+            <TransactionText
+              leftText="Reference"
+              rightText={selectedTxn?.transactionReference ?? ""}
+            />
             <TransactionText
               noBorder
               leftText="Amount"
-              rightText="$200,000.00"
+              rightText={FormatNumber(selectedTxn?.amount ?? 0)}
             />
             <Button
               text="Get receipt"
