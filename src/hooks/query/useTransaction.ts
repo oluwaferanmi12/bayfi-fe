@@ -18,6 +18,7 @@ export const useGetTransactionId = (transactionId: string) => {
       return getTransactionDetail(transactionId);
     },
     queryKey: ["get-transaction-detail"],
+    enabled: !!transactionId,
   });
 };
 

@@ -18,16 +18,18 @@ import { Button } from "@/components/buttons";
 import chatIcon from "@/assets/svg/chat-message-icon.svg";
 import { Transaction } from "@/types";
 import { momentLocal } from "@/utils/moment-local";
-import { useGetTransaction } from "@/hooks/query";
+import { useGetTransaction, useGetTransactionId } from "@/hooks/query";
 import { TableInput } from "../inputs/table-input";
 import { TablePagination } from "../pagination/table-pagination";
 import { FormatNumber } from "@/utils/formatter";
+import { Loader } from "../loader/general-loader";
 
 export const TransactionTable = () => {
-  const { isPending, data } = useGetTransaction();
+  const { data, isPending } = useGetTransaction();
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const columnHelper = createColumnHelper<Transaction>();
   const [selectedTxn, setSelectedTxn] = useState<Transaction>();
+  const transactionDetails = useGetTransactionId(selectedTxn?.id ?? "");
   const columns = [
     columnHelper.accessor("createdAt", {
       cell: (info) => (
@@ -159,51 +161,55 @@ export const TransactionTable = () => {
         <TablePagination />
       </div>
       <div className="mt-4">
-        <table className="w-full">
-          <thead>
-            {table.getHeaderGroups().map((headerGroup, index) => {
-              return (
-                <tr key={index} className="  min-w-full w-full">
-                  {headerGroup.headers.map((header, index, rootData) => {
-                    return (
-                      <th
-                        className={`bg-[#F7F7F7]  p-4 ${
-                          index === 0 && "rounded-tl-2xl"
-                        } ${index === rootData.length - 1 && "rounded-tr-2xl"}`}
-                        key={header.id}
-                      >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                      </th>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr className="border-b border-[#EAECF0]" key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td className="bg-[#FEFEFE33]" key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {isPending ? (
+          <Loader />
+        ) : (
+          <table className="w-full">
+            <thead>
+              {table.getHeaderGroups().map((headerGroup, index) => {
+                return (
+                  <tr key={index} className="  min-w-full w-full">
+                    {headerGroup.headers.map((header, index, rootData) => {
+                      return (
+                        <th
+                          className={`bg-[#F7F7F7]  p-4 ${
+                            index === 0 && "rounded-tl-2xl"
+                          } ${index === rootData.length - 1 && "rounded-tr-2xl"}`}
+                          key={header.id}
+                        >
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </th>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => {
+                return (
+                  <tr className="border-b border-[#EAECF0]" key={row.id}>
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td className="bg-[#FEFEFE33]" key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );

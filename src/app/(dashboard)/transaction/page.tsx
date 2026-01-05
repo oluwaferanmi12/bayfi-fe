@@ -1,10 +1,7 @@
 "use client";
-
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
 import exportIcon from "@/assets/svg/export-icon.svg";
-import { TableInput } from "@/components/inputs/table-input";
-import { TablePagination } from "@/components/pagination/table-pagination";
 import { TransactionTable } from "@/components/tables/transaction-table";
 import { useGetTransaction, useGetTransactionSummary } from "@/hooks/query";
 import { Col, Row } from "antd";
@@ -14,7 +11,6 @@ import Image from "next/image";
 import { FormatNumber } from "@/utils/formatter";
 
 function Transaction() {
-  const { isPending, data } = useGetTransaction();
   const transactionSummary = useGetTransactionSummary();
   return (
     <div className="bg-white rounded-lg p-4">
@@ -80,7 +76,7 @@ function Transaction() {
           </div>
         </Col>
       </Row>
-      {data && <TransactionTable />}
+      <TransactionTable />
     </div>
   );
 }
