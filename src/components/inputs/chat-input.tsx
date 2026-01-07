@@ -167,7 +167,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
               type="button"
               onMouseDown={(e) => e.preventDefault()}
               aria-label="Attach files"
-              className={`absolute top-0 left-2 `}
+              className={`absolute top-0 left-2 cursor-pointer `}
               onClick={() => {
                 if (convertedImageUrls.length === 4) {
                   toast.error(
@@ -178,7 +178,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
             >
               {convertedImageUrls.length < 4 && (
                 <input
-                  className="w-[24px] opacity-0 h-[24px] absolute"
+                  className="w-6 opacity-0 h-6 absolute"
                   onChange={(e) => handleFilesPicked(e.target.files)}
                   accept="image/*"
                   type="file"

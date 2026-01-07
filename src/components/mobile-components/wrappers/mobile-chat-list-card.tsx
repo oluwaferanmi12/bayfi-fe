@@ -4,7 +4,7 @@ import { messageDateFormatter } from "@/utils/formatter";
 import Image from "next/image";
 
 export const MobileChatListCard = ({ chat }: { chat: ChatTransaction }) => {
-  console.log(chat, "Chat value here");
+ 
   return (
     <div className="bg-white cursor-pointer lg:hover:bg-[#F6F6F6] gap-4 p-3 rounded-lg mb-2 flex items-center">
       <span>
@@ -16,7 +16,7 @@ export const MobileChatListCard = ({ chat }: { chat: ChatTransaction }) => {
             {chat.giftCardName}
           </p>
           <span className="border border-[#E9D7FE] p-2 py-1 text-sm font-grotesk-medium rounded-lg text-[#6941C6] ">
-            Giftcard purchase
+            Giftcard sale
           </span>
         </div>
         <div className="mt-1 flex items-center justify-between">
