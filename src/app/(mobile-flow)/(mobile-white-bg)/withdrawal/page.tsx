@@ -10,7 +10,7 @@ import { Text } from "@/components/texts/text";
 import { Select, Spin } from "antd";
 import { BankOption } from "@/interfaces/interfaces";
 import { GReceipt } from "@/components/UIs/general-reciept";
-import { FormatNumber } from "@/utils/formatter";
+import { FormatNumber, numberFormatter, stripCommas } from "@/utils/formatter";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
@@ -64,8 +64,9 @@ const WithdrawalMobile = () => {
           <div className="bg-white rounded-lg p-4 mt-4">
             <GInput
               onChange={(e) => {
-                setAmount(+e.target.value);
+                setAmount(e.target.value);
               }}
+              value={numberFormatter(stripCommas(amount))}
               label="How much do you want to withdraw?"
               error={payloadError.amount}
               placeholder="Enter amount"
@@ -134,7 +135,10 @@ const WithdrawalMobile = () => {
       ) : (
         <div className="flex items-center justify-center flex-col">
           <Text type="header-text-20" value="You are about to send" />
-          <Text type="text-green-24" value={`NGN ${FormatNumber(amount)}`} />
+          <Text
+            type="text-green-24"
+            value={`NGN ${FormatNumber(+stripCommas(amount))}`}
+          />
           <div>
             <Text type="main-text-regular" value="to " />
             <Text

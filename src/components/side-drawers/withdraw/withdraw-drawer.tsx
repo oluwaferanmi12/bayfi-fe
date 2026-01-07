@@ -10,7 +10,7 @@ import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
 import { Select, Spin } from "antd";
-import { FormatNumber } from "@/utils/formatter";
+import { FormatNumber, numberFormatter, stripCommas } from "@/utils/formatter";
 import { useWithdraw } from "@/hooks/custom/withdraw/useWithdraw";
 import { BankOption } from "@/interfaces/interfaces";
 
@@ -71,9 +71,11 @@ export const WithdrawDrawer = ({
               label="How much would you like to withdraw?"
               placeholder="0.00"
               onChange={(e) => {
-                setAmount(+e.target.value);
+                setAmount(e.target.value);
               }}
+              value={numberFormatter(amount)}
               error={payloadError.amount}
+              inputMode="numeric"
             />
             <div className={`mb-4 w-full`}>
               <Text type="input-text" value={"Select bank"} />
@@ -137,7 +139,10 @@ export const WithdrawDrawer = ({
       ) : (
         <div className="flex items-center justify-center flex-col">
           <Text type="header-text-20" value="You are about to send" />
-          <Text type="text-green-24" value={`NGN ${FormatNumber(amount)}`} />
+          <Text
+            type="text-green-24"
+            value={`NGN ${FormatNumber(+stripCommas(amount))}`}
+          />
           <div>
             <Text type="main-text-regular" value="to " />
             <Text

@@ -145,14 +145,14 @@ const WhatWeDo = () => {
               </div>
             </Col>
             <Col lg={12} xs={24}>
-              <div className="lg:min-h-[560px] min-h-[400px] bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl lg:w-4/5 w-full mx-auto mt-8 lg:mt-0">
+              <div className="lg:min-h-140 min-h-100 bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl lg:w-4/5 w-full mx-auto mt-8 lg:mt-0">
                 <div className="flex items-center gap-3">
                   <Image src={headPhonIcon} alt="" />
                   <p className="font-jakarta-semibold text-base lg:text-xl">
                     Our RATES walk in HIGH heels.
                   </p>
                 </div>
-                <div className="my-12 h-[150px] lg:h-[200px]">
+                <div className="my-12 h-37.5 lg:h-50">
                   <Image src={seamlessIntegration} alt="" />
                 </div>
                 <div className="lg:w-4/5 w-full">
@@ -185,14 +185,14 @@ const WhatWeDo = () => {
               </div>
             </Col>
             <Col lg={12} xs={24}>
-              <div className="lg:min-h-[560px] min-h-[400px] bg-[#FFFFFF] border border-[#DEDEDE] py-8 flex flex-col  items-center rounded-xl lg:w-4/5 mx-auto mt-8 lg:mt-0">
+              <div className="lg:min-h-140 min-h-100 bg-[#FFFFFF] border border-[#DEDEDE] py-8 flex flex-col  items-center rounded-xl lg:w-4/5 mx-auto mt-8 lg:mt-0">
                 <div className="flex items-center gap-3">
                   <Image src={headPhonIcon} alt="" />
                   <p className="font-jakarta-semibold text-base lg:text-xl">
                     {`Buy or Sell, you're getting the best deal ever.`}
                   </p>
                 </div>
-                <div className="my-12 h-[150px] lg:h-[200px]">
+                <div className="my-12 h-37.5 lg:h-50">
                   <Image src={googleBing} alt="" />
                 </div>
                 <div className="w-4/5">
@@ -225,14 +225,14 @@ one place`}
               </div>
             </Col>
             <Col lg={12} xs={24}>
-              <div className="lg:min-h-[560px] min-h-[400px] bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl lg:w-4/5 mx-auto mt-8 lg:mt-0">
+              <div className="lg:min-h-140 min-h-100 bg-[#9FE870] py-8 flex flex-col  items-center rounded-xl lg:w-4/5 mx-auto mt-8 lg:mt-0">
                 <div className="flex items-center gap-3">
                   <Image src={headPhonIcon} alt="" />
                   <p className="font-jakarta-semibold lg:text-xl">
                     Seamless Integration
                   </p>
                 </div>
-                <div className="my-12 h-[150px] lg:h-[200px]">
+                <div className="my-12 h-37.5 lg:h-50">
                   <Image src={seamlessIntegration} alt="" />
                 </div>
                 <div className="lg:w-4/5 w-full">

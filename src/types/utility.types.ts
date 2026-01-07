@@ -5,3 +5,4 @@ export interface Country {
 }
 
 export type ImageFolderType = "flag" | "cards" | "chat-transaction" | "profile";
+

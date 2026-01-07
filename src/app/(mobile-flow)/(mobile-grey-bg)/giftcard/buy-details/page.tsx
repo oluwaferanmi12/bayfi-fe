@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { CardInterface, CountryResponseInterface } from "@/types";
 import { InitiateCardTxn } from "@/types";
 import placeholderImage from "@/assets/svg/placeholder.svg";
+import { numberFormatter, stripCommas } from "@/utils/formatter";
 
 function BuyCardDetails() {
   const [selectedCard, setSelectedCard] = useState<CardInterface | null>(null);
@@ -97,11 +98,11 @@ function BuyCardDetails() {
           </div>
           <div className="mt-4">
             <GInput
-              inputVal={String(giftCardAmount)}
+              inputVal={numberFormatter(giftCardAmount.toString())}
               placeholder="0.00"
               label="Enter amount"
               setInput={(e) => {
-                setGiftCardAmount(+e);
+                setGiftCardAmount(+stripCommas(e));
               }}
               inputMode="numeric"
             />
@@ -148,11 +149,11 @@ function BuyCardDetails() {
         </div>
         <div className="mt-4">
           <GInput
-            inputVal={String(giftCardAmount)}
+            inputVal={numberFormatter(giftCardAmount.toString())}
             placeholder="0.00"
             label="Enter amount"
             setInput={(e) => {
-              setGiftCardAmount(+e);
+              setGiftCardAmount(+stripCommas(e));
             }}
           />
         </div>

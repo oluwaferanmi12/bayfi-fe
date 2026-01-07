@@ -12,12 +12,13 @@ import {
   useGetBeneficiary,
 } from "@/hooks/query/usePayment";
 import { BankOption } from "@/interfaces/interfaces";
+import { stripCommas } from "@/utils/formatter";
 
 export const useWithdraw = () => {
   const queryClient = useQueryClient();
   const [showWithdrawOtp, setShowWithdrawOtp] = useState(false);
   const [pin, setPin] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const [selectedBank, setSelectedBank] = useState<BankOption | null>(null);
   const [accountNumber, setAccountNumber] = useState("");
   const [searchedValue, setSearchedValue] = useState("");
@@ -38,6 +39,7 @@ export const useWithdraw = () => {
     setDisburseResponse(data);
     setShowReciept(true);
     queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
+    queryClient.invalidateQueries({ queryKey: ["user-transaction"] });
   });
   const activeKey = uuidv4();
   const { data: bankAccount, isLoading: accountLookupLoading } =
@@ -50,10 +52,16 @@ export const useWithdraw = () => {
 
   const handleValidate = () => {
     let validated = true;
-    if (amount <= 0) {
+    if (+stripCommas(amount) <= 0) {
       setPayloadError((prev) => ({
         ...prev,
         amount: "Invalid amount entered",
+      }));
+      validated = false;
+    } else if (+stripCommas(amount) < 500) {
+      setPayloadError((prev) => ({
+        ...prev,
+        amount: "Only an amount greater than 500 can be withdrawn",
       }));
       validated = false;
     } else {
@@ -109,7 +117,7 @@ export const useWithdraw = () => {
     // handleValidation first here
     if (!handleValidate()) {
       return;
-    }  
+    }
     if (profile?.isPinCreated) {
       setShowWithdrawOtp(true);
     } else {
@@ -122,7 +130,7 @@ export const useWithdraw = () => {
     disburse.mutate({
       accountName: bankAccount?.accountName ?? "",
       accountNumber,
-      amount,
+      amount: +stripCommas(amount),
       bankCode: bankAccount?.bankCode ?? "",
       key: activeKey,
       pin,

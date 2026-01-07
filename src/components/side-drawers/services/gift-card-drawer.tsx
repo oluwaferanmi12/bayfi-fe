@@ -22,6 +22,7 @@ import {
 import { Spin } from "antd";
 import { toast } from "sonner";
 import { Loader } from "@/components/loader/general-loader";
+import { numberFormatter, stripCommas } from "@/utils/formatter";
 
 export const GiftCardDrawer = ({
   handleClose,
@@ -211,11 +212,11 @@ export const GiftCardDrawer = ({
             </div>
             <div className="mt-4">
               <GInput
-                inputVal={String(giftCardAmount)}
+                inputVal={numberFormatter(String(giftCardAmount))}
                 placeholder="0.00"
                 label="Enter amount"
                 setInput={(e) => {
-                  setGiftCardAmount(+e);
+                  setGiftCardAmount(+stripCommas(e));
                 }}
               />
             </div>
