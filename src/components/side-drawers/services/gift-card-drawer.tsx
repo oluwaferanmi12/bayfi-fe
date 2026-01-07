@@ -6,7 +6,6 @@ import { SearchInput } from "@/components/inputs/search-input";
 import {
   useGetCardCountries,
   useGetCards,
-  useInitiateCardTxn,
 } from "@/hooks/query";
 import { ChatContainer } from "@/components/chat/chat-container";
 import { Button } from "@/components/buttons";
@@ -15,7 +14,6 @@ import Image from "next/image";
 import bitCoinGroup from "@/assets/svg/bitCoinGroup.svg";
 import sellCryptoIcon from "@/assets/svg/sellCryptoIcon.svg";
 import { CountryWrapper } from "@/components/wrappers/country-wrapper";
-import usIcon from "@/assets/svg/us-icon.svg";
 import { FullCardDetails } from "@/components/wrappers/full-card-details";
 import { GInput } from "@/components/inputs/GInput";
 import { SideDrawerBreadCrumbProps } from "@/interfaces/interfaces-ui";

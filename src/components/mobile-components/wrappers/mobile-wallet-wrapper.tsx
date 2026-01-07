@@ -1,8 +1,4 @@
-import eyeIcon from "@/assets/svg/eyeIcon.svg";
 import Image from "next/image";
-import tradeIcon from "@/assets/svg/mobileTradeIcon.svg";
-import withdrawIcon from "@/assets/svg/mobileWithdrawIcon.svg";
-import depositIcon from "@/assets/svg/mobileDepositIcon.svg";
 import { Text } from "@/components/texts/text";
 import { useState } from "react";
 import bitCoinGroup from "@/assets/svg/bitCoinGroup.svg";
@@ -21,6 +17,7 @@ import mobileBgPattern from "@/assets/svg/mobile-bg-pattern.svg";
 import giftCardActionIcon from "@/assets/svg/trade-giftcard-dashboard.svg";
 import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
 import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
+import { GiftcardBottomDrawer } from "@/components/side-drawers/services/giftcard-bottom-drawer";
 
 export const MobileWalletWrapper = ({
   walletDetails,
@@ -30,7 +27,7 @@ export const MobileWalletWrapper = ({
   const queryClient = useQueryClient();
   const [showTradeModal, setShowTradeModal] = useState(false);
   const [showDepositModal, setShowDepositModal] = useState(false);
-  const [showWithdrawModal, setShowWithdrawModal] = useState(false);
+  const [showGiftcardModal, setShowGiftcardModal] = useState(false);
   const mutateWalletStatus = useToggleWalletStatus((data) => {
     queryClient.invalidateQueries({ queryKey: ["get-profile"] });
     queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
@@ -39,6 +36,12 @@ export const MobileWalletWrapper = ({
   const { profile } = useProfileStore();
   return (
     <>
+      <GiftcardBottomDrawer
+        open={showGiftcardModal}
+        handleClose={() => {
+          setShowGiftcardModal(false);
+        }}
+      />
       <BottomDrawer
         open={showDepositModal}
         onClose={() => {
@@ -160,7 +163,7 @@ export const MobileWalletWrapper = ({
       <div className="my-4 flex items-center gap-3">
         <button
           onClick={() => {
-            setShowTradeModal(true);
+            setShowGiftcardModal(true);
           }}
           className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4  flex flex-col items-center justify-center"
         >
@@ -198,69 +201,6 @@ export const MobileWalletWrapper = ({
           </p>
         </button>
       </div>
-
-      {/* <div className="bg-white p-4 my-2 rounded-2xl flex flex-col justify-center items-center">
-        <button
-          onClick={() => {
-            mutateWalletStatus.mutate(!profile?.isBalanceVisible);
-          }}
-          className="flex items-center gap-2 "
-        >
-          <Image
-            width={20}
-            height={20}
-            src={profile?.isBalanceVisible ? eyeIcon : eyeSlash}
-            alt=""
-          />
-          <p className="text-bayfi-grey-900 font-grotesk-medium text-sm">
-            Wallet Balance
-          </p>
-        </button>
-        {profile && (
-          <p className="text-2xl font-grotesk-bold py-3 border-b w-full text-center border-[#F0F0F0]">
-            {"NGN"}{" "}
-            {profile.isBalanceVisible
-              ? FormatNumber(walletDetails?.walletBalance ?? 0)
-              : "****"}
-          </p>
-        )}
-
-        <div className="py-3 flex px-6 items-center justify-between w-full">
-          <div
-            onClick={() => {
-              setShowTradeModal(true);
-            }}
-            className="flex flex-col cursor-pointer items-center justify-center gap-2"
-          >
-            <Image src={tradeIcon} alt="" />
-            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
-              Trade
-            </p>
-          </div>
-          <div
-            onClick={() => {
-              setShowDepositModal(true);
-            }}
-            className="flex cursor-pointer flex-col items-center justify-center gap-2"
-          >
-            <Image src={depositIcon} alt="" />
-            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
-              Deposit
-            </p>
-          </div>
-          <div
-            onClick={() => {
-              router.push("withdrawal");
-            }}
-            className="flex flex-col items-center justify-center gap-2"
-          >
-            <Image src={withdrawIcon} alt="" />
-            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
-              Withdraw
-            </p>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };

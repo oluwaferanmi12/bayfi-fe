@@ -42,6 +42,7 @@ import { WithdrawDrawer } from "@/components/side-drawers/withdraw/withdraw-draw
 import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/loader/general-loader";
+import { GiftCardDrawer } from "@/components/side-drawers/services/gift-card-drawer";
 
 function Dashboard() {
   const queryClient = useQueryClient();
@@ -54,6 +55,7 @@ function Dashboard() {
   const [showDepositQR, setShowDepositQR] = useState(false);
   const [showBuyCrypto, setShowBuyCrypto] = useState(false);
   const [showSelectWallet, setShowSelectWallet] = useState(false);
+  const [showGiftcardDrawer, setShowGiftcardDrawer] = useState(false);
   const { data: walletDetails } = useGetWallet();
   const { data: transactions, isPending: transactionLoading } =
     useGetTransaction();
@@ -72,6 +74,12 @@ function Dashboard() {
           close={() => {
             setShowWithdrawModal(false);
           }}
+        />
+        <GiftCardDrawer
+          handleClose={() => {
+            setShowGiftcardDrawer(false);
+          }}
+          showGiftCard={showGiftcardDrawer}
         />
         <SideDrawer
           onClose={() => {
@@ -324,7 +332,7 @@ function Dashboard() {
                 <div className="flex items-center gap-2 justify-center">
                   <button
                     onClick={() => {
-                      setShowCryptoModal(true);
+                      setShowGiftcardDrawer(true);
                     }}
                     className="flex items-center border cursor-pointer border-[#E9EBF8] p-1 rounded-xl pr-4"
                   >
@@ -362,7 +370,13 @@ function Dashboard() {
             <div className="mt-6">
               <Text type="header-text-20" value="Other services" />
               <div className="mt-4 flex gap-6">
-                <DashboardServiceWrapper icon={bulkCard} text="Gift card" />
+                <DashboardServiceWrapper
+                  clickAction={() => {
+                    setShowGiftcardDrawer(true);
+                  }}
+                  icon={bulkCard}
+                  text="Gift card"
+                />
                 <DashboardServiceWrapper icon={bulkCall} text="Buy airtime" />
                 <DashboardServiceWrapper icon={bulkGlobal} text="Betting" />
                 <DashboardServiceWrapper icon={wifiSquare} text="Mobile data" />
@@ -422,13 +436,18 @@ export default Dashboard;
 const DashboardServiceWrapper = ({
   icon,
   text,
+  clickAction,
 }: {
   icon: string;
   text: string;
+  clickAction?: () => void;
 }) => {
   return (
     <>
-      <div className="flex justify-center bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full">
+      <div
+        onClick={clickAction}
+        className="flex justify-center bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full"
+      >
         <Image src={icon} alt="" />
         <Text type={"text-plain-dark-18"} value={text} />
       </div>

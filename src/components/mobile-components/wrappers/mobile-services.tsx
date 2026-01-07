@@ -6,11 +6,20 @@ import otherIcon from "@/assets/svg/othersMobileIcon.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { GiftcardBottomDrawer } from "@/components/side-drawers/services/giftcard-bottom-drawer";
+import { useState } from "react";
 
 export const MobileDashboardService = () => {
   const router = useRouter();
+  const [showGiftcardDrawer, setShowGiftcardDrawer] = useState(false);
   return (
     <>
+      <GiftcardBottomDrawer
+        handleClose={() => {
+          setShowGiftcardDrawer(false);
+        }}
+        open={showGiftcardDrawer}
+      />
       <div className="my-3">
         <p className="text-bayfi-black-900 text-lg font-grotesk-semi-bold">
           Other services
