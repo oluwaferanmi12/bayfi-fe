@@ -88,8 +88,8 @@ export const useWithdraw = () => {
         accountNumber: "",
       }));
     }
-
-    if (!bankAccount?.accountName) {
+    console.log(selectedBank);
+    if (!bankAccount?.accountName && !selectedBank?.value) {
       setPayloadError((prev) => ({
         ...prev,
         bankName: "Kindly select a bank",
