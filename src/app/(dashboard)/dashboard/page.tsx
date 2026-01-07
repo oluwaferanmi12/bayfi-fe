@@ -446,7 +446,7 @@ const DashboardServiceWrapper = ({
     <>
       <div
         onClick={clickAction}
-        className="flex justify-center bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full"
+        className="flex justify-center cursor-pointer bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full"
       >
         <Image src={icon} alt="" />
         <Text type={"text-plain-dark-18"} value={text} />
