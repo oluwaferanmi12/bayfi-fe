@@ -4,6 +4,7 @@ import { UserResponseContainer } from "./user/user-response-container";
 import { SupportChatContainer } from "./support/support-chat-container";
 import { Fragment, useEffect, useRef } from "react";
 import { ChatStatus } from "./status/chat-status";
+import { Loader } from "../loader/general-loader";
 
 export const MessageWrapper = ({
   messages,
@@ -29,7 +30,7 @@ export const MessageWrapper = ({
   return (
     <div>
       {messageLoading ? (
-        <p>Loading</p>
+        <Loader />
       ) : (
         <div>
           {messages.map((item, index) => {
