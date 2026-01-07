@@ -4,6 +4,7 @@ import { useChatMessage } from "@/hooks/custom/chat/useMessage";
 import { InitiateCardTxn, Message } from "@/types";
 import { useEffect, useRef, useState } from "react";
 import { MessageWrapper } from "./message-wrapper";
+import { Loader } from "../loader/general-loader";
 
 export const ChatContainer = ({
   chatType,
@@ -38,7 +39,7 @@ export const ChatContainer = ({
       {/* scrollable messages */}
       <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar">
         {messageLoading ? (
-          <p>Loading</p>
+          <Loader />
         ) : (
           <>
             <MessageWrapper

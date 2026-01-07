@@ -164,11 +164,11 @@ const Register = () => {
             </div>
             <div className="bg-white  border border-bayfi-green-50 rounded-lg p-8 ">
               <div className="flex justify-center flex-col items-center">
-                <Text value="Welcome Back" type="header-32" />
+                <Text value="Join us" type="header-32" />
                 <div className="mt-2">
                   <Text
                     type="header-subtext"
-                    value="Login to continue your journey"
+                    value="Register to enjoy seamless trading and best rates"
                   />
                 </div>
               </div>

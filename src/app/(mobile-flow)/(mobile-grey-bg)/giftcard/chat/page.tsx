@@ -23,7 +23,6 @@ function GiftCardChat() {
       }
     }
   }, []);
-  console.log("init texn", initTxn);
   return (
     <>
       <PageTitle title="Giftcards/Sell" />
