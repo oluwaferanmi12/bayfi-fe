@@ -3,10 +3,7 @@ import { SideDrawer } from "../side-drawer";
 import { GiftCardWrapper } from "@/components/wrappers/gift-card-wrapper";
 import { useEffect, useState } from "react";
 import { SearchInput } from "@/components/inputs/search-input";
-import {
-  useGetCardCountries,
-  useGetCards,
-} from "@/hooks/query";
+import { useGetCardCountries, useGetCards } from "@/hooks/query";
 import { ChatContainer } from "@/components/chat/chat-container";
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
@@ -24,6 +21,7 @@ import {
 } from "@/types";
 import { Spin } from "antd";
 import { toast } from "sonner";
+import { Loader } from "@/components/loader/general-loader";
 
 export const GiftCardDrawer = ({
   handleClose,
@@ -105,7 +103,7 @@ export const GiftCardDrawer = ({
             </div>
 
             {isPending ? (
-              <Spin />
+              <Loader />
             ) : cards ? (
               cards
                 .filter((item) =>
@@ -155,7 +153,10 @@ export const GiftCardDrawer = ({
             <div className="my-2">
               <SearchInput />
             </div>
-            {countryResponses.data &&
+            {countryResponses.isPending ? (
+              <Loader />
+            ) : (
+              countryResponses.data &&
               countryResponses.data.map((item: any) => {
                 return (
                   <div
@@ -180,7 +181,8 @@ export const GiftCardDrawer = ({
                     />
                   </div>
                 );
-              })}
+              })
+            )}
           </>
         ) : showGiftCardAmount ? (
           <div>
