@@ -12,6 +12,8 @@ import { useGetCardCountries, useGetCards } from "@/hooks/query";
 import { Spin } from "antd";
 import { CardInterface, CountryResponseInterface } from "@/types";
 import placeholderImage from "@/assets/svg/placeholder.svg";
+import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
+import { Loader } from "@/components/loader/general-loader";
 
 function GiftCard() {
   const [showCountryDrawer, setShowCountryDrawer] = useState(false);
@@ -41,28 +43,32 @@ function GiftCard() {
         <div className="mb-2">
           <SearchInput bgGrey />
         </div>
-        {countryResponses.isLoading
-          ? "Loading"
-          : countryResponses.data?.map((item) => {
-              return (
-                <CountryWrapper
-                  key={item.id}
-                  action={() => {
-                    router.push("/giftcard/buy-details");
-                    setCountrySelected(item);
-                  }}
-                  flag={item.logo_url ?? placeholderImage}
-                  countryName={item.name}
-                />
-              );
-            })}
+        {countryResponses.isLoading ? (
+          <Loader />
+        ) : countryResponses.data?.length ? (
+          countryResponses.data?.map((item) => {
+            return (
+              <CountryWrapper
+                key={item.id}
+                action={() => {
+                  router.push("/giftcard/buy-details");
+                  setCountrySelected(item);
+                }}
+                flag={item.logo_url ?? placeholderImage}
+                countryName={item.name}
+              />
+            );
+          })
+        ) : (
+          <GenericEmptyState />
+        )}
       </BottomDrawer>
       <PageTitle title="Giftcards" />
       <SearchInput value={searchValue} onChange={setSearchValue} bgWhite />
       <FlashSalesCard />
       <div className="mt-2">
         {isPending ? (
-          <Spin />
+          <Loader />
         ) : cards ? (
           cards
             .filter((item) =>

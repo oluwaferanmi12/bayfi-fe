@@ -16,16 +16,27 @@ import { SideDrawer } from "@/components/side-drawers/side-drawer";
 import bitcoinSmallIcon from "@/assets/svg/bitcoin-small-icon.svg";
 import { Button } from "@/components/buttons";
 import chatIcon from "@/assets/svg/chat-message-icon.svg";
-import { Transaction } from "@/types";
+import { Transaction, TransactionCategory } from "@/types";
 import { momentLocal } from "@/utils/moment-local";
 import { useGetTransaction, useGetTransactionId } from "@/hooks/query";
 import { TableInput } from "../inputs/table-input";
 import { TablePagination } from "../pagination/table-pagination";
 import { FormatNumber } from "@/utils/formatter";
 import { Loader } from "../loader/general-loader";
+import { GenericEmptyState } from "../UIs/empty-state/generic-empty-state";
+import { useTransactionTableHook } from "@/hooks/custom/transaction/useTransactionTableHook";
+import { useGetTransactionIconType } from "@/hooks/custom/others/useGetIconType";
 
 export const TransactionTable = () => {
-  const { data, isPending } = useGetTransaction();
+  const {
+    data,
+    isPending,
+    handleNext,
+    handlePrevious,
+    handleRefetch,
+    handleSearch,
+    searchPayload,
+  } = useTransactionTableHook();
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const columnHelper = createColumnHelper<Transaction>();
   const [selectedTxn, setSelectedTxn] = useState<Transaction>();
@@ -45,9 +56,8 @@ export const TransactionTable = () => {
     }),
     columnHelper.accessor("transactionCategory", {
       cell: (info) => (
-        <div className="flex items-center gap-2 justify-center">
-          <Image src={walletTopUpIcon} alt="" />{" "}
-          <TableText text={info.getValue()} />{" "}
+        <div className="flex justify-center">
+          <ResolveCategory transaction={info.row.original} />
         </div>
       ),
       header: (info) => <TableText text="Channel" headerType />,
@@ -84,10 +94,11 @@ export const TransactionTable = () => {
   ];
 
   const table = useReactTable({
-    data: data || [],
+    data: data?.data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
   return (
     <>
       <SideDrawer
@@ -157,13 +168,19 @@ export const TransactionTable = () => {
         </div>
       </SideDrawer>
       <div className="py-3 flex items-center justify-between">
-        <TableInput placeholder="Search" />
-        <TablePagination />
+        <TableInput handleSearch={handleSearch} placeholder="Search" />
+        <TablePagination
+          handleRefetchData={handleRefetch}
+          handleNext={handleNext}
+          handlePrevious={handlePrevious}
+          data={data?.metadata}
+          pageSize={searchPayload.pageSize}
+        />
       </div>
       <div className="mt-4">
         {isPending ? (
           <Loader />
-        ) : (
+        ) : data?.data.length ? (
           <table className="w-full">
             <thead>
               {table.getHeaderGroups().map((headerGroup, index) => {
@@ -209,6 +226,8 @@ export const TransactionTable = () => {
               })}
             </tbody>
           </table>
+        ) : (
+          <GenericEmptyState />
         )}
       </div>
     </>
@@ -236,6 +255,16 @@ const TransactionText = ({
 
         <p className="text-bayfi-black-400">{rightText}</p>
       </div>
+    </div>
+  );
+};
+
+const ResolveCategory = ({ transaction }: { transaction: Transaction }) => {
+  const resolveIconType = useGetTransactionIconType(transaction);
+  return (
+    <div className="flex items-center gap-2 w-50 ">
+      <Image src={resolveIconType} alt="" />
+      <p>{TransactionCategory[transaction!.transactionCategory]}</p>
     </div>
   );
 };

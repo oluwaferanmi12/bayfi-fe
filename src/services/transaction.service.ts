@@ -1,9 +1,15 @@
 import { axiosInstance } from "@/axios";
-import { Transaction, TransactionSummary } from "@/types";
+import { PaginationReturn } from "@/interfaces/interfaces";
+import { Transaction, TransactionMeta, TransactionSummary } from "@/types";
 
-export const transactions = async (): Promise<Transaction[]> => {
-  const { data } = await axiosInstance.get(`/transactions`);
-  return data.data;
+export const transactions = async (
+  meta: TransactionMeta
+): Promise<{ data: Transaction[]; metadata: PaginationReturn }> => {
+  const { data } = await axiosInstance.get(
+    `/transactions?page=${meta.page}&pageSize=${meta.pageSize}&search=${meta.search}`
+  );
+  // return data.data;
+  return { data: data.data, metadata: data.metadata };
 };
 
 export const getTransactionDetail = async (transactionId: string) => {

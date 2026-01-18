@@ -43,6 +43,7 @@ import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper"
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/loader/general-loader";
 import { GiftCardDrawer } from "@/components/side-drawers/services/gift-card-drawer";
+import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
 
 function Dashboard() {
   const queryClient = useQueryClient();
@@ -58,7 +59,13 @@ function Dashboard() {
   const [showGiftcardDrawer, setShowGiftcardDrawer] = useState(false);
   const { data: walletDetails } = useGetWallet();
   const { data: transactions, isPending: transactionLoading } =
-    useGetTransaction();
+    useGetTransaction({
+      category: "",
+      page: 1,
+      pageSize: 5,
+      search: "",
+      status: "",
+    });
   const mutateWalletStatus = useToggleWalletStatus((data) => {
     queryClient.invalidateQueries({ queryKey: ["get-profile"] });
     queryClient.invalidateQueries({ queryKey: ["get-wallet"] });
@@ -405,10 +412,10 @@ function Dashboard() {
             <div className="bg-white min-h-[80vh] rounded-3xl p-4 py-8">
               {transactionLoading ? (
                 <Loader />
-              ) : transactions && transactions.length ? (
+              ) : transactions?.data && transactions.data.length ? (
                 <>
                   <Text type="main-text-regular" value="Transaction history" />
-                  {transactions.map((item) => {
+                  {transactions.data.map((item) => {
                     return (
                       <div key={item.id} className="mt-3 rounded-lg ">
                         <DashboardTransactionWrapper transaction={item} />
@@ -417,14 +424,14 @@ function Dashboard() {
                   })}
                 </>
               ) : (
-                <p className="text-center my-4">No transactions found</p>
+                <GenericEmptyState />
               )}
             </div>
           </Col>
         </Row>
       </div>
       <DashboardMobile
-        transactions={transactions}
+        transactions={transactions?.data}
         walletDetails={walletDetails}
       />
     </>

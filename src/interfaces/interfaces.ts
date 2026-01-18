@@ -80,3 +80,22 @@ export interface UIProfile {
   verified: boolean;
   avatar: string;
 }
+
+export interface PaginationReturn {
+  currentPage: number;
+  pageSize: number;
+  totalRecordCount: number;
+  totalPages: number;
+  currentCount: number;
+  fromRecord: number;
+  toRecord: number;
+  hasNext: boolean;
+  hasPrevious: boolean;
+  isFirst: boolean;
+  isLast: boolean;
+  empty: boolean;
+  nextPage: number;
+  sort: string;
+  lastShowing: number;
+}
+

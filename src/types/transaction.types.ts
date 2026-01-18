@@ -39,3 +39,12 @@ export interface TransactionSummary {
   inflow: InnerTransactionSummary;
   outflow: InnerTransactionSummary;
 }
+
+
+export interface TransactionMeta {
+  page: number;
+  pageSize: number;
+  category: string;
+  status: string;
+  search: string;
+}

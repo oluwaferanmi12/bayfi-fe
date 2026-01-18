@@ -21,6 +21,14 @@ import { SetPinModal } from "@/components/modals/pin/set-pin-modal";
 import { useGetWallet } from "@/hooks/query";
 import { useWalletStore } from "@/store/walletStore";
 import { usePinStore } from "@/store/usePinStore";
+import homeInactive from "@/assets/svg/homeIconInactive.svg";
+import transactionIcon from "@/assets/svg/transaction-nav-active.svg";
+import transactionInactiveIcon from "@/assets/svg/transaction-nav-inactive.svg";
+import serviceIcon from "@/assets/svg/service-nav-icon.svg";
+import serviceInactiveIcon from "@/assets/svg/service-nav-inactive.svg";
+import supportActiveIcon from "@/assets/svg/support-nav-icon.svg";
+import supportInactiveIcon from "@/assets/svg/support-nav-inactive.svg";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -47,21 +55,25 @@ export default function RootLayout({
       navTitle: "Dashboard",
       navIcon: homeIcon,
       url: "/dashboard",
+      navInactive: homeInactive,
     },
     {
       navTitle: "Services",
-      navIcon: homeIcon,
+      navIcon: serviceIcon,
       url: "/services",
+      navInactive: serviceInactiveIcon,
     },
     {
       navTitle: "Transactions",
-      navIcon: homeIcon,
+      navIcon: transactionIcon,
       url: "/transaction",
+      navInactive: transactionInactiveIcon,
     },
     {
       navTitle: "Support",
-      navIcon: homeIcon,
+      navIcon: supportActiveIcon,
       url: "/support",
+      navInactive: supportInactiveIcon,
     },
   ];
 
@@ -79,8 +91,6 @@ export default function RootLayout({
       setWallet(walletDetails);
     }
   }, [walletDetails, walletDetailsLoading]);
-
- 
 
   return (
     <>
@@ -138,7 +148,12 @@ export default function RootLayout({
                       <span
                         className={` ${pathname === nav.url ? "px-4 py-2 bg-black rounded-lg" : ""} flex items-center gap-2`}
                       >
-                        <Image src={nav.navIcon} alt="" />
+                        <Image
+                          src={
+                            pathname === nav.url ? nav.navIcon : nav.navInactive
+                          }
+                          alt=""
+                        />
                         <Text
                           value={nav.navTitle}
                           type={

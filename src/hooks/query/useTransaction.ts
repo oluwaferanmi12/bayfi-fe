@@ -3,12 +3,13 @@ import {
   transactions,
   transactionSummary,
 } from "@/services";
+import { TransactionMeta } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetTransaction = () => {
+export const useGetTransaction = (payload: TransactionMeta) => {
   return useQuery({
-    queryFn: transactions,
-    queryKey: ["user-transaction"],
+    queryFn: () => transactions(payload),
+    queryKey: ["user-transaction", payload],
   });
 };
 

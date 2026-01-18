@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-  ],
+, "src/hooks/custom/transaction/useTransactionTableHook.tsx"  ],
   "exclude": [
     "node_modules"
   ],
