@@ -65,8 +65,13 @@ function Support() {
               </div>
             </div>
             <div className="py-3 flex items-center justify-between">
-              <TableInput placeholder="Search" />
-              <TablePagination />
+              <TableInput handleSearch={() => {}} placeholder="Search" />
+              <TablePagination
+                handleNext={() => {}}
+                handlePrevious={() => {}}
+                handleRefetchData={() => {}}
+                pageSize={9}
+              />
             </div>
             <div>
               <SupportTable />

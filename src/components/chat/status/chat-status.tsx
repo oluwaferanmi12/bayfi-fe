@@ -16,7 +16,7 @@ export const ChatStatus = ({
           className={`px-3 py-1 font-grotesk-semi-bold text-[#292D32] text-base my-2 rounded-full  bg-[#FFD886] `}
         >
           <p>
-            Chat locked Admin will respond in{" "}
+            Chat locked, Admin will respond in{" "}
             <span className="font-grotesk-bold">
               <CountDown duration={chatDetails?.lockedUntil ?? ""} /> mins
             </span>{" "}
