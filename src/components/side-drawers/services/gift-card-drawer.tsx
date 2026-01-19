@@ -244,7 +244,7 @@ export const GiftCardDrawer = ({
             />
           </div>
         ) : showGiftcardChat && initiateCardTxn ? (
-          <div className="relative border border-[red] ">
+          <div className="relative ">
             <ChatContainer bgWhite={false} initTxn={initiateCardTxn} />
           </div>
         ) : (

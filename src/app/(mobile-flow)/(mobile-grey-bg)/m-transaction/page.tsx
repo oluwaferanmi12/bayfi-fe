@@ -13,7 +13,13 @@ import { useGetTransactionIconType } from "@/hooks/custom/others/useGetIconType"
 
 function MobileTransaction() {
   const transactionSummary = useGetTransactionSummary();
-  const { isPending, data } = useGetTransaction();
+  const { isPending, data } = useGetTransaction({
+    category: "",
+    page: 1,
+    pageSize: 30,
+    search: "",
+    status: "",
+  });
   return (
     <>
       <MobileNav />
@@ -65,9 +71,9 @@ function MobileTransaction() {
         <div className="mt-3">
           <p className="font-grotesk-medium">List of transactions</p>
           <div className="mt-1">
-            {data &&
-              data.length &&
-              data.map((item) => {
+            {data?.data &&
+              data.data.length &&
+              data.data.map((item) => {
                 return <TransactionWrapper key={item.id} transaction={item} />;
               })}
           </div>

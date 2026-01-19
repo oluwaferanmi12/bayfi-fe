@@ -35,6 +35,11 @@ export const useChatMessage = (
     setMessages((prev) => [...prev, m]);
   };
 
+  const handleGiftcardStatus = () => {
+    console.log("Got triggered right here and for the testing!!!!");
+    queryClient.invalidateQueries({ queryKey: ["one-chat-detail", chatId] });
+  };
+
   const handleLockTriggered = (res: any) => {
     queryClient.invalidateQueries({ queryKey: ["one-chat-detail"] });
   };
@@ -54,6 +59,7 @@ export const useChatMessage = (
     if (!isConnected || !client?.connected) return;
     subscribe(`/user/giftcard/messages`, handleMessage);
     subscribe(`/topic/admin/locks`, handleLockTriggered);
+    subscribe(`/user/giftcard/status`, handleGiftcardStatus);
     if (initTxn) {
       client?.publish({
         destination: "/app/chat.sendMessage",
@@ -79,6 +85,6 @@ export const useChatMessage = (
     handleSendMessage,
     chatDetail,
     chatDetailLoading,
-    showInput
+    showInput,
   };
 };
