@@ -36,8 +36,8 @@ export const useChatMessage = (
   };
 
   const handleGiftcardStatus = () => {
-    console.log("Got triggered right here and for the testing!!!!");
     queryClient.invalidateQueries({ queryKey: ["one-chat-detail", chatId] });
+    queryClient.invalidateQueries({ queryKey: ["user-transaction"] });
   };
 
   const handleLockTriggered = (res: any) => {
