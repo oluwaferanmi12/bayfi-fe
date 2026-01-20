@@ -4,7 +4,6 @@ import { messageDateFormatter } from "@/utils/formatter";
 import Image from "next/image";
 
 export const MobileChatListCard = ({ chat }: { chat: ChatTransaction }) => {
- 
   return (
     <div className="bg-white cursor-pointer lg:hover:bg-[#F6F6F6] gap-4 p-3 rounded-lg mb-2 flex items-center">
       <span>
@@ -21,7 +20,7 @@ export const MobileChatListCard = ({ chat }: { chat: ChatTransaction }) => {
         </div>
         <div className="mt-1 flex items-center justify-between">
           <p
-            className={`${chat.status === "OPEN" ? "text-[#FF9500]" : "text-[#34C759]"}  text-base font-grotesk-semi-bold`}
+            className={`${chat.status === "EXPIRED" ? "text-[#FF9500]" : chat.status === "FAILED" ? "text-[#F00500]" : chat.status === "COMPLETED" ? "text-[#34C759]" : chat.status === "PROCESSING" ? "text-bayfi-black-300" : ""}  text-base font-grotesk-semi-bold`}
           >
             {chat.status}
           </p>

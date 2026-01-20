@@ -45,5 +45,5 @@ export interface ChatTransaction {
   amount: number;
   messageInitiator: MessageType;
   messageInitiatorDescription: string;
-  status: "OPEN" | "COMPLETED";
+  status: "OPEN" | "COMPLETED" | "EXPIRED" | "PROCESSING" | "FAILED";
 }
