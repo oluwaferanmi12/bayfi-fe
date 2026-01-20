@@ -137,7 +137,7 @@ export default function RootLayout({
             <Col xs={22}>
               <div className="flex justify-between items-center">
                 <Image
-                  onClick={() => router.push("/")}
+                  onClick={() => router.push("/dashboard")}
                   className="cursor-pointer"
                   src={logo}
                   alt=""
