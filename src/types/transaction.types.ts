@@ -40,11 +40,35 @@ export interface TransactionSummary {
   outflow: InnerTransactionSummary;
 }
 
-
 export interface TransactionMeta {
   page: number;
   pageSize: number;
   category: string;
   status: string;
   search: string;
+}
+
+export interface GiftCardTransactionLog {
+  adminView: boolean;
+  chatTransactionId: number;
+  createdAt: string;
+  id: number;
+  lineTotalToUser: number;
+  quantity: number;
+  requestTotalToUser: number;
+  transactionReference: string;
+  unitAmountToUser: number;
+}
+
+export interface WalletTransactionLog {
+  beneficiaryAccountName: string;
+  beneficiaryAccountNumber: string;
+  beneficiaryBankName: string;
+  currency: string;
+  reference: string;
+  responseMessage: string;
+  sessionId: string;
+  transactionEndDate: string;
+  transactionStartDate: string;
+  transactionValueAmount: number;
 }

@@ -1,6 +1,5 @@
 "use client";
 import { TableText } from "@/components/tables/text/table-text";
-import { TransactionInterface } from "@/interfaces/interfaces";
 import {
   createColumnHelper,
   flexRender,
@@ -9,23 +8,18 @@ import {
 } from "@tanstack/react-table";
 import eyeIcon from "@/assets/svg/table-eye-icon.svg";
 import Image from "next/image";
-import walletTopUpIcon from "@/assets/svg/wallet-icon.svg";
 import { TableStatus } from "@/components/status/table-status";
 import { useState } from "react";
-import { SideDrawer } from "@/components/side-drawers/side-drawer";
-import bitcoinSmallIcon from "@/assets/svg/bitcoin-small-icon.svg";
-import { Button } from "@/components/buttons";
-import chatIcon from "@/assets/svg/chat-message-icon.svg";
 import { Transaction, TransactionCategory } from "@/types";
 import { momentLocal } from "@/utils/moment-local";
-import { useGetTransaction, useGetTransactionId } from "@/hooks/query";
+import { useGetTransactionLog } from "@/hooks/query";
 import { TableInput } from "../inputs/table-input";
 import { TablePagination } from "../pagination/table-pagination";
-import { FormatNumber } from "@/utils/formatter";
 import { Loader } from "../loader/general-loader";
 import { GenericEmptyState } from "../UIs/empty-state/generic-empty-state";
 import { useTransactionTableHook } from "@/hooks/custom/transaction/useTransactionTableHook";
 import { useGetTransactionIconType } from "@/hooks/custom/others/useGetIconType";
+import { TransactionDrawer } from "../side-drawers/drawers/transaction-drawer";
 
 export const TransactionTable = () => {
   const {
@@ -40,7 +34,7 @@ export const TransactionTable = () => {
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const columnHelper = createColumnHelper<Transaction>();
   const [selectedTxn, setSelectedTxn] = useState<Transaction>();
-  const transactionDetails = useGetTransactionId(selectedTxn?.id ?? "");
+  
   const columns = [
     columnHelper.accessor("createdAt", {
       cell: (info) => (
@@ -101,72 +95,13 @@ export const TransactionTable = () => {
 
   return (
     <>
-      <SideDrawer
-        open={showSideDrawer}
-        onClose={() => {
+      <TransactionDrawer
+        handleClose={() => {
           setShowSideDrawer(false);
         }}
-        title="Transaction Details"
-      >
-        <div>
-          <div className="bg-bayfi-black-700 p-4 rounded-lg flex flex-col items-center justify-center gap-1">
-            <TableStatus text="Completed" type="Success" />
-            <p className="text-bayfi-green-500 text-2xl font-grotesk-medium">
-              NGN{FormatNumber(selectedTxn?.amount ?? 0)}
-            </p>
-            <div className="text-white text-base font-grotesk-regular">
-              to{" "}
-              <span className="text-white font-grotesk-semi-bold">
-                {selectedTxn?.receiverName}
-              </span>{" "}
-              <span className="text-[#BEDD3A] font-grotesk-medium">OPAY</span>
-            </div>
-          </div>
-          <div
-            style={{ border: "0.5px solid #DCDCDC" }}
-            className="mt-4 rounded-lg p-4 bg-[#F5F5F5]"
-          >
-            <TransactionText
-              leftText="Transaction channel"
-              rightText="Crypto purchase"
-              icon={bitcoinSmallIcon}
-            />
-            <TransactionText
-              leftText="Account channel"
-              rightText="0000397042"
-            />
-            <TransactionText
-              leftText="Account name"
-              rightText="Olaitan Akinlade"
-            />
-            <TransactionText leftText="Bank name" rightText="Opay" />
-            <TransactionText leftText="Date" rightText="02-14-2025 9:30" />
-            <TransactionText
-              leftText="Reference"
-              rightText={selectedTxn?.transactionReference ?? ""}
-            />
-            <TransactionText
-              noBorder
-              leftText="Amount"
-              rightText={FormatNumber(selectedTxn?.amount ?? 0)}
-            />
-            <Button
-              text="Get receipt"
-              type="bgGreen"
-              loading={false}
-              fullWidth
-            />
-            <Button
-              icon={chatIcon}
-              text="Raise a dispute"
-              type="bgPlain"
-              loading={false}
-              fullWidth
-              iconPosition="right"
-            />
-          </div>
-        </div>
-      </SideDrawer>
+        openDrawer={showSideDrawer}
+        selectedTxn={selectedTxn}
+      />
       <div className="py-3 flex items-center justify-between">
         <TableInput handleSearch={handleSearch} placeholder="Search" />
         <TablePagination
@@ -198,7 +133,7 @@ export const TransactionTable = () => {
                             ? null
                             : flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                         </th>
                       );
@@ -216,7 +151,7 @@ export const TransactionTable = () => {
                         <td className="bg-[#FEFEFE33]" key={cell.id}>
                           {flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext()
+                            cell.getContext(),
                           )}
                         </td>
                       );
@@ -231,31 +166,6 @@ export const TransactionTable = () => {
         )}
       </div>
     </>
-  );
-};
-
-const TransactionText = ({
-  rightText,
-  leftText,
-  icon,
-  noBorder,
-}: {
-  rightText: string;
-  leftText: string;
-  icon?: string;
-  noBorder?: boolean;
-}) => {
-  return (
-    <div
-      className={`flex ${!noBorder && "border-b border-[#DCDCDC]"}  py-3 justify-between items-center font-grotesk-medium text-base`}
-    >
-      <p>{leftText}</p>
-      <div className="flex items-center gap-2">
-        {icon && <Image src={icon} alt="" />}
-
-        <p className="text-bayfi-black-400">{rightText}</p>
-      </div>
-    </div>
   );
 };
 

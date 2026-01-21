@@ -1,5 +1,6 @@
 import {
   getTransactionDetail,
+  transactionLog,
   transactions,
   transactionSummary,
 } from "@/services";
@@ -27,5 +28,13 @@ export const useGetTransactionSummary = () => {
   return useQuery({
     queryFn: () => transactionSummary(),
     queryKey: ["transaction-summary"],
+  });
+};
+
+export const useGetTransactionLog = (id: string) => {
+  return useQuery({
+    queryKey: ["transaction-log", id],
+    queryFn: () => transactionLog(id),
+    enabled: !!id,
   });
 };

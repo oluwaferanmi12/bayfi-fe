@@ -5,7 +5,7 @@ export const usePagination = () => {
   const [searchPayload, setSearchPayload] = useState({
     category: "",
     page: 1,
-    pageSize: 5,
+    pageSize: 20,
     search: "",
     status: "",
   });
@@ -19,7 +19,7 @@ export const usePagination = () => {
     setSearchPayload({
       category: "",
       page: 1,
-      pageSize: 5,
+      pageSize: 20,
       search: "",
       status: "",
     });
@@ -28,7 +28,7 @@ export const usePagination = () => {
   const handleSearch = debounce((val: string) => {
     setSearchPayload((prev) => ({ ...prev, search: val }));
   }, 500);
-  
+
   return {
     searchPayload,
     handleNext,
