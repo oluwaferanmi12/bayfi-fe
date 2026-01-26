@@ -33,7 +33,7 @@ export const forgotPasswordEmailService = async (payload: ForgotPasswordEmailInt
 }
 
 export const forgotPasswordOtpVerificationService = async(payload: OtpVerificationInterface): Promise<GeneralResponseInterface> => {
- const { data } = await axiosInstance.post("/auth/password/verify", payload)
+ const { data } = await axiosInstance.post("/auth/verify/otp", payload)
   return data.data
 }
 

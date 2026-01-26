@@ -5,9 +5,9 @@ import GeneralLandingPageWrapper from "@/components/wrappers/lading-wrapper/gene
 import { Col, Row } from "antd";
 import badge from "@/assets/svg/badge.svg";
 import teamIcon from "@/assets/svg/team-icon.svg";
-import ceoPlaceholder from "@/assets/svg/ceo-placeholder.svg";
 import TradingArea from "@/components/UIs/landing/trading-area";
 import Footer from "@/components/UIs/landing/footer";
+import { TeamWrapper } from "@/components/features/landing-page/team-wrapper";
 
 const About = () => {
   return (
@@ -22,13 +22,13 @@ const About = () => {
         </p>
       </section>
       <section className="flex  items-center lg:gap-20 gap-8  overflow-hidden">
-        <div className="shrink-0 w-[250px] lg:w-[600px]">
+        <div className="shrink-0 w-62.5 lg:w-150">
           <Image className="min-w-full" src={peoplePlacholder} alt="" />
         </div>
-        <div className="shrink-0 w-[250px] lg:w-[600px]">
+        <div className="shrink-0 w-62.5 lg:w-150">
           <Image className="min-w-full" src={peoplePlacholder} alt="" />
         </div>
-        <div className="shrink-0 w-[250px] lg:w-[600px]">
+        <div className="shrink-0 w-62.5 lg:w-150">
           <Image className="min-w-full" src={peoplePlacholder} alt="" />
         </div>
       </section>
@@ -88,73 +88,7 @@ const About = () => {
             </p>
           </div>
           <p className="font-jakarta-medium text-4xl py-8">Meet our team</p>
-          <Row >
-            <Col xs={24} lg={8} className="mb-8 lg:mb-16">
-              <div>
-                <Image src={ceoPlaceholder} alt="" />
-              </div>
-              <div className="mt-6">
-                <p className="font-inter-semibold text-lg text-[#0A0D14]">
-                  Afeez Onadiran
-                </p>
-                <p className="font-inter-regular text-[#0A0D14] mt-2">
-                  CEO, Bayfi LTD
-                </p>
-              </div>
-            </Col>
-            <Col xs={24} lg={8} className="mb-8 lg:mb-16">
-              <div>
-                <Image src={ceoPlaceholder} alt="" />
-              </div>
-              <div className="mt-6">
-                <p className="font-inter-semibold text-lg text-[#0A0D14]">
-                  Afeez Onadiran
-                </p>
-                <p className="font-inter-regular text-[#0A0D14] mt-2">
-                  CEO, Bayfi LTD
-                </p>
-              </div>
-            </Col>
-            <Col xs={24} lg={8} className="mb-8 lg:mb-16">
-              <div>
-                <Image src={ceoPlaceholder} alt="" />
-              </div>
-              <div className="mt-6">
-                <p className="font-inter-semibold text-lg text-[#0A0D14]">
-                  Afeez Onadiran
-                </p>
-                <p className="font-inter-regular text-[#0A0D14] mt-2">
-                  CEO, Bayfi LTD
-                </p>
-              </div>
-            </Col>
-            <Col xs={24} lg={8} className="mb-8 lg:mb-16">
-              <div>
-                <Image src={ceoPlaceholder} alt="" />
-              </div>
-              <div className="mt-6">
-                <p className="font-inter-semibold text-lg text-[#0A0D14]">
-                  Afeez Onadiran
-                </p>
-                <p className="font-inter-regular text-[#0A0D14] mt-2">
-                  CEO, Bayfi LTD
-                </p>
-              </div>
-            </Col>
-            <Col xs={24} lg={8} className="mb-8 lg:mb-16">
-              <div>
-                <Image src={ceoPlaceholder} alt="" />
-              </div>
-              <div className="mt-6">
-                <p className="font-inter-semibold text-lg text-[#0A0D14]">
-                  Afeez Onadiran
-                </p>
-                <p className="font-inter-regular text-[#0A0D14] mt-2">
-                  CEO, Bayfi LTD
-                </p>
-              </div>
-            </Col>
-          </Row>
+          <TeamWrapper />
         </GeneralLandingPageWrapper>
       </section>
       <TradingArea />

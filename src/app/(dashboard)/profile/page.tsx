@@ -7,7 +7,6 @@ import { PasswordForm } from "@/components/features/profile/password-form";
 import { ProfileForm } from "@/components/features/profile/profile-form";
 import { useEffect, useState } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
-import { useSearchParams } from "next/navigation";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
