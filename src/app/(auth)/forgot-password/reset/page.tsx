@@ -1,24 +1,17 @@
 "use client";
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
-import arrowIcon from "@/assets/svg/arrow-bidirection.svg";
 import { GInput } from "@/components/inputs/GInput";
-import mailIcon from "@/assets/svg/input-message-icon.svg";
 import { Col, Row } from "antd";
 import logo from "@/assets/svg/logo.svg";
 import Image from "next/image";
 import inputPasswordIcon from "@/assets/svg/input-password-icon.svg";
-import googleIcon from "@/assets/svg/googleIcon.svg";
-import facebookIcon from "@/assets/svg/facebookIcon.svg";
-import appleIcon from "@/assets/svg/appleIcon.svg";
-import Link from "next/link";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useLogin, useResetPassowrd } from "@/hooks/query";
+import { useResetPassowrd } from "@/hooks/query";
 import { toast } from "sonner";
-import Cookies from "js-cookie";
-import { OTPInput } from "@/components/inputs/otp-input";
+import moment from "moment-timezone";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -82,6 +75,7 @@ const ResetPassword = () => {
                       otp,
                       newPassword,
                       confirmNewPassword,
+                      timeZone: moment.tz.guess(),
                     });
                   }}
                   type="bgGreen"

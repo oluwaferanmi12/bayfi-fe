@@ -77,6 +77,7 @@ export interface ResetPasswordInterface {
   otp: string;
   newPassword: string;
   confirmNewPassword: string;
+  timeZone: string;
 }
 
 export interface GeneralResponseInterface {
