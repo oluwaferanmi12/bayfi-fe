@@ -1,17 +1,27 @@
 import GeneralLandingPageWrapper from "@/components/wrappers/lading-wrapper/general-landing-wrapper";
 import { Col, Row } from "antd";
+import { link } from "fs/promises";
 import Link from "next/link";
+import { title } from "process";
 import React from "react";
 
 function Footer() {
   const companyArray = [
-    "About-us",
-    "Why you choose us",
-    "Partnership",
-    "Work with us",
+    { title: "About-us", link: "/about" },
+    { title: "Why you choose us", link: "/what-we-do" },
+    // { title: "Partnership", link: "/partnership" },
+    // { title: "Work with us", link: "/work-with-us" },
   ];
-  const serviceArray = ["Giftcard Trade", "Crypto Trade", "Bill Payment"];
-  const clientsArray = ["Blogs", "Case Studies", "Testimonials"];
+  const serviceArray = [
+    { title: "Giftcard Trade", link: "/dashboard" },
+    { title: "Crypto Trade", link: "/dashboard" },
+    { title: "Bill Payment", link: "/dashboard" },
+  ];
+  // const clientsArray = [
+  //   { title: "Blogs", link: "/blogs" },
+  //   { title: "Case Studies", link: "/case-studies" },
+  //   { title: "Testimonials", link: "/testimonials" },
+  // ];
   return (
     <section className="bg-black pt-20 relative overflow-hidden">
       <GeneralLandingPageWrapper>
@@ -25,9 +35,9 @@ function Footer() {
                 <div className="lg:mt-8 mt-4">
                   {companyArray.map((item, index) => {
                     return (
-                      <Link key={index} href={""}>
+                      <Link key={index} href={item.link}>
                         <p className="text-[#9A9A9A] font-inter-light mb-4 text-base">
-                          {item.toUpperCase()}
+                          {item.title.toUpperCase()}
                         </p>
                       </Link>
                     );
@@ -41,31 +51,31 @@ function Footer() {
                 <div className="lg:mt-8 mt-4">
                   {serviceArray.map((item, index) => {
                     return (
-                      <Link key={index} href={""}>
+                      <Link key={index} href={item.link}>
                         <p className="text-[#9A9A9A] font-inter-light mb-4 text-base">
-                          {item.toUpperCase()}
+                          {item.title.toUpperCase()}
                         </p>
                       </Link>
                     );
                   })}
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-[#FEFBF6] font-inter-semibold text-xl">
                   CLIENTS
                 </p>
                 <div className="lg:mt-8 mt-4">
                   {clientsArray.map((item, index) => {
                     return (
-                      <Link key={index} href={""}>
+                      <Link key={index} href={item.link}>
                         <p className="text-[#9A9A9A] font-inter-light mb-4 text-base">
-                          {item.toUpperCase()}
+                          {item.title.toUpperCase()}
                         </p>
                       </Link>
                     );
                   })}
                 </div>
-              </div>
+              </div> */}
             </div>
           </Col>
           <Col xs={24} lg={10}>

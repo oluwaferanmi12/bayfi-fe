@@ -21,7 +21,7 @@ export const FeatureSection = () => {
       icon: feature1,
     },
     {
-      mainText: "Trade Crypto",
+      mainText: "Trade Crypto (Coming Soon)",
       subText:
         "Swap your Bitcoin and other coins faster than Aviator eats your money",
       icon: feature2,
@@ -64,9 +64,8 @@ export const FeatureSection = () => {
             <RevealOnScroll duration={2}>
               <div>
                 <p className="text-[#9A9A9A] lg:text-lg font-jakarta-regular text-base lg:w-4/5">
-                  Automation & workflow features include a drag & drop builder,
-                  automated task assignments, conditional with good triggers,
-                  and api integrations.
+                  Empathy. Teamwork. Community. Collaboration. Customer
+                  satisfaction.
                 </p>
               </div>
             </RevealOnScroll>
@@ -91,7 +90,7 @@ export const FeatureSection = () => {
                     <div key={index} className="flex items-start gap-6 mb-16">
                       <Image
                         src={item.icon}
-                        className="lg:w-[45px] w-[24px] aspect-square"
+                        className="lg:w-11.25 w-6 aspect-square"
                         alt=""
                       />
                       <div>
@@ -130,8 +129,8 @@ export const FeatureSection = () => {
         </motion.div>
       </div>
       <GeneralLandingPageWrapper>
-        <div className="mt-12 h-[400px] lg:h-[800px] rounded-t-lg bg-[#D9D9D9] flex items-center justify-center">
-          <div className="bg-white h-[60px] lg:h-[120px] aspect-square rounded-full flex items-center justify-center">
+        <div className="mt-12 h-100 lg:h-200 rounded-t-lg bg-[#D9D9D9] flex items-center justify-center">
+          <div className="bg-white h-15 lg:h-30 aspect-square rounded-full flex items-center justify-center">
             <Image src={playIcon} alt="" />
           </div>
         </div>

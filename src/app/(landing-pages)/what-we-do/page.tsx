@@ -41,28 +41,28 @@ const WhatWeDo = () => {
                 </div>
                 <div>
                   <h3 className="text-[#242628] font-inter-regular text-base lg:text-xl w-full lg:w-4/5">
-                    Supercharge your finance, empower your teams and track the
-                    pulse of your business with an end-to-end expense management
-                    platform tailored for African SMBs.
+                    Don&apos;t be like John Doe, who sits around for hours to
+                    complete a transaction. This is a new world and our currency
+                    is SPEED.
                   </h3>
                 </div>
                 <div className="flex items-center gap-2 mt-12">
                   <button
-                    className="bg-black px-8 py-4 rounded-lg"
-                    onClick={() => router.push("/")}
+                    className="bg-black px-8 py-4 rounded-lg cursor-pointer"
+                    onClick={() => router.push("/dashboard")}
                   >
                     <p className="font-inter-semibold text-sm lg:text-lg text-[#BFFF0B]">
                       Start now
                     </p>
                   </button>
-                  <button
+                  {/* <button
                     className="bg-white border border-[#E5E8E3] px-8 py-4 rounded-lg"
                     onClick={() => router.push("/login")}
                   >
                     <p className="font-inter-semibold text-sm lg:text-lg text-[#242628]">
                       Contact Sales
                     </p>
-                  </button>
+                  </button> */}
                 </div>
               </Col>
               <Col lg={12} xs={24}>
@@ -104,8 +104,7 @@ const WhatWeDo = () => {
                 Bye to errors & fraud.
               </h2>
               <p className="font-inter-regular text-base text-[#242628] lg:w-4/5">
-                Define and enforce spending limits. Nothing falls through the
-                cracks.
+                Eliminating mistakes and protecting your funds from fraud.
               </p>
             </Col>
             <Col lg={8} xs={24} className="mb-12 lg:mb-0">
@@ -116,8 +115,7 @@ const WhatWeDo = () => {
                 Forget risky cash management.
               </h2>
               <p className="font-inter-regular text-base text-[#242628] lg:w-4/5">
-                Define and enforce spending limits. Nothing falls through the
-                cracks.
+                You are in control of your funds.
               </p>
             </Col>
           </Row>
@@ -171,8 +169,7 @@ const WhatWeDo = () => {
                   CRYPTO TRADE
                 </h1>
                 <p className="my-4 font-inter-regular text-[#F2F2F2] text-base lg:text-2xl lg:w-4/5">
-                  Create a plan that works for your unique needs and goals with
-                  our easy-to-use budgeting structure.
+                  The speed of lightning is five steps behind us.
                 </p>
                 <Link href={"/login"}>
                   <button className="flex items-center gap-2 mt-4">
@@ -211,8 +208,7 @@ one place`}
                   BILL PAYMENTS
                 </h1>
                 <p className="my-4 font-inter-regular text-[#F2F2F2] text-base lg:text-2xl lg:w-4/5">
-                  Create a plan that works for your unique needs and goals with
-                  our easy-to-use budgeting structure.
+                  This is boring but we do it for you.
                 </p>
                 <Link href={"/login"}>
                   <button className="flex items-center gap-2 mt-4">

@@ -15,7 +15,7 @@ export const LandingNav = () => {
   const navObjects = [
     { href: "/about", text: "About us" },
     { href: "/what-we-do", text: "Stuff we do" },
-    { href: "/updates", text: "Sharp updates" },
+    // { href: "/updates", text: "Sharp updates" },
     { href: "/contact-us", text: "Hit us up" },
   ];
   useEffect(() => {

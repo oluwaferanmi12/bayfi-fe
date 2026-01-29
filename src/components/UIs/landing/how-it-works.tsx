@@ -18,11 +18,11 @@ export const HowItWorks = () => {
       icon: beginIcon,
       mainText: "Begin your journey",
       textVal:
-        "AI assist for SQL and formulas, and much more. We’ve built a fast engine under the hood, so you’ll find Equals performs.",
+        "We have made it simple: create an account, initiate a trade, and enjoy instant withdrawals to your bank account.",
     },
     {
       icon: serviceIcon,
-      mainText: "Choose Your Service",
+      mainText: "Sign in and get started",
       textVal:
         "AI assist for SQL and formulas, and much more. We’ve built a fast engine under the hood, so you’ll find Equals performs.",
     },

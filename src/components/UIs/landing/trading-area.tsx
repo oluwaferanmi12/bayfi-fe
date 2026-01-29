@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import arrowRightGreen from "@/assets/svg/arrow-right-bg-green.svg";
 import ipadPhone from "@/assets/svg/ipad-pro.svg";
+import Link from "next/link";
 
 function TradingArea() {
   return (
@@ -18,18 +19,19 @@ function TradingArea() {
                 </p>
                 <div className="my-8">
                   <p className="text-[#9A9A9A] text-base lg:text-lg font-jakarta-regular">
-                    Automation & workflow features include a drag & drop
-                    builder, automated task assignments, conditional with good
-                    triggers, and api integrations.
+                    Best rates are your dream. Making them come true is our
+                    goal.
                   </p>
                 </div>
                 <div>
-                  <button className="flex bg-black mt-4 border border-[#272727] px-4 py-2 rounded-full items-center gap-3">
-                    <p className="font-jakarta-semibold text-white">
-                      Try for free
-                    </p>
-                    <Image src={arrowRightGreen} alt="" />
-                  </button>
+                  <Link href={"/dashboard"}>
+                    <button className="flex bg-black mt-4 border border-[#272727] px-4 py-2 rounded-full items-center gap-3">
+                      <p className="font-jakarta-semibold text-white">
+                        Try for free
+                      </p>
+                      <Image src={arrowRightGreen} alt="" />
+                    </button>
+                  </Link>
                 </div>
               </div>
             </Col>
