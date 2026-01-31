@@ -1,10 +1,9 @@
 import fileUploadIcon from "@/assets/svg/input-attachment.svg";
 import sendIcon from "@/assets/svg/chat-send-icon.svg";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { useSaveImage } from "@/hooks/query";
 import { ChatSelecteFiles } from "../bottom-drawers/chat/select-file-drawer";
 import { useImageUtils } from "@/hooks/custom/chat/useChatImage";
 import { UploadedFilesDrawer } from "../bottom-drawers/chat/uploaded-files-drawer";
@@ -145,10 +144,10 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
                       />
                     );
                   })}
-                  <div className="absolute z-20 top-1 ">
+                  <div className="absolute z-20 -left-1 ">
                     <p
                       style={{ backgroundColor: "rgba(102, 102, 102, 0.5)" }}
-                      className="text-white bg-bayfi-black-300 rounded-full w-4 aspect-square text-xs flex items-center justify-center"
+                      className="text-white bg-bayfi-black-300 rounded-full w-8 aspect-square text-lg flex items-center justify-center font-grotesk-extra-bold pb-1" 
                     >
                       +{convertedImageUrls.length}
                     </p>
