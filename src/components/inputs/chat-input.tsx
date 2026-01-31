@@ -117,7 +117,7 @@ export const ChatInput = ({ bgWhite, handleMessage }: ChatInputProps) => {
                     e.stopPropagation();
                     setShowEditUploadedFile(true);
                   }}
-                  className="w-[24px] h-[24px]"
+                  className="w-6 h-6"
                 >
                   {convertedImageUrls.map((item, i) => {
                     const dir = i % 2 === 0 ? 1 : -1;

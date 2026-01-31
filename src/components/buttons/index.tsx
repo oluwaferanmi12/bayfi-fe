@@ -39,7 +39,7 @@ export const Button = ({
             iconLeft && <Image src={iconLeft} alt="" />
           )}
           <p
-            className={`flex items-center text-sm font-grotesk-semi-bold lg:text-base ${smallerType && "mb-1"}`}
+            className={`flex items-center whitespace-nowrap text-sm font-grotesk-semi-bold lg:text-base ${smallerType && "mb-1"}`}
           >
             {text}
           </p>
