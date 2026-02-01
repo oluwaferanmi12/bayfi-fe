@@ -5,6 +5,7 @@ import {
   editCard,
   getCards,
   giftcardCountries,
+  giftcardRates,
   initiateGiftCardTxn,
   manageCard,
 } from "@/services/card.service";
@@ -96,5 +97,12 @@ export const useGetCardCountries = (id: string) => {
     queryFn: () => giftcardCountries(id),
     queryKey: ["giftcard-country", id],
     enabled: !!id,
+  });
+};
+
+export const useGetUserRates = () => {
+  return useQuery({
+    queryFn: giftcardRates,
+    queryKey: ["user-rates"],
   });
 };

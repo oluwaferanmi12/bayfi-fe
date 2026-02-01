@@ -3,6 +3,7 @@ import {
   CardInterface,
   CreateCardInterface,
   EditCardInterface,
+  GiftcardRates,
   InitiateCardTxn,
   ManageCardInterface,
 } from "@/types";
@@ -16,7 +17,7 @@ export const getCards = async ({
   pageSize: number;
 }): Promise<CardInterface[]> => {
   const { data } = await axiosInstance.get(
-    `/giftcards/fetch/active/${page}/${pageSize}`
+    `/giftcards/fetch/active/${page}/${pageSize}`,
   );
   return data.data;
 };
@@ -34,7 +35,7 @@ export const changeCardStatus = async ({
   status: boolean;
 }) => {
   const { data } = await axiosInstance.patch(
-    `/admin/giftcards/${id}/${status}`
+    `/admin/giftcards/${id}/${status}`,
   );
   return data.data;
 };
@@ -47,21 +48,21 @@ export const deleteCard = async (id: string) => {
 export const editCard = async (payload: EditCardInterface) => {
   const { data } = await axiosInstance.put(
     `/admin/giftcards/${payload.id}`,
-    payload
+    payload,
   );
   return data;
 };
 
 export const manageCard = async (payload: ManageCardInterface) => {
   const { data } = await axiosInstance.patch(
-    `/admin/giftcards/${payload.id}/status?status=${payload.status}`
+    `/admin/giftcards/${payload.id}/status?status=${payload.status}`,
   );
   return data.data;
 };
 
 export const giftcardCountries = async (id: string): Promise<Country[]> => {
   const { data } = await axiosInstance(
-    `/giftcards/fetch/giftcard/countries/${id}`
+    `/giftcards/fetch/giftcard/countries/${id}`,
   );
   return data.data.countryResponses;
 };
@@ -69,7 +70,12 @@ export const giftcardCountries = async (id: string): Promise<Country[]> => {
 export const initiateGiftCardTxn = async (payload: InitiateCardTxn) => {
   const { data } = await axiosInstance.post(
     `/giftcards/initiate/chat/transaction`,
-    payload
+    payload,
   );
+  return data.data;
+};
+
+export const giftcardRates = async (): Promise<GiftcardRates[]> => {
+  const { data } = await axiosInstance.get(`/giftcard/rates/user`);
   return data.data;
 };

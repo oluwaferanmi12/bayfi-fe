@@ -47,3 +47,21 @@ export interface InitiateCardTxn {
   amount: number;
   chatMessageInitiator: "USER" | "ADMIN";
 }
+
+export interface GiftcardRates {
+  id: string;
+  giftCardRecordId: number;
+  countryId: number;
+  giftCardType: "PHYSICAL" | "ECODE";
+  minimumPrice: number;
+  maximumPrice: number;
+  amount: number;
+  rate: number;
+  cardAvatar: string;
+  countryAvatar: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+  cardName: string;
+  countryName: string;
+}
