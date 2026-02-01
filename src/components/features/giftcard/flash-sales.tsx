@@ -3,7 +3,7 @@ import hotCard from "@/assets/svg/hot-card.svg";
 import Image from "next/image";
 import Link from "next/link";
 
-export const FlashSalesCard = () => {
+export const FlashSalesCard = ({ click }: { click?: () => void }) => {
   return (
     <div className="bg-black my-4 p-4 rounded-2xl relative overflow-hidden">
       <div className="absolute top-0 left-0 ">
@@ -19,9 +19,18 @@ export const FlashSalesCard = () => {
           </p>
         </div>
         <div>
-          <Link href="/hot-card-deals">
-            <Button loading={false} text="See Deals" type="bgGreen" />
-          </Link>
+          {click ? (
+            <Button
+              loading={false}
+              action={click}
+              text="See Deals"
+              type="bgGreen"
+            />
+          ) : (
+            <Link className="text-black" href="/hot-card-deals">
+              <Button loading={false} text="See Deals" type="bgGreen" />
+            </Link>
+          )}
         </div>
       </div>
     </div>

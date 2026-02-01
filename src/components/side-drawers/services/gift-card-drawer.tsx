@@ -19,10 +19,11 @@ import {
   CountryResponseInterface,
   InitiateCardTxn,
 } from "@/types";
-import { Spin } from "antd";
 import { toast } from "sonner";
 import { Loader } from "@/components/loader/general-loader";
 import { numberFormatter, stripCommas } from "@/utils/formatter";
+import { FlashSalesCard } from "@/components/features/giftcard/flash-sales";
+import { GiftcardRates } from "@/components/features/giftcard/giftcard-rate";
 
 export const GiftCardDrawer = ({
   handleClose,
@@ -38,6 +39,7 @@ export const GiftCardDrawer = ({
   const [showGiftcardChat, setGiftCardChat] = useState(false);
   const [initiateCardTxn, setInitiateCardTxn] = useState<InitiateCardTxn>();
   const [giftCardAmount, setGiftCardAmount] = useState(0);
+  const [showGiftcardRates, setShowGiftcardRates] = useState(false);
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface>();
   const [breadCrumData, setBreadCrumbData] = useState<
@@ -47,6 +49,7 @@ export const GiftCardDrawer = ({
       text: "home",
       action: () => {
         setShowGiftCardList(false);
+        setShowGiftcardRates(false);
         setShowGiftCardAmount(false);
         setShowCountry(false);
         handlRemoveFromBreadCrumb("home");
@@ -79,6 +82,37 @@ export const GiftCardDrawer = ({
       return updated;
     });
   };
+
+  const appendFlashSalesBreadcrumb = () => {
+    setBreadCrumbData((prev) => {
+      const existingIndex = prev.findIndex(
+        (item) => item.text === "Flash Sales",
+      );
+      const cleared = prev.map((item) => ({ ...item, active: false }));
+      if (existingIndex !== -1) {
+        const trimmed = cleared.slice(0, existingIndex + 1);
+        return trimmed.map((item, idx, arr) => ({
+          ...item,
+          active: idx === arr.length - 1,
+        }));
+      }
+      return [
+        ...cleared,
+        {
+          text: "Flash Sales",
+          action: () => {
+            setShowGiftCardList(true);
+            setShowGiftcardRates(true);
+            setShowCountry(false);
+            setShowGiftCardAmount(false);
+            setGiftCardChat(false);
+            handlRemoveFromBreadCrumb("Flash Sales");
+          },
+          active: true,
+        },
+      ];
+    });
+  };
   useEffect(() => {
     if (initiateCardTxn) {
       setShowGiftCardAmount(false);
@@ -98,57 +132,70 @@ export const GiftCardDrawer = ({
       <div>
         <SideDrawerBreadCrumb breadCrumbArray={breadCrumData} />
         {showGiftCardList ? (
-          <>
-            <div className="my-2">
-              <SearchInput value={searchValue} onChange={setSearchValue} />
+          showGiftcardRates ? (
+            <div className="mt-4">
+              <GiftcardRates />
             </div>
+          ) : (
+            <>
+              <div className="my-2">
+                <SearchInput value={searchValue} onChange={setSearchValue} />
+              </div>
 
-            {isPending ? (
-              <Loader />
-            ) : cards ? (
-              cards
-                .filter((item) =>
-                  item.cardName
-                    .toLowerCase()
-                    .includes(searchValue.toLowerCase())
-                )
-                .map((item) => (
-                  <div
-                    key={item.id}
-                    className="cursor-pointer"
-                    onClick={() => {
-                      setShowGiftCardList(false);
-                      setShowCountry(true);
-                      setSelectedCard(item);
-                      setBreadCrumbData((prev) => {
-                        const newData = prev.map((item) => ({
-                          ...item,
-                          active: false,
-                        }));
-                        return [
-                          ...newData,
-                          {
-                            text: "Countries",
-                            action: () => {
-                              setShowCountry(true);
-                              handlRemoveFromBreadCrumb("Countries");
+              <FlashSalesCard
+                click={() => {
+                  setShowGiftcardRates(true);
+                  appendFlashSalesBreadcrumb();
+                }}
+              />
+              {isPending ? (
+                <Loader />
+              ) : cards ? (
+                cards
+                  .filter((item) =>
+                    item.cardName
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase()),
+                  )
+                  .map((item) => (
+                    <div
+                      key={item.id}
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setShowGiftCardList(false);
+                        setShowGiftcardRates(false);
+                        setShowCountry(true);
+                        setSelectedCard(item);
+                        setBreadCrumbData((prev) => {
+                          const newData = prev.map((item) => ({
+                            ...item,
+                            active: false,
+                          }));
+                          return [
+                            ...newData,
+                            {
+                              text: "Countries",
+                              action: () => {
+                                setShowCountry(true);
+                                handlRemoveFromBreadCrumb("Countries");
+                              },
+                              active: true,
                             },
-                            active: true,
-                          },
-                        ];
-                      });
-                    }}
-                  >
-                    <GiftCardWrapper
-                      text={item.cardName}
-                      image={item.avatarUrl}
-                    />
-                  </div>
-                ))
-            ) : (
-              "No data available"
-            )}
-          </>
+                          ];
+                        });
+                      }}
+                    >
+                      <GiftCardWrapper
+                        text={item.cardName}
+                        image={item.avatarUrl}
+                      />
+                    </div>
+                  ))
+              ) : (
+                "No data available"
+              )}
+            </>
+          )
         ) : showCountry ? (
           <>
             <div className="my-2">
@@ -252,12 +299,14 @@ export const GiftCardDrawer = ({
             <div
               onClick={() => {
                 setShowGiftCardList(true);
+                setShowGiftcardRates(false);
                 setBreadCrumbData((prev) => [
                   ...prev,
                   {
                     text: "Sell Giftcard",
                     action: () => {
                       setShowGiftCardList(true);
+                      setShowGiftcardRates(false);
                       handlRemoveFromBreadCrumb("Sell Giftcard");
                     },
                     active: true,
@@ -280,6 +329,7 @@ export const GiftCardDrawer = ({
             <div
               onClick={() => {
                 setShowGiftCardList(true);
+                setShowGiftcardRates(false);
               }}
               className="bg-bayfi-green-500 my-4 cursor-pointer rounded-lg p-4 flex justify-between"
             >
