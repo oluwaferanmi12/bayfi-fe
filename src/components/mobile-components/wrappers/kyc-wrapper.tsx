@@ -13,7 +13,7 @@ export const KycWrapper = ({
   const { profile } = useProfileStore();
   return (
     <>
-      {profile && !profile.isBvnVerified && (
+      {profile && profile.tierLevel !== "TIER3" && (
         <div
           className={`relative flex flex-col ${desktopType ? "mt-4" : "mt-10"}  justify-center items-center`}
         >
@@ -23,7 +23,9 @@ export const KycWrapper = ({
             <div className="flex items-center gap-2">
               <Image src={kycBadge} alt="" />
               <p className="text-[#4B5563] text-xs font-medium">
-                Complete your kyc
+                {profile.tierLevel === "TIER1"
+                  ? "Complete your kyc"
+                  : "Upgrade to Tier 3"}
               </p>
             </div>
             <button

@@ -13,6 +13,7 @@ export const useKycProfile = () => {
     verified: false,
   });
   const [bvn, setBvn] = useState("");
+  const [nin, setNin] = useState("");
   useEffect(() => {
     if (profile) {
       setFormData({
@@ -25,5 +26,5 @@ export const useKycProfile = () => {
       });
     }
   }, [profile]);
-  return { formData, setFormData , setBvn, bvn};
+  return { formData, setFormData, setBvn, bvn, profile, nin, setNin };
 };

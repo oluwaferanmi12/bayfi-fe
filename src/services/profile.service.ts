@@ -34,12 +34,17 @@ export const logout = async () => {
   return data;
 };
 
-export const doKyc = async (payload: KYC) => {
+export const doKycBvn = async (payload: KYC) => {
   const { data } = await axiosInstance.post(`/kyc/bvn/verify`, payload);
+  return data;
+};
+
+export const doKycNin = async (payload: { nin: string }) => {
+  const { data } = await axiosInstance.post(`/kyc/nin/verify`, payload);
   return data;
 };
 
 export const tiers = async (): Promise<TierDetails[]> => {
   const { data } = await axiosInstance.get("/user/tiers");
-  return data.data
+  return data.data;
 };

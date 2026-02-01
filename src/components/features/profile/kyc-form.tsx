@@ -4,15 +4,26 @@ import { GInput } from "@/components/inputs/GInput";
 import verifyBvn from "@/assets/svg/verify-badge.svg";
 import { Button } from "@/components/buttons";
 import { useKycProfile } from "@/hooks/custom/profile/useKycProfile";
-import { useDoKyc } from "@/hooks/query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useDoKycBvn, useDoKycNin } from "@/hooks/query";
+import { useQueryClient } from "@tanstack/react-query";
+import checkIcon from "@/assets/svg/check-circle-green.svg";
+import Image from "next/image";
 
 export const KycForm = () => {
-  const { formData, setFormData, bvn, setBvn } = useKycProfile();
+  const queryClient = useQueryClient();
+  const { formData, setFormData, bvn, setBvn, profile, nin, setNin } =
+    useKycProfile();
   const router = useRouter();
-  const doKyc = useDoKyc(() => {
+  const doKycBvn = useDoKycBvn(() => {
     toast.success("KYC completed successfully");
+    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
+    router.push("/dashboard");
+  });
+  const doKycNin = useDoKycNin(() => {
+    toast.success("KYC completed successfully");
+    queryClient.invalidateQueries({ queryKey: ["get-profile"] });
     router.push("/dashboard");
   });
   return (
@@ -53,31 +64,66 @@ export const KycForm = () => {
             }
           />
         </div>
-        <GInput
-          value={bvn}
-          onChange={(e) => {
-            setBvn(e.target.value);
-          }}
-          label="Bvn"
-          placeholder="Enter your BVN number"
-          setInput={(val) => setFormData((prev) => ({ ...prev, email: val }))}
-          icon={verifyBvn}
-        />
+        <div className="flex items-center gap-2 ">
+          <GInput
+            value={nin}
+            onChange={(e) => {
+              setNin(e.target.value);
+            }}
+            label="NIN"
+            placeholder="Enter your NIN number"
+            setInput={(val) => setFormData((prev) => ({ ...prev, email: val }))}
+            icon={verifyBvn}
+            disabled={profile?.tierLevel !== "TIER1"}
+          />
+          {profile?.tierLevel === "TIER2" && (
+            <div>
+              <Image src={checkIcon} alt="Verified" />
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-2 ">
+          <GInput
+            value={bvn}
+            onChange={(e) => {
+              setBvn(e.target.value);
+            }}
+            label="Bvn"
+            placeholder="Enter your BVN number"
+            setInput={(val) => setFormData((prev) => ({ ...prev, email: val }))}
+            icon={verifyBvn}
+            disabled={profile?.tierLevel !== "TIER2"}
+          />
+          {profile?.tierLevel === "TIER3" && (
+            <div>
+              <Image src={checkIcon} alt="Verified" />
+            </div>
+          )}
+        </div>
 
-        <Button
-          loading={doKyc.isPending}
-          text="Save changes"
-          type="bgGreen"
-          fullWidth
-          action={() => {
-            // handleUpdateProfile();
-            doKyc.mutate({
-              firstName: formData.firstName,
-              lastName: formData.lastName,
-              bvn,
-            });
-          }}
-        />
+        {profile?.tierLevel !== "TIER3" && (
+          <Button
+            loading={doKycBvn.isPending}
+            text="Save changes"
+            type="bgGreen"
+            fullWidth
+            action={() => {
+              // handleUpdateProfile();
+              if (profile?.tierLevel === "TIER1") {
+                doKycNin.mutate({
+                  nin,
+                });
+                return;
+              } else {
+                doKycBvn.mutate({
+                  firstName: formData.firstName,
+                  lastName: formData.lastName,
+                  bvn,
+                });
+              }
+            }}
+          />
+        )}
       </div>
     </div>
   );
