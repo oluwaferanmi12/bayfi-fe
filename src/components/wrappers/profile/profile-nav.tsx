@@ -1,6 +1,5 @@
 import avatarPlacholder from "@/assets/svg/profile-default-avatar.svg";
 import Image from "next/image";
-import aboutIcon from "@/assets/svg/profile-about-icon.svg";
 import logoutIcon from "@/assets/svg/profile-logout-icon.svg";
 import arrowRightTop from "@/assets/svg/arrow-right-top.svg";
 import {
@@ -27,6 +26,7 @@ import { Switch } from "antd";
 import directBoxSend from "@/assets/svg/direct-box-send.svg";
 import buildingIcon from "@/assets/svg/building-icon.svg";
 import legalIcon from "@/assets/svg/legal-icon.svg";
+import { TierInfoDrawer } from "@/components/side-drawers/profile/tier-info-drawer";
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -38,6 +38,7 @@ export const ProfileNav = ({
   const router = useRouter();
   const [imageUrl, setImageUrl] = useState("");
   const profileDataFn = useFetchProfile();
+  const [showTierDetails, setShowTierDetais] = useState(false);
   const profileData: ProfileDataInterface | undefined = profileDataFn?.data;
   const logOutMutate = useLogout((val) => {
     Cookies.remove("loginDetails");
@@ -58,8 +59,17 @@ export const ProfileNav = ({
 
   return (
     <>
+      <TierInfoDrawer
+        open={showTierDetails}
+        handleClose={() => setShowTierDetais(false)}
+      />
       <div className={` lg:p-4 rounded-lg`}>
-        <div className="flex items-center justify-between bg-[#FBFBFB] px-4 py-2 rounded-lg mt-2">
+        <div
+          onClick={() => {
+            setShowTierDetais(true);
+          }}
+          className="flex cursor-pointer items-center justify-between bg-[#FBFBFB] px-4 py-2 rounded-lg mt-2"
+        >
           <div className="flex items-center gap-2">
             <div className="flex items-center justify-center ">
               <div className="w-15 h-15 overflow-hidden relative">
@@ -83,8 +93,9 @@ export const ProfileNav = ({
               </p>
             </div>
           </div>
-          <div>
-            <Tier />
+          <div className="flex items-center">
+            <Tier tier={profileData?.tierLevel} />
+            <Image src={arrowRightShort} alt="" />
           </div>
         </div>
 

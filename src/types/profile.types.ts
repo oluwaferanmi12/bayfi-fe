@@ -1,3 +1,5 @@
+export type TierLevel = "TIER1" | "TIER2" | "TIER3";
+
 export interface ProfileDataInterface {
   id: string;
   username: string;
@@ -12,6 +14,7 @@ export interface ProfileDataInterface {
   verified: boolean;
   isBalanceVisible: boolean;
   isBvnVerified: boolean;
+  tierLevel: TierLevel;
 }
 
 export interface PostProfileInterface {
