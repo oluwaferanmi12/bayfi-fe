@@ -4,6 +4,7 @@ import {
   fetchUserProfileService,
   getUser,
   logout,
+  tiers,
   updateProfile,
 } from "@/services/profile.service";
 import { PostProfileInterface } from "@/types/profile.types";
@@ -49,5 +50,12 @@ export const useDoKyc = (sc: (val: any) => void) => {
   return useMutation({
     mutationFn: doKyc,
     onSuccess: sc,
+  });
+};
+
+export const useGetTiers = () => {
+  return useQuery({
+    queryFn: tiers,
+    queryKey: ["get-tiers"],
   });
 };

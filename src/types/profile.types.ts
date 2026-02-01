@@ -39,3 +39,18 @@ export interface KYC {
   lastName: string;
   bvn: string;
 }
+
+export interface TierDetails {
+  id: string;
+  level: string;
+  name: string;
+  active: boolean;
+  requiresBvnVerified: boolean;
+  dailyDebitLimit: number;
+  dailyCreditLimit: number;
+  requirement: string;
+  isCurrentPlan: boolean;
+  isEligible: boolean;
+  createdAt: string;
+  lastUpdatedAt: string;
+}

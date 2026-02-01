@@ -4,6 +4,7 @@ import {
   KYC,
   PostProfileInterface,
   ProfileDataInterface,
+  TierDetails,
   UpdatePin,
 } from "@/types";
 
@@ -36,4 +37,9 @@ export const logout = async () => {
 export const doKyc = async (payload: KYC) => {
   const { data } = await axiosInstance.post(`/kyc/bvn/verify`, payload);
   return data;
+};
+
+export const tiers = async (): Promise<TierDetails[]> => {
+  const { data } = await axiosInstance.get("/user/tiers");
+  return data.data
 };

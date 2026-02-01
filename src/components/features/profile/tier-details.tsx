@@ -5,9 +5,13 @@ import { TierVertical } from "./tier-vertical";
 import { Tier } from "./tier";
 import kycIcon from "@/assets/svg/kyc-badge.svg";
 import checkCircle from "@/assets/svg/check-circle.svg";
+import { useGetTiers } from "@/hooks/query";
+import { Loader } from "@/components/loader/general-loader";
+import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
 
 export const TierDetails = ({ mobileType }: { mobileType?: boolean }) => {
   const { profile } = useProfileStore();
+  const { data, isLoading } = useGetTiers();
   return (
     <div>
       <div
@@ -42,42 +46,60 @@ export const TierDetails = ({ mobileType }: { mobileType?: boolean }) => {
         </div>
       </div>
       <div>
-        <div
-          className={`${mobileType ? "bg-white" : " bg-[#FBFBFB]"}  rounded-2xl px-4 py-3 my-2 mt-4 flex items-center justify-between`}
-        >
-          <div className="flex items-center gap-3">
-            <Tier />
-            <p className="text-bayfi-black-600 text-xl font-grotesk-semi-bold">
-              Account Tier 1
-            </p>
-          </div>
-          <div>
-            <Image height={24} width={24} src={kycIcon} alt="KYC Badge" />
-          </div>
-        </div>
+        {isLoading ? (
+          <Loader />
+        ) : data?.length ? (
+          data.map((item) => {
+            return (
+              <>
+                <div
+                  className={`${mobileType ? "bg-white" : " bg-[#FBFBFB]"}  rounded-2xl px-4 py-3 my-2 mt-4 flex items-center justify-between`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Tier tier={item.level} />
+                    <p className="text-bayfi-black-600 text-xl font-grotesk-semi-bold">
+                      Account {item.name}
+                    </p>
+                  </div>
+                  <div>
+                    <Image
+                      height={24}
+                      width={24}
+                      src={kycIcon}
+                      alt="KYC Badge"
+                    />
+                  </div>
+                </div>
 
-        <div
-          className={`${mobileType ? "bg-white" : "bg-[#FBFBFB]"}  rounded-2xl px-4 py-2 `}
-        >
-          <div className="flex items-center gap-2 my-2">
-            <Image src={checkCircle} alt="Check Icon" />
-            <p className="text-base text-[#141414] font-grotesk-medium">
-              Unlimited messages, interactions, and history
-            </p>
-          </div>
-          <div className="flex items-center gap-2 my-2">
-            <Image src={checkCircle} alt="Check Icon" />
-            <p className="text-base text-[#141414] font-grotesk-medium">
-              Unlimited messages, interactions, and history
-            </p>
-          </div>
-          <div className="flex items-center gap-2 my-2">
-            <Image src={checkCircle} alt="Check Icon" />
-            <p className="text-base text-[#141414] font-grotesk-medium">
-              Unlimited messages, interactions, and history
-            </p>
-          </div>
-        </div>
+                <div
+                  key={item.id}
+                  className={`${mobileType ? "bg-white" : "bg-[#FBFBFB]"}  rounded-2xl px-4 py-2 `}
+                >
+                  <div className="flex items-center gap-2 my-2">
+                    <Image src={checkCircle} alt="Check Icon" />
+                    <p className="text-base text-[#141414] font-grotesk-medium">
+                      Unlimited messages, interactions, and history
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 my-2">
+                    <Image src={checkCircle} alt="Check Icon" />
+                    <p className="text-base text-[#141414] font-grotesk-medium">
+                      Unlimited messages, interactions, and history
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 my-2">
+                    <Image src={checkCircle} alt="Check Icon" />
+                    <p className="text-base text-[#141414] font-grotesk-medium">
+                      Unlimited messages, interactions, and history
+                    </p>
+                  </div>
+                </div>
+              </>
+            );
+          })
+        ) : (
+          <GenericEmptyState />
+        )}
       </div>
     </div>
   );

@@ -66,7 +66,11 @@ export const ProfileNav = ({
       <div className={` lg:p-4 rounded-lg`}>
         <div
           onClick={() => {
-            setShowTierDetais(true);
+            if (noBg) {
+              router.push("/tier-details");
+            } else {
+              setShowTierDetais(true);
+            }
           }}
           className="flex cursor-pointer items-center justify-between bg-[#FBFBFB] px-4 py-2 rounded-lg mt-2"
         >
@@ -99,7 +103,7 @@ export const ProfileNav = ({
           </div>
         </div>
 
-        <div className="py-4">
+        <div className="py-4 pb-0">
           <div className="lg:block hidden">
             <KycWrapper
               clickAction={() => {
