@@ -44,6 +44,7 @@ import { useRouter } from "next/navigation";
 import { Loader } from "@/components/loader/general-loader";
 import { GiftCardDrawer } from "@/components/side-drawers/services/gift-card-drawer";
 import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
+import { DashboardRatesCard } from "@/components/features/dashboard/dashboard-rates";
 
 function Dashboard() {
   const queryClient = useQueryClient();
@@ -296,83 +297,97 @@ function Dashboard() {
               }}
               desktopType
             />
-            <div className="bg-white relative mt-3 py-8 text-center items-center  rounded-4xl p-4 ">
-              <span className="absolute left-0 top-0">
-                <Image src={bgImage} alt="" />
-              </span>
-              <span className="absolute right-0 top-0">
-                <Image src={bgImage} alt="" />
-              </span>
-              <div>
-                <div className="flex justify-center">
-                  {profile && (
-                    <button
-                      disabled={mutateWalletStatus.isPending}
-                      onClick={() => {
-                        mutateWalletStatus.mutate(!profile.isBalanceVisible);
-                      }}
-                      className={`bg-bayfi-green-100 ${mutateWalletStatus.isPending && "opacity-50"} rounded-full px-4 py-1 flex items-center gap-2`}
-                    >
-                      <span>
-                        <Image
-                          src={profile.isBalanceVisible ? eyeIcon : eyeSlash}
-                          alt=""
-                          width={20}
-                          height={20}
-                        />
-                      </span>
-                      <Text type="text-plain-dark-16" value="Wallet balance" />
-                    </button>
-                  )}
-                </div>
+            <Row gutter={16} className="mt-3">
+              <Col xs={14}>
+                <div className="bg-white relative  py-8 text-center items-center  rounded-4xl p-4 ">
+                  <span className="absolute left-0 top-0">
+                    <Image src={bgImage} alt="" />
+                  </span>
+                  <span className="absolute right-0 top-0">
+                    <Image src={bgImage} alt="" />
+                  </span>
+                  <div>
+                    <div className="flex justify-center">
+                      {profile && (
+                        <button
+                          disabled={mutateWalletStatus.isPending}
+                          onClick={() => {
+                            mutateWalletStatus.mutate(
+                              !profile.isBalanceVisible,
+                            );
+                          }}
+                          className={`bg-bayfi-green-100 ${mutateWalletStatus.isPending && "opacity-50"} rounded-full px-4 py-1 flex items-center gap-2`}
+                        >
+                          <span>
+                            <Image
+                              src={
+                                profile.isBalanceVisible ? eyeIcon : eyeSlash
+                              }
+                              alt=""
+                              width={20}
+                              height={20}
+                            />
+                          </span>
+                          <Text
+                            type="text-plain-dark-16"
+                            value="Wallet balance"
+                          />
+                        </button>
+                      )}
+                    </div>
 
-                <div className="py-4">
-                  <Text
-                    type="number-big"
-                    value={
-                      profile?.isBalanceVisible
-                        ? `NGN ${FormatNumber(walletDetails?.walletBalance ?? 0)}`
-                        : "****"
-                    }
-                  />
+                    <div className="py-4">
+                      <Text
+                        type="number-big"
+                        value={
+                          profile?.isBalanceVisible
+                            ? `NGN ${FormatNumber(walletDetails?.walletBalance ?? 0)}`
+                            : "****"
+                        }
+                      />
+                    </div>
+                    <div className="flex items-center gap-2 justify-center">
+                      <button
+                        onClick={() => {
+                          setShowGiftcardDrawer(true);
+                        }}
+                        className="flex items-center border cursor-pointer border-[#E9EBF8] p-1 rounded-xl pr-4"
+                      >
+                        <Image src={giftCardActionIcon} alt="" />
+                        <p className="text-[#444D5A] font-grotesk-bold text-base">
+                          Trade Giftcard
+                        </p>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setDepositModal(true);
+                        }}
+                        className="flex items-center border gap-2 pl-2  border-[#E9EBF8] p-1 rounded-xl pr-4"
+                      >
+                        <Image src={cryptoActionIcon} alt="" />
+                        <p className="text-[#444D5A] cursor-pointer font-grotesk-bold text-base">
+                          Trade Crypto
+                        </p>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowWithdrawModal(true);
+                        }}
+                        className="flex items-center gap-2 pl-2 cursor-pointer border border-[#E9EBF8] p-1 rounded-xl pr-4"
+                      >
+                        <Image src={withdrawActionIcon} alt="" />
+                        <p className="text-[#444D5A] font-grotesk-bold text-base">
+                          Withdraw
+                        </p>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 justify-center">
-                  <button
-                    onClick={() => {
-                      setShowGiftcardDrawer(true);
-                    }}
-                    className="flex items-center border cursor-pointer border-[#E9EBF8] p-1 rounded-xl pr-4"
-                  >
-                    <Image src={giftCardActionIcon} alt="" />
-                    <p className="text-[#444D5A] font-grotesk-bold text-base">
-                      Trade Giftcard
-                    </p>
-                  </button>
-                  <button
-                    onClick={() => {
-                      setDepositModal(true);
-                    }}
-                    className="flex items-center border gap-2 pl-2  border-[#E9EBF8] p-1 rounded-xl pr-4"
-                  >
-                    <Image src={cryptoActionIcon} alt="" />
-                    <p className="text-[#444D5A] cursor-pointer font-grotesk-bold text-base">
-                      Trade Crypto
-                    </p>
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowWithdrawModal(true);
-                    }}
-                    className="flex items-center gap-2 pl-2 cursor-pointer border border-[#E9EBF8] p-1 rounded-xl pr-4"
-                  >
-                    <Image src={withdrawActionIcon} alt="" />
-                    <p className="text-[#444D5A] font-grotesk-bold text-base">
-                      Withdraw
-                    </p>
-                  </button>
-                </div>
-              </div>
-            </div>
+              </Col>
+              <Col xs={10}>
+                <DashboardRatesCard />
+              </Col>
+            </Row>
 
             <div className="mt-6">
               <Text type="header-text-20" value="Other services" />
