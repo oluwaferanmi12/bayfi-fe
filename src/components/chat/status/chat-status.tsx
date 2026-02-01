@@ -26,7 +26,7 @@ export const ChatStatus = ({
         <div
           className={`px-6 py-1 font-grotesk-semi-bold text-[#292D32] text-base my-2 rounded-full bg-[#6DA544]  `}
         >
-          <p>Transaction completed, have any question ?</p>
+          <p>Transaction completed, have any questions?</p>
           <Link href={"/support"}>
             <p className="text-[#F0F0F0] font-grotesk-extra-bold">
               Contact support
