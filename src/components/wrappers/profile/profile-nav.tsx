@@ -1,16 +1,16 @@
 import avatarPlacholder from "@/assets/svg/profile-default-avatar.svg";
 import Image from "next/image";
-import { IncompleteKycBadge } from "@/components/wrappers/profile/incomplete-kyc";
-import profileSetting from "@/assets/svg/profile-setting-icon.svg";
-import leaderboardIcon from "@/assets/svg/profile-leaderboard-icon.svg";
-import securityIcon from "@/assets/svg/profile-setting-icon.svg";
-import helpIcon from "@/assets/svg/profile-help-icon.svg";
 import aboutIcon from "@/assets/svg/profile-about-icon.svg";
 import logoutIcon from "@/assets/svg/profile-logout-icon.svg";
 import arrowRightTop from "@/assets/svg/arrow-right-top.svg";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
-import arrowRightGreen from "@/assets/svg/arrow-right-green.svg";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useFetchProfile } from "@/hooks/query/useProfile";
@@ -18,7 +18,15 @@ import { ProfileDataInterface } from "@/types/profile.types";
 import { useLogout } from "@/hooks/query";
 import { isValidImageUrl } from "@/utils/checkValidImage";
 import { KycWrapper } from "@/components/mobile-components/wrappers/kyc-wrapper";
-import { Loader } from "@/components/loader/general-loader";
+import { Tier } from "@/components/features/profile/tier";
+import arrowRightShort from "@/assets/svg/arrow-right-short.svg";
+import linearUser from "@/assets/svg/linear-user.svg";
+import keyIcon from "@/assets/svg/key.svg";
+import moonIcon from "@/assets/svg/moon-icon.svg";
+import { Switch } from "antd";
+import directBoxSend from "@/assets/svg/direct-box-send.svg";
+import buildingIcon from "@/assets/svg/building-icon.svg";
+import legalIcon from "@/assets/svg/legal-icon.svg";
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -50,47 +58,55 @@ export const ProfileNav = ({
 
   return (
     <>
-      <div className={`${!noBg && "bg-bayfi-grey-100"}  lg:p-4 rounded-lg`}>
-        <div className="lg:block hidden">
-          <KycWrapper
-            clickAction={() => {
-              setActiveProfile("kyc");
-            }}
-            desktopType
-          />
-        </div>
-        <div className="lg:hidden">
-          <KycWrapper
-            clickAction={() => {
-              router.push("/complete-kyc");
-            }}
-            desktopType
-          />
+      <div className={`  lg:p-4 rounded-lg`}>
+        <div className="flex items-center justify-between bg-[#FBFBFB] px-4 rounded-lg mt-2">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center mt-4 ">
+              <div className="w-15 h-15 overflow-hidden relative">
+                <Image
+                  className="border object-cover w-full border-[#CBE461] rounded-full"
+                  src={imageUrl ? imageUrl : avatarPlacholder}
+                  alt=""
+                  layout="fill"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-center min-w-0">
+              <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl truncate max-w-[180px] lg:max-w-[240px]">
+                {profileData
+                  ? `${profileData.firstName} ${profileData.lastName}`
+                  : ""}
+              </p>
+              <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base truncate max-w-[180px] lg:max-w-[240px]">
+                {profileData?.username}
+              </p>
+            </div>
+          </div>
+          <div>
+            <Tier />
+          </div>
         </div>
 
-        <div className="flex items-center justify-center mt-4 ">
-          <div className="w-15 h-15 overflow-hidden relative">
-            <Image
-              className="border object-cover w-full border-[#CBE461] rounded-full"
-              src={imageUrl ? imageUrl : avatarPlacholder}
-              alt=""
-              layout="fill"
+        <div className="py-4">
+          <div className="lg:block hidden">
+            <KycWrapper
+              clickAction={() => {
+                setActiveProfile("kyc");
+              }}
+              desktopType
+            />
+          </div>
+          <div className="lg:hidden">
+            <KycWrapper
+              clickAction={() => {
+                router.push("/complete-kyc");
+              }}
+              desktopType
             />
           </div>
         </div>
 
-        <div className="flex items-center flex-col  justify-center">
-          <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl">
-            {profileData ? (
-              `${profileData.firstName} ${profileData.lastName}`
-            ) : (
-              <Loader />
-            )}
-          </p>
-          <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base">
-            {profileData?.username}
-          </p>
-        </div>
         <div className="mt-4 pb-28 lg:pb-0">
           <ProfileNavContainer
             clickAction={() => {
@@ -99,15 +115,15 @@ export const ProfileNav = ({
               }
               setActiveProfile("setting");
             }}
-            icon={profileSetting}
-            text="Profile Setting"
+            icon={linearUser}
+            text="Account information"
             whiteBg={noBg}
           />
-          <ProfileNavContainer
+          {/* <ProfileNavContainer
             whiteBg={noBg}
             icon={leaderboardIcon}
             text="Leaderboard"
-          />
+          /> */}
           <ProfileNavContainer
             clickAction={() => {
               if (noBg) {
@@ -115,19 +131,41 @@ export const ProfileNav = ({
               }
               setActiveProfile("security");
             }}
-            icon={securityIcon}
-            text="Security settings"
+            icon={keyIcon}
+            text="Security"
             whiteBg={noBg}
           />
           <ProfileNavContainer
+            clickAction={() => {
+              // if (noBg) {
+              //   router.push("/security-setting");
+              // }
+              // setActiveProfile("security");
+            }}
+            icon={moonIcon}
+            text="Dark Mode"
             whiteBg={noBg}
-            icon={helpIcon}
+            extraIcon={
+              <>
+                <Switch />
+              </>
+            }
+          />
+          <ProfileNavContainer
+            whiteBg={noBg}
+            icon={directBoxSend}
             text="Help & Support"
           />
           <ProfileNavContainer
-            icon={aboutIcon}
+            icon={buildingIcon}
             text="About Bayfi"
-            extraIcon={arrowRightTop}
+            extraIcon={<Image src={arrowRightTop} alt="" />}
+            whiteBg={noBg}
+          />
+          <ProfileNavContainer
+            icon={legalIcon}
+            text="Legal"
+            extraIcon={<Image src={arrowRightTop} alt="" />}
             whiteBg={noBg}
           />
           <ProfileNavContainer
@@ -153,7 +191,7 @@ export const ProfileNavContainer = ({
 }: {
   icon: string;
   text: string;
-  extraIcon?: string;
+  extraIcon?: ReactNode;
   logoutType?: boolean;
   clickAction?: () => void;
   whiteBg?: boolean;
@@ -166,7 +204,7 @@ export const ProfileNavContainer = ({
         }
       }}
       className={`flex ${whiteBg && "bg-white rounded-lg px-4 mb-2"} items-center  justify-between cursor-pointer py-3`}
-      style={{ borderBottom: "1px solid #EBF1FF" }}
+      // style={{ borderBottom: "1px solid #EBF1FF" }}
     >
       <div className="flex items-center gap-3 ">
         <Image src={icon} alt="" />
@@ -178,11 +216,7 @@ export const ProfileNavContainer = ({
       </div>
       {(extraIcon || whiteBg) &&
         !logoutType &&
-        (extraIcon ? (
-          <Image src={extraIcon} alt="" />
-        ) : (
-          <Image src={arrowRightGreen} alt="" />
-        ))}
+        (extraIcon ? extraIcon : <Image src={arrowRightShort} alt="" />)}
     </div>
   );
 };

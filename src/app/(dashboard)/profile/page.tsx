@@ -13,7 +13,6 @@ function ProfileSetting() {
   useEffect(() => {
     const urlParam = new URLSearchParams(window.location.search);
     const kycVal = urlParam.get("type");
-    console.log(kycVal, "Kyc Value here");
     if (kycVal === "kyc") {
       setActiveProfile("kyc");
     } else {
@@ -33,7 +32,7 @@ function ProfileSetting() {
       <div className="p-4">
         <Row>
           <Col xs={6}>
-            <ProfileNav setActiveProfile={setActiveProfile} />
+            <ProfileNav  setActiveProfile={setActiveProfile} />
           </Col>
           <Col xs={18}>
             <div className="flex items-center justify-center w-full">

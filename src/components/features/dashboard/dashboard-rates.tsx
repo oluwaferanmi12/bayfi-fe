@@ -17,14 +17,14 @@ export const DashboardRatesCard = () => {
     setActiveIndex(0);
     const intervalId = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % rates.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(intervalId);
   }, [rates.length]);
 
   useEffect(() => {
     if (!rates.length) return;
     setIsAnimating(true);
-    const timeoutId = setTimeout(() => setIsAnimating(false), 50);
+    const timeoutId = setTimeout(() => setIsAnimating(false), 100);
     return () => clearTimeout(timeoutId);
   }, [activeIndex, rates.length]);
 
