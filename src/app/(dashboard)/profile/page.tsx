@@ -7,6 +7,7 @@ import { PasswordForm } from "@/components/features/profile/password-form";
 import { ProfileForm } from "@/components/features/profile/profile-form";
 import { useEffect, useState } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
+import { Legal } from "@/components/features/profile/legal/legal";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
@@ -31,8 +32,8 @@ function ProfileSetting() {
       </div>
       <div className="p-4">
         <Row>
-          <Col xs={6}>
-            <ProfileNav  setActiveProfile={setActiveProfile} />
+          <Col xs={6} className="border-r border-[#FBFBFB]">
+            <ProfileNav setActiveProfile={setActiveProfile} />
           </Col>
           <Col xs={18}>
             <div className="flex items-center justify-center w-full">
@@ -42,6 +43,7 @@ function ProfileSetting() {
                     {activeProfile === "setting" && <ProfileForm />}
                     {activeProfile === "security" && <PasswordForm />}
                     {activeProfile === "kyc" && <KycForm />}
+                    {activeProfile === "legal" && <Legal />}
                   </div>
                 </Col>
               </Row>

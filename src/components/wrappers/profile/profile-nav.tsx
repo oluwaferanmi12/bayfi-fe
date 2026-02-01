@@ -58,10 +58,10 @@ export const ProfileNav = ({
 
   return (
     <>
-      <div className={`  lg:p-4 rounded-lg`}>
-        <div className="flex items-center justify-between bg-[#FBFBFB] px-4 rounded-lg mt-2">
+      <div className={` lg:p-4 rounded-lg`}>
+        <div className="flex items-center justify-between bg-[#FBFBFB] px-4 py-2 rounded-lg mt-2">
           <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center mt-4 ">
+            <div className="flex items-center justify-center ">
               <div className="w-15 h-15 overflow-hidden relative">
                 <Image
                   className="border object-cover w-full border-[#CBE461] rounded-full"
@@ -73,12 +73,12 @@ export const ProfileNav = ({
             </div>
 
             <div className="flex flex-col justify-center min-w-0">
-              <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl truncate max-w-[180px] lg:max-w-[240px]">
+              <p className="text-bayfi-black-900 font-grotesk-medium text-xl lg:text-2xl truncate max-w-45 lg:max-w-60">
                 {profileData
                   ? `${profileData.firstName} ${profileData.lastName}`
                   : ""}
               </p>
-              <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base truncate max-w-[180px] lg:max-w-[240px]">
+              <p className="text-text-color-600 font-grotesk-medium text-sm lg:text-base truncate max-w-45 lg:max-w-60">
                 {profileData?.username}
               </p>
             </div>
@@ -163,6 +163,12 @@ export const ProfileNav = ({
             whiteBg={noBg}
           />
           <ProfileNavContainer
+            clickAction={() => {
+              if (noBg) {
+                router.push("/legal");
+              }
+              setActiveProfile("legal");
+            }}
             icon={legalIcon}
             text="Legal"
             extraIcon={<Image src={arrowRightTop} alt="" />}
