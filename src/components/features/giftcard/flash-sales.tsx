@@ -1,6 +1,7 @@
 import { Button } from "@/components/buttons";
 import hotCard from "@/assets/svg/hot-card.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const FlashSalesCard = () => {
   return (
@@ -18,7 +19,9 @@ export const FlashSalesCard = () => {
           </p>
         </div>
         <div>
-          <Button loading={false} text="See Deals" type="bgGreen" />
+          <Link href="/hot-card-deals">
+            <Button loading={false} text="See Deals" type="bgGreen" />
+          </Link>
         </div>
       </div>
     </div>
