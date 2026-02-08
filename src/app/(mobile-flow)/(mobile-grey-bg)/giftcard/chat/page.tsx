@@ -7,7 +7,7 @@ import { InitiateCardTxn } from "@/types";
 
 function GiftCardChat() {
   const [initTxn, setInitTxn] = useState<InitiateCardTxn | undefined>(
-    undefined
+    undefined,
   );
 
   useEffect(() => {
@@ -26,7 +26,9 @@ function GiftCardChat() {
   return (
     <>
       <PageTitle title="Giftcards/Sell" />
-      <ChatContainer bgWhite initTxn={initTxn} />
+      <div>
+        <ChatContainer bgWhite initTxn={initTxn} />
+      </div>
     </>
   );
 }

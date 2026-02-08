@@ -1,3 +1,4 @@
+"use client";
 import { SupportHeaderType } from "@/components/chat/support/support-header-type";
 import { ChatInput } from "@/components/inputs/chat-input";
 import { useChatMessage } from "@/hooks/custom/chat/useMessage";
@@ -5,6 +6,7 @@ import { InitiateCardTxn, Message } from "@/types";
 import { useEffect, useRef, useState } from "react";
 import { MessageWrapper } from "./message-wrapper";
 import { Loader } from "../loader/general-loader";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export const ChatContainer = ({
   chatType,
@@ -16,14 +18,20 @@ export const ChatContainer = ({
   initTxn?: InitiateCardTxn;
 }) => {
   const [initMessage, setInitMessage] = useState<any>();
-
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const extractedChatId = searchParams.get("id") ?? undefined;
   const {
     handleSendMessage,
     messages,
     messageLoading,
     chatDetail,
     chatDetailLoading,
-  } = useChatMessage(initMessage?.chatTransactionId, initTxn, true);
+  } = useChatMessage(
+    extractedChatId ?? initMessage?.chatTransactionId,
+    initTxn,
+    true,
+  );
 
   useEffect(() => {
     if (!initMessage && messages?.length) setInitMessage(messages[0]);

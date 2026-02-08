@@ -10,6 +10,7 @@ export interface Message {
   amount: number;
   messageInitiator: MessageType;
   messageInitiatorDescription: string;
+  chatTransactionId?: number;
 }
 
 export interface MessagePayload {

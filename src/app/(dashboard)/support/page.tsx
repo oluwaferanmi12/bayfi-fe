@@ -8,7 +8,6 @@ import { TableInput } from "@/components/inputs/table-input";
 import { TablePagination } from "@/components/pagination/table-pagination";
 import { Col, Row } from "antd";
 import { ChatContainer } from "@/components/chat/chat-container";
-import { TransactionTable } from "@/components/tables/transaction-table";
 import { SupportTable } from "@/components/tables/support-table";
 import { SideDrawer } from "@/components/side-drawers/side-drawer";
 import { GInput } from "@/components/inputs/GInput";

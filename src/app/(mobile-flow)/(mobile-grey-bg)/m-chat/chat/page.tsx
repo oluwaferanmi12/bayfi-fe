@@ -26,7 +26,7 @@ function MChatDetails() {
   return (
     <div className="h-full">
       <PageTitle fixed title={`Giftcard Chat`} />
-      <div>
+      <div >
         <MessageWrapper
           messages={messages}
           messageLoading={messageLoading}

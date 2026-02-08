@@ -2,12 +2,13 @@ import { useGetChatDetail, useGetOneChat } from "@/hooks/query";
 import { useStompClient } from "@/hooks/stomp/useChatStomp";
 import { InitiateCardTxn, Message } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const useChatMessage = (
   chatId: string,
   initTxn?: InitiateCardTxn,
-  autoConnect?: boolean
+  autoConnect?: boolean,
 ) => {
   const queryClient = useQueryClient();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -15,6 +16,8 @@ export const useChatMessage = (
   const { client, isConnected, subscribe } = useStompClient({
     autoConnect: connectToChat,
   });
+  const router = useRouter();
+  const pathName = usePathname();
   const [showInput, setShowInput] = useState(false);
   const { data, isPending: messageLoading } = useGetOneChat(chatId!);
   const { data: chatDetail, isPending: chatDetailLoading } =
@@ -32,6 +35,12 @@ export const useChatMessage = (
     });
   };
   const handleMessage = (m: Message) => {
+    console.log(m, "Value for the first messge");
+    console.log(pathName, "Current pathname");
+    if (pathName.includes("giftcard/chat") && m.chatTransactionId) {
+      router.push(`${pathName}?id=${m.chatTransactionId}`);
+      localStorage.removeItem("initiateCardTxn");
+    }
     setMessages((prev) => [...prev, m]);
   };
 
