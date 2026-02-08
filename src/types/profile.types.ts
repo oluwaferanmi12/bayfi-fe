@@ -39,6 +39,11 @@ export interface KYC {
   lastName: string;
   bvn: string;
 }
+export interface KYCNin {
+  firstName: string;
+  lastName: string;
+  nin: string;
+}
 
 export interface TierDetails {
   id: string;

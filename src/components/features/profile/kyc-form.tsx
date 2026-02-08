@@ -103,7 +103,7 @@ export const KycForm = () => {
 
         {profile?.tierLevel !== "TIER3" && (
           <Button
-            loading={doKycBvn.isPending}
+            loading={doKycBvn.isPending || doKycNin.isPending}
             text="Save changes"
             type="bgGreen"
             fullWidth
@@ -111,6 +111,8 @@ export const KycForm = () => {
               // handleUpdateProfile();
               if (profile?.tierLevel === "TIER1") {
                 doKycNin.mutate({
+                  firstName: formData.firstName,
+                  lastName: formData.lastName,
                   nin,
                 });
                 return;
