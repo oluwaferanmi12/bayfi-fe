@@ -30,31 +30,35 @@ const OtherServices = () => {
         />
         <OtherServiceWrapper
           action={() => {
-            router.push("/betting");
+            // router.push("/betting");
           }}
+          showComingSoon
           icon={bettingIcon}
           text="Betting "
         />
         <OtherServiceWrapper
           action={() => {
-            router.push("/buy-airtime");
+            // router.push("/buy-airtime");
           }}
+          showComingSoon
           icon={airtimeIcon}
           text="Buy Airtime "
         />
 
         <OtherServiceWrapper
           action={() => {
-            router.push("/buy-data");
+            // router.push("/buy-data");
           }}
+          showComingSoon
           icon={mobileIcon}
           text="Mobile Data "
         />
 
         <OtherServiceWrapper
           action={() => {
-            router.push("/buy-cable");
+            // router.push("/buy-cable");
           }}
+          showComingSoon
           icon={cableBlackIcon}
           text="Cable TV"
         />

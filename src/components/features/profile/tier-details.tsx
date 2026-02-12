@@ -8,6 +8,7 @@ import checkCircle from "@/assets/svg/check-circle.svg";
 import { useGetTiers } from "@/hooks/query";
 import { Loader } from "@/components/loader/general-loader";
 import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
+import { FormatNumber } from "@/utils/formatter";
 
 export const TierDetails = ({ mobileType }: { mobileType?: boolean }) => {
   const { profile } = useProfileStore();
@@ -62,12 +63,14 @@ export const TierDetails = ({ mobileType }: { mobileType?: boolean }) => {
                     </p>
                   </div>
                   <div>
-                    <Image
-                      height={24}
-                      width={24}
-                      src={kycIcon}
-                      alt="KYC Badge"
-                    />
+                    {profile?.tierLevel === item.level && (
+                      <Image
+                        height={24}
+                        width={24}
+                        src={kycIcon}
+                        alt="KYC Badge"
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -78,21 +81,16 @@ export const TierDetails = ({ mobileType }: { mobileType?: boolean }) => {
                   <div className="flex items-center gap-2 my-2">
                     <Image src={checkCircle} alt="Check Icon" />
                     <p className="text-base text-[#141414] font-grotesk-medium">
-                      Unlimited messages, interactions, and history
+                      Daily debit limit: NGN {FormatNumber(item.dailyDebitLimit)}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 my-2">
                     <Image src={checkCircle} alt="Check Icon" />
                     <p className="text-base text-[#141414] font-grotesk-medium">
-                      Unlimited messages, interactions, and history
+                      Daily credit limit: NGN {FormatNumber(item.dailyCreditLimit)}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 my-2">
-                    <Image src={checkCircle} alt="Check Icon" />
-                    <p className="text-base text-[#141414] font-grotesk-medium">
-                      Unlimited messages, interactions, and history
-                    </p>
-                  </div>
+                 
                 </div>
               </>
             );

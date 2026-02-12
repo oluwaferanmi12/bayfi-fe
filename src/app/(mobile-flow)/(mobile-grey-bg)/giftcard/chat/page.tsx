@@ -2,7 +2,7 @@
 
 import { ChatContainer } from "@/components/chat/chat-container";
 import { PageTitle } from "@/components/mobile-components/headers/page-title";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { InitiateCardTxn } from "@/types";
 
 function GiftCardChat() {

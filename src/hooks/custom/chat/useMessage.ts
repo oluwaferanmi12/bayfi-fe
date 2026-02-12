@@ -35,8 +35,6 @@ export const useChatMessage = (
     });
   };
   const handleMessage = (m: Message) => {
-    console.log(m, "Value for the first messge");
-    console.log(pathName, "Current pathname");
     if (pathName.includes("giftcard/chat") && m.chatTransactionId) {
       router.push(`${pathName}?id=${m.chatTransactionId}`);
       localStorage.removeItem("initiateCardTxn");
