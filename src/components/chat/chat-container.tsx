@@ -18,9 +18,8 @@ export const ChatContainer = ({
   initTxn?: InitiateCardTxn;
 }) => {
   const [initMessage, setInitMessage] = useState<any>();
-  const pathName = usePathname();
-  const searchParams = useSearchParams();
-  const extractedChatId = searchParams.get("id") ?? undefined;
+
+  const [extractedChatId, setExtractedId] = useState<string | undefined>();
   const {
     handleSendMessage,
     messages,
@@ -34,8 +33,14 @@ export const ChatContainer = ({
   );
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    setExtractedId(searchParams.get("id") ?? undefined);
+  }, []);
+  useEffect(() => {
     if (!initMessage && messages?.length) setInitMessage(messages[0]);
   }, [messages, initMessage]);
+
+  useEffect(() => {}, []);
 
   return (
     <div
