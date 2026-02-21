@@ -1,8 +1,8 @@
 import moment from "moment";
 
-export const FormatNumber = (val: number) => {
+export const FormatNumber = (val: number, hideZeroDecimals = false) => {
   return val.toLocaleString(undefined, {
-    minimumFractionDigits: 2,
+    minimumFractionDigits: hideZeroDecimals ? 0 : 2,
     maximumFractionDigits: 2,
   });
 };

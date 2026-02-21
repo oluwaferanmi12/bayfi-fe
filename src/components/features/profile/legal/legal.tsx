@@ -9,7 +9,7 @@ export const Legal = () => {
   return (
     <section>
       <Row className="mb-5">
-        <Col xs={8}>
+        <Col xs={24} lg={10} xl={8}>
           <div className="bg-[#F9F9F9] p-1 rounded-lg flex items-center gap-1 relative">
             <div
               className="flex-1 rounded-lg p-3 cursor-pointer relative z-10"

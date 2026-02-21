@@ -58,7 +58,7 @@ export const GiftcardRates = () => {
                     {rate.cardName}
                   </p>
                   <p className="text-[#20242A] text-sm font-grotesk-medium">
-                    ${FormatNumber(rate.rate)} at {FormatNumber(rate.rate)}/$
+                    ${FormatNumber(rate.rate, true)} at {FormatNumber(rate.rate, true)}/$
                   </p>
                 </div>
               </Col>

@@ -77,12 +77,15 @@ function Dashboard() {
   return (
     <>
       <div className="hidden lg:block">
-        <WithdrawDrawer
-          open={showWithdrawModal}
-          close={() => {
-            setShowWithdrawModal(false);
-          }}
-        />
+        {showWithdrawModal && (
+          <WithdrawDrawer
+            open={showWithdrawModal}
+            close={() => {
+              setShowWithdrawModal(false);
+            }}
+          />
+        )}
+
         <GiftCardDrawer
           handleClose={() => {
             setShowGiftcardDrawer(false);

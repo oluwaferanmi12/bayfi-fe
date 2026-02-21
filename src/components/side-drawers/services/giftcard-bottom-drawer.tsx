@@ -26,7 +26,7 @@ export const GiftcardBottomDrawer = ({
             <Text value="Sell Giftcard" type="text-plain-green-18" />
             <div className="w-[80%]">
               <Text
-                value="Deposit naira via bank transfer or with your card"
+                value="Convert your cards to Naira with siuuper speeed"
                 type="text-small-white"
               />
             </div>
@@ -41,7 +41,7 @@ export const GiftcardBottomDrawer = ({
             <Text value="Buy Giftcard" type="text-plain-dark-18" />
             <div className="w-[80%]">
               <Text
-                value="Swift and reliable trading of any Giftcard"
+                value="Purchase giftcards for easy transfer across channels."
                 type="text-small-light"
               />
             </div>

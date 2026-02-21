@@ -58,7 +58,7 @@ export const useWithdraw = () => {
         amount: "Invalid amount entered",
       }));
       validated = false;
-    } else if (+stripCommas(amount) < 500) {
+    } else if (+stripCommas(amount) < 200) {
       setPayloadError((prev) => ({
         ...prev,
         amount: "Only an amount greater than 500 can be withdrawn",

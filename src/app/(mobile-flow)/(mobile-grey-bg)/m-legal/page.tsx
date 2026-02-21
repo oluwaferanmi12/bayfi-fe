@@ -8,7 +8,7 @@ function Legal() {
     <>
       <PageTitle title="Legal" />
       <div className="">
-        <Link href={"/legal/terms"}>
+        <Link href={"/m-legal/terms"}>
           <div className="flex items-center justify-between bg-white p-4 rounded-xl mb-2">
             <p className="text-bayfi-black-600 font-inter-medium text-sm">
               Terms of Use
@@ -16,7 +16,7 @@ function Legal() {
             <Image src={arrowRight} alt="arrow right" />
           </div>
         </Link>
-        <Link href={"/legal/privacy"}>
+        <Link href={"/m-legal/privacy"}>
           <div className="flex items-center justify-between bg-white p-4 rounded-xl mb-2">
             <p className="text-bayfi-black-600 font-inter-medium text-sm">
               Privacy Policy

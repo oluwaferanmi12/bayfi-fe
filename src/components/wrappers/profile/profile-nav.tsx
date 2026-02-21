@@ -180,7 +180,7 @@ export const ProfileNav = ({
           <ProfileNavContainer
             clickAction={() => {
               if (noBg) {
-                router.push("/legal");
+                router.push("/m-legal");
               }
               setActiveProfile("legal");
             }}

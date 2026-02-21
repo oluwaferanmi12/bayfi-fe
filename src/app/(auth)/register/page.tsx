@@ -239,6 +239,17 @@ const Register = () => {
                   password={password}
                 />
               </div>
+              <div className="mt-4 text-center text-sm text-[#586068]">
+                By registering, you agree to our{" "}
+                <Link href="/legal" className="text-[#242628] underline">
+                  Terms of Use
+                </Link>{" "}
+                and{" "}
+                <Link href="/legal" className="text-[#242628] underline">
+                  Privacy Policy
+                </Link>
+                .
+              </div>
               <div className="mt-4">
                 <Button
                   action={() => {
