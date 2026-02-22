@@ -3,7 +3,6 @@
 import eyeIcon from "@/assets/svg/eyeIconWhite.svg";
 import { Text } from "@/components/texts/text";
 import { useProfileStore } from "@/store/userProfileStore";
-import eyeSlashed from "@/assets/svg/eye-slash.svg";
 import Image from "next/image";
 import { useWalletStore } from "@/store/walletStore";
 import { FormatNumber } from "@/utils/formatter";
@@ -27,10 +26,12 @@ export const DarkBalanceWrapper = () => {
               mutateWalletStatus.mutate(!profile?.isBalanceVisible);
             }}
           >
-            <Image
-              src={profile?.isBalanceVisible ? eyeIcon : eyeSlashed}
-              alt=""
-            />
+            <div className="relative">
+              <Image src={eyeIcon} alt="" />
+              {!profile?.isBalanceVisible && (
+                <span className="absolute left-1/2 top-1/2 w-4 h-[1.5px] bg-white -translate-x-1/2 -translate-y-1/2 rotate-[-35deg]" />
+              )}
+            </div>
             <Text type="text-small-white" value="Available balance" />
           </button>
         </div>

@@ -3,7 +3,7 @@ import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
 import exportIcon from "@/assets/svg/export-icon.svg";
 import { TransactionTable } from "@/components/tables/transaction-table";
-import { useGetTransaction, useGetTransactionSummary } from "@/hooks/query";
+import { useGetTransactionSummary } from "@/hooks/query";
 import { Col, Row } from "antd";
 import arrowDownGreen from "@/assets/svg/arrow-down-green.svg";
 import arrowUpOrange from "@/assets/svg/arrow-up-orange.svg";

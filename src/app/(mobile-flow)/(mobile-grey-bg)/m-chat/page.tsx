@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useGetActivChat } from "@/hooks/query";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/loader/general-loader";
+import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
 
 export default function MobileChatList() {
   const [activeTab, setActiveTab] = useState<"chat" | "support">("chat");
@@ -41,7 +42,7 @@ export default function MobileChatList() {
             {activeTab === "support" && <Image src={messageIcon} alt="" />}
             <p className="text-lg font-grotesk-medium">Support</p>
           </div>
-      </div>
+        </div>
         {isPending ? (
           <Loader />
         ) : data?.length ? (
@@ -58,7 +59,7 @@ export default function MobileChatList() {
             ))}
           </>
         ) : (
-          "No data found"
+          <GenericEmptyState />
         )}
       </div>
     </>

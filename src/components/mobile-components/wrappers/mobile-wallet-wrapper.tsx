@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { Wallet } from "@/types";
 import { FormatNumber } from "@/utils/formatter";
 import { useProfileStore } from "@/store/userProfileStore";
-import eyeSlash from "@/assets/svg/eye-slash.svg";
 import { useToggleWalletStatus } from "@/hooks/query";
 import { useQueryClient } from "@tanstack/react-query";
 import eyeGreyBg from "@/assets/svg/eye-grey-bg.svg";
@@ -135,11 +134,14 @@ export const MobileWalletWrapper = ({
           }}
           className="flex items-center gap-2"
         >
-          <Image
-            className={`${mutateWalletStatus.isPending && "opacity-50"}`}
-            src={eyeGreyBg}
-            alt=""
-          />
+          <div
+            className={`relative ${mutateWalletStatus.isPending && "opacity-50"}`}
+          >
+            <Image src={eyeGreyBg} alt="" />
+            {!profile?.isBalanceVisible && (
+              <span className="absolute left-1/2 top-1/2 w-5 h-[1.5px] bg-white -translate-x-1/2 -translate-y-1/2 rotate-[-35deg]" />
+            )}
+          </div>
           <button
             disabled={mutateWalletStatus.isPending}
             className={`border border-[#F0F0F033]  rounded-full bg-[#F0F0F066] px-4 gap-2 ${mutateWalletStatus.isPending && "opacity-50"}`}

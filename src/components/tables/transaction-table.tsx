@@ -12,7 +12,6 @@ import { TableStatus } from "@/components/status/table-status";
 import { useState } from "react";
 import { Transaction, TransactionCategory } from "@/types";
 import { momentLocal } from "@/utils/moment-local";
-import { useGetTransactionLog } from "@/hooks/query";
 import { TableInput } from "../inputs/table-input";
 import { TablePagination } from "../pagination/table-pagination";
 import { Loader } from "../loader/general-loader";
