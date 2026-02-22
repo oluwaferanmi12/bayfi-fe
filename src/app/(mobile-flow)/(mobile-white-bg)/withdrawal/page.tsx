@@ -14,10 +14,12 @@ import { FormatNumber, numberFormatter, stripCommas } from "@/utils/formatter";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
+import binIcon from "@/assets/svg/bin-icon.svg";
+import { useRouter } from "next/navigation";
 
 const WithdrawalMobile = () => {
+  const router = useRouter();
   const {
-    data,
     beneficiaryLoading,
     searchedValue,
     selectedBank,
@@ -39,6 +41,10 @@ const WithdrawalMobile = () => {
     setPin,
     disburse,
     pin,
+    beneficiaries,
+    accountNumber,
+    handleDeleteBeneficiary,
+    deletingBeneficiary,
   } = useWithdraw();
 
   return (
@@ -49,7 +55,7 @@ const WithdrawalMobile = () => {
           <div className="mb-3">
             <DarkBalanceWrapper />
           </div>
-          {!beneficiaryLoading && data && data.length > 0 && (
+          {!beneficiaryLoading && beneficiaries && beneficiaries.length > 0 && (
             <>
               <div className="mb-3">
                 <p className="text-text-color-900 font-grotesk-bold text-sm">
@@ -57,7 +63,32 @@ const WithdrawalMobile = () => {
                 </p>
               </div>
               <div className="flex items-center gap-4 overflow-x-scroll hide-scrollbar">
-                <MobileContactWrapper />
+                {beneficiaries.map((item) => (
+                  <div key={item.id} className="flex flex-col items-center relative">
+                    <MobileContactWrapper
+                      beneficiary={item}
+                      click={(val) => {
+                        setSelectedBank({
+                          label: val.bankName,
+                          value: val.bankCode,
+                        });
+                        setAccountNumber(val.accountNumber);
+                      }}
+                    />
+                    <button
+                      type="button"
+                      disabled={deletingBeneficiary}
+                      
+                      onClick={() => {
+                        handleDeleteBeneficiary(item.id);
+                      }}
+                      className={`absolute mt-1 top-0 right-4 ${deletingBeneficiary ? "opacity-50" : "cursor-pointer"}`}
+                      aria-label={`Remove ${item.accountName}`}
+                    >
+                      <Image src={binIcon} alt="Delete beneficiary" />
+                    </button>
+                  </div>
+                ))}
               </div>
             </>
           )}
@@ -78,7 +109,7 @@ const WithdrawalMobile = () => {
                 <Select
                   showSearch
                   searchValue={searchedValue}
-                  value={selectedBank?.value}
+                  value={selectedBank?.label}
                   placeholder="Type to search bank..."
                   options={bankOptions}
                   filterOption={false} // IMPORTANT: remote search (don't filter locally)
@@ -108,6 +139,7 @@ const WithdrawalMobile = () => {
               onChange={(e) => {
                 setAccountNumber(e.target.value);
               }}
+              value={accountNumber}
               label="Recipient account"
               placeholder="Enter 10 digits account number"
               error={payloadError.accountNumber}
@@ -131,7 +163,20 @@ const WithdrawalMobile = () => {
           </div>
         </>
       ) : showReciept && disburseResponse ? (
-        <GReceipt payload={disburseResponse} />
+        <GReceipt
+          selectedBank={selectedBank}
+          handleClose={() => {
+            router.push("/dashboard");
+          }}
+          payload={disburseResponse}
+          showBeneficiaryButton={
+            beneficiaries?.length
+              ? beneficiaries.some(
+                  (item) => item.accountNumber !== accountNumber,
+                )
+              : false
+          }
+        />
       ) : (
         <div className="flex items-center justify-center flex-col">
           <Text type="header-text-20" value="You are about to send" />

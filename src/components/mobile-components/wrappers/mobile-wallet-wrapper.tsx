@@ -175,10 +175,8 @@ export const MobileWalletWrapper = ({
           </p>
         </button>
         <button
-          onClick={() => {
-            setShowDepositModal(true);
-          }}
-          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center"
+          disabled
+          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center blur-[1.5px] opacity-60 pointer-events-none"
         >
           <div>
             <Image src={cryptoActionIcon} alt="" />

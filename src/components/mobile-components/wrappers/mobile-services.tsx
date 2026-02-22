@@ -40,7 +40,7 @@ export const MobileDashboardService = () => {
             onClick={() => {
               router.push("/buy-airtime");
             }}
-            className="flex flex-col items-center justify-center gap-2"
+            className="flex flex-col items-center justify-center gap-2 blur-[1.5px] opacity-60 pointer-events-none"
           >
             <Image src={airtimeIcon} alt="" />
             <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
@@ -51,7 +51,7 @@ export const MobileDashboardService = () => {
             onClick={() => {
               router.push("/betting");
             }}
-            className="flex flex-col items-center justify-center gap-2"
+            className="flex flex-col items-center justify-center gap-2 blur-[1.5px] opacity-60 pointer-events-none"
           >
             <Image src={bettingIcon} alt="" />
             <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">

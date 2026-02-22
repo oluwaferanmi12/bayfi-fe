@@ -1,11 +1,27 @@
 import { Button } from "@/components/buttons";
 import { Text } from "@/components/texts/text";
+import { useSaveBeneficiary } from "@/hooks/query/usePayment";
+import { BankOption } from "@/interfaces/interfaces";
 import { DisburseResponse } from "@/types";
 import { FormatNumber } from "@/utils/formatter";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
-export const GReceipt = ({ payload }: { payload: DisburseResponse }) => {
+export const GReceipt = ({
+  payload,
+  selectedBank,
+  handleClose,
+  showBeneficiaryButton,
+}: {
+  payload: DisburseResponse;
+  selectedBank: BankOption | null;
+  handleClose: () => void;
+  showBeneficiaryButton?: boolean;
+}) => {
   const router = useRouter();
+  const saveBeneficiary = useSaveBeneficiary(() => {
+    toast.success("Beneficiary saved successfully");
+  });
   return (
     <>
       <div className="bg-bayfi-black-500 rounded-2xl p-4">
@@ -48,12 +64,28 @@ export const GReceipt = ({ payload }: { payload: DisburseResponse }) => {
           />
         </div>
         <div className="mt-4">
-          <Button text="Get receipt" type="bgGreen" fullWidth loading={false} />
+          {showBeneficiaryButton && (
+            <div className="mb-2">
+              <Button
+                text="Save as beneficiary"
+                type="bgWhite"
+                fullWidth
+                loading={saveBeneficiary.isPending}
+                action={() => {
+                  saveBeneficiary.mutate({
+                    accountName: payload.beneficiaryAccountName,
+                    accountNumber: payload.beneficiaryAccountNumber,
+                    bankCode: selectedBank?.value ?? "",
+                    bankLogoUrl: "",
+                    bankName: payload.beneficiaryBankName,
+                  });
+                }}
+              />
+            </div>
+          )}
           <div
             className="flex justify-center mt-3 cursor-pointer"
-            onClick={() => {
-              router.push("/dashboard");
-            }}
+            onClick={handleClose}
           >
             <Text type="text-small-green" value="Continue to homepage" />
           </div>

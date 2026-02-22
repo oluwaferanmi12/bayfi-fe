@@ -160,6 +160,7 @@ export const ProfileNav = ({
             icon={moonIcon}
             text="Dark Mode"
             whiteBg={noBg}
+            disabled
             extraIcon={
               <>
                 <Switch />
@@ -170,10 +171,14 @@ export const ProfileNav = ({
             whiteBg={noBg}
             icon={directBoxSend}
             text="Help & Support"
+            disabled
           />
           <ProfileNavContainer
             icon={buildingIcon}
             text="About Bayfi"
+            clickAction={() => {
+              window.open("/about", "_blank");
+            }}
             extraIcon={<Image src={arrowRightTop} alt="" />}
             whiteBg={noBg}
           />
@@ -209,6 +214,7 @@ export const ProfileNavContainer = ({
   logoutType,
   clickAction,
   whiteBg,
+  disabled,
 }: {
   icon: string;
   text: string;
@@ -216,15 +222,20 @@ export const ProfileNavContainer = ({
   logoutType?: boolean;
   clickAction?: () => void;
   whiteBg?: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <div
       onClick={() => {
-        if (clickAction) {
+        if (!disabled && clickAction) {
           clickAction();
         }
       }}
-      className={`flex ${whiteBg && "bg-white rounded-lg px-4 mb-2"} items-center  justify-between cursor-pointer py-3`}
+      className={`flex ${whiteBg && "bg-white rounded-lg px-4 mb-2"} items-center justify-between py-3 ${
+        disabled
+          ? "blur-[1.5px] opacity-60 pointer-events-none"
+          : "cursor-pointer"
+      }`}
       // style={{ borderBottom: "1px solid #EBF1FF" }}
     >
       <div className="flex items-center gap-3 ">

@@ -1,20 +1,42 @@
+import { Beneficiary } from "@/types";
+import { getInitials } from "@/utils/get-initials";
+
 export const MobileContactWrapper = ({
-  initials,
-  name,
+  beneficiary,
+  click,
 }: {
-  initials?: string;
-  name?: string;
+  beneficiary: Beneficiary;
+  click: (val: Beneficiary) => void;
 }) => {
+  const accountNameParts = beneficiary.accountName
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2);
+
   return (
-    <div className="flex">
-      <div className="bg-white p-4 w-[100px] rounded-lg flex flex-col items-center justify-center">
-        <div className="bg-[#D1B2FF] aspect-square w-[40px] flex items-center justify-center h-[40px] rounded-full">
-          <p className="text-[#5E1DBB] font-grotesk-bold">{initials ?? "OA"}</p>
+    <button
+      type="button"
+      onClick={() => click(beneficiary)}
+      className="flex bg-transparent p-0 border-none"
+    >
+      <div className="bg-white p-4 w-25 rounded-lg flex flex-col items-center justify-center">
+        <div className="bg-[#D1B2FF] aspect-square w-10 flex items-center justify-center h-10 rounded-full">
+          <p className="text-[#5E1DBB] font-grotesk-bold">
+            {getInitials(beneficiary.accountName)}
+          </p>
         </div>
-        <p className="text-text-color-500 font-grotesk-semi-bold w-full overflow-hidden text-ellipsis text-center whitespace-nowrap">
-          {name ?? "Olaitan aaaaa"}
-        </p>
+        <div className="flex flex-col items-center">
+          {accountNameParts.map((namePart, index) => (
+            <p
+              key={`${namePart}-${index}`}
+              className="text-text-color-500 font-grotesk-semi-bold text-center"
+            >
+              {namePart}
+            </p>
+          ))}
+        </div>
       </div>
-    </div>
+    </button>
   );
 };

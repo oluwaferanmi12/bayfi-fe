@@ -52,3 +52,12 @@ export interface DisburseResponse {
   transactionStartDate: string;
   transactionValueAmount: number;
 }
+
+export interface Beneficiary {
+  id: number;
+  accountName: string;
+  accountNumber: string;
+  bankName: string;
+  bankCode: string;
+  bankLogoUrl: string;
+}

@@ -7,12 +7,14 @@ import { DisburseResponse } from "@/types";
 import { v4 as uuidv4 } from "uuid";
 import {
   useAccountLookup,
+  useDeleteBeneficiary,
   useDisburse,
   useGetBankSearch,
   useGetBeneficiary,
 } from "@/hooks/query/usePayment";
 import { BankOption } from "@/interfaces/interfaces";
 import { stripCommas } from "@/utils/formatter";
+import { toast } from "sonner";
 
 export const useWithdraw = () => {
   const queryClient = useQueryClient();
@@ -34,7 +36,11 @@ export const useWithdraw = () => {
   const { showPinModal, setShowPinModal } = usePinStore();
   const [disburseResponse, setDisburseResponse] =
     useState<DisburseResponse | null>(null);
-  const { data, isPending } = useGetBeneficiary();
+  const { data: beneficiaries, isPending } = useGetBeneficiary();
+  const deleteBeneficiary = useDeleteBeneficiary(() => {
+    toast.success("Beneficiary removed");
+    queryClient.invalidateQueries({ queryKey: ["get-beneficiary"] });
+  });
   const disburse = useDisburse((data) => {
     setDisburseResponse(data);
     setShowReciept(true);
@@ -88,7 +94,6 @@ export const useWithdraw = () => {
         accountNumber: "",
       }));
     }
-    console.log(selectedBank);
     if (!bankAccount?.accountName && !selectedBank?.value) {
       setPayloadError((prev) => ({
         ...prev,
@@ -110,7 +115,7 @@ export const useWithdraw = () => {
         label: b.name,
         value: b.bankCode,
       })),
-    [bankList]
+    [bankList],
   );
 
   const handleShowOtp = () => {
@@ -121,7 +126,6 @@ export const useWithdraw = () => {
     if (profile?.isPinCreated) {
       setShowWithdrawOtp(true);
     } else {
-      console.log("Got inside this block");
       setShowPinModal(true);
     }
   };
@@ -136,9 +140,13 @@ export const useWithdraw = () => {
       pin,
     });
   };
+
+  const handleDeleteBeneficiary = (beneficiaryId: number) => {
+    deleteBeneficiary.mutate(String(beneficiaryId));
+  };
+
   return {
     showWithdrawOtp,
-    data,
     setAmount,
     payloadError,
     searchedValue,
@@ -159,5 +167,9 @@ export const useWithdraw = () => {
     setPin,
     pin,
     beneficiaryLoading: isPending,
+    beneficiaries,
+    accountNumber,
+    handleDeleteBeneficiary,
+    deletingBeneficiary: deleteBeneficiary.isPending,
   };
 };

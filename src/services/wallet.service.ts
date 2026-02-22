@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/axios";
-import { Wallet } from "@/types";
+import { SaveBeneficiary, Wallet } from "@/types";
 
 export const getWallet = async (): Promise<Wallet> => {
   const { data } = await axiosInstance.get(`/wallets/balance`);
@@ -8,7 +8,7 @@ export const getWallet = async (): Promise<Wallet> => {
 
 export const toggleStatus = async (visibility: boolean) => {
   const result = await axiosInstance.put(
-    `/wallets/toggle-status?visibility=${visibility}`
+    `/wallets/toggle-status?visibility=${visibility}`,
   );
   return result.data;
 };

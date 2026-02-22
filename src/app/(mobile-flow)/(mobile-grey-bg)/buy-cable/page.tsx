@@ -14,8 +14,8 @@ function BuyCable() {
         </p>
       </div>
       <div className="flex items-center gap-4 overflow-x-scroll hide-scrollbar">
-        <MobileContactWrapper initials="DV" name="DSTV" />
-        <MobileContactWrapper initials="S" name="Showmax" />
+        {/* <MobileContactWrapper initials="DV" name="DSTV" />
+        <MobileContactWrapper initials="S" name="Showmax" /> */}
        
       </div>
       <div className="bg-white rounded-lg p-4 mt-4">

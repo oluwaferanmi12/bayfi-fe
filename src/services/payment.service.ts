@@ -6,6 +6,7 @@ import {
   Beneficiary,
   Disburse,
   DisburseResponse,
+  SaveBeneficiary,
 } from "@/types";
 
 export const getBeneficiary = async (): Promise<Beneficiary[]> => {
@@ -13,21 +14,21 @@ export const getBeneficiary = async (): Promise<Beneficiary[]> => {
   return data.data;
 };
 
-export const saveBeneficiary = async (payload: Beneficiary) => {
-  const { data } = await axiosInstance.post(`/bank/beneficiaries`);
+export const saveBeneficiary = async (payload: SaveBeneficiary) => {
+  const { data } = await axiosInstance.post(`/bank/beneficiaries`, payload);
   return data;
 };
 
 export const deleteBeneficiary = async (beneficiaryId: string) => {
   const { data } = await axiosInstance.delete(
-    `/bank/beneficiaries/${beneficiaryId}`
+    `/bank/beneficiaries/${beneficiaryId}`,
   );
   return data;
 };
 
 export const bankSearch = async (query: string): Promise<Bank[]> => {
   const { data } = await axiosInstance.get(
-    `/payment/banks/search?query=${query}`
+    `/payment/banks/search?query=${query}`,
   );
   return data.data;
 };
@@ -42,13 +43,13 @@ export const accountNameLookup = async ({
   accountNumber,
 }: AccountLookUpInterface): Promise<AccountLookUp> => {
   const { data } = await axiosInstance.get(
-    `/payment/account/name/lookup?bankCode=${bankCode}&accountNumber=${accountNumber}`
+    `/payment/account/name/lookup?bankCode=${bankCode}&accountNumber=${accountNumber}`,
   );
   return data.data;
 };
 
 export const disburse = async (
-  payload: Disburse
+  payload: Disburse,
 ): Promise<DisburseResponse> => {
   const { key, ...rest } = payload;
   const { data } = await axiosInstance.post(`/payment/disbursement`, rest, {

@@ -362,10 +362,8 @@ function Dashboard() {
                         </p>
                       </button>
                       <button
-                        onClick={() => {
-                          setDepositModal(true);
-                        }}
-                        className="flex items-center border gap-2 pl-2  border-[#E9EBF8] p-1 rounded-xl pr-4"
+                        disabled
+                        className="flex items-center border gap-2 pl-2 border-[#E9EBF8] p-1 rounded-xl pr-4 blur-[1.5px] opacity-60 pointer-events-none"
                       >
                         <Image src={cryptoActionIcon} alt="" />
                         <p className="text-[#444D5A] cursor-pointer font-grotesk-bold text-base">
@@ -402,13 +400,29 @@ function Dashboard() {
                   icon={bulkCard}
                   text="Gift card"
                 />
-                <DashboardServiceWrapper icon={bulkCall} text="Buy airtime" />
-                <DashboardServiceWrapper icon={bulkGlobal} text="Betting" />
-                <DashboardServiceWrapper icon={wifiSquare} text="Mobile data" />
-                <DashboardServiceWrapper icon={cableIcon} text="Cable TV" />
+                <DashboardServiceWrapper
+                  icon={bulkCall}
+                  text="Buy airtime"
+                  disabled
+                />
+                <DashboardServiceWrapper
+                  icon={bulkGlobal}
+                  text="Betting"
+                  disabled
+                />
+                <DashboardServiceWrapper
+                  icon={wifiSquare}
+                  text="Mobile data"
+                  disabled
+                />
+                <DashboardServiceWrapper
+                  icon={cableIcon}
+                  text="Cable TV"
+                  disabled
+                />
               </div>
             </div>
-            <div className="mt-8 bg-white rounded-2xl">
+            <div className="mt-8 bg-white rounded-2xl blur-[1.5px] opacity-60 pointer-events-none">
               <div className="p-4 flex items-center gap-3 border-b border-bayfi-grey-500">
                 <Image src={dollarSquare} alt="" />
                 <div>
@@ -462,16 +476,22 @@ const DashboardServiceWrapper = ({
   icon,
   text,
   clickAction,
+  disabled,
 }: {
   icon: string;
   text: string;
   clickAction?: () => void;
+  disabled?: boolean;
 }) => {
   return (
     <>
       <div
-        onClick={clickAction}
-        className="flex justify-center cursor-pointer bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full"
+        onClick={disabled ? undefined : clickAction}
+        className={`flex justify-center bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full ${
+          disabled
+            ? "blur-[1.5px] opacity-60 pointer-events-none"
+            : "cursor-pointer"
+        }`}
       >
         <Image src={icon} alt="" />
         <Text type={"text-plain-dark-18"} value={text} />

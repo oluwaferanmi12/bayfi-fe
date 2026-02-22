@@ -1,4 +1,3 @@
-import React, { useEffect, useMemo, useState } from "react";
 import { SideDrawer } from "../side-drawer";
 import { UserProfile } from "@/components/UIs/user-name-profile";
 import { DarkBalanceWrapper } from "@/components/wrappers/dark-balance-wrapper";
@@ -9,6 +8,7 @@ import { Text } from "@/components/texts/text";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
 import padLockIcon from "@/assets/svg/padLockIcon.svg";
+import binIcon from "@/assets/svg/bin-icon.svg";
 import { Select, Spin } from "antd";
 import { FormatNumber, numberFormatter, stripCommas } from "@/utils/formatter";
 import { useWithdraw } from "@/hooks/custom/withdraw/useWithdraw";
@@ -24,7 +24,6 @@ export const WithdrawDrawer = ({
   const {
     showReciept,
     showWithdrawOtp,
-    data,
     setAmount,
     accountLookupLoading,
     bankAccount,
@@ -43,6 +42,10 @@ export const WithdrawDrawer = ({
     amount,
     setPin,
     pin,
+    beneficiaries,
+    accountNumber,
+    handleDeleteBeneficiary,
+    deletingBeneficiary,
   } = useWithdraw();
   return (
     <SideDrawer
@@ -53,13 +56,43 @@ export const WithdrawDrawer = ({
     >
       {!showWithdrawOtp ? (
         <div>
-          {data && data.length > 0 && (
+          {beneficiaries && beneficiaries.length > 0 && (
             <>
               <div className="mt-2 mb-4">
                 <Text type="header-text-20" value="Recent beneficiaries" />
               </div>
-              <div className="flex items-center justify-between">
-                <UserProfile />
+
+              <div className="flex items-center gap-3">
+                {beneficiaries.map((item) => {
+                  return (
+                    <div
+                      key={item.id}
+                      className="flex flex-col relative items-center"
+                    >
+                      <UserProfile
+                        click={(val) => {
+                          setSelectedBank({
+                            label: val.bankName,
+                            value: val.bankCode,
+                          });
+                          setAccountNumber(val.accountNumber);
+                        }}
+                        beneficiary={item}
+                      />
+                      <button
+                        type="button"
+                        disabled={deletingBeneficiary}
+                        onClick={() => {
+                          handleDeleteBeneficiary(item.id);
+                        }}
+                        className={`absolute top-0 -right-1 mt-1 ${deletingBeneficiary ? "opacity-50" : "cursor-pointer"}`}
+                        aria-label={`Remove ${item.accountName}`}
+                      >
+                        <Image src={binIcon} alt="Delete beneficiary" />
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </>
           )}
@@ -81,9 +114,14 @@ export const WithdrawDrawer = ({
               <Text type="input-text" value={"Select bank"} />
               <div className="mt-1 relative">
                 <Select
+                  labelInValue
                   showSearch
                   searchValue={searchedValue}
-                  value={selectedBank?.value}
+                  value={
+                    selectedBank
+                      ? { value: selectedBank.value, label: selectedBank.label }
+                      : undefined
+                  }
                   placeholder="Type to search bank..."
                   options={bankOptions}
                   filterOption={false} // IMPORTANT: remote search (don't filter locally)
@@ -91,9 +129,8 @@ export const WithdrawDrawer = ({
                     setSearchedValue(val);
                     if (selectedBank) setSelectedBank(null);
                   }}
-                  onChange={(value, option) => {
-                    // option can be BankOption when options provided
-                    setSelectedBank(option as BankOption);
+                  onChange={(option) => {
+                    setSelectedBank(option as unknown as BankOption);
                     setSearchedValue("");
                   }}
                   notFoundContent={
@@ -114,6 +151,7 @@ export const WithdrawDrawer = ({
               onChange={(e) => {
                 setAccountNumber(e.target.value);
               }}
+              value={accountNumber}
               label="Recipient Account"
               placeholder="Enter 10 digits account number"
               noMarginBottom
@@ -135,7 +173,18 @@ export const WithdrawDrawer = ({
           </div>
         </div>
       ) : showReciept && disburseResponse ? (
-        <GReceipt payload={disburseResponse} />
+        <GReceipt
+          selectedBank={selectedBank}
+          payload={disburseResponse}
+          handleClose={close}
+          showBeneficiaryButton={
+            beneficiaries?.length
+              ? beneficiaries.some(
+                  (item) => item.accountNumber !== accountNumber,
+                )
+              : false
+          }
+        />
       ) : (
         <div className="flex items-center justify-center flex-col">
           <Text type="header-text-20" value="You are about to send" />

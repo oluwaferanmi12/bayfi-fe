@@ -1,4 +1,5 @@
-import { getWallet, toggleStatus } from "@/services";
+import { getWallet, saveBeneficiary, toggleStatus } from "@/services";
+import { SaveBeneficiary } from "@/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useGetWallet = () => {

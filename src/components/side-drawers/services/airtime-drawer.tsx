@@ -25,11 +25,11 @@ const AirtimeDrawer = ({
                     <Text type="header-text-20" value="Recent beneficiaries" />
                 </div>
                 <div className="flex items-center justify-between">
+                    {/* <UserProfile />
                     <UserProfile />
                     <UserProfile />
                     <UserProfile />
-                    <UserProfile />
-                    <UserProfile />
+                    <UserProfile /> */}
                 </div>
 
                 <div className="my-4">
