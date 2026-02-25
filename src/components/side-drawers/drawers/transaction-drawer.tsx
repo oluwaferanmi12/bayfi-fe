@@ -37,8 +37,10 @@ export const TransactionDrawer = ({
     if (data) {
       if (selectedTxn?.transactionCategory === "SELL_GIFT_CARD") {
         setGiftcardTxnLog(data as GiftCardTransactionLog[]);
+        setTransactionWalletLog(undefined);
       } else {
         setTransactionWalletLog(data as WalletTransactionLog);
+        setGiftcardTxnLog([]);
       }
     }
   }, [data, selectedTxn]);
@@ -51,7 +53,6 @@ export const TransactionDrawer = ({
     }
     return 0;
   }, [giftCardTxnLog]);
-  console.log(selectedTxn, "Selected Txn");
   return (
     <>
       <SideDrawer
@@ -120,8 +121,10 @@ export const TransactionDrawer = ({
               {giftCardTxnLog.map((item, index) => {
                 return (
                   <div key={item.id} className="my-4">
-                    <p className="font-grotesk-bold text-lg">Unit ({index + 1})</p>
-                    <div >
+                    <p className="font-grotesk-bold text-lg">
+                      Unit ({index + 1})
+                    </p>
+                    <div>
                       <TransactionText
                         leftText="Amount"
                         rightText={`NGN ${FormatNumber(item.unitAmountToUser ?? 0)}`}
