@@ -102,10 +102,43 @@ export const TransactionDrawer = ({
                 icon={giftcardSmallIcon}
               />
               <TransactionText
+                leftText="Total amount"
+                rightText={`NGN ${FormatNumber(giftCardTxnLog[0].requestTotalToUser ?? 0)}`}
+              />
+              <TransactionText
+                leftText="Total amount(USD)"
+                rightText={`$ ${FormatNumber(giftCardTxnLog[0].requestTotalInDollar ?? 0)}`}
+              />
+              <TransactionText
                 leftText="Transaction reference"
                 rightText={giftCardTxnLog[0].transactionReference ?? ""}
               />
-             
+              <TransactionText
+                leftText="Total quantity"
+                rightText={`${giftCardTxnLog.length ?? ""}`}
+              />
+              {giftCardTxnLog.map((item, index) => {
+                return (
+                  <div key={item.id} className="my-4">
+                    <p className="font-grotesk-bold text-lg">Unit ({index + 1})</p>
+                    <div >
+                      <TransactionText
+                        leftText="Amount"
+                        rightText={`NGN ${FormatNumber(item.unitAmountToUser ?? 0)}`}
+                      />
+                      <TransactionText
+                        leftText="Amount(USD)"
+                        rightText={`$ ${FormatNumber(item.unitAmountInDollar ?? 0)}`}
+                      />
+                      <TransactionText
+                        leftText="Quantity"
+                        rightText={`${item.quantity ?? 0}`}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+
               <Button
                 text="Get receipt"
                 type="bgGreen"

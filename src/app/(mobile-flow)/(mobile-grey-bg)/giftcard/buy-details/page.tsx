@@ -81,7 +81,7 @@ function BuyCardDetails() {
           </div>
         </div>
         <div className="bg-white p-4 rounded-lg">
-          <div className="mt-4 flex items-center gap-2">
+          <div className="mt-4 flex items-center gap-2 flex-wrap">
             {presetValues.map((item, index) => {
               return (
                 <span
@@ -89,7 +89,7 @@ function BuyCardDetails() {
                     setGiftCardAmount(item);
                   }}
                   key={index}
-                  className="bg-[#F6F6F6] w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center font-grotesk-medium"
+                  className="bg-[#F6F6F6] whitespace-nowrap w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center font-grotesk-medium"
                 >
                   $ {item}
                 </span>

@@ -67,7 +67,7 @@ export const TransactionReceipt = ({
         <div className="bg-bayfi-black-700 p-4 rounded-lg flex flex-col items-center justify-center gap-1">
           <TableStatus type={resolvedStatus} text={resolvedStatusText} />
           <p className="text-bayfi-green-500 text-2xl font-grotesk-medium">
-            NGN{FormatNumber(totalGiftCardAmount || selectedTxn.amount)}
+            NGN{FormatNumber(totalGiftCardAmount)}
           </p>
           <div className="text-white text-base font-grotesk-regular">
             from {selectedTxn.receiverName}
@@ -83,6 +83,14 @@ export const TransactionReceipt = ({
               icon={giftcardSmallIcon}
             />
             <TransactionText
+              leftText="Total amount"
+              rightText={`NGN ${FormatNumber(giftCardTxnLog[0]?.requestTotalToUser ?? 0)}`}
+            />
+            <TransactionText
+              leftText="Total amount(USD)"
+              rightText={`$ ${FormatNumber(giftCardTxnLog[0]?.requestTotalInDollar ?? 0)}`}
+            />
+            <TransactionText
               leftText="Transaction reference"
               rightText={
                 giftCardTxnLog[0]?.transactionReference ??
@@ -90,10 +98,30 @@ export const TransactionReceipt = ({
               }
             />
             <TransactionText
-              noBorder
-              leftText="Amount"
-              rightText={`NGN ${FormatNumber(totalGiftCardAmount || selectedTxn.amount)}`}
+              leftText="Total quantity"
+              rightText={`${giftCardTxnLog.length ?? 0}`}
             />
+            {giftCardTxnLog.map((item, index) => {
+              return (
+                <div key={item.id} className="my-4">
+                  <p className="font-grotesk-bold text-lg">Unit ({index + 1})</p>
+                  <div>
+                    <TransactionText
+                      leftText="Amount"
+                      rightText={`NGN ${FormatNumber(item.unitAmountToUser ?? 0)}`}
+                    />
+                    <TransactionText
+                      leftText="Amount(USD)"
+                      rightText={`$ ${FormatNumber(item.unitAmountInDollar ?? 0)}`}
+                    />
+                    <TransactionText
+                      leftText="Quantity"
+                      rightText={`${item.quantity ?? 0}`}
+                    />
+                  </div>
+                </div>
+              );
+            })}
 
             <Button text="Get receipt" type="bgGreen" loading={false} fullWidth />
             <Button

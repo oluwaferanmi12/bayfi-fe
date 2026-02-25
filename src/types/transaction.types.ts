@@ -49,15 +49,18 @@ export interface TransactionMeta {
 }
 
 export interface GiftCardTransactionLog {
-  adminView: boolean;
-  chatTransactionId: number;
-  createdAt: string;
   id: number;
-  lineTotalToUser: number;
-  quantity: number;
-  requestTotalToUser: number;
+  createdAt: string;
+  chatTransactionId: number;
   transactionReference: string;
+  unitAmountInDollar: number;
   unitAmountToUser: number;
+  quantity: number;
+  lineTotalToUser: number;
+  lineTotalInDollar: number;
+  requestTotalToUser: number;
+  requestTotalInDollar: number;
+  adminView: boolean;
 }
 
 export interface WalletTransactionLog {
