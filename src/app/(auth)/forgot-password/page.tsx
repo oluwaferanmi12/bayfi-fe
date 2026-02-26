@@ -13,15 +13,16 @@ import { useForgotPasswordEmail } from "@/hooks/query";
 import { toast } from "sonner";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const router = useRouter();
+
+  console.log(email, "Email value here");
 
   const forgotPasswordEmailMutate = useForgotPasswordEmail((data) => {
     toast.success("An otp was sent to your email");
+    localStorage.setItem("userEmail", email);
     router.replace("/forgot-password/verify-otp");
-
   });
-
 
   return (
     <Row className="h-full">
@@ -52,7 +53,7 @@ const ForgotPassword = () => {
               <div className="mt-4">
                 <Button
                   action={() => {
-                    forgotPasswordEmailMutate.mutate({email})
+                    forgotPasswordEmailMutate.mutate({ email });
                   }}
                   type="bgGreen"
                   text="Submit"
