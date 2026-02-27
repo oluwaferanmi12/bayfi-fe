@@ -67,7 +67,7 @@ export const useWithdraw = () => {
     } else if (+stripCommas(amount) < 200) {
       setPayloadError((prev) => ({
         ...prev,
-        amount: "Only an amount greater than 500 can be withdrawn",
+        amount: "Only an amount greater than 200 can be withdrawn",
       }));
       validated = false;
     } else {
@@ -104,6 +104,20 @@ export const useWithdraw = () => {
       setPayloadError((prev) => ({
         ...prev,
         bankName: "",
+      }));
+    }
+
+    if (!bankAccount?.accountName) {
+      setPayloadError((prev) => ({
+        ...prev,
+        accountName: "Account name isn't valid",
+      }));
+      toast.error("Account name isn't valid");
+      validated = false;
+    } else {
+      setPayloadError((prev) => ({
+        ...prev,
+        accountName: "",
       }));
     }
     return validated;
