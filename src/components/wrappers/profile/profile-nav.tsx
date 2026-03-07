@@ -152,6 +152,17 @@ export const ProfileNav = ({
           />
           <ProfileNavContainer
             clickAction={() => {
+              if (noBg) {
+                router.push("/security-setting");
+              }
+              setActiveProfile("security");
+            }}
+            icon={keyIcon}
+            text="Reward"
+            whiteBg={noBg}
+          />
+          <ProfileNavContainer
+            clickAction={() => {
               // if (noBg) {
               //   router.push("/security-setting");
               // }
