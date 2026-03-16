@@ -8,4 +8,5 @@ export * from "./payment.service";
 export * from "./profile.service";
 export * from "./pin.service";
 export * from "./payment.service";
-export * from "./team.service"
+export * from "./team.service";
+export * from "./reward.service";

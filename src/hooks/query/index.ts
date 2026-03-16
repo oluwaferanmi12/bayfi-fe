@@ -7,3 +7,4 @@ export * from "./useWallet";
 export * from "./usePin";
 export * from "./useProfile";
 export * from "./useTeam";
+export * from "./useReward";

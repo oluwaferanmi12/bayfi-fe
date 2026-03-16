@@ -1,9 +1,18 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import jarIcon from "@/assets/svg/jar.svg";
 import { Button } from "@/components/buttons";
+import whiteCopyIcon from "@/assets/svg/white-copy-icon.svg";
+import { useEmptyReferral } from "./hooks/useEmptyReferral";
 
-export const FirstReferralPage = () => {
+export const FirstReferralPage = ({
+  setStep: _setStep,
+}: {
+  setStep: (val: number) => void;
+}) => {
+  const { referralCode, handleCopyCode } = useEmptyReferral();
   return (
     <div>
       <>
@@ -20,20 +29,18 @@ export const FirstReferralPage = () => {
           </p>
           <div className="mt-12 border rounded-[20px] p-4 py-6 border-text-color-600 flex items-center justify-center flex-col">
             <p className="text-bayfi-green-200 text-4xl text-center font-grotesk-bold mb-3">
-              BAY-87K3
+              {referralCode}
             </p>
-            <Button text="Copy" type="bgGreen" loading={false} />
+            <Button
+              text="Copy"
+              icon={whiteCopyIcon}
+              type="bgGreen"
+              loading={false}
+              action={handleCopyCode}
+            />
           </div>
         </div>
-
-        <div className="mt-20">
-          <Button
-            loading={false}
-            fullWidth
-            type="bgGreen"
-            text="Share your code"
-          />
-        </div>
+        =
       </>
     </div>
   );

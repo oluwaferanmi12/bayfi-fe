@@ -403,6 +403,18 @@
   animation-delay: 0.95s;
 }
 
+.reward-bg {
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(153, 179, 42),
+      rgba(47, 98, 10)
+    ),
+    url("../assets/svg/reward-jar-patter.svg");
+  background-position: center;
+  background-size: cover;
+}
+
 /* logo breathing */
 .logo-img {
   position: relative;

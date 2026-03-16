@@ -27,6 +27,7 @@ const Register = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [referralCode, setReferralCode] = useState("");
   const [passwordValidated, setPasswordValidated] = useState(false);
   const [errorPayload, setErrorPayload] = useState({
     email: "",
@@ -35,6 +36,7 @@ const Register = () => {
     password: "",
     userName: "",
     phoneNumber: "",
+    referralCode: "",
   });
 
   const payloadObj = {
@@ -44,6 +46,7 @@ const Register = () => {
     phoneNumber,
     username,
     password,
+    referralCode,
   };
 
   const handleValidate = () => {
@@ -136,7 +139,6 @@ const Register = () => {
         password: "",
       }));
     }
-
     return validated;
   };
 
@@ -215,6 +217,14 @@ const Register = () => {
                     />
                   </div>
                 </div>
+
+                <GInput
+                  label="Referral Code (Optional)"
+                  placeholder="Your referral code"
+                  icon={mailIcon}
+                  setInput={setReferralCode}
+                  error={errorPayload.referralCode}
+                />
 
                 <GInput
                   label="Email"

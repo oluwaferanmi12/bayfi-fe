@@ -28,6 +28,7 @@ import serviceIcon from "@/assets/svg/service-nav-icon.svg";
 import serviceInactiveIcon from "@/assets/svg/service-nav-inactive.svg";
 import supportActiveIcon from "@/assets/svg/support-nav-icon.svg";
 import supportInactiveIcon from "@/assets/svg/support-nav-inactive.svg";
+import rewardIcon from "@/assets/svg/reward-box.svg";
 
 export default function RootLayout({
   children,
@@ -167,7 +168,10 @@ export default function RootLayout({
                   ))}
                 </div>
                 <div className="flex items-center gap-4">
-                  <Image className="cursor-pointer" src={bellIcon} alt="" />
+                  {/* <Image className="cursor-pointer" src={bellIcon} alt="" /> */}
+                  <Link href={`/profile?type=reward`}>
+                    <Image src={rewardIcon} alt="Reward" />
+                  </Link>
                   <Image
                     width={40}
                     height={40}

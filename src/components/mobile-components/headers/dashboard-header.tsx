@@ -1,9 +1,10 @@
 import notificationIcon from "@/assets/svg/notification.svg";
 import Image from "next/image";
-import placeholderAvatar from "@/assets/svg/dashboard-placeholder.svg";
 import { useProfileStore } from "@/store/userProfileStore";
 import profilePlaceholder from "@/assets/svg/profile-default-avatar.svg";
 import { useRouter } from "next/navigation";
+import rewardBox from "@/assets/svg/reward-box.svg";
+import Link from "next/link";
 
 export const DashboardHeader = () => {
   const { profile } = useProfileStore();
@@ -15,8 +16,10 @@ export const DashboardHeader = () => {
           Hey, {profile?.firstName}
         </p>
         <div className="flex items-center gap-2">
-          <Image src={notificationIcon} alt="" />
-
+          {/* <Image src={notificationIcon} alt="" /> */}
+          <Link href={"/m-referral"}>
+            <Image src={rewardBox} alt="" />
+          </Link>
           <Image
             width={30}
             height={30}

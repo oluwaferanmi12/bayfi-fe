@@ -27,6 +27,7 @@ import directBoxSend from "@/assets/svg/direct-box-send.svg";
 import buildingIcon from "@/assets/svg/building-icon.svg";
 import legalIcon from "@/assets/svg/legal-icon.svg";
 import { TierInfoDrawer } from "@/components/side-drawers/profile/tier-info-drawer";
+import cupIcon from "@/assets/svg/cup-icon.svg";
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -155,9 +156,9 @@ export const ProfileNav = ({
               if (noBg) {
                 router.push("/security-setting");
               }
-              setActiveProfile("security");
+              setActiveProfile("reward");
             }}
-            icon={keyIcon}
+            icon={cupIcon}
             text="Reward"
             whiteBg={noBg}
           />

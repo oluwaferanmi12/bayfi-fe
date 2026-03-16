@@ -8,6 +8,7 @@ import { ProfileForm } from "@/components/features/profile/profile-form";
 import { useEffect, useState } from "react";
 import { ProfileType } from "@/interfaces/interfaces-ui";
 import { Legal } from "@/components/features/profile/legal/legal";
+import { DesktopReferral } from "@/components/features/referral/desktop/deskop-referral";
 
 function ProfileSetting() {
   const [activeProfile, setActiveProfile] = useState<ProfileType>("setting");
@@ -16,6 +17,8 @@ function ProfileSetting() {
     const kycVal = urlParam.get("type");
     if (kycVal === "kyc") {
       setActiveProfile("kyc");
+    } else if (kycVal === "reward") {
+      setActiveProfile("reward");
     } else {
       setActiveProfile("setting");
     }
@@ -44,6 +47,7 @@ function ProfileSetting() {
                     {activeProfile === "security" && <PasswordForm />}
                     {activeProfile === "kyc" && <KycForm />}
                     {activeProfile === "legal" && <Legal />}
+                    {activeProfile === "reward" && <DesktopReferral />}
                   </div>
                 </Col>
               </Row>

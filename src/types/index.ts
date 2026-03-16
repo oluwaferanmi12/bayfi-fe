@@ -6,4 +6,5 @@ export * from "./chat.types";
 export * from "./wallet.types";
 export * from "./profile.types";
 export * from "./transaction.types";
-export * from "./payment.types"
+export * from "./payment.types";
+export * from "./reward.types";
