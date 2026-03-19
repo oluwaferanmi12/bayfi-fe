@@ -3,6 +3,7 @@ import {
   getReferralCode,
   getRewardActivity,
   getRewardJar,
+  getRewardPrograms,
 } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
@@ -31,5 +32,12 @@ export const useGetRewardActivity = () => {
   return useQuery({
     queryKey: ["get-reward-activity"],
     queryFn: getRewardActivity,
+  });
+};
+
+export const useGetRewardPrograms = () => {
+  return useQuery({
+    queryKey: ["get-reward-programs"],
+    queryFn: getRewardPrograms,
   });
 };

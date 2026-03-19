@@ -30,7 +30,12 @@ export const getRewardActivity = async (): Promise<
   RewardPagedResponse<RewardActivity>
 > => {
   const { data } = await axiosInstance.get(
-    `/api/v1/rewards/activity?page=${1}&size=${30}`,
+    `/rewards/activity?page=${1}&size=${30}`,
   );
   return { data: data.data, metadata: data.metadata };
+};
+
+export const getRewardPrograms = async () => {
+  const { data } = await axiosInstance.get(`/reward-management/programs`);
+  return data.data;
 };
