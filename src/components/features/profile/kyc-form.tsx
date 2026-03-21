@@ -10,6 +10,7 @@ import { useDoKycBvn, useDoKycNin } from "@/hooks/query";
 import { useQueryClient } from "@tanstack/react-query";
 import checkIcon from "@/assets/svg/check-circle-green.svg";
 import Image from "next/image";
+import { TierNotification } from "@/components/UIs/tier-notification";
 
 export const KycForm = () => {
   const queryClient = useQueryClient();
@@ -64,6 +65,7 @@ export const KycForm = () => {
             }
           />
         </div>
+        <TierNotification />
         <div className="flex items-center gap-2 ">
           <GInput
             value={nin}
