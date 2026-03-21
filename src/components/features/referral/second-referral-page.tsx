@@ -1,19 +1,21 @@
-import React, { useState } from "react";
-import jarGreen from "@/assets/svg/jar-green.svg";
-import Image from "next/image";
-import send2 from "@/assets/svg/send-2.svg";
+import { useState } from "react";
 import { RewardProgressBar } from "./reward-progress-bar";
 import { ReferralTab } from "./referral-tab";
 import { RedemptionWrapper } from "./redemption-wrapper";
 import { ReferralWrapper } from "./referral-wrapper";
 import { DesktopRewardCard } from "./desktop-reward-card";
+import { RewardActivity } from "@/types";
+import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
+import { useGetRedemptions } from "@/hooks/query";
+import { Loader } from "@/components/loader/general-loader";
 
 export const SecondReferalPage = ({
-  setStep,
+  rewardActivity,
 }: {
-  setStep: (val: number) => void;
+  rewardActivity: RewardActivity[];
 }) => {
   const [activeTab, setActiveTab] = useState(1);
+  const { data: redemption, isLoading } = useGetRedemptions();
   return (
     <div>
       <DesktopRewardCard />
@@ -27,16 +29,28 @@ export const SecondReferalPage = ({
       <div className="mt-4">
         {activeTab === 1 && (
           <>
-            <RedemptionWrapper />
-            <RedemptionWrapper />
-            <RedemptionWrapper />
+            {isLoading ? (
+              <Loader />
+            ) : redemption?.data.length ? (
+              <>
+                {redemption.data.map((item) => {
+                  return <RedemptionWrapper key={item.id} />;
+                })}
+              </>
+            ) : (
+              <GenericEmptyState />
+            )}
           </>
         )}
         {activeTab === 2 && (
           <>
-            <ReferralWrapper />
-            <ReferralWrapper />
-            <ReferralWrapper />
+            {rewardActivity.length ? (
+              rewardActivity.map((item) => {
+                return <ReferralWrapper rewardActivity={item} key={item.id} />;
+              })
+            ) : (
+              <GenericEmptyState />
+            )}
           </>
         )}
       </div>

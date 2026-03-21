@@ -4,9 +4,18 @@ import { ReferralTab } from "../referral-tab";
 import { RewardProgressBar } from "../reward-progress-bar";
 import { RedemptionWrapper } from "../redemption-wrapper";
 import { ReferralWrapper } from "../referral-wrapper";
+import { useGetRedemptions } from "@/hooks/query";
+import { RewardActivity } from "@/types";
+import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
+import { Loader } from "@/components/loader/general-loader";
 
-export const DesktopRewardProgress = () => {
+export const DesktopRewardProgress = ({
+  rewardActivity,
+}: {
+  rewardActivity: RewardActivity[];
+}) => {
   const [activeTab, setActiveTab] = useState(1);
+  const { data: redemption, isLoading } = useGetRedemptions();
   return (
     <div>
       <DesktopRewardCard />
@@ -24,16 +33,34 @@ export const DesktopRewardProgress = () => {
       <div className="mt-4">
         {activeTab === 1 && (
           <>
-            <RedemptionWrapper desktopType />
-            <RedemptionWrapper desktopType />
-            <RedemptionWrapper desktopType />
+            {isLoading ? (
+              <Loader />
+            ) : redemption?.data.length ? (
+              <>
+                {redemption.data.map((item) => {
+                  return <RedemptionWrapper key={item.id} desktopType />;
+                })}
+              </>
+            ) : (
+              <GenericEmptyState />
+            )}
           </>
         )}
         {activeTab === 2 && (
           <>
-            <ReferralWrapper desktopType />
-            <ReferralWrapper desktopType />
-            <ReferralWrapper desktopType />
+            {rewardActivity.length ? (
+              rewardActivity.map((item) => {
+                return (
+                  <ReferralWrapper
+                    rewardActivity={item}
+                    key={item.id}
+                    desktopType
+                  />
+                );
+              })
+            ) : (
+              <GenericEmptyState />
+            )}
           </>
         )}
       </div>

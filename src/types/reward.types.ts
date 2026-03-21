@@ -6,11 +6,12 @@ export interface ReferralCode {
 }
 
 export interface RewardJar {
-  balance: number;
-  totalEarned: number;
-  totalRedeemed: number;
-  currency: string;
-  [key: string]: unknown;
+  currentBalance: number;
+  targetAmount: number;
+  carryOverBaseLine: number;
+  eligibleForRedemption: boolean;
+  redeemableAmount: number | null;
+  progressPercent: number;
 }
 
 export interface RewardRedemption {
@@ -22,11 +23,12 @@ export interface RewardRedemption {
 }
 
 export interface RewardActivity {
-  id: string;
-  amount: number;
-  currency: string;
+  amountNgn: number;
+  category: string;
   createdAt: string;
-  [key: string]: unknown;
+  description: string;
+  id: string;
+  metadata: string;
 }
 
 export interface RewardPagedResponse<T> {

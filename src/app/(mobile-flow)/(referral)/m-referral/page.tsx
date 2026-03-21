@@ -1,14 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FirstReferralPage } from "@/components/features/referral/first-referral-page";
 import { SecondReferalPage } from "@/components/features/referral/second-referral-page";
+import { useGetRewardActivity } from "@/hooks/query";
+import { Loader } from "@/components/loader/general-loader";
 
 function MReferral() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const { data: rewardActivity, isLoading: rewardActivityLoading } =
+    useGetRewardActivity();
   return (
     <>
-      {currentStep === 1 && <FirstReferralPage setStep={setCurrentStep} />}
-      {currentStep === 2 && <SecondReferalPage setStep={setCurrentStep} />}
+      {rewardActivityLoading ? (
+        <Loader />
+      ) : !rewardActivity?.data.length ? (
+        <FirstReferralPage />
+      ) : (
+        <SecondReferalPage rewardActivity={rewardActivity.data} />
+      )}
     </>
   );
 }

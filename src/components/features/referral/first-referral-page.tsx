@@ -7,11 +7,7 @@ import { Button } from "@/components/buttons";
 import whiteCopyIcon from "@/assets/svg/white-copy-icon.svg";
 import { useEmptyReferral } from "./hooks/useEmptyReferral";
 
-export const FirstReferralPage = ({
-  setStep: _setStep,
-}: {
-  setStep: (val: number) => void;
-}) => {
+export const FirstReferralPage = () => {
   const { referralCode, handleCopyCode } = useEmptyReferral();
   return (
     <div>

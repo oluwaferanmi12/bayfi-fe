@@ -2,6 +2,7 @@ import Image from "next/image";
 import jarGreen from "@/assets/svg/jar-green.svg";
 import send2 from "@/assets/svg/send-2.svg";
 import { useEmptyReferral } from "./hooks/useEmptyReferral";
+import { RewardJar } from "@/types";
 
 export const DesktopRewardCard = () => {
   const { referralCode, handleCopyCode } = useEmptyReferral();
