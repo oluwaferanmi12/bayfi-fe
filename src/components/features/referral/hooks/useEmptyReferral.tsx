@@ -12,7 +12,7 @@ export const useEmptyReferral = () => {
       return;
     }
 
-    const referralMessage = `Hey, join Bayfi and use my referral code **${referralCode}** to get started. You can earn rewards after signing up and completing your first transactions. Let us win together 🚀`;
+    const referralMessage = `${referralCode}`;
 
     try {
       await navigator.clipboard.writeText(referralMessage);
