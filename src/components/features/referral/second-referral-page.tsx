@@ -16,6 +16,7 @@ export const SecondReferalPage = ({
 }) => {
   const [activeTab, setActiveTab] = useState(1);
   const { data: redemption, isLoading } = useGetRedemptions();
+  console.log(redemption, "Redembption");
   return (
     <div>
       <DesktopRewardCard />
@@ -34,7 +35,7 @@ export const SecondReferalPage = ({
             ) : redemption?.data.length ? (
               <>
                 {redemption.data.map((item) => {
-                  return <RedemptionWrapper key={item.id} />;
+                  return <RedemptionWrapper redemption={item} key={item.id} />;
                 })}
               </>
             ) : (

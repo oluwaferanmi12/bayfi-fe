@@ -16,10 +16,11 @@ export interface RewardJar {
 
 export interface RewardRedemption {
   id: string;
-  amount: number;
-  currency: string;
+  category: string;
+  amountNgn: number;
+  description: string;
+  metadata: null;
   createdAt: string;
-  [key: string]: unknown;
 }
 
 export interface RewardActivity {

@@ -23,6 +23,7 @@ export const getRedemptions = async (): Promise<
   const { data } = await axiosInstance.get(
     `/rewards/redemptions?page=${1}&size=${30}`,
   );
+  
   return { data: data.data, metadata: data.metadata };
 };
 

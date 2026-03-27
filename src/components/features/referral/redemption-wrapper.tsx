@@ -1,11 +1,16 @@
 import redemptionIcon from "@/assets/svg/redemption-icon.svg";
 import redemptionIconWhite from "@/assets/svg/redemption-icon-white.svg";
 import Image from "next/image";
+import { RewardActivity, RewardRedemption } from "@/types";
+import { momentLocal } from "@/utils/moment-local";
+import { FormatNumber } from "@/utils/formatter";
 
 export const RedemptionWrapper = ({
   desktopType,
+  redemption,
 }: {
   desktopType?: boolean;
+  redemption: RewardRedemption;
 }) => {
   return (
     <div
@@ -21,18 +26,20 @@ export const RedemptionWrapper = ({
             <p
               className={` ${desktopType ? "text-bayfi-black-900" : "text-white"} font-grotesk-semi-bold text-lg`}
             >
-              Withdrawals
+              {redemption.category}
             </p>
             <p
               className={` ${desktopType ? "text-bayfi-black-900" : "text-white"} font-grotesk-semi-bold text-lg`}
             >
-              NGN2,240.00
+              NGN{FormatNumber(redemption.amountNgn)}
             </p>
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-[#747474] font-grotesk-semi-bold">11:45 AM</p>
             <p className="text-[#747474] font-grotesk-semi-bold">
-              Balance: 20,000.00
+              {momentLocal(redemption.createdAt).format("DD-MM-YYYY,HH:mm")}
+            </p>
+            <p className="text-[#747474] font-grotesk-semi-bold">
+             {redemption.description}
             </p>
           </div>
         </div>

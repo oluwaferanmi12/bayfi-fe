@@ -38,7 +38,13 @@ export const DesktopRewardProgress = ({
             ) : redemption?.data.length ? (
               <>
                 {redemption.data.map((item) => {
-                  return <RedemptionWrapper key={item.id} desktopType />;
+                  return (
+                    <RedemptionWrapper
+                      redemption={item}
+                      key={item.id}
+                      desktopType
+                    />
+                  );
                 })}
               </>
             ) : (

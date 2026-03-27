@@ -8,7 +8,6 @@ export const RewardProgressBar = ({
   type?: "desktop" | "mobile";
 }) => {
   const { data } = useGetRewardJar();
-  console.log(data, "Data");
   return (
     <div>
       <div
