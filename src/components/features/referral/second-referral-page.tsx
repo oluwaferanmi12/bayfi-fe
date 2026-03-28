@@ -16,9 +16,8 @@ export const SecondReferalPage = ({
 }) => {
   const [activeTab, setActiveTab] = useState(1);
   const { data: redemption, isLoading } = useGetRedemptions();
-  console.log(redemption, "Redembption");
   return (
-    <div>
+    <div className="w-full min-w-full">
       <DesktopRewardCard />
       <div className="my-6">
         <p className="text-[#E1EFA4] font-grotesk-bold text-xl text-center">

@@ -7,18 +7,18 @@ export const DesktopReferral = () => {
   const { data: rewardActivity, isLoading: rewardActivityLoading } =
     useGetRewardActivity();
   return (
-    <>
+    <div className="w-full">
       {rewardActivityLoading ? (
         <Loader />
       ) : (
-        <>
+        <div className="w-full">
           {rewardActivity?.data.length ? (
             <DesktopRewardProgress rewardActivity={rewardActivity.data} />
           ) : (
             <DesktopReferralEmpty />
           )}
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 };
