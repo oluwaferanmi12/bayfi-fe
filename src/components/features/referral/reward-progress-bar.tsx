@@ -25,7 +25,7 @@ export const RewardProgressBar = ({
           NGN {FormatNumber(data?.currentBalance ?? 0)}
         </p>
         <p className="text-xl font-grotesk-bold text-bayfi-black-400">
-          NGN ${FormatNumber(data?.targetAmount ?? 0, true)}{" "}
+          NGN {FormatNumber(data?.targetAmount ?? 0, true)}{" "}
         </p>
       </div>
     </div>
