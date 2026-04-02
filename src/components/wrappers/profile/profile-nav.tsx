@@ -135,11 +135,7 @@ export const ProfileNav = ({
             text="Account information"
             whiteBg={noBg}
           />
-          {/* <ProfileNavContainer
-            whiteBg={noBg}
-            icon={leaderboardIcon}
-            text="Leaderboard"
-          /> */}
+
           <ProfileNavContainer
             clickAction={() => {
               if (noBg) {
@@ -154,7 +150,7 @@ export const ProfileNav = ({
           <ProfileNavContainer
             clickAction={() => {
               if (noBg) {
-                router.push("/security-setting");
+                router.push("/m-referral");
               }
               setActiveProfile("reward");
             }}

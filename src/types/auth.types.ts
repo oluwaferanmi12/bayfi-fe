@@ -30,6 +30,7 @@ export interface RegisterInterface {
   username: string;
   phoneNumber: string;
   password: string;
+  referralCode?: string;
 }
 export interface RegisterResponseInterface {
   status: true;

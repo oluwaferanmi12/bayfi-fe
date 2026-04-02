@@ -11,8 +11,8 @@ import inputPasswordIcon from "@/assets/svg/input-password-icon.svg";
 import Link from "next/link";
 import userIconButton from "@/assets/svg/input-profile-icon.svg";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import mobileIcon from "@/assets/svg/mobileIcon.svg";
 import { useRegister } from "@/hooks/query/useAuth";
 import { toast } from "sonner";
@@ -21,6 +21,7 @@ import { isValidEmail } from "@/utils/email-validate";
 
 const Register = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -48,6 +49,20 @@ const Register = () => {
     password,
     referralCode,
   };
+
+  useEffect(() => {
+    const referralCodeFromUrl = searchParams.get("ref")?.trim();
+
+    if (!referralCodeFromUrl) {
+      return;
+    }
+
+    setReferralCode(referralCodeFromUrl);
+    setErrorPayload((prev) => ({
+      ...prev,
+      referralCode: "",
+    }));
+  }, [searchParams]);
 
   const handleValidate = () => {
     let validated = true;
@@ -223,6 +238,7 @@ const Register = () => {
                   placeholder="Your referral code"
                   icon={mailIcon}
                   setInput={setReferralCode}
+                  inputVal={referralCode}
                   error={errorPayload.referralCode}
                 />
 
