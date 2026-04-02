@@ -12,14 +12,14 @@ import Link from "next/link";
 import userIconButton from "@/assets/svg/input-profile-icon.svg";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import mobileIcon from "@/assets/svg/mobileIcon.svg";
 import { useRegister } from "@/hooks/query/useAuth";
 import { toast } from "sonner";
 import { PasswordValidation } from "@/components/validation/password-validation";
 import { isValidEmail } from "@/utils/email-validate";
 
-const Register = () => {
+const RegisterContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [firstname, setFirstname] = useState("");
@@ -302,6 +302,14 @@ const Register = () => {
         <AnimatedAuthSide />
       </Col>
     </Row>
+  );
+};
+
+const Register = () => {
+  return (
+    <Suspense fallback={null}>
+      <RegisterContent />
+    </Suspense>
   );
 };
 
