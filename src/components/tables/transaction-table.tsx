@@ -74,18 +74,25 @@ export const TransactionTable = () => {
     }),
     columnHelper.display({
       id: "action",
-      cell: (info) => (
-        <div
-          onClick={() => {
-            setSelectedTxn(info.row.original);
-            setShowSideDrawer(true);
-          }}
-          className="flex items-center cursor-pointer gap-2"
-        >
-          <Image src={eyeIcon} alt="" />
-          <TableText text={"View"} />
-        </div>
-      ),
+      cell: (info) => {
+        const result = info.row.original;
+        return (
+          <>
+            {!result.transactionCategory.toLowerCase().includes("reward") && (
+              <div
+                onClick={() => {
+                  setSelectedTxn(info.row.original);
+                  setShowSideDrawer(true);
+                }}
+                className="flex items-center cursor-pointer gap-2"
+              >
+                <Image src={eyeIcon} alt="" />
+                <TableText text={"View"} />
+              </div>
+            )}
+          </>
+        );
+      },
     }),
   ];
 
