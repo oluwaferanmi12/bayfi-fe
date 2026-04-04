@@ -22,7 +22,7 @@ export const RewardProgressBar = ({
         <p
           className={`text-xl font-grotesk-bold  ${type === "mobile" ? "text-[#E1EFA4]" : "text-[#B8B8B8]"}`}
         >
-          NGN {FormatNumber(data?.currentBalance ?? 0)}
+          NGN {FormatNumber(data?.currentBalance ?? 0 , true)}
         </p>
         <p className="text-xl font-grotesk-bold text-bayfi-black-400">
           NGN {FormatNumber(data?.targetAmount ?? 0, true)}{" "}

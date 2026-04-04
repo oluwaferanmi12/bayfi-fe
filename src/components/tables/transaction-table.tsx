@@ -19,6 +19,7 @@ import { GenericEmptyState } from "../UIs/empty-state/generic-empty-state";
 import { useTransactionTableHook } from "@/hooks/custom/transaction/useTransactionTableHook";
 import { useGetTransactionIconType } from "@/hooks/custom/others/useGetIconType";
 import { TransactionDrawer } from "../side-drawers/drawers/transaction-drawer";
+import { FormatNumber } from "@/utils/formatter";
 
 export const TransactionTable = () => {
   const {
@@ -33,7 +34,7 @@ export const TransactionTable = () => {
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const columnHelper = createColumnHelper<Transaction>();
   const [selectedTxn, setSelectedTxn] = useState<Transaction>();
-  
+
   const columns = [
     columnHelper.accessor("createdAt", {
       cell: (info) => (
@@ -44,7 +45,9 @@ export const TransactionTable = () => {
       header: (info) => <TableText text="Date" headerType />,
     }),
     columnHelper.accessor("amount", {
-      cell: (info) => <TableText text={"NGN" + " " + info.getValue()} />,
+      cell: (info) => (
+        <TableText text={"NGN" + " " + FormatNumber(info.getValue())} />
+      ),
       header: (info) => <TableText text="Amount" headerType />,
     }),
     columnHelper.accessor("transactionCategory", {
