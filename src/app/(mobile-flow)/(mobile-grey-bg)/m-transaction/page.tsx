@@ -89,12 +89,6 @@ function MobileTransaction() {
         <p className="text-bayfi-black-600 text-xl font-grotesk-semi-bold">
           Transaction
         </p>
-        {/* <div className="bg-white relative z-20 py-2 px-4 rounded-lg flex items-center gap-2">
-          <Image src={filterIcon} alt="" />
-          <p className="text-sm font-grotesk-semi-bold text-[#747474]">
-            This month
-          </p>
-        </div> */}
       </div>
       <div className="bg-white p-4 rounded-lg mt-4">
         <Row gutter={12}>
@@ -168,9 +162,11 @@ const TransactionWrapper = ({ transaction }: { transaction: Transaction }) => {
   return (
     <div
       onClick={() => {
-        setSelectedTransaction(transaction);
-        sessionStorage.setItem("selectedTxn", JSON.stringify(transaction));
-        router.push(`/m-transaction/${transaction.id}`);
+        if (!transaction.transactionCategory.toLowerCase().includes("reward")) {
+          setSelectedTransaction(transaction);
+          sessionStorage.setItem("selectedTxn", JSON.stringify(transaction));
+          router.push(`/m-transaction/${transaction.id}`);
+        }
       }}
       className="bg-[#F6F6F6] mb-2 px-4 py-2 rounded-lg flex items-center justify-between cursor-pointer"
     >
