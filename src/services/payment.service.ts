@@ -33,7 +33,7 @@ export const bankSearch = async (query: string): Promise<Bank[]> => {
   return data.data;
 };
 
-export const bankList = async (): Promise<Bank> => {
+export const bankList = async (): Promise<Bank[]> => {
   const { data } = await axiosInstance.get(`payment/bank/list`);
   return data.data;
 };

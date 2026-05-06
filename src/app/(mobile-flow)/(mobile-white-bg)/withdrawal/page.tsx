@@ -119,7 +119,7 @@ const WithdrawalMobile = () => {
                   }}
                   onChange={(value, option) => {
                     // option can be BankOption when options provided
-                    setSelectedBank(option as BankOption);
+                    setSelectedBank(option as unknown as BankOption);
                     setSearchedValue("");
                   }}
                   notFoundContent={

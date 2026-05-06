@@ -39,6 +39,7 @@ export const WithdrawSuccess = ({
           text="View transactions"
           type="bgGreen"
           fullWidth
+          loading={false}
           action={() => {
             handleClose();
             router.push("/transaction");
