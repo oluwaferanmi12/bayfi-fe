@@ -3,7 +3,7 @@ import { UserProfile } from "@/components/UIs/user-name-profile";
 import { DarkBalanceWrapper } from "@/components/wrappers/dark-balance-wrapper";
 import { GInput } from "@/components/inputs/GInput";
 import { Button } from "@/components/buttons";
-import { GReceipt } from "@/components/UIs/general-reciept";
+import { WithdrawSuccess } from "./withdraw-success";
 import { Text } from "@/components/texts/text";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
@@ -124,7 +124,7 @@ export const WithdrawDrawer = ({
                   }
                   placeholder="Type to search bank..."
                   options={bankOptions}
-                  filterOption={false} // IMPORTANT: remote search (don't filter locally)
+                  filterOption={false}
                   onSearch={(val) => {
                     setSearchedValue(val);
                     if (selectedBank) setSelectedBank(null);
@@ -173,17 +173,11 @@ export const WithdrawDrawer = ({
           </div>
         </div>
       ) : showReciept && disburseResponse ? (
-        <GReceipt
-          selectedBank={selectedBank}
+        <WithdrawSuccess
           payload={disburseResponse}
+          accountName={bankAccount?.accountName ?? ""}
+          bankName={selectedBank?.label ?? ""}
           handleClose={close}
-          showBeneficiaryButton={
-            beneficiaries?.length
-              ? beneficiaries.some(
-                  (item) => item.accountNumber !== accountNumber,
-                )
-              : false
-          }
         />
       ) : (
         <div className="flex items-center justify-center flex-col">

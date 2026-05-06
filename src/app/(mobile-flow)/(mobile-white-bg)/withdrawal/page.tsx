@@ -165,6 +165,8 @@ const WithdrawalMobile = () => {
       ) : showReciept && disburseResponse ? (
         <GReceipt
           selectedBank={selectedBank}
+          accountName={bankAccount?.accountName ?? ""}
+          bankName={selectedBank?.label ?? ""}
           handleClose={() => {
             router.push("/dashboard");
           }}

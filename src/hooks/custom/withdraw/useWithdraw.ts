@@ -1,6 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { useDebounce } from "../debounce/useDebounce";
 import { useProfileStore } from "@/store/userProfileStore";
 import { usePinStore } from "@/store/usePinStore";
 import { DisburseResponse } from "@/types";
@@ -9,7 +8,7 @@ import {
   useAccountLookup,
   useDeleteBeneficiary,
   useDisburse,
-  useGetBankSearch,
+  useGetBankList,
   useGetBeneficiary,
 } from "@/hooks/query/usePayment";
 import { BankOption } from "@/interfaces/interfaces";
@@ -24,8 +23,9 @@ export const useWithdraw = () => {
   const [selectedBank, setSelectedBank] = useState<BankOption | null>(null);
   const [accountNumber, setAccountNumber] = useState("");
   const [searchedValue, setSearchedValue] = useState("");
-  const bankSearch = useDebounce(searchedValue, 500);
   const [showReciept, setShowReciept] = useState(false);
+  const { data: originalBankList, isLoading: originalBankListLoading } =
+    useGetBankList();
   const [payloadError, setPayloadError] = useState({
     accountName: "",
     accountNumber: "",
@@ -53,9 +53,6 @@ export const useWithdraw = () => {
       accountNumber,
       bankCode: selectedBank?.value ?? "",
     });
-  const { data: bankList, isLoading: bankListLoading } =
-    useGetBankSearch(bankSearch);
-
   const handleValidate = () => {
     let validated = true;
     if (+stripCommas(amount) <= 0) {
@@ -123,14 +120,29 @@ export const useWithdraw = () => {
     return validated;
   };
 
-  const bankOptions = useMemo(
-    () =>
-      (bankList ?? []).map((b) => ({
-        label: b.name,
-        value: b.bankCode,
-      })),
-    [bankList],
-  );
+  const bankOptions = useMemo(() => {
+    const list = originalBankList ?? [];
+    const query = searchedValue.trim().toLowerCase();
+    const filtered = query
+      ? list.filter((b) => b.name.toLowerCase().includes(query))
+      : list;
+
+    const sorted = [...filtered].sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { sensitivity: "base" }),
+    );
+
+    const groups: Record<string, { label: string; value: string }[]> = {};
+    for (const b of sorted) {
+      const letter = b.name[0].toUpperCase();
+      if (!groups[letter]) groups[letter] = [];
+      groups[letter].push({ label: b.name, value: b.bankCode });
+    }
+
+    return Object.entries(groups).map(([letter, options]) => ({
+      label: letter,
+      options,
+    }));
+  }, [originalBankList, searchedValue]);
 
   const handleShowOtp = () => {
     // handleValidation first here
@@ -144,12 +156,14 @@ export const useWithdraw = () => {
     }
   };
 
+  console.log(bankAccount, "Bannk Account value");
+  console.log(selectedBank, "Selected bank value");
   const handleWithdraw = () => {
     disburse.mutate({
       accountName: bankAccount?.accountName ?? "",
       accountNumber,
       amount: +stripCommas(amount),
-      bankCode: bankAccount?.bankCode ?? "",
+      bankCode: selectedBank?.value ?? "",
       key: activeKey,
       pin,
     });
@@ -167,7 +181,7 @@ export const useWithdraw = () => {
     selectedBank,
     setSearchedValue,
     setSelectedBank,
-    bankListLoading,
+    bankListLoading: originalBankListLoading,
     bankAccount,
     accountLookupLoading,
     handleShowOtp,

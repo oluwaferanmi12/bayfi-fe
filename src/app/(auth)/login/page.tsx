@@ -19,6 +19,7 @@ import Cookies from "js-cookie";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
   const router = useRouter();
 
   const loginMutate = useLogin((data) => {
@@ -33,6 +34,27 @@ const Login = () => {
       toast.warning("Verification required");
     }
   });
+
+  const validate = () => {
+    const newErrors = { email: "", password: "" };
+    let valid = true;
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      newErrors.email = "Enter a valid email address";
+      valid = false;
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
 
   return (
     <Row className="h-full">
@@ -59,6 +81,7 @@ const Login = () => {
                   placeholder="Your email address"
                   icon={mailIcon}
                   setInput={setEmail}
+                  error={errors.email}
                 />
                 <GInput
                   label="Password"
@@ -66,6 +89,7 @@ const Login = () => {
                   icon={inputPasswordIcon}
                   type={"password"}
                   setInput={setPassword}
+                  error={errors.password}
                 />
                 <div className="flex justify-end cursor-pointer w-full">
                   <Link href="/forgot-password">
@@ -76,6 +100,7 @@ const Login = () => {
               <div className="mt-4">
                 <Button
                   action={() => {
+                    if (!validate()) return;
                     loginMutate.mutate({ email, password });
                   }}
                   type="bgGreen"

@@ -57,5 +57,6 @@ export const disburse = async (
       "Idempotency-Key": key,
     },
   });
+  console.log(data.data, "REsult for data here");
   return data.data;
 };

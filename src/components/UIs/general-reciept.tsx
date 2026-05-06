@@ -10,11 +10,15 @@ import { toast } from "sonner";
 export const GReceipt = ({
   payload,
   selectedBank,
+  accountName,
+  bankName,
   handleClose,
   showBeneficiaryButton,
 }: {
   payload: DisburseResponse;
   selectedBank: BankOption | null;
+  accountName: string;
+  bankName: string;
   handleClose: () => void;
   showBeneficiaryButton?: boolean;
 }) => {
@@ -29,37 +33,28 @@ export const GReceipt = ({
           <Text type="header-text-white-20" value="You sent" />
           <Text
             type="text-green-24"
-            value={`NGN ${FormatNumber(payload.transactionValueAmount)}`}
+            value={`NGN ${FormatNumber(payload.amount)}`}
           />
           <div>
             <Text type="header-text-white-20" value="to" />{" "}
-            <Text
-              type="header-text-white-bold-20"
-              value={payload.beneficiaryAccountName}
-            />{" "}
-            <Text type="text-green-24" value={payload.beneficiaryBankName} />
+            <Text type="header-text-white-bold-20" value={accountName} />{" "}
+            <Text type="text-green-24" value={bankName} />
           </div>
         </div>
         <div className="border border-bayfi-black-400 py-8 px-4 mt-8 rounded-3xl">
           <BrokenRecieptRecord
             leftText="Account number"
-            rightText={payload.beneficiaryAccountNumber}
+            rightText={payload.accountNumber}
           />
-          <BrokenRecieptRecord
-            leftText="Account name"
-            rightText={payload.beneficiaryAccountName}
-          />
-          <BrokenRecieptRecord
-            leftText="Bank name"
-            rightText={payload.beneficiaryBankName}
-          />
+          <BrokenRecieptRecord leftText="Account name" rightText={accountName} />
+          <BrokenRecieptRecord leftText="Bank name" rightText={bankName} />
           <BrokenRecieptRecord
             leftText="Reference"
             rightText={payload.reference}
           />
           <BrokenRecieptRecord
             leftText="Amount"
-            rightText={FormatNumber(payload.transactionValueAmount)}
+            rightText={FormatNumber(payload.amount)}
             hideBorder
           />
         </div>
@@ -73,11 +68,11 @@ export const GReceipt = ({
                 loading={saveBeneficiary.isPending}
                 action={() => {
                   saveBeneficiary.mutate({
-                    accountName: payload.beneficiaryAccountName,
-                    accountNumber: payload.beneficiaryAccountNumber,
+                    accountName,
+                    accountNumber: payload.accountNumber,
                     bankCode: selectedBank?.value ?? "",
                     bankLogoUrl: "",
-                    bankName: payload.beneficiaryBankName,
+                    bankName,
                   });
                 }}
               />

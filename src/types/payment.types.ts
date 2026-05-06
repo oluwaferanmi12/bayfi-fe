@@ -40,17 +40,14 @@ export interface Disburse {
 }
 
 export interface DisburseResponse {
-  beneficiaryAccountName: string;
-  beneficiaryAccountNumber: string;
-  beneficiaryBankName: string;
-  currency: string;
   reference: string;
-  responseMessage: string;
-  sessionId: string;
-  transactionEndDate: string;
-  transactionReference: string;
-  transactionStartDate: string;
-  transactionValueAmount: number;
+  merchantTxRef: string | null;
+  status: string;
+  providerStatus: string | null;
+  message: string;
+  amount: number;
+  accountNumber: string;
+  bankCode: string | null;
 }
 
 export interface Beneficiary {
