@@ -9,7 +9,7 @@ import { useWithdraw } from "@/hooks/custom/withdraw/useWithdraw";
 import { Text } from "@/components/texts/text";
 import { Select, Spin } from "antd";
 import { BankOption } from "@/interfaces/interfaces";
-import { GReceipt } from "@/components/UIs/general-reciept";
+import { WithdrawSuccess } from "@/components/side-drawers/withdraw/withdraw-success";
 import { FormatNumber, numberFormatter, stripCommas } from "@/utils/formatter";
 import Image from "next/image";
 import { OTPInput } from "@/components/inputs/otp-input";
@@ -46,6 +46,7 @@ const WithdrawalMobile = () => {
     handleDeleteBeneficiary,
     deletingBeneficiary,
   } = useWithdraw();
+
 
   return (
     <>
@@ -163,21 +164,11 @@ const WithdrawalMobile = () => {
           </div>
         </>
       ) : showReciept && disburseResponse ? (
-        <GReceipt
-          selectedBank={selectedBank}
+        <WithdrawSuccess
+          payload={disburseResponse}
           accountName={bankAccount?.accountName ?? ""}
           bankName={selectedBank?.label ?? ""}
-          handleClose={() => {
-            router.push("/dashboard");
-          }}
-          payload={disburseResponse}
-          showBeneficiaryButton={
-            beneficiaries?.length
-              ? beneficiaries.some(
-                  (item) => item.accountNumber !== accountNumber,
-                )
-              : false
-          }
+          handleClose={() => router.push("/dashboard")}
         />
       ) : (
         <div className="flex items-center justify-center flex-col">
