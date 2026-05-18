@@ -169,6 +169,7 @@ const WithdrawalMobile = () => {
           accountName={bankAccount?.accountName ?? ""}
           bankName={selectedBank?.label ?? ""}
           handleClose={() => router.push("/dashboard")}
+          transactionRoute="/m-transaction"
         />
       ) : (
         <div className="flex items-center justify-center flex-col">

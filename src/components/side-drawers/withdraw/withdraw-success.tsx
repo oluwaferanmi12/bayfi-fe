@@ -11,11 +11,13 @@ export const WithdrawSuccess = ({
   accountName,
   bankName,
   handleClose,
+  transactionRoute = "/transaction",
 }: {
   payload: DisburseResponse;
   accountName: string;
   bankName: string;
   handleClose: () => void;
+  transactionRoute?: string;
 }) => {
   const router = useRouter();
 
@@ -42,7 +44,7 @@ export const WithdrawSuccess = ({
           loading={false}
           action={() => {
             handleClose();
-            router.push("/transaction");
+            router.replace(transactionRoute);
           }}
         />
         <div className="flex justify-center cursor-pointer" onClick={handleClose}>
