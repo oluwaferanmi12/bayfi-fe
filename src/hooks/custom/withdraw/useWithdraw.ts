@@ -155,9 +155,6 @@ export const useWithdraw = () => {
       setShowPinModal(true);
     }
   };
-
-  console.log(bankAccount, "Bannk Account value");
-  console.log(selectedBank, "Selected bank value");
   const handleWithdraw = () => {
     disburse.mutate({
       accountName: bankAccount?.accountName ?? "",

@@ -35,7 +35,7 @@ export const GReceipt = ({
             type="text-green-24"
             value={`NGN ${FormatNumber(payload.amount)}`}
           />
-          <div>
+          <div className="text-center items-center flex flex-col justify-center">
             <Text type="header-text-white-20" value="to" />{" "}
             <Text type="header-text-white-bold-20" value={accountName} />{" "}
             <Text type="text-green-24" value={bankName} />
@@ -46,7 +46,10 @@ export const GReceipt = ({
             leftText="Account number"
             rightText={payload.accountNumber}
           />
-          <BrokenRecieptRecord leftText="Account name" rightText={accountName} />
+          <BrokenRecieptRecord
+            leftText="Account name"
+            rightText={accountName}
+          />
           <BrokenRecieptRecord leftText="Bank name" rightText={bankName} />
           <BrokenRecieptRecord
             leftText="Reference"
