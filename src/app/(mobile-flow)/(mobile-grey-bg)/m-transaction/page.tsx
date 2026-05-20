@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useTransactionStore } from "@/store/transactionStore";
 import { useEffect, useRef, useState } from "react";
 import { Loader } from "@/components/loader/general-loader";
+import { TableStatus } from "@/components/status/table-status";
 
 function MobileTransaction() {
   const [page, setPage] = useState(1);
@@ -162,7 +163,10 @@ const TransactionWrapper = ({ transaction }: { transaction: Transaction }) => {
   return (
     <div
       onClick={() => {
-        if (!transaction.transactionCategory.toLowerCase().includes("reward")) {
+        if (
+          !transaction.transactionCategory.toLowerCase().includes("reward") &&
+          !transaction.transactionStatus.toLowerCase().includes("failed")
+        ) {
           setSelectedTransaction(transaction);
           sessionStorage.setItem("selectedTxn", JSON.stringify(transaction));
           router.push(`/m-transaction/${transaction.id}`);
@@ -176,9 +180,28 @@ const TransactionWrapper = ({ transaction }: { transaction: Transaction }) => {
           <p className="text-[#171717] font-grotesk-semi-bold text-lg">
             {TransactionCategory[transaction!.transactionCategory]}
           </p>
-          <p className="text-[#747474] text-sm font-grotesk-medium">
-            {transaction.transactionType}
-          </p>
+          <div className="flex items-center gap-2">
+            <p className="text-[#747474] text-sm font-grotesk-medium">
+              {transaction.transactionType}
+            </p>
+            <div className="flex items-center  justify-center">
+              {transaction.transactionStatus
+                .toLowerCase()
+                .includes("success") ? (
+                <TableStatus smallerScreen type="Success" text="Completed" />
+              ) : transaction.transactionStatus
+                  .toLowerCase()
+                  .includes("pend") ? (
+                <TableStatus
+                  smallerScreen
+                  type={"Pending"}
+                  text="In progress"
+                />
+              ) : (
+                <TableStatus smallerScreen text="Failed" type="Failed" />
+              )}
+            </div>
+          </div>
         </div>
       </div>
       <div>
