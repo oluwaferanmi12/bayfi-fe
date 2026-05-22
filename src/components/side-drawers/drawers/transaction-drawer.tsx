@@ -6,12 +6,11 @@ import {
   Transaction,
   WalletTransactionLog,
 } from "@/types";
-import bitcoinSmallIcon from "@/assets/svg/bitcoin-small-icon.svg";
 import giftcardSmallIcon from "@/assets/svg/giftCardMobileIcon.svg";
 import { Button } from "@/components/buttons";
 import chatIcon from "@/assets/svg/chat-message-icon.svg";
 import Image from "next/image";
-import { useGetTransactionId, useGetTransactionLog } from "@/hooks/query";
+import {  useGetTransactionLog } from "@/hooks/query";
 import { useEffect, useMemo, useState } from "react";
 import { Loader } from "@/components/loader/general-loader";
 import withdrawIcon from "@/assets/svg/green-withdraw-icon.svg";
@@ -26,13 +25,8 @@ export const TransactionDrawer = ({
   openDrawer: boolean;
   selectedTxn?: Transaction;
 }) => {
-  console.log("selectedTxn", selectedTxn);
   const { data, isLoading } = useGetTransactionLog(selectedTxn?.id ?? "");
-  const { data: txnData, isLoading: isTxnLoading } = useGetTransactionId(
-    selectedTxn?.id ?? "",
-  );
 
-  console.log("txn Data", txnData);
   const [giftCardTxnLog, setGiftcardTxnLog] =
     useState<GiftCardTransactionLog[]>();
   const [transactionWalletLog, setTransactionWalletLog] =

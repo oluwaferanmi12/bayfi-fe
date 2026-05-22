@@ -14,15 +14,6 @@ export const useGetTransaction = (payload: TransactionMeta) => {
   });
 };
 
-export const useGetTransactionId = (transactionId: string) => {
-  return useQuery({
-    queryFn: () => {
-      return getTransactionDetail(transactionId);
-    },
-    queryKey: ["get-transaction-detail"],
-    enabled: !!transactionId,
-  });
-};
 
 export const useGetTransactionSummary = () => {
   return useQuery({
