@@ -9,12 +9,16 @@ export const getChats = async (chatId: string) => {
 };
 
 export const getOneChatMessages = async (
-  chatId: string
-): Promise<Message[]> => {
+  chatId: string,
+  page = 1
+): Promise<{ data: Message[]; hasNext: boolean }> => {
   const { data } = await axiosInstance.get(
-    `/giftcards/chats/${chatId}/messages`
+    `/giftcards/chats/${chatId}/messages?page=${page}&pageSize=20`
   );
-  return data.data;
+  return {
+    data: data.data ?? [],
+    hasNext: data.metadata?.hasNext ?? false,
+  };
 };
 
 export const userChats = async (): Promise<ChatTransaction[]> => {

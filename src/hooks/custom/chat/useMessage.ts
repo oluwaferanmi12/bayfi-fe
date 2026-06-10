@@ -19,9 +19,16 @@ export const useChatMessage = (
   const router = useRouter();
   const pathName = usePathname();
   const [showInput, setShowInput] = useState(false);
-  const { data, isPending: messageLoading } = useGetOneChat(chatId!);
+  const {
+    data,
+    isPending: messageLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetOneChat(chatId!);
   const { data: chatDetail, isPending: chatDetailLoading } =
     useGetChatDetail(chatId);
+
   const handleSendMessage = (message: string, imageUrls?: string[]) => {
     const payload = {
       message: message,
@@ -34,6 +41,7 @@ export const useChatMessage = (
       body: JSON.stringify(payload),
     });
   };
+
   const handleMessage = (m: Message) => {
     if (pathName.includes("giftcard/chat") && m.chatTransactionId) {
       router.push(`${pathName}?id=${m.chatTransactionId}`);
@@ -50,9 +58,16 @@ export const useChatMessage = (
   const handleLockTriggered = (res: any) => {
     queryClient.invalidateQueries({ queryKey: ["one-chat-detail"] });
   };
+
+  // Flatten pages in reverse so oldest messages appear at the top,
+  // newest (page 1) at the bottom — same pattern as bayfi-admin.
   useEffect(() => {
     if (data) {
-      setMessages(data);
+      const flat = data.pages
+        .slice()
+        .reverse()
+        .flatMap((p) => p.data);
+      setMessages(flat);
     }
   }, [data]);
 
@@ -93,5 +108,8 @@ export const useChatMessage = (
     chatDetail,
     chatDetailLoading,
     showInput,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   };
 };

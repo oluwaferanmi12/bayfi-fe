@@ -11,11 +11,13 @@ export const MessageWrapper = ({
   messageLoading,
   bgWhite,
   chatDetail,
+  isFetchingNextPage,
 }: {
   messages: Message[];
   messageLoading: boolean;
   bgWhite: boolean;
   chatDetail?: MessagePayload;
+  isFetchingNextPage?: boolean;
 }) => {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const firstPaint = useRef(true);
@@ -33,6 +35,11 @@ export const MessageWrapper = ({
         <Loader />
       ) : (
         <div>
+          {isFetchingNextPage && (
+            <div className="flex justify-center py-2">
+              <Loader />
+            </div>
+          )}
           {messages.map((item, index) => {
             return (
               <Fragment key={index}>

@@ -4,7 +4,7 @@ import {
   getOneChatMessages,
   userChats,
 } from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 export const useGetChats = (chatId: string) => {
   return useQuery({
@@ -14,9 +14,13 @@ export const useGetChats = (chatId: string) => {
 };
 
 export const useGetOneChat = (chatId: string) => {
-  return useQuery({
-    queryFn: () => getOneChatMessages(chatId),
+  return useInfiniteQuery({
     queryKey: ["get-one-chat", chatId],
+    queryFn: ({ pageParam = 1 }) =>
+      getOneChatMessages(chatId, pageParam as number),
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.hasNext ? allPages.length + 1 : undefined,
+    initialPageParam: 1,
     enabled: !!chatId,
   });
 };
