@@ -10,13 +10,20 @@ import { useGetActivChat } from "@/hooks/query";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/loader/general-loader";
 import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
+import { ComingSoonModal } from "@/components/modals/coming-soon-modal";
 
 export default function MobileChatList() {
   const [activeTab, setActiveTab] = useState<"chat" | "support">("chat");
+  const [showSupportComingSoon, setShowSupportComingSoon] = useState(false);
   const { data, isPending } = useGetActivChat();
   const router = useRouter();
   return (
     <>
+      <ComingSoonModal
+        open={showSupportComingSoon}
+        onClose={() => setShowSupportComingSoon(false)}
+        title="Support"
+      />
       <MobileNav />
       <FixedMobileHeader
         header="Chat & Support"
@@ -35,9 +42,9 @@ export default function MobileChatList() {
           </div>
           <div
             onClick={() => {
-              setActiveTab("support");
+              setShowSupportComingSoon(true);
             }}
-            className={`${activeTab === "support" && "border-b border-[#67811A] bg-[#EFF8D5] "} flex gap-2 items-center justify-center py-2  w-full`}
+            className={`flex gap-2 items-center justify-center py-2 w-full`}
           >
             {activeTab === "support" && <Image src={messageIcon} alt="" />}
             <p className="text-lg font-grotesk-medium">Support</p>

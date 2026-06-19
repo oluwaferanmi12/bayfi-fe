@@ -21,6 +21,7 @@ import { SetPinModal } from "@/components/modals/pin/set-pin-modal";
 import { useGetWallet } from "@/hooks/query";
 import { useWalletStore } from "@/store/walletStore";
 import { usePinStore } from "@/store/usePinStore";
+import { ComingSoonModal } from "@/components/modals/coming-soon-modal";
 import homeInactive from "@/assets/svg/homeIconInactive.svg";
 import transactionIcon from "@/assets/svg/transaction-nav-active.svg";
 import transactionInactiveIcon from "@/assets/svg/transaction-nav-inactive.svg";
@@ -38,6 +39,7 @@ export default function RootLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [showChatList, setShowChatList] = useState(false);
+  const [showSupportComingSoon, setShowSupportComingSoon] = useState(false);
   const [showChatPage, setShowChatPage] = useState(false);
   const [activeChatId, setActiveChatId] = useState<null | number>(null);
   const { data: profileDetails } = useFetchProfile();
@@ -95,6 +97,11 @@ export default function RootLayout({
 
   return (
     <>
+      <ComingSoonModal
+        open={showSupportComingSoon}
+        onClose={() => setShowSupportComingSoon(false)}
+        title="Support"
+      />
       <SetPinModal
         open={showPinModal}
         close={() => {
@@ -144,28 +151,40 @@ export default function RootLayout({
                   alt=""
                 />
                 <div className="flex items-center gap-8">
-                  {navLinks.map((nav) => (
-                    <Link key={nav.navTitle} href={nav.url}>
-                      <span
-                        className={` ${pathname === nav.url ? "px-4 py-2 bg-black rounded-lg" : ""} flex items-center gap-2`}
+                  {navLinks.map((nav) =>
+                    nav.navTitle === "Support" ? (
+                      <button
+                        key={nav.navTitle}
+                        onClick={() => setShowSupportComingSoon(true)}
                       >
-                        <Image
-                          src={
-                            pathname === nav.url ? nav.navIcon : nav.navInactive
-                          }
-                          alt=""
-                        />
-                        <Text
-                          value={nav.navTitle}
-                          type={
-                            pathname === nav.url
-                              ? "text-green-bold"
-                              : "nav-text"
-                          }
-                        />
-                      </span>
-                    </Link>
-                  ))}
+                        <span className="flex items-center gap-2">
+                          <Image src={nav.navInactive} alt="" />
+                          <Text value={nav.navTitle} type="nav-text" />
+                        </span>
+                      </button>
+                    ) : (
+                      <Link key={nav.navTitle} href={nav.url}>
+                        <span
+                          className={` ${pathname === nav.url ? "px-4 py-2 bg-black rounded-lg" : ""} flex items-center gap-2`}
+                        >
+                          <Image
+                            src={
+                              pathname === nav.url ? nav.navIcon : nav.navInactive
+                            }
+                            alt=""
+                          />
+                          <Text
+                            value={nav.navTitle}
+                            type={
+                              pathname === nav.url
+                                ? "text-green-bold"
+                                : "nav-text"
+                            }
+                          />
+                        </span>
+                      </Link>
+                    )
+                  )}
                 </div>
                 <div className="flex items-center gap-4">
                   {/* <Image className="cursor-pointer" src={bellIcon} alt="" /> */}

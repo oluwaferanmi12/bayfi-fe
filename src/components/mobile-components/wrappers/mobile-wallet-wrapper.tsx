@@ -168,7 +168,7 @@ export const MobileWalletWrapper = ({
           onClick={() => {
             setShowGiftcardModal(true);
           }}
-          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4  flex flex-col items-center justify-center"
+          className="bg-white flex-1 border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center"
         >
           <div>
             <Image src={giftCardActionIcon} alt="" />
@@ -177,21 +177,23 @@ export const MobileWalletWrapper = ({
             Trade Giftcard
           </p>
         </button>
-        <ComingSoonWrapper title="Trade Crypto">
-          <div className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center">
-            <div>
-              <Image src={cryptoActionIcon} alt="" />
+        <div className="flex-1">
+          <ComingSoonWrapper title="Trade Crypto">
+            <div className="bg-white border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center">
+              <div>
+                <Image src={cryptoActionIcon} alt="" />
+              </div>
+              <p className="text-[#444D5A] font-grotesk-bold text-xs mt-1">
+                Trade Crypto
+              </p>
             </div>
-            <p className="text-[#444D5A] font-grotesk-bold text-xs mt-1">
-              Trade Crypto
-            </p>
-          </div>
-        </ComingSoonWrapper>
+          </ComingSoonWrapper>
+        </div>
         <button
           onClick={() => {
             router.push("withdrawal");
           }}
-          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center"
+          className="bg-white flex-1 border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center"
         >
           <div>
             <Image src={withdrawActionIcon} alt="" />

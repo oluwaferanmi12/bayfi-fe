@@ -22,6 +22,7 @@ import BettingDrawer from "@/components/side-drawers/services/betting-drawer";
 import AirtimeDrawer from "@/components/side-drawers/services/airtime-drawer";
 import MobileDataDrawer from "@/components/side-drawers/services/mobile-data-drawer";
 import CableTvDrawer from "@/components/side-drawers/services/cable-tv-drawer";
+import { ComingSoonModal } from "@/components/modals/coming-soon-modal";
 
 const Services = () => {
   const [showAirtimeModal, setShowAirtimeModal] = useState(false);
@@ -29,6 +30,8 @@ const Services = () => {
   const [showBuyData, setShowBuyData] = useState(false);
   const [showCableTv, setShowCableTv] = useState(false);
   const [showGiftCard, setShowGiftCard] = useState(false);
+  const [comingSoonTitle, setComingSoonTitle] = useState("");
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   const services = [
     {
@@ -48,7 +51,8 @@ const Services = () => {
       sideIcon: bettingInner,
       bgColor: "#17191C",
       clickAction: () => {
-        setShowBetting(true);
+        setComingSoonTitle("Betting");
+        setShowComingSoon(true);
       },
     },
     {
@@ -58,7 +62,8 @@ const Services = () => {
       sideIcon: innerAirtime,
       bgColor: "#360A93E5",
       clickAction: () => {
-        setShowAirtimeModal(true);
+        setComingSoonTitle("Airtime");
+        setShowComingSoon(true);
       },
     },
     {
@@ -68,7 +73,8 @@ const Services = () => {
       sideIcon: innerMobileData,
       bgColor: "#0A3993E5",
       clickAction: () => {
-        setShowBuyData(true);
+        setComingSoonTitle("Mobile data");
+        setShowComingSoon(true);
       },
     },
     {
@@ -78,12 +84,18 @@ const Services = () => {
       sideIcon: innerCableTv,
       bgColor: "#934C0AE5",
       clickAction: () => {
-        setShowCableTv(true);
+        setComingSoonTitle("Cable Tv");
+        setShowComingSoon(true);
       },
     },
   ];
   return (
     <div>
+      <ComingSoonModal
+        open={showComingSoon}
+        onClose={() => setShowComingSoon(false)}
+        title={comingSoonTitle}
+      />
       <GiftCardDrawer
         handleClose={() => {
           setShowGiftCard(false);
