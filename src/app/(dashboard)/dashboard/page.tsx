@@ -45,6 +45,7 @@ import { Loader } from "@/components/loader/general-loader";
 import { GiftCardDrawer } from "@/components/side-drawers/services/gift-card-drawer";
 import { GenericEmptyState } from "@/components/UIs/empty-state/generic-empty-state";
 import { DashboardRatesCard } from "@/components/features/dashboard/dashboard-rates";
+import { ComingSoonWrapper } from "@/components/modals/coming-soon-modal";
 
 function Dashboard() {
   const queryClient = useQueryClient();
@@ -361,15 +362,14 @@ function Dashboard() {
                           Trade Giftcard
                         </p>
                       </button>
-                      <button
-                        disabled
-                        className="flex items-center border gap-2 pl-2 border-[#E9EBF8] p-1 rounded-xl pr-4 blur-[1.5px] opacity-60 pointer-events-none"
-                      >
-                        <Image src={cryptoActionIcon} alt="" />
-                        <p className="text-[#444D5A] cursor-pointer font-grotesk-bold text-base">
-                          Trade Crypto
-                        </p>
-                      </button>
+                      <ComingSoonWrapper title="Trade Crypto">
+                        <div className="flex items-center border gap-2 pl-2 border-[#E9EBF8] p-1 rounded-xl pr-4">
+                          <Image src={cryptoActionIcon} alt="" />
+                          <p className="text-[#444D5A] font-grotesk-bold text-base">
+                            Trade Crypto
+                          </p>
+                        </div>
+                      </ComingSoonWrapper>
                       <button
                         onClick={() => {
                           setShowWithdrawModal(true);
@@ -422,23 +422,25 @@ function Dashboard() {
                 />
               </div>
             </div>
-            <div className="mt-8 bg-white rounded-2xl blur-[1.5px] opacity-60 pointer-events-none">
-              <div className="p-4 flex items-center gap-3 border-b border-bayfi-grey-500">
-                <Image src={dollarSquare} alt="" />
-                <div>
-                  <Text type="main-text-bold" value="Trade Analytics" />
+            <ComingSoonWrapper title="Trade Analytics">
+              <div className="mt-8 bg-white rounded-2xl">
+                <div className="p-4 flex items-center gap-3 border-b border-bayfi-grey-500">
+                  <Image src={dollarSquare} alt="" />
                   <div>
-                    <Text
-                      type="body-medium"
-                      value="Keep track of new and previous trades"
-                    />
+                    <Text type="main-text-bold" value="Trade Analytics" />
+                    <div>
+                      <Text
+                        type="body-medium"
+                        value="Keep track of new and previous trades"
+                      />
+                    </div>
                   </div>
                 </div>
+                <div className="p-4 py-8">
+                  <Image className="w-full" src={chartPlaceholder} alt="" />
+                </div>
               </div>
-              <div className="p-4 py-8">
-                <Image className="w-full" src={chartPlaceholder} alt="" />
-              </div>
-            </div>
+            </ComingSoonWrapper>
           </Col>
           <Col xs={8}>
             <div className="bg-white min-h-[80vh] rounded-3xl p-4 py-8">
@@ -483,19 +485,16 @@ const DashboardServiceWrapper = ({
   clickAction?: () => void;
   disabled?: boolean;
 }) => {
-  return (
-    <>
-      <div
-        onClick={disabled ? undefined : clickAction}
-        className={`flex justify-center bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full ${
-          disabled
-            ? "blur-[1.5px] opacity-60 pointer-events-none"
-            : "cursor-pointer"
-        }`}
-      >
-        <Image src={icon} alt="" />
-        <Text type={"text-plain-dark-18"} value={text} />
-      </div>
-    </>
+  const card = (
+    <div className="flex justify-center bg-white rounded-2xl flex-col gap-1 items-center py-6 w-full cursor-pointer">
+      <Image src={icon} alt="" />
+      <Text type={"text-plain-dark-18"} value={text} />
+    </div>
   );
+
+  if (disabled) {
+    return <div className="w-full"><ComingSoonWrapper title={text}>{card}</ComingSoonWrapper></div>;
+  }
+
+  return <div className="w-full" onClick={clickAction}>{card}</div>;
 };

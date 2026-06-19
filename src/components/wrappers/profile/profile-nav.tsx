@@ -28,6 +28,7 @@ import buildingIcon from "@/assets/svg/building-icon.svg";
 import legalIcon from "@/assets/svg/legal-icon.svg";
 import { TierInfoDrawer } from "@/components/side-drawers/profile/tier-info-drawer";
 import cupIcon from "@/assets/svg/cup-icon.svg";
+import { ComingSoonWrapper } from "@/components/modals/coming-soon-modal";
 
 export const ProfileNav = ({
   setActiveProfile,
@@ -232,19 +233,10 @@ export const ProfileNavContainer = ({
   whiteBg?: boolean;
   disabled?: boolean;
 }) => {
-  return (
+  const inner = (
     <div
-      onClick={() => {
-        if (!disabled && clickAction) {
-          clickAction();
-        }
-      }}
-      className={`flex ${whiteBg && "bg-white rounded-lg px-4 mb-2"} items-center justify-between py-3 ${
-        disabled
-          ? "blur-[1.5px] opacity-60 pointer-events-none"
-          : "cursor-pointer"
-      }`}
-      // style={{ borderBottom: "1px solid #EBF1FF" }}
+      onClick={disabled ? undefined : () => clickAction?.()}
+      className={`flex ${whiteBg && "bg-white rounded-lg px-4 mb-2"} items-center justify-between py-3 cursor-pointer`}
     >
       <div className="flex items-center gap-3 ">
         <Image src={icon} alt="" />
@@ -259,4 +251,10 @@ export const ProfileNavContainer = ({
         (extraIcon ? extraIcon : <Image src={arrowRightShort} alt="" />)}
     </div>
   );
+
+  if (disabled) {
+    return <ComingSoonWrapper title={text}>{inner}</ComingSoonWrapper>;
+  }
+
+  return inner;
 };

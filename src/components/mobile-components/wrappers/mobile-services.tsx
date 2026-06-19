@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GiftcardBottomDrawer } from "@/components/side-drawers/services/giftcard-bottom-drawer";
 import { useState } from "react";
+import { ComingSoonWrapper } from "@/components/modals/coming-soon-modal";
 
 export const MobileDashboardService = () => {
   const router = useRouter();
@@ -36,28 +37,22 @@ export const MobileDashboardService = () => {
               Gift card
             </p>
           </div>
-          <div
-            onClick={() => {
-              router.push("/buy-airtime");
-            }}
-            className="flex flex-col items-center justify-center gap-2 blur-[1.5px] opacity-60 pointer-events-none"
-          >
-            <Image src={airtimeIcon} alt="" />
-            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
-              Airtime
-            </p>
-          </div>
-          <div
-            onClick={() => {
-              router.push("/betting");
-            }}
-            className="flex flex-col items-center justify-center gap-2 blur-[1.5px] opacity-60 pointer-events-none"
-          >
-            <Image src={bettingIcon} alt="" />
-            <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
-              Betting
-            </p>
-          </div>
+          <ComingSoonWrapper title="Airtime">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <Image src={airtimeIcon} alt="" />
+              <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
+                Airtime
+              </p>
+            </div>
+          </ComingSoonWrapper>
+          <ComingSoonWrapper title="Betting">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <Image src={bettingIcon} alt="" />
+              <p className="text-bayfi-black-500 font-grotesk-semi-bold text-sm">
+                Betting
+              </p>
+            </div>
+          </ComingSoonWrapper>
           <Link href={"/other-services"}>
             <div className="flex flex-col items-center justify-center gap-2">
               <Image src={otherIcon} alt="" />

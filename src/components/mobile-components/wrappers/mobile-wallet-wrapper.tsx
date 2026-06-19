@@ -17,6 +17,7 @@ import giftCardActionIcon from "@/assets/svg/trade-giftcard-dashboard.svg";
 import withdrawActionIcon from "@/assets/svg/withdraw-dashboard.svg";
 import cryptoActionIcon from "@/assets/svg/buy-crypto-dashboard.svg";
 import { GiftcardBottomDrawer } from "@/components/side-drawers/services/giftcard-bottom-drawer";
+import { ComingSoonWrapper } from "@/components/modals/coming-soon-modal";
 
 export const MobileWalletWrapper = ({
   walletDetails,
@@ -176,17 +177,16 @@ export const MobileWalletWrapper = ({
             Trade Giftcard
           </p>
         </button>
-        <button
-          disabled
-          className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center blur-[1.5px] opacity-60 pointer-events-none"
-        >
-          <div>
-            <Image src={cryptoActionIcon} alt="" />
+        <ComingSoonWrapper title="Trade Crypto">
+          <div className="bg-white w-full border border-[#E9EBF8] rounded-xl p-4 flex flex-col items-center justify-center">
+            <div>
+              <Image src={cryptoActionIcon} alt="" />
+            </div>
+            <p className="text-[#444D5A] font-grotesk-bold text-xs mt-1">
+              Trade Crypto
+            </p>
           </div>
-          <p className="text-[#444D5A] font-grotesk-bold text-xs mt-1">
-            Trade Crypto
-          </p>
-        </button>
+        </ComingSoonWrapper>
         <button
           onClick={() => {
             router.push("withdrawal");

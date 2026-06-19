@@ -40,26 +40,32 @@ export const GiftcardRates = () => {
           {filteredRates.map((rate) => {
             return (
               <Col key={rate.id} xs={12}>
-                <div className="bg-white border border-[#EBF1FF] mb-2 rounded-lg p-4 flex flex-col justify-center items-start">
-                  <div className="bg-[#F5F5F5] flex items-center gap-2 rounded-full px-4 py-1">
-                    <div className="w-2.5 relative h-2.5">
-                      <Image
-                        src={rate.countryAvatar}
-                        alt=""
-                        layout="fill"
-                        objectFit="cover"
-                      />
+                <div className="bg-white border border-[#EBF1FF] mb-2 rounded-lg p-4 flex justify-between items-center">
+                  <div>
+                    <div className="bg-[#F5F5F5] flex items-center gap-2 rounded-full px-4 py-1">
+                      <div className="w-2.5 relative h-2.5">
+                        <Image
+                          src={rate.countryAvatar}
+                          alt=""
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                      <p className="text-[#000000] font-grotesk-semi-bold">
+                        {rate.countryName}
+                      </p>
                     </div>
-                    <p className="text-[#000000] font-grotesk-semi-bold">
-                      {rate.countryName}
+                    <p className="my-2 text-[#4B5563] text-xl font-grotesk-semi-bold">
+                      {rate.cardName}
+                    </p>
+                    <p className="text-[#20242A] text-sm font-grotesk-medium">
+                      ${FormatNumber(rate.amount, true)} at{" "}
+                      {FormatNumber(rate.rate, true)}/$
                     </p>
                   </div>
-                  <p className="my-2 text-[#4B5563] text-xl font-grotesk-semi-bold">
-                    {rate.cardName}
-                  </p>
-                  <p className="text-[#20242A] text-sm font-grotesk-medium">
-                    ${FormatNumber(rate.rate, true)} at {FormatNumber(rate.rate, true)}/$
-                  </p>
+                  <div>
+                    <Image src={rate.cardAvatar} alt="" width={34} height={34} />
+                  </div>
                 </div>
               </Col>
             );

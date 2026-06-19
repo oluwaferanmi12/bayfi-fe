@@ -65,7 +65,7 @@ export const DashboardRatesCard = () => {
               {activeRate.cardName ?? "Google name"}
             </p>
             <p className="text-[#EDEEEF] text-base font-grotesk-semi-bold">
-              ${FormatNumber(displayAmount)} at {FormatNumber(activeRate.rate)}
+              ${FormatNumber(displayAmount, true)} at {FormatNumber(activeRate.rate, true)}
               /$
             </p>
           </div>
