@@ -13,20 +13,32 @@ import { useForgotPasswordOtp, useOtp, useResendOtp } from "@/hooks/query";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
+const RESEND_COOLDOWN_SECONDS = 60;
+const RESEND_EXPIRY_STORAGE_KEY = "otpResendExpiry:forgotPassword";
+
+const getRemainingSeconds = (expiry: number) =>
+  Math.max(Math.ceil((expiry - Date.now()) / 1000), 0);
+
 const VerifyOtp = () => {
   const [otp, setOtp] = useState("");
   const [otpMedium, setOtpMedium] = useState("");
   const [email, setEmail] = useState("");
+  const [resendExpiry, setResendExpiry] = useState<number | null>(null);
+  const [resendCooldown, setResendCooldown] = useState(0);
   const router = useRouter();
 
   const verifyOtpMutate = useForgotPasswordOtp((data) => {
     localStorage.setItem("otp", otp);
     toast.success("Verification Successful");
+    localStorage.removeItem(RESEND_EXPIRY_STORAGE_KEY);
     router.replace("/forgot-password/reset");
   });
 
   const resendOtpMutate = useResendOtp((data) => {
     toast.success("An Otp has been sent to your registered email");
+    const expiry = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
+    localStorage.setItem(RESEND_EXPIRY_STORAGE_KEY, String(expiry));
+    setResendExpiry(expiry);
   });
 
   useEffect(() => {
@@ -34,6 +46,29 @@ const VerifyOtp = () => {
     setEmail(_email);
     setOtpMedium(_email);
   }, []);
+
+  // Persist the cooldown as an expiry timestamp so a page refresh doesn't
+  // reset (or falsely re-lock) the wait — remaining time is always derived
+  // from wall-clock time rather than a counter that restarts on mount.
+  useEffect(() => {
+    const stored = localStorage.getItem(RESEND_EXPIRY_STORAGE_KEY);
+    const expiry = stored
+      ? Number(stored)
+      : Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
+    if (!stored) {
+      localStorage.setItem(RESEND_EXPIRY_STORAGE_KEY, String(expiry));
+    }
+    setResendExpiry(expiry);
+  }, []);
+
+  useEffect(() => {
+    if (resendExpiry === null) return;
+    setResendCooldown(getRemainingSeconds(resendExpiry));
+    const interval = setInterval(() => {
+      setResendCooldown(getRemainingSeconds(resendExpiry));
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [resendExpiry]);
 
   return (
     <Row className="h-full">
@@ -73,8 +108,13 @@ const VerifyOtp = () => {
               <div className="flex justify-center">
                 <Button
                   type="bgPlain"
-                  text="Resend code"
+                  text={
+                    resendCooldown > 0
+                      ? `Resend code in ${resendCooldown}s`
+                      : "Resend code"
+                  }
                   loading={resendOtpMutate.isPending}
+                  disabled={resendCooldown > 0}
                   action={() => {
                     resendOtpMutate.mutate({ email });
                   }}

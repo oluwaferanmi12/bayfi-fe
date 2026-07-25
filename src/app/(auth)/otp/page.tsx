@@ -13,7 +13,7 @@ import { useOtp, useResendOtp } from "@/hooks/query";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
-const RESEND_COOLDOWN_SECONDS = 5 * 60;
+const RESEND_COOLDOWN_SECONDS = 60;
 const RESEND_EXPIRY_STORAGE_KEY = "otpResendExpiry";
 
 const getRemainingSeconds = (expiry: number) =>
@@ -68,10 +68,6 @@ const Otp = () => {
     return () => clearInterval(interval);
   }, [resendExpiry]);
 
-  const resendCooldownLabel = `${Math.floor(resendCooldown / 60)}:${String(
-    resendCooldown % 60,
-  ).padStart(2, "0")}`;
-
   return (
     <Row className="h-full">
       <Col lg={16} xs={24}>
@@ -112,7 +108,7 @@ const Otp = () => {
                   type="bgPlain"
                   text={
                     resendCooldown > 0
-                      ? `Resend code in ${resendCooldownLabel}`
+                      ? `Resend code in ${resendCooldown}s`
                       : "Resend code"
                   }
                   loading={resendOtpMutate.isPending}
