@@ -15,9 +15,7 @@ import { toast } from "sonner";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const router = useRouter();
-
-  console.log(email, "Email value here");
-
+  
   const forgotPasswordEmailMutate = useForgotPasswordEmail((data) => {
     toast.success("An otp was sent to your email");
     localStorage.setItem("userEmail", email);

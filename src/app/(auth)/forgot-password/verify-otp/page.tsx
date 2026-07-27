@@ -9,7 +9,12 @@ import { Button } from "@/components/buttons";
 import { OTPInput } from "@/components/inputs/otp-input";
 import { AnimatedAuthSide } from "@/components/wrappers/right-auth-wrapper";
 import { useRouter } from "next/navigation";
-import { useForgotPasswordOtp, useOtp, useResendOtp } from "@/hooks/query";
+import {
+  useForgotPasswordEmail,
+  useForgotPasswordOtp,
+  useOtp,
+  useResendOtp,
+} from "@/hooks/query";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
@@ -34,7 +39,7 @@ const VerifyOtp = () => {
     router.replace("/forgot-password/reset");
   });
 
-  const resendOtpMutate = useResendOtp((data) => {
+  const resendOtpMutate = useForgotPasswordEmail((data) => {
     toast.success("An Otp has been sent to your registered email");
     const expiry = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
     localStorage.setItem(RESEND_EXPIRY_STORAGE_KEY, String(expiry));
