@@ -47,17 +47,12 @@ const VerifyOtp = () => {
     setOtpMedium(_email);
   }, []);
 
-  // Persist the cooldown as an expiry timestamp so a page refresh doesn't
-  // reset (or falsely re-lock) the wait — remaining time is always derived
-  // from wall-clock time rather than a counter that restarts on mount.
+  // Start the cooldown the moment the user lands on this page (including a
+  // refresh), persisting it as an expiry timestamp in localStorage so the
+  // countdown shown is always derived from wall-clock time.
   useEffect(() => {
-    const stored = localStorage.getItem(RESEND_EXPIRY_STORAGE_KEY);
-    const expiry = stored
-      ? Number(stored)
-      : Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
-    if (!stored) {
-      localStorage.setItem(RESEND_EXPIRY_STORAGE_KEY, String(expiry));
-    }
+    const expiry = Date.now() + RESEND_COOLDOWN_SECONDS * 1000;
+    localStorage.setItem(RESEND_EXPIRY_STORAGE_KEY, String(expiry));
     setResendExpiry(expiry);
   }, []);
 
