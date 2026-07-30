@@ -24,10 +24,11 @@ export const DesktopRewardCard = () => {
               The person you refer makes a trade
             </p>
           </div>
-
-          <p className="text-4xl text-[#F6F4F0] font-grotesk-bold">
-            {referralCode}
-          </p>
+          <div className="bg-[#1B1B1B] rounded-lg px-2.5 py-3 inline-block mt-2">
+            <p className="text-2xl text-[#F6F4F0] font-grotesk-bold">
+              {referralCode}
+            </p>
+          </div>
           <div className="flex items-center gap-2">
             <button
               className="flex items-center gap-2 bg-[#1B1B1B66] px-3 p-1 mt-3 rounded-lg"

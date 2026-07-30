@@ -1,4 +1,3 @@
-import React from "react";
 import moneyJar from "@/assets/svg/money-jar.svg";
 import Image from "next/image";
 import { Button } from "@/components/buttons";
