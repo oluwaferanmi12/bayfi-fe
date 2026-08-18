@@ -19,11 +19,27 @@ function BuyCardDetails() {
   const [countrySelected, setCountrySelected] =
     useState<CountryResponseInterface | null>(null);
   const [giftCardAmount, setGiftCardAmount] = useState(0);
+  const [amountError, setAmountError] = useState("");
   const [initiateCardTxn, setInitiateCardTxn] = useState<InitiateCardTxn>();
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
 
+  const handleAmountChange = (val: string) => {
+    setGiftCardAmount(+stripCommas(val));
+    setAmountError("");
+  };
+
+  const handlePresetSelect = (val: number) => {
+    setGiftCardAmount(val);
+    setAmountError("");
+  };
+
   const handleGetRate = () => {
+    if (!giftCardAmount || giftCardAmount <= 0) {
+      setAmountError("Please enter a valid amount");
+      return;
+    }
+
     const txn = {
       amount: giftCardAmount,
       chatId: null,
@@ -86,7 +102,7 @@ function BuyCardDetails() {
               return (
                 <span
                   onClick={() => {
-                    setGiftCardAmount(item);
+                    handlePresetSelect(item);
                   }}
                   key={index}
                   className="bg-[#F6F6F6] whitespace-nowrap w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center font-grotesk-medium"
@@ -101,9 +117,8 @@ function BuyCardDetails() {
               inputVal={numberFormatter(giftCardAmount.toString())}
               placeholder="0.00"
               label="Enter amount"
-              setInput={(e) => {
-                setGiftCardAmount(+stripCommas(e));
-              }}
+              setInput={handleAmountChange}
+              error={amountError}
               inputMode="numeric"
             />
           </div>
@@ -137,7 +152,7 @@ function BuyCardDetails() {
             return (
               <span
                 onClick={() => {
-                  setGiftCardAmount(item);
+                  handlePresetSelect(item);
                 }}
                 key={index}
                 className="bg-[#F6F6F6] md:w-full text-text-color-500 border border-[#DCDCDC] text-sm py-2 px-4 rounded-lg text-center whitespace-nowrap font-grotesk-medium"
@@ -152,9 +167,8 @@ function BuyCardDetails() {
             inputVal={numberFormatter(giftCardAmount.toString())}
             placeholder="0.00"
             label="Enter amount"
-            setInput={(e) => {
-              setGiftCardAmount(+stripCommas(e));
-            }}
+            setInput={handleAmountChange}
+            error={amountError}
           />
         </div>
         <Button
