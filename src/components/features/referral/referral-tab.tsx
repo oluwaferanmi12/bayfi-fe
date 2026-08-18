@@ -23,7 +23,7 @@ export const ReferralTab = ({
         <p
           className={` ${activeTab === 1 ? "text-[#101010] font-grotesk-medium " : `${desktopType ? "text-bayfi-black-900" : "text-white "} font-grotesk-semi-bold`} text-sm `}
         >
-          Referral History
+          Bonus History
         </p>
       </div>
       <div
