@@ -33,6 +33,23 @@ export const DesktopRewardProgress = ({
       <div className="mt-4">
         {activeTab === 1 && (
           <>
+            {rewardActivity.length ? (
+              rewardActivity.map((item) => {
+                return (
+                  <ReferralWrapper
+                    rewardActivity={item}
+                    key={item.id}
+                    desktopType
+                  />
+                );
+              })
+            ) : (
+              <GenericEmptyState />
+            )}
+          </>
+        )}
+        {activeTab === 2 && (
+          <>
             {isLoading ? (
               <Loader />
             ) : redemption?.data.length ? (
@@ -47,23 +64,6 @@ export const DesktopRewardProgress = ({
                   );
                 })}
               </>
-            ) : (
-              <GenericEmptyState />
-            )}
-          </>
-        )}
-        {activeTab === 2 && (
-          <>
-            {rewardActivity.length ? (
-              rewardActivity.map((item) => {
-                return (
-                  <ReferralWrapper
-                    rewardActivity={item}
-                    key={item.id}
-                    desktopType
-                  />
-                );
-              })
             ) : (
               <GenericEmptyState />
             )}

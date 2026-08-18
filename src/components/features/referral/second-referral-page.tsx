@@ -29,6 +29,17 @@ export const SecondReferalPage = ({
       <div className="mt-4">
         {activeTab === 1 && (
           <>
+            {rewardActivity.length ? (
+              rewardActivity.map((item) => {
+                return <ReferralWrapper rewardActivity={item} key={item.id} />;
+              })
+            ) : (
+              <GenericEmptyState />
+            )}
+          </>
+        )}
+        {activeTab === 2 && (
+          <>
             {isLoading ? (
               <Loader />
             ) : redemption?.data.length ? (
@@ -37,17 +48,6 @@ export const SecondReferalPage = ({
                   return <RedemptionWrapper redemption={item} key={item.id} />;
                 })}
               </>
-            ) : (
-              <GenericEmptyState />
-            )}
-          </>
-        )}
-        {activeTab === 2 && (
-          <>
-            {rewardActivity.length ? (
-              rewardActivity.map((item) => {
-                return <ReferralWrapper rewardActivity={item} key={item.id} />;
-              })
             ) : (
               <GenericEmptyState />
             )}

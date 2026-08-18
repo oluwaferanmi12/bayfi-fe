@@ -23,7 +23,7 @@ export const ReferralTab = ({
         <p
           className={` ${activeTab === 1 ? "text-[#101010] font-grotesk-medium " : `${desktopType ? "text-bayfi-black-900" : "text-white "} font-grotesk-semi-bold`} text-sm `}
         >
-          Redemption History
+          Referral History
         </p>
       </div>
       <div
@@ -36,7 +36,7 @@ export const ReferralTab = ({
         <p
           className={` ${activeTab === 2 ? "text-[#101010] font-grotesk-medium bg-[#EFF8D5]" : `${desktopType ? "text-bayfi-black-900" : "text-white "} font-grotesk-semi-bold`} text-sm text-center`}
         >
-          Referral History
+          Redemption History
         </p>
       </div>
     </div>

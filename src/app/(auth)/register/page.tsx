@@ -97,6 +97,15 @@ const RegisterContent = () => {
         userName: "Username is required",
       }));
       validated = false;
+    } else if (
+      payloadObj.username.length < 3 ||
+      payloadObj.username.length > 20
+    ) {
+      setErrorPayload((prev) => ({
+        ...prev,
+        userName: "Username must be between 3 and 20 characters",
+      }));
+      validated = false;
     } else {
       setErrorPayload((prev) => ({
         ...prev,
@@ -220,6 +229,7 @@ const RegisterContent = () => {
                       icon={userIconButton}
                       setInput={setUsername}
                       error={errorPayload.userName}
+                      maxLength={20}
                     />
                   </div>
                   <div className="w-full">
